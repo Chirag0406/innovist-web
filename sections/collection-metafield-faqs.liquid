@@ -1,0 +1,163 @@
+
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+<style>
+
+/* accordion-1 */
+.accordion-1{
+  position: relative;
+border-bottom: 1px solid;
+  margin-bottom: 20px;
+}
+.accordion-1 .head{
+    background-color: white;
+    color: black;
+    padding: 10px 0px;
+    cursor: pointer;
+    transition: 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+  .head h3 {
+    font-size: 15px;
+    margin-bottom: 0;
+    margin-top: 0px;
+    font-weight: 600;
+    padding-right: 5px;
+}
+.accordion-1 .arrow{
+  color: black;
+  font-size: 24px;
+  transition: 0.25s ease;
+  opacity: 0.3;
+  transform: rotate(-90deg);
+}
+/* .accordion-1 .head:hover .arrow{
+  opacity: 1;
+} */
+/* .accordion-1 .head:hover, .accordion-1 .active{
+  background-color: #FFE77AFF;
+} */
+.accordion-1 .arrow-animate{
+  transform: rotate(0deg);
+  opacity: 1;
+}
+.accordion-1 .content{
+  background-color: white;
+  display: none;
+  padding: 5px 0px;
+  color: black;
+}
+  /* .accordion-1 .content p:first-child {
+    display: none;
+} */
+  .faq-tabs-wrapper {
+    padding-top: 45px;
+    padding-bottom:20px;
+}
+  .faq-tabs-wrapper h2 {
+    font-size: 20px;
+    font-weight: bold;
+}
+.content p {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0 0 12px;
+}
+@media screen and (max-width: 767px) {
+  .faq-tabs-wrapper {
+    padding-top: 35px;
+    padding-bottom:20px;
+}
+  .head h3 {
+    font-size: 15px;
+
+    line-height: 1.4;
+
+}
+  .accordion-1 .arrow {
+    font-size: 20px;
+}
+.faq-tabs-wrapper  h2 {
+    font-size: 20px;
+}
+.accordion-1 .content{
+font-size:15px;
+}
+.content p {
+    font-size: 14px;
+    line-height: 24px;
+    margin: 0 0 12px;
+}
+}
+</style>
+
+<div class="faq-tabs-wrapper">
+<div class="page-width">
+{% if collection.metafields.custom.faq != blank %}
+  <h2>FAQ's</h2>
+{% endif %}
+ {% assign faqgotquestion = collection.metafields.custom.faq.value %} 
+      {% if faqgotquestion != blank %}
+      {% assign faqgotquestionsteps = faqgotquestion.steps %}
+
+      {% for faqgotquestionstep in faqgotquestionsteps %}
+  <div class="accordion-1">
+    <div class="head">
+      <h3>{{ faqgotquestionstep.ques }}</h3>
+      <i class="fas fa-angle-down arrow"></i>
+    </div>
+    <div class="content">
+      <p>{{ faqgotquestionstep.answer }}</p>
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+</div>
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+  $('.head').click(function(){
+  $(this).toggleClass('active');
+  $(this).parent().find('.arrow').toggleClass('arrow-animate');
+  $(this).parent().find('.content').slideToggle(280);
+});
+  </script>
+{% comment %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+ {% for faqgotquestionstep in faqgotquestionsteps %}
+{
+    "@type": "Question",
+    "name": "{{ faqgotquestionstep.ques }}",
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": "{{ faqgotquestionstep.answer }}"
+    }
+  
+  }{% unless forloop.last %},{% endunless%}
+{% endfor %}
+]
+}
+</script>
+{% endcomment %}
+{% schema %}
+  {
+    "name": "Collection Metafield Faqs",
+    "settings": [],
+    "presets":[
+      {
+         "name":"Collection Metafield Faqs"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

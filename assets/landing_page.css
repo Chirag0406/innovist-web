@@ -1,0 +1,633 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&display=swap');
+
+
+@font-face {
+    font-family: 'Helvetica';
+    src: url('../assets/font/helvetica.eot') format('eot');
+    src: url('../assets/font/helvetica.ttf') format('ttf');
+    src: url('../assets/font/helvetica.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeue';
+    src: url('../assets/font/helveticaneue_medium.eot') format('eot');
+    src: url('../assets/font/helveticaneue_medium.ttf') format('ttf');
+    src: url('../assets/font/helveticaneue_medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Helvetica-Bold';
+    src: url('../assets/font/Helvetica-Bold.woff2') format('woff2'),
+        url('../assets/font/Helvetica-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+.search-desktop, .searchanize-search {
+    display: none;
+}
+
+.cart_menu,.menu_cart_icon {
+    visibility: hidden;
+}
+
+.new_user {
+    background: #fff;
+    padding: 0;
+    margin-top: 100px;
+    padding-bottom: 50px;
+    min-height: calc(100vh - 100px);
+}
+
+nav.custom_navbar {
+    border-bottom: 3px solid #FFCBC1;
+}
+
+.banner-box {
+    overflow: hidden;
+    background: radial-gradient(63.66% 63.66% at 26.94% 63.66%, rgba(230, 247, 255, 0.8) 58.99%, rgba(255, 203, 192, 0.8) 99.68%);
+    border-bottom: 3px solid #FFCBC0;
+    border-left: 0;
+    border-right: 0;
+    padding: 41px 1rem;
+}
+
+.banner-box .content h1 {
+    color: #01385E;
+    font-size: 42px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    display: inline;
+    text-decoration: none;
+    box-shadow: inset 0 -0.8em 0 rgb(255 255 255);
+}
+
+.banner-box .content ul {
+    padding: 0;
+    margin: 65px 0 0;
+    list-style: none;
+    display: flex;
+}
+
+.banner-box .content ul li span {
+    width: 100px;
+    height: 100px;
+    display: inline-block;
+    margin: 0 0 8px;
+}
+
+.banner-box .content ul li span img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-box .content ul li h5 {
+    margin: 0;
+    font-size: 18px;
+    padding: 0 15px;
+    color: #413F3F;
+    font-family: 'Helvetica';
+    font-weight: 500;
+    line-height: 26px;
+}
+
+.banner-box .content button {
+    width: 373px;
+    padding: 0;
+    border: none;
+    margin: 77px 0 0;
+}
+
+.meet-india .head h2{
+    position: relative;
+    display: inline-flex;
+    margin: 0 0 29px;
+}
+
+.meet-india .head h5{
+    position: relative;
+    display: inline-flex;
+    margin: 0;
+}
+
+.photos-content .head {
+    margin: 0 0 20px;
+}
+
+
+.photos-content .box {
+    border-radius: 4px;
+    background: #e6f7ff;
+    border: 2px solid #ffcbc0;
+    padding: 0;
+}
+
+.photos-content .box span {
+    width: 100%;
+    height: 175px;
+    display: block;
+    overflow: hidden;
+}
+
+.photos-content .box span img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.photos-content .box h5 {
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+    color: #4B4B4B;
+}
+
+.photos-content {
+    margin: 0 0 50px;
+}
+
+.photos-content:last-child {
+    margin: 0;
+}
+
+.meet-india .head h5 span{
+    border: 2px solid #FFCBC0;
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    padding: 0 15px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+    color: #01385E;
+    height: 33px;
+    text-transform: uppercase;
+}
+
+.meet-india .head h2 span {
+    border: 2px solid #FFCBC0;
+    position: relative;
+    z-index: 1;
+    background: #fff;
+    padding: 0 15px;
+    font-size: 35px;
+    line-height: 39px;
+    font-weight: normal;
+    color: #01385E;
+    height: 47px;
+    font-weight: 600;
+}
+
+section.steps_3.meet-india h2 span {
+    font-weight: normal;
+}
+
+.meet-india .head h2:after {
+    position: absolute;
+    content: "";
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    height: 47px;
+    width: auto;
+    z-index: 0;
+    border: 2px solid #FFCBC0;
+    background: #E6F7FF;
+}
+
+.meet-india .head h5:after {
+    position: absolute;
+    content: "";
+    left: -10px;
+    right: -10px;
+    bottom: -10px;
+    height: 33px;
+    width: auto;
+    z-index: 0;
+    border: 2px solid #FFCBC0;
+    background: #E6F7FF;
+}
+
+section.meet-india {
+    padding: 57px 0;
+    background: #FFF5F3;
+}
+
+section.meet-india .head{
+    text-align: center;
+}
+
+section.meet-india .head p {
+    font-size: 18px;
+    color: #4B4B4B;
+    line-height: 28px;
+    font-weight: 500;
+}
+
+
+
+
+.client-review-slide-main.meet-india .head {
+    margin: 0;
+}
+
+.client-review-slide-main.meet-india .head h2 {
+    margin: 0 0 52px;
+}
+
+.client-review-slide-main.meet-india{
+    background: radial-gradient(101.7% 104.4% at 50% 50%, #E6F7FF 32.29%, #FFCBC0 100%) !important;
+    border: 3px solid #FFCBC0;
+    border-left:0 ;
+    border-right:0 ;
+    padding: 51px 0 104px;
+}
+
+.client_reviews {
+    background: #FFFFFF;
+    border: 2px solid #FFCBC0;
+    box-sizing: border-box;
+    box-shadow: 2px 5px 20px rgb(0 0 0 / 8%);
+    border-radius: 5px;
+    padding: 50px 14px;
+    margin-bottom: 60px;
+    position: relative;
+    width: 100%;
+    margin: 35px 0 0;  
+    min-height: 290px;  
+}
+
+.client_reviews img {
+    margin-bottom: 20px;
+}
+
+.client_reviews p, .client_reviews span  {
+    font-size: 12px;
+    color: #4B4B4B;
+    font-weight:500;
+    font-family: 'helvetica';
+}
+
+.product_box .price p {
+    color: #01385e;
+    font-family: 'HelveticaNeue';
+    font-weight: 500;
+}
+
+.client-review-slide .slick-slide {
+    padding: 0 15px;
+}
+
+.client_reviews img {
+    margin: 10px auto;
+}
+
+.client_profile {
+    position: absolute;
+    height: 74px;
+    width: 74px;
+    content: "";
+    background: #fff;
+    top: -44px;
+    left: 50%;
+    transform: translate(-50%, 10px);
+    border-radius: 50%;
+    border: 2px solid #fff;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px #01385e;
+}
+
+section.client-review-slide-main.meet-india .slick-prev {
+    background-image: url(../assets/slick-arrow-left.svg) !important;
+    width: 64px;
+    height: 64px;
+    left: -60px;
+}
+
+section.client-review-slide-main.meet-india .slick-dotted.slick-slider {
+    margin-bottom: 52px;
+}
+
+.client-review-slide-main.meet-india button {
+    width: 338px;
+    margin: 0 auto;
+    display: block;
+    border: none;
+    background: transparent;
+}
+
+.client-review-slide-main.meet-india button img {
+    width: 100%;
+}
+
+section.client-review-slide-main.meet-india .slick-next {
+    background-image: url(../assets/slick-arrow-right.svg) !important;
+    width: 64px;
+    height: 64px;
+    right: -60px;
+}
+
+.client_profile img {
+    margin: 0 auto !important;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.autoplay .slick-slide img {
+    display: block;
+    margin: 0 auto;
+    height: 20px;
+}
+
+.client-review-slide {
+    margin-bottom: 60px;
+}
+
+
+
+section.footer {
+    background: #01385E;
+    padding: 60px;
+}
+
+.footer_links {
+    display: flex;
+    color: #fff;
+    font-size: 21px;
+    font-weight: 300;
+    flex-wrap: wrap;
+}
+
+.footer_links li {
+    list-style: none;
+    width: calc(100% / 2);
+    margin: 4px 0;
+}
+
+.contact_us h3{
+    color: #fff;
+    font-weight: bold;
+    font-size: 21px;
+    margin-bottom: 10px;
+}
+
+.contact_us p {
+    font-weight: 300;
+    font-size: 18px;
+    margin-bottom: 0;
+}
+
+.contact_us p a{
+    color: #fff;
+}
+
+.footer .subscribe {
+    margin: 40px 0 0;
+    display: flex;
+    width: 100%;
+}
+
+.footer .subscribe input {
+    height: 45px;
+    padding: 0 10px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    color: #fff;
+    font-size: 18px;
+    width: 100%;
+}
+
+.footer .subscribe input ::-webkit-input-placeholder { /* Edge */
+    color: #fff;
+  }
+  
+  .footer .subscribe input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #fff;
+  }
+  
+  .footer .subscribe input::placeholder {
+    color: #fff;
+  }
+
+.footer .subscribe button {
+    background: #fff;
+    border: none;
+    text-transform: uppercase;
+    color: #01385e;
+    margin-left: 15px;
+    width: 50%;
+    font-family: 'HelveticaNeue';
+    font-weight: 500;
+}
+
+.footer .social {
+    width: 30%;
+    margin: 30px auto 0;
+    display: block;
+}
+
+.footer .social ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer .social ul li {
+    width: 100%;
+    padding: 0 12px;
+    text-align: center;
+}
+
+.footer .social ul li a {
+    display: block;
+}
+
+.footer .social ul li a img {
+    width: 20px;
+}
+
+.new_user{
+    padding-bottom: 0;
+}
+
+section.paymnet-mode {
+    background: #000;
+    padding: 20px;
+    text-align: center;
+}
+
+section.paymnet-mode img {
+    width: 40%;
+}
+
+.like1 .outer-box {
+    margin-top :60px;
+}
+
+.steps_3 h5 {
+    font-size: 28px;
+    color: #413F3F;
+    margin-bottom: 50px;
+   font-weight: 300;
+}
+
+.take_quiz {
+    box-shadow: 2px 5px 20px rgb(0 0 0 / 8%);
+    border-radius: 9px;
+}
+
+.take_quiz_bg {
+    background: #E6F7FF;
+    padding: 24px 9px 24px 100px;
+    text-align: left;
+    position: relative;
+    min-height: 134px;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border-bottom: 4px solid #01385e;
+}
+
+.take_quiz_bg h6 {
+    font-size: 18px;
+    margin: 0;
+    color: #01385e;
+    font-family: 'Helvetica';
+    font-weight: 500;
+}
+
+.take_quiz span {
+    font-family: 'Playfair Display SC', serif;
+    color: #01385E;
+    font-size: 59px;
+    font-weight: 700;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    line-height: 75px;
+    text-align: center;
+    height: 70%;
+    width: 80px;
+    border-right: 1px solid #01385e;
+}
+
+section.steps_3 button {
+    margin: 45px 0 36px;
+    border: none;
+    background: transparent;
+}
+
+section.steps_3 p.para {
+    font-size: 18px;
+    color: #4B4B4B;
+    font-family: 'Helvetica';
+    font-weight: 500;
+    margin: 0;
+}
+
+section.steps_3 button img {
+    width: 100%;
+}
+
+.banner-box .col-lg-5 .content h1,.banner-box .col-lg-5 .content button,
+.client-review-slide-mob{
+    display: none;
+}
+
+.meet-india .head h2 span br{display: none;}
+
+.client_reviews span {
+    font-family: 'Helvetica';
+    font-weight: bold;
+}
+
+
+@media  only screen and (max-width: 1440px) {
+
+}
+
+@media  only screen and (max-width: 1366px) {
+
+}
+
+@media only screen and (min-width: 769px){  
+    
+}
+
+@media only screen and (max-width: 768px){ 
+
+    .photos-content .col-lg-3:nth-child(1) .box,.photos-content .col-lg-3:nth-child(2) .box {margin: 0;}
+    .meet-india .head h5 span {font-size: 14px;}.photos-content .box {margin: 30px 0 0;}
+    .photos-content .box span{height: auto;}
+    .banner-box .content button {margin-bottom: 50px;}
+    .img-box {width: 80%;margin: 0 auto;}
+    .meet-india .head h2 span{height: auto;}
+    .meet-india .head h2:after{height: 80px;}
+    .meet-india .head h2 span br {
+        display: block;
+    }
+    .client-review-slide{display: none !important;}
+    
+}
+
+@media only screen and (max-width: 560px){ 
+
+    .client_reviews{min-height: auto;}
+
+.new_user {margin-top: 79px;}
+.banner-box .content h1 {font-size: 26px;padding: 0 48px;line-height: 32px;}
+.banner-box .content ul{margin:0;}
+.banner-box .content h1 br {display: none;}
+.banner-box .row {flex-direction: column-reverse;}
+.banner-box .col-lg-7 h1 {display: none;}
+.banner-box .col-lg-5 .content button {margin: 25px 0 44px;}
+.banner-box .content ul li {width: 50%;margin-top: 18px;}
+.banner-box .content ul {flex-wrap: wrap;}
+.banner-box .content ul li h5 {font-size: 12px;line-height: normal;padding: 0 30px;}
+.banner-box .content ul li:nth-child(1),.banner-box .content ul li:nth-child(2) {margin: 0;}
+.banner-box .col-lg-7 button {display: none;}
+.meet-india .head h2 span {font-size: 22px;height: auto;}
+section.client-review-slide-main.meet-india h2 span {font-weight: normal;}
+.meet-india .head h2:after {height: 80px;}
+section.meet-india .head p {font-size: 15px;}
+section.meet-india .head p br {display: none;}
+section.meet-india .head {margin: 0 0 30px;}
+.meet-india .head h5 span {font-size: 14px;}.photos-content .box {margin: 10px 0 0;}
+.photos-content .box h5 {font-size: 12px;}
+.meet-india .head h2 span br{display: block;}
+.banner-box .content.banner_mob_text h1, .banner-box .content.banner_mob_text button{display: inline;padding: 0;}
+.banner-box {background: radial-gradient(133.63% 53.28% at 28.67% 63.28%, #E6F7FF 37.34%, #FFCBC0 100%);}
+.banner-box .content.banner_mob_text button,.client-review-slide-main.meet-india button,section.steps_3 button{width: 90%;margin-left: auto;margin-right: auto;}
+.meet-india .head h2 {margin: 0 5px 29px;}
+.img-box {width: 100%;margin: 25px 0 0;}
+section.steps_3 .col-md-4 .take_quiz,
+.client-review-slide-mob .col-lg-4 .client_reviews {margin: 52px 0 0;}
+section.steps_3 .col-md-4:first-child .take_quiz {margin: 0;}
+.take_quiz_bg h6,section.steps_3 p.para {font-size: 18px;}
+.client-review-slide-mob{display: block;margin-bottom: 55px;}
+.client-review-slide-main.meet-india .head h2 {margin: 0 0 10px;}
+
+}
+
+@media only screen and (max-width: 375px){ 
+
+}
+
+@media only screen and (max-width: 320px){
+
+    .meet-india .head h2 span {font-size: 18px;}
+    
+ }

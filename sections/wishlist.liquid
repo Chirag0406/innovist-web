@@ -1,0 +1,529 @@
+{% schema %}
+{
+"name": "refill",
+"settings": []
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<style>
+    @media only screen and (max-width: 600px) {
+        .no_items {
+            line-height:29px;
+        }
+    }
+</style>
+
+<!--Wishlist-->
+
+{% unless customer %}
+    <script>
+        console.log("redirrrrect urlllll 111------->");
+        function login(redirect_url){
+            console.log("redirrrrect urlllll------->", window.location.href);
+            debugger;
+            localStorage.setItem("redirect_url", redirect_url ? redirect_url : window.location.href);
+
+            let width=window.screen.availWidth;
+            let modal = document.getElementById("myModal");
+            let mobile_modal = document.getElementById("mobile-myModal");
+        
+            if(width<601)
+            {
+                modal.style.display='none'
+                mobile_modal.style.display='block'       
+            }
+            else if(width>601)
+            {
+                modal.style.display='block'
+                mobile_modal.style.display='none'   
+            } 
+            {% comment %} window.location.href = '/account/login'; {% endcomment %}
+        }
+        login('');
+    </script>
+{% endunless %}
+<section>
+    <div style="margin: 7%;">
+      <h1>{{customer.first_name}}'s Wishlist</h1>
+        <div class="products_section">
+            <div
+                    id="CollectionAjaxResult"
+                    class="collection-content"
+                    data-section-id="{{ section.id }}"
+                    data-section-type="collection-template"
+                    data-collection-template="true"
+            >
+                <div class="container">
+                    <div class="product-recommendations">
+                        <div class="new-grid product-grid wishlisted_items collection-grid" data-view="small" data-scroll-to>
+                            {% assign wishlist_items = customer.metafields.global.wishlist_items | split: ',' %}
+                             {% assign wishlisted_items_size = 0%}
+                            {%- for handle in wishlist_items -%}
+                                {%unless handle == "0"%}
+                                     {% assign wishlisted_items_size = wishlisted_items_size | plus: 1 %}
+                                    {% assign products_obj = all_products[handle]%}
+                                    {%- render 'product-grid-item', product: products_obj -%}
+                                {%endunless%}
+                            {%- endfor -%}
+                        </div>
+                        {%- for handle in wishlist_items -%}
+                            {%assign products_obj = all_products[handle]%}
+                            {%- render 'quick-shop-modal', product: products_obj -%}
+                        {%- endfor -%}
+
+                        {% if wishlisted_items_size == 0  %}
+                            <h3 class="no_items" style="text-align: center; line-height:23px">NO ITEMS IN YOUR WISHLIST.
+                                <br/>
+                                <br/>
+                                Add now, Buy Later.
+                                <br/>
+                                <br/>
+                                  Save your favourite products here!</h3>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>
+
+<style>
+    .cart__item-title a{
+        color: #000 !important;
+    }
+    .quick-product__btn {
+        display: none !important;
+    }
+    .header-section {
+        display:block !important;
+    }
+    .announcement-bar {
+        display:block !important;
+
+    }
+    .page_hide{
+        display:none;
+    }
+    .navbar.navbar-expand-lg.nav_default {
+        margin-top: 0px;
+    }
+
+    nav.navbar.navbar-expand-lg.nav_default {
+        margin-top: 0px !important;
+        padding-top: 0;
+    }
+    }
+    .loading_wrapper .personalised{
+        margin: 0 auto;
+    }
+    .Loading-page {
+        margin: 36px auto;
+        height:300px;
+    }
+    .loading_wrapper {
+        /* height: 100vh; */
+        /* overflow-y: hidden; */
+
+    }
+    .unique .box{
+        background: rgb(210,210,210);
+    }
+    .small-text{
+        font-weight: 300;
+        font-size: 12px;
+        text-transform: lowercase;
+    }
+    .buttonClicked{
+
+    }
+    @media only screen and (max-width: 576px){
+        .Loading-page {
+            margin-top: 12px !important;
+        }
+    }
+
+    .inner_wrapper_hair {
+        padding: 100px 0;
+        background: rgb(210,210,210);}
+    .alert-fixed {
+        position:fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index: 9999999999999;
+        border-radius:0px
+    }
+
+    nav.navbar.navbar-expand-lg.nav_default{
+        margin-top: 0 !important;
+        padding-top: 0;
+    }
+
+    /**** update quiz section css */
+    .update_dropdown .hidden {
+        display: none;
+    }
+
+    .update_dropdown{
+        padding   : 30px 0;
+        border-top: none;
+    }
+
+    .sec_update {
+        padding: 1rem;
+        background: #000;
+        border-radius:5px;
+        color:#fff;
+        box-shadow: 2px 2px 6px 0px rgb(228 226 228);
+    }
+
+    .sec_update p {
+        margin-bottom: 0;
+    }
+
+    .btn.dropbox_btn {
+        color: #fff;
+        font-family: Helvetica;
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: bold;
+        position: relative;
+        text-align: left;
+        padding: 0 0 0 22px;
+        line-height: 38px;
+        width: 100%;
+        margin: 0;
+        text-transform: none;
+    }
+
+    .bogo_add{
+        padding: 1em 0 0 0;
+        font-size: 14px;
+        font-weight:normal;
+    }
+    @media(max-width:500px) {
+        .bogo_add{
+            padding: 1em 0 0 0;
+            font-size: 14px;
+        }
+    }
+
+
+    .btn.dropbox_btn::after {
+        position: absolute;
+        content: "\f107";
+        top: 15px;
+        right: 0;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 14px;
+        font-size: 27px;
+        color: #e5e5e5;
+
+
+    }
+
+    .btn.dropbox_btn span {
+        display: block;
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 500;
+        font-family: Helvetica;
+        color: #C4C4C4;
+
+    }
+
+    .sec_update .card.card-body {
+        background: transparent;
+        border: none;
+        margin: 0;
+        padding: 0 22px;
+    }
+
+    .sec_update .card.card-body span {
+        margin-bottom: 40px;
+        font-size: 18px;
+        color: #1C1111;
+        text-align: center;
+        font-weight: 500;
+        font-family: Helvetica;
+
+    }
+
+    .skin_goals h3 {
+        font-family: Helvetica Neue;
+        font-size: 20px;
+        font-weight: 500;
+        text-align: left;
+        margin-bottom: 30px;
+    }
+
+    .sec_update .card.card-body ul {
+        padding: 0;
+        margin: 0 auto;
+        list-style: none;
+        width: 100%;
+        text-align: left;
+    }
+
+    .sec_update .card.card-body .color {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    .sec_update .card.card-body ul li {
+        width: 48%;
+        height: 35px;
+        margin: 13px 0 13px;
+        position: relative;
+        background: #FFFFFF;
+        box-sizing: border-box;
+        border-radius: 3px;
+        margin-right: 4%;
+        font-size: 18px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        display: inline-block;
+    }
+
+    .sec_update .card.card-body ul.treatment li {
+        width: 32%;
+    }
+
+
+
+    .sec_update .card.card-body .color li {
+        width: calc(100% / 3);
+        text-align: center;
+        height: 100%;
+        padding: 0;
+        height: auto;
+    }
+
+
+
+    .sec_update .card.card-body .color li h5 {
+        font-size: 13px;
+        font-family: 'Helvetica';
+        color: #1C1111;
+        margin: 10px 0;
+        display: block;
+    }
+
+    .sec_update .card.card-body ul li:nth-child(even) {
+        margin-right: 0;
+    }
+
+    .sec_update .card.card-body ul li input {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 2;
+        opacity: 0;
+    }
+
+    .sec_update .card.card-body ul li input[type="text"] {
+        opacity: 1;
+        cursor: text;
+        border-radius: 3px;
+        padding: 1rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: 'Helvetica';
+        font-size: 13px;
+        border: 1px dashed #000;
+        background-color: initial;
+    }
+
+    .sec_update .card.card-body ul li input[type="checkbox"]:checked + span,
+    .sec_update .card.card-body ul li input[type="radio"]:checked + span {
+        color:#fff;
+    }
+
+    .sec_update .card.card-body ul li input[type="checkbox"]:checked + span + h5,
+    .sec_update .card.card-body ul li input[type="radio"]:checked + span + h5 {
+        font-weight: bold;
+    }
+
+    .sec_update .card.card-body .color li > span {
+        width: 100%;
+        height: 92px;
+        display: block;
+        background: #fff;
+        margin: 0;
+        border-radius: 7px;
+    }
+
+
+    .sec_update .card.card-body ul li span.check {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        border-radius: 3px;
+        z-index: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: 0.5px solid #000000;
+        padding: 1rem;
+        font-family: 'Helvetica';
+        font-size: 13px;
+    }
+
+    .sec_update .card.card-body .color li input {
+        opacity: 0;
+    }
+
+    .sec_update .card.card-body .color li > span {
+        width: 92px;
+        height: 99px;
+        display: block;
+        background: #fff;
+        margin: 0 auto;
+        border-radius: 7px;
+    }
+
+    .sec_update .card.card-body .color li > span img {
+        width: 58px;
+        margin-top: -30px;
+    }
+
+
+    .sec_update .card.card-body ul li input[type="checkbox"]:checked + .check,
+    .sec_update .card.card-body ul li input[type="radio"]:checked + .check {
+        background: #000;
+        color:#fff;
+        font-weight: 600;
+    }
+
+    .sec_update .card.card-body ul.fragrance li {
+        width: 30%;
+        height: 35px;
+        margin-right: 2% !important;
+    }
+
+
+    .sec_update .card.card-body ul.update_name li {
+        width: 43%;
+        height: 35px;
+    }
+
+    .sec_update .card.card-body button.btn {
+        background:#000;
+        border-radius: 3px;
+        color:#fff;
+        text-transform: uppercase;
+        padding:22px 0;
+        margin: 20px 0;
+    }
+
+    .sec_update .card.card-body .color li {margin: 60px 0 0;}
+    .sec_update .card.card-body .color li:nth-child(1),.sec_update .card.card-body .color li:nth-child(2),
+    .sec_update .card.card-body .color li:nth-child(3){margin-top: 0;}
+
+    /* -------------media starts------------------------- */
+
+    @media only screen and (max-width: 1200px){
+        .btn.dropbox_btn {
+            font-size: 23px;
+            line-height: 30px;
+        }
+
+        .btn.dropbox_btn span {
+            font-size: 15px;
+        }
+
+        .sec_update .card.card-body span {
+            font-size: 15px;
+            margin: 0 0px 16px 0;
+        }
+
+        .btn.dropbox_btn::before {
+            height: 137%;
+        }
+    }
+
+    @media only screen and (max-width: 992px){
+        .sec_update .card.card-body span {
+            font-size: 14px;
+        }
+    }
+
+    @media only screen and (max-width: 767px){
+        .sec_update {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media only screen and (max-width: 560px){
+
+        .sec_update .card.card-body .color li > span {width: 52px;height: 49px;}
+        .sec_update .card.card-body .color li h5{font-size: 8px;margin: 8px 0 5px;}
+        .sec_update .card.card-body .color li > span img {width: 36px;}
+        .sec_update .card.card-body .color li {margin: 35px 0 0;}
+        .sec_update .card.card-body .color li:nth-child(1),.sec_update .card.card-body .color li:nth-child(2),
+        .sec_update .card.card-body .color li:nth-child(3){margin-top: 0;}
+
+
+        .btn.dropbox_btn {
+            font-size: 19px;
+        }
+
+        .btn.dropbox_btn span {
+            font-size: 10px;
+            line-height: 21px;
+
+        }
+
+        .skin_goals h3 {
+            font-size: 12px;
+            margin: 16px 0 2px 0;
+        }
+
+        .sec_update .card.card-body ul li span.check {
+            font-family: Helvetica Neue;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 15px;
+        }
+
+        .sec_update .card.card-body ul li, .sec_update .card.card-body ul.update_name li {
+            height: 20px;
+        }
+
+        .sec_update .card.card-body button.btn {
+            padding: 7px 0;
+            margin: 30px 0 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .sec_update .card.card-body ul.fragrance li {
+            height: 20px;
+        }
+
+        .sec_update .card.card-body span {
+            font-size: 12px;
+        }
+    }
+
+    @media only screen and (max-width: 375px){
+        .sec_update {padding: 35px 12px;}
+    }
+
+
+
+
+</style>

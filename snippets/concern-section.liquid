@@ -1,0 +1,81 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<div class="product_add_sec">
+    <p class="subtitle_text"> 
+        {{product.title}}
+    </p>
+    <div class="product_price_div">
+        {% if product.compare_at_price_max > product.price %}
+        <s class="product__price--strike">
+            {% if current_variant.compare_at_price > current_variant.price
+            %}
+            {{ current_variant.compare_at_price | money }}
+            {% endif %}
+        </s>
+        <br>
+        {% endif %}
+
+        <span class="product__price">
+            {{ current_variant.price | money }}
+        </span>
+
+        {% comment %} {% if product.type != blank %}
+            <span class="product__type">
+                | {{ product.type }}
+            </span>
+        {% endif %} {% endcomment %}
+    </div>
+    {%- form 'product', product, class: 'product-form', data-swatches:
+    'false' -%}
+    {% unless product.variants.size == 1 %}
+        <div class="product__selectors">
+            <div class="selector-wrapper js"
+                data-option="option0">
+                <select class="selector-menu"
+                    data-id="SingleOptionSelector-{{ forloop.index0 }}-{{product.id}}"
+                    data-single-option-selector
+                    data-index="option0">
+                    {% for variant in product.variants %}
+                        <option {% if variant == current_variant %}selected="selected" {% endif %} {% unless variant.available %}disabled="disabled" {% endunless %} value="{{ variant.id }}">
+                            {{ variant.title }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+    {% endunless %}
+
+    <select name="id" class="no-js" data-product-select {%if product.variants.size==1 %} style="display:none" {%endif%}>
+        {% for variant in product.variants %}
+            <option {% if variant==current_variant %} selected="selected" {% endif %}
+                {% unless variant.available %}disabled="disabled" {% endunless %}
+                value="{{ variant.id }}">
+                {{ variant.title }}
+            </option>
+        {% endfor %}
+    </select>
+
+    <input type="hidden" name="quantity" value="1" aria-label="quantity">
+
+    <div class="product__submit_cus" data-product-id="{{ product.id }}">
+        <div class="product__submit__buttons">
+            <button type="submit" name="add"
+                class="btn product__submit__add product__submit__add_cust"
+                data-add-to-cart {% unless current_variant.available
+                %}disabled="disabled" {% endunless %}>
+                <span data-add-to-cart-text class="cart_option">
+                    {%- if current_variant.available and product.tags
+                    contains
+                    '_preorder' -%}
+                    {{ 'products.product.pre_order' | t }}
+                    {%- elsif current_variant.available -%}
+                    {{ 'products.product.add_to_cart' | t }}
+                    {%- else -%}
+                    {{ 'products.product.sold_out' | t }}
+                    {%- endif -%}
+                </span>
+            </button>
+        </div>
+    </div>
+    {%- endform -%}
+</div>

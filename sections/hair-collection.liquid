@@ -1,0 +1,900 @@
+<style>
+    .black-btn{
+        background: #000 !important;
+        color:#fff !important;
+        border:0 !important;
+        font-weight:bold !important;
+        font-family: 'HelveticaNeue';
+        border-radius:4px;
+        padding:1rem 2.3rem !important;
+    }
+     .site-nav__dropdown-list a, .megamenu__wrapper a{
+       color:#000 !important;
+     }
+    .black-btn a{
+        color:#fff !important;
+    }
+    .login-link{
+        padding:8px 0;
+    }
+    .black-link{
+        color:#000 !important;
+    }
+</style>
+
+<section class="banner_section bg-yellow-b haircare_banner_section">
+    <!--div class="main_bg nutra-banner-web haircare-b-web" style="background-image: url(https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Desktop_Top_Banner.png?v=1652189695)";>
+           <span></span>
+         </div-->
+		 <div class="main_bg nutra-banner-web haircare-b-web">
+             <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Desktop_Top_Banner_2.png?v=1652764984"  class="w-100"/>
+           <span></span>
+         </div>
+
+		 <div class="main_bg nutra-banner-mob haircare-w-m" style="">
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Mobile_Top_Banner_3b127f59-c848-4bb8-9783-97e151932973.png?v=1652764984" class="w-100">
+           <span></span>
+         </div>
+         <div class="skin_analysis haircare-page-btn ingredient_banner_btn text-center">
+           <button class="black-btn"><a href="/pages/quiz-3">Take Quiz</a></button>
+             <br/>
+             {% unless customer %} <div class="login-link">Existing User? <a style="text-decoration: underline;" onClick="setUrl()">Login</a></div>{% endunless %}
+         </div>
+     </section>
+     <section class="personalized_skincare ingredient_per_skin haircare_per_skin">
+       {% comment %} <h2 class="personalized_skincaretitle">
+         <span class="haircare-blue">{{section.settings.hair_second_sec_heading}}</span>
+         {{section.settings.hair_second_sec_subheading}}
+       </h2> {% endcomment %}
+
+       <div class="what_we_deliver">
+       <div class="container-fluid">
+         <div class="row">
+           <p class="subtitle">{{section.settings.hair_third_sec_heading}}</p>
+           <div class="col-md-4 col-sm-12">
+               <div class="card">
+                 <div class="card-img-top">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_798.png?v=1603798912" />
+                 </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{section.settings.hair_third_sec_heading_first}}</h5>
+                  <p class="card-text">{{section.settings.hair_third_sec_content_first}}</p>
+                </div>
+              </div>
+             </div>
+           <div class="col-md-4 col-sm-12">
+               <div class="card">
+                 <div class="card-img-top">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_796.png?v=1602847134" />
+                 </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{section.settings.hair_third_sec_heading_sec}}</h5>
+                  <p class="card-text">{{section.settings.hair_third_sec_content_sec}}</p>
+                </div>
+              </div>
+             </div>
+           <div class="col-md-4 col-sm-12">
+               <div class="card">
+                 <div class="card-img-top">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_797.png?v=1602847135" />
+                 </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{section.settings.hair_third_sec_heading_third}}</h5>
+                  <p class="card-text">{{section.settings.hair_third_sec_content_third}}</p>
+                </div>
+              </div>
+             </div>
+
+         </div>
+       </div>
+       </div>
+     </section>
+	 {% comment %} <div class="easy-to-reach">
+			<div class="container">
+				<h5>We're easy to reach and easier to be yours!</h5>
+				<img class="easy-web" src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_908.png?v=1602848065">
+				<img class="easy-mob" src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_907.png?v=1602848064">
+
+			</div>
+		</div> {% endcomment %}
+     <section class="personalized_skincare haircare_block_skin">
+		   <div class="skincare_ingredients">
+		   <div class="container">
+			 <div class="row">
+			   <p class="subtitle">{{section.settings.hair_fourth_sec_heading}}</p>
+
+			   <div class="col-md-5 col-sm-12">
+				   <div class="ingredient_text">
+					 <p>{{section.settings.hair_fourth_sec_left}}</p>
+				   </div>
+				 </div>
+				 <div class="col-md-7 col-sm-12 p-0">
+				   <div class="ingredient_types">
+					 <div class="card peach">
+					  <div class="ingredient_images">
+						<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_800.png?v=1602847134" alt=""/>
+					  </div>
+					  <div class="ingredient_detail">
+					   <h5 class="ingredient_title">{{section.settings.hair_fourth_sec_right_first_head}}</h5>
+					   <p>{{section.settings.hair_fourth_sec_right_first_subhead}}</p>
+					  </div>
+					 </div>
+					 <div class="card peach hyaluronic">
+					  <div class="ingredient_images">
+						<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/55.png?v=1602847134" alt=""/>
+					  </div>
+					  <div class="ingredient_detail">
+					   <h5 class="ingredient_title">{{section.settings.hair_fourth_sec_right_sec_head}}</h5>
+					   <p>{{section.settings.hair_fourth_sec_right_sec_subhead}}</p>
+					  </div>
+					 </div>
+					 <div class="card peach resorcinol">
+					  <div class="ingredient_images">
+						<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/unnamed.png?v=1602847134" alt=""/>
+					  </div>
+					  <div class="ingredient_detail">
+					   <h5 class="ingredient_title">{{section.settings.hair_fourth_sec_right_third_head}}</h5>
+					   <p>{{section.settings.hair_fourth_sec_right_third_subhead}}</p>
+					  </div>
+					 </div>
+					 <div class="card peach peptides">
+					  <div class="ingredient_images">
+						<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/vitamin_e.png?v=1602847134" alt=""/>
+					  </div>
+					  <div class="ingredient_detail">
+					   <h5 class="ingredient_title">Vitamins</h5>
+					   <p>Nourishes Hair</p>
+					  </div>
+					 </div>
+					 <div class="card peach fruitenzymes">
+					  <div class="ingredient_images">
+						<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Almond.png?v=1602847134" alt=""/>
+					  </div>
+					  <div class="ingredient_detail">
+					   <h5 class="ingredient_title">Almond Oil</h5>
+					   <p>Moisturizes Hair and Scalp</p>
+					  </div>
+					 </div>
+					 <div class="card peach lactic-acid">
+					  <div class="ingredient_images">
+						<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/c0216209-800px-wm.png?v=1602847134" alt=""/>
+					  </div>
+					  <div class="ingredient_detail">
+					   <h5 class="ingredient_title">Witch Hazel</h5>
+					   <p>Controls Oil</p>
+					  </div>
+					 </div>
+				   </div>
+				 </div>
+			 </div>
+		   </div>
+		   </div>
+		 </section>
+
+    <div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center breaking-news bg-white">
+                <marquee class="news-scroll" behavior="scroll" direction="left" onmouseover="this.stop();" onmouseout="this.start();">
+                  <a href="#">Paraben Free </a>
+                  <span class="dot"></span>
+                  <a href="#">Highest Grade Natural hair </a>
+                  <span class="dot"></span>
+                  <a href="#">Free of Harmful Chemicals </a>
+                  <span class="dot"></span>
+                  <a href="#">Mineral Oil Free</a>
+                  <span class="dot"></span>
+                  <a href="#">Cruelty Free</a>
+                  <span class="dot"></span>
+                  <a href="#">Paraben Free</a>
+                  <span class="dot"></span>
+                  <a href="#">Highest Grade Natural hair </a>
+                  <span class="dot"></span>
+                  <a href="#">Free of Harmful Chemicals</a>
+                </marquee>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="nutra-page-read text-center">
+       <a href="{{ section.settings.hair_fifth_sec_link_view}}">{{ section.settings.hair_fifth_sec_link_text_view}}</a>
+     </div>
+
+     <div class="skin_analysis haircare-page-btn text-center">
+       <button><a href="/pages/quiz-3">{{ section.settings.hair_fifth_sec_link_text}}</a></button>
+     </div>
+     <div class="step_regime mb-10">
+       <h5><span class="haircare-blue">{{ section.settings.hair_six_heading}}</span>{{ section.settings.hair_six_subheading}}</h5>
+     </div>
+     <section class="exclusively_for_you haircare_exclusive_for_you">
+       <div class="container-fluid">
+         <p class="subtitle">{{ section.settings.hair_seven_heading}}</p>
+		<div class="row mt-5 forst-row">
+            <div class="col-md-6 col-sm-12">
+               <div class="product-image">
+                 <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Step_1_44d7a385-5499-48be-97de-e109f8ea908d.png?v=1652273916" alt="pre-shampoo-mask" style="height:500px !important;">
+               </div>
+             </div>
+             <div class="col-md-6 col-sm-12">
+               <div class="product_detail prod-det-1">
+				<div class="haricare_no_cont">
+					<h3 class="product_title">{{ section.settings.hair_seven_first_heading}}</h3>
+					<span class="img-left custom_product_number" style="background-image: url(https://cdn.shopify.com/s/files/1/0039/6073/3763/files/01.png?v=1601267674);"></span>
+				</div>
+               <span class="product_subtitle">{{ section.settings.hair_seven_first_subheading}}</span>
+				<ul class="color_dots">
+					<li class="yello_d"></li>
+					<li class="blue_d"></li>
+					<li class="sky_d"></li>
+					<li class="orange_d"></li>
+					<li class="pinkl_d"></li>
+					<li class="green_d"></li>
+					<li class="red_d"></li>
+				</ul>
+               <ul class="product_advantages">
+                 {{ section.settings.hair_seven_first_cont}}
+               </ul>
+               </div>
+             </div>
+         </div>
+         <div class="row mt-5 flex-column-reverse flex-sm-row sec-row">
+            <div class="col-md-6 col-sm-12">
+               <div class="product_detail text-right prod-det-2">
+				<div class="haricare_no_cont">
+					<h3 class="product_title">{{ section.settings.hair_seven_sec_heading}}</h3>
+					<span class="img-right custom_product_number" style="background-image: url(https://cdn.shopify.com/s/files/1/0039/6073/3763/files/02.png?v=1601267596);"></span>
+				</div>
+			  <span class="product_subtitle">{{ section.settings.hair_seven_sec_subheading}}</span>
+				<ul class="color_dots">
+					<li class="yello_d"></li>
+					<li class="blue_d"></li>
+					<li class="sky_d"></li>
+					<li class="orange_d"></li>
+					<li class="pinkl_d"></li>
+					<li class="green_d"></li>
+					<li class="red_d"></li>
+				</ul>
+               {{ section.settings.hair_seven_sec_cont}}
+               </div>
+             </div>
+             <div class="col-md-6 col-sm-12 text-right">
+               <div class="product-image">
+                 <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Step_2_300f7e51-02c7-4009-bc08-7439369be707.png?v=1652273916" alt="" />
+               </div>
+             </div>
+         </div>
+         <div class="row mt-5 third-row">
+            <div class="col-md-6 col-sm-12">
+               <div class="product-image">
+                 <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Step_3_bd37153f-876f-4917-a2fc-e33ccbfb2c04.png?v=1652273917" alt="" />
+               </div>
+             </div>
+
+             <div class="col-md-6 col-sm-12">
+               <div class="product_detail prod-det-3">
+				<div class="haricare_no_cont">
+					<h3 class="product_title">{{ section.settings.hair_seven_third_heading}}</h3>
+					<span class="img-left custom_product_number" style="background-image: url(https://cdn.shopify.com/s/files/1/0039/6073/3763/files/03.png?v=1601267614);"></span>
+				</div>
+			  <span class="product_subtitle">{{ section.settings.hair_seven_third_subheading}}</span>
+				<ul class="color_dots">
+					<li class="yello_d"></li>
+					<li class="blue_d"></li>
+					<li class="sky_d"></li>
+					<li class="orange_d"></li>
+					<li class="pinkl_d"></li>
+					<li class="green_d"></li>
+					<li class="red_d"></li>
+				</ul>
+               <ul class="product_advantages">
+                 {{ section.settings.hair_seven_third_cont}}
+               </ul>
+               </div>
+             </div>
+         </div>
+
+       </div>
+
+     </section>
+
+	%%insert-review-section%%
+	%%insert-logo-section%%
+     <section class="personalized_skincare ">
+       <div class="what_we_deliver_prt2 haircare_deliver_part2 what-we-del-bg mb-10">
+       <div class="container">
+         <div class="row">
+           <p class="subtitle">{{ section.settings.hair_eleventh_heading}}</p>
+
+             <div class="col-md-4 col-sm-6">
+               <div class="card mt-3">
+                 <div class="card-img-top mb-5">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_703.png?v=1602847134" />
+                 </div>
+                <div class="card-body">
+                  <h5 class="card-title2">{{ section.settings.hair__heading_first}}</h5>
+                  <p class="card-text">{{ section.settings.hair_eleventh_subheading_first}}</p>
+                </div>
+              </div>
+             </div>
+             <div class="col-md-4 col-sm-6">
+               <div class="card mt-3">
+                 <div class="card-img-top mb-5">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_761.png?v=1602847134" />
+                 </div>
+                <div class="card-body">
+                  <h5 class="card-title2">{{ section.settings.hair_eleventh_heading_sec}}</h5>
+                  <p class="card-text">{{ section.settings.hair_eleventh_subheading_sec}}</p>
+                </div>
+              </div>
+             </div>
+           <div class="col-md-4 col-sm-6">
+               <div class="card mt-3">
+                 <div class="card-img-top mb-5">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_707.png?v=1602847134" />
+                 </div>
+                <div class="card-body">
+                  <h5 class="card-title2">{{ section.settings.hair_eleventh_heading_third}}</h5>
+                  <p class="card-text">{{ section.settings.hair_eleventh_subheading_third}}</p>
+                </div>
+              </div>
+             </div>
+            <div class="col-md-4 col-sm-6">
+               <div class="card mt-3">
+                 <div class="card-img-top mb-5">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_762.png?v=1602847134">
+                 </div>
+                <div class="card-body">
+                  <h5 class="card-title2">{{ section.settings.hair_eleventh_heading_four}}</h5>
+                  <p class="card-text">{{ section.settings.hair_eleventh_subheading_four}}</p>
+                </div>
+              </div>
+             </div>
+             <div class="col-md-4 col-sm-6">
+               <div class="card mt-3">
+                 <div class="card-img-top mb-5">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_704.png?v=1602847134">
+                 </div>
+                <div class="card-body">
+                  <h5 class="card-title2">{{ section.settings.hair_eleventh_heading_fifth}}</h5>
+                  <p class="card-text">{{ section.settings.hair_eleventh_subheading_fifth}}</p>
+                </div>
+              </div>
+             </div>
+           <div class="col-md-4 col-sm-6">
+               <div class="card mt-3">
+                 <div class="card-img-top mb-5">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_705.png?v=1602847134">
+                 </div>
+                <div class="card-body">
+                  <h5 class="card-title2">{{ section.settings.hair_eleventh_heading_six}}</h5>
+                  <p class="card-text">{{ section.settings.hair_eleventh_subheading_six}}</p>
+                </div>
+              </div>
+             </div>
+
+         </div>
+       </div>
+       </div>
+     </section>
+
+
+
+     <section class="personalized_skincare last_product_nutra">
+       <div class="like_to_know mb-10">
+       <div class="container">
+           <p class="subtitle">{{ section.settings.hair_twelevth_heading}}</p>
+         <div class="row">
+			<div class="mobile_view_about_product">
+				<img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Bottom_Banner_e42fc0e5-544c-40d4-aada-640f71e199d9.png?v=1652273916" alt="" />
+			</div>
+           <div class="about_product">
+             <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Bottom_Banner_e42fc0e5-544c-40d4-aada-640f71e199d9.png?v=1652273916" alt="" />
+           </div>
+           <div class="skin_analysis ingredient_here_analysis  haircare-page-btn text-center">
+       <button><a href="/pages/quiz-3">{{ section.settings.hair_thirteen_link_text}}</a></button>
+     </div>
+         </div>
+       </div>
+       </div>
+     </section>
+	<div class="efficiency-sec haircare-eff">
+		<p>{{ section.settings.hair_fourteen_cont}}
+		</p>
+	</div>
+
+	<style>
+		nav.navbar.navbar-expand-lg.nav_default {
+			margin-top: 0px!important;
+		}
+	</style>
+<script>
+    function setUrl(){
+        localStorage.setItem("redirect_url", "/pages/quiz-3");
+        
+        let width=window.screen.availWidth;
+        let modal = document.getElementById("myModal");
+        let mobile_modal = document.getElementById("mobile-myModal");
+    
+        if(width<601)
+        {
+            modal.style.display='none'
+            mobile_modal.style.display='block'       
+        }
+        else if(width>601)
+        {
+            modal.style.display='block'
+            mobile_modal.style.display='none'   
+        } 
+        {% comment %} window.location.href="/account/login"; {% endcomment %}
+
+    }
+</script>
+
+
+
+
+{% schema %}
+  {
+    "name": "hair Collections",
+    "settings": [
+      {
+        "type": "header",
+        "content": "First section"
+      },
+      {
+        "id": "hair_first_sec_link_text",
+        "type": "text",
+        "label": "Link text"
+      },
+      {
+        "id": "hair_first_sec_link",
+        "type": "url",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Second section"
+      },
+      {
+        "id": "hair_second_sec_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_second_sec_subheading",
+        "type": "text",
+        "label": "Subheading"
+      },
+      {
+        "type": "header",
+        "content": "Third section"
+      },
+      {
+        "id": "hair_third_sec_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
+        "content": "Third section first part"
+      },
+      {
+        "id": "hair_third_sec_heading_first",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_third_sec_content_first",
+        "type": "textarea",
+        "label": "Content"
+      },
+      {
+        "type": "header",
+        "content": "Third section second part"
+      },
+      {
+        "id": "hair_third_sec_heading_sec",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_third_sec_content_sec",
+        "type": "textarea",
+        "label": "Content"
+      },
+      {
+        "type": "header",
+        "content": "Third section third part"
+      },
+      {
+        "id": "hair_third_sec_heading_third",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_third_sec_content_third",
+        "type": "textarea",
+        "label": "Content"
+      },
+      {
+        "type": "header",
+        "content": "Fourth section"
+      },
+      {
+        "id": "hair_fourth_sec_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
+        "content": "Fourth section left part"
+      },
+      {
+        "id": "hair_fourth_sec_left",
+        "type": "textarea",
+        "label": "Content"
+      },
+      {
+        "type": "header",
+        "content": "Fourth section right part"
+      },
+      {
+        "id": "hair_fourth_sec_right_first_head",
+        "type": "text",
+        "label": "First heading"
+      },
+      {
+        "id": "hair_fourth_sec_right_first_subhead",
+        "type": "text",
+        "label": "First subheading"
+      },
+      {
+        "id": "hair_fourth_sec_right_sec_head",
+        "type": "text",
+        "label": "Second heading"
+      },
+      {
+        "id": "hair_fourth_sec_right_sec_subhead",
+        "type": "text",
+        "label": "Second subheading"
+      },
+      {
+        "id": "hair_fourth_sec_right_third_head",
+        "type": "text",
+        "label": "Third heading"
+      },
+      {
+        "id": "hair_fourth_sec_right_third_subhead",
+        "type": "text",
+        "label": "Third subheading"
+      },
+      {
+        "type": "header",
+        "content": "Fifth section"
+      },
+       {
+        "id": "hair_fifth_sec_link_text_view",
+        "type": "text",
+        "label": "Link text"
+      },
+      {
+        "id": "hair_fifth_sec_link_view",
+        "type": "url",
+        "label": "Link"
+      },
+      {
+        "id": "hair_fifth_sec_link_text",
+        "type": "text",
+        "label": "Link text"
+      },
+      {
+        "id": "hair_fifth_sec_link",
+        "type": "url",
+        "label": "Link"
+      },
+       {
+        "type": "header",
+        "content": "Sixth section"
+      },
+      {
+        "id": "hair_six_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_six_subheading",
+        "type": "text",
+        "label": "Subheading"
+      },
+      {
+        "type": "header",
+        "content": "Seventh section"
+      },
+      {
+        "id": "hair_seven_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
+        "content": "Seventh section first part"
+      },
+      {
+        "id": "hair_seven_first_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_seven_first_subheading",
+        "type": "textarea",
+        "label": "Subheading"
+      },
+      {
+        "id": "hair_seven_first_cont",
+        "type": "textarea",
+        "label": "Content"
+      },
+      {
+        "id": "hair_seven_first_cont_pro_linktext",
+        "type": "text",
+        "label": "Link text"
+      },
+      {
+        "id": "hair_seven_first_cont_pro_link",
+        "type": "url",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Seventh section second part"
+      },
+      {
+        "id": "hair_seven_sec_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_seven_sec_subheading",
+        "type": "textarea",
+        "label": "Subheading"
+      },
+      {
+        "id": "hair_seven_sec_cont",
+        "type": "textarea",
+        "label": "Content"
+      },
+      {
+        "id": "hair_seven_sec_cont_pro_linktext",
+        "type": "text",
+        "label": "Link text"
+      },
+      {
+        "id": "hair_seven_sec_cont_pro_link",
+        "type": "url",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Seventh section third part"
+      },
+      {
+        "id": "hair_seven_third_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_seven_third_subheading",
+        "type": "textarea",
+        "label": "Subheading"
+      },
+      {
+        "id": "hair_seven_third_cont",
+        "type": "textarea",
+        "label": "Content"
+      },
+      {
+        "id": "hair_seven_third_cont_pro_linktext",
+        "type": "text",
+        "label": "Link text"
+      },
+      {
+        "id": "hair_seven_third_cont_pro_link",
+        "type": "url",
+        "label": "Link"
+      },
+       {
+        "type": "header",
+        "content": "Eighth section"
+      },
+      {
+        "id": "hair_eighth_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_eighth_content",
+        "type": "textarea",
+        "label": "Content"
+      },
+      {
+        "id": "hair_eighth_price",
+        "type": "text",
+        "label": "Price"
+      },
+       {
+        "type": "header",
+        "content": "Ninth section"
+      },
+      {
+        "id": "hair_ninth_heading_combo",
+        "type": "text",
+        "label": "Combo Product Heading"
+      },
+      {
+        "id": "hair_ninth_content_combo",
+        "type": "textarea",
+        "label": "Combo Product Content"
+      },
+      {
+        "id": "hair_ninth_heading",
+        "type": "text",
+        "label": "Testimonial Heading"
+      },
+      {
+        "id": "hair_ninth_content",
+        "type": "textarea",
+        "label": "Testimonial Content"
+      },
+       {
+        "type": "header",
+        "content": "Tenth section"
+      },
+      {
+        "id": "hair_tenth_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "id": "hair_tenth_content",
+        "type": "textarea",
+        "label": "Content"
+      },
+      {
+        "id": "hair_tenth_linktext",
+        "type": "text",
+        "label": "Link Text"
+      },
+      {
+        "id": "hair_tenth_link",
+        "type": "url",
+        "label": "Link"
+      },
+       {
+        "type": "header",
+        "content": "Eleventh section"
+      },
+      {
+        "id": "hair_eleventh_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
+        "content": "Eleventh section first part"
+      },
+      {
+        "id": "hair__heading_first",
+        "type": "text",
+        "label": "Heading"
+      },
+       {
+        "id": "hair_eleventh_subheading_first",
+        "type": "text",
+        "label": "Subheading"
+      },
+      {
+        "type": "header",
+        "content": "Eleventh section second part"
+      },
+      {
+        "id": "hair_eleventh_heading_sec",
+        "type": "text",
+        "label": "Heading"
+      },
+       {
+        "id": "hair_eleventh_subheading_sec",
+        "type": "text",
+        "label": "Subheading"
+      },
+      {
+        "type": "header",
+        "content": "Eleventh section third part"
+      },
+      {
+        "id": "hair_eleventh_heading_third",
+        "type": "text",
+        "label": "Heading"
+      },
+       {
+        "id": "hair_eleventh_subheading_third",
+        "type": "text",
+        "label": "Subheading"
+      },
+      {
+        "type": "header",
+        "content": "Eleventh section fourth part"
+      },
+      {
+        "id": "hair_eleventh_heading_four",
+        "type": "text",
+        "label": "Heading"
+      },
+       {
+        "id": "hair_eleventh_subheading_four",
+        "type": "text",
+        "label": "Subheading"
+      },
+      {
+        "type": "header",
+        "content": "Eleventh section fifth part"
+      },
+      {
+        "id": "hair_eleventh_heading_fifth",
+        "type": "text",
+        "label": "Heading"
+      },
+       {
+        "id": "hair_eleventh_subheading_fifth",
+        "type": "text",
+        "label": "Subheading"
+      },
+      {
+        "type": "header",
+        "content": "Eleventh section sixth part"
+      },
+      {
+        "id": "hair_eleventh_heading_six",
+        "type": "text",
+        "label": "Heading"
+      },
+       {
+        "id": "hair_eleventh_subheading_six",
+        "type": "text",
+        "label": "Subheading"
+      },
+      {
+        "type": "header",
+        "content": "Twelevth section"
+      },
+      {
+        "id": "hair_twelevth_heading",
+        "type": "text",
+        "label": "Heading"
+      },
+      {
+        "type": "header",
+        "content": "Thirteen section"
+      },
+      {
+        "id": "hair_thirteen_link_text",
+        "type": "text",
+        "label": "Link Text"
+      },
+      {
+        "id": "hair_thirteen_link",
+        "type": "url",
+        "label": "Link"
+      },
+      {
+        "type": "header",
+        "content": "Fourteen section"
+      },
+      {
+        "id": "hair_fourteen_cont",
+        "type": "textarea",
+        "label": "Content"
+      }
+    ]
+  }
+{% endschema %}

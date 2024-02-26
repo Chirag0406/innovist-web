@@ -1,0 +1,2192 @@
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" media="print" onload="this.media='all'">
+<link rel="preload stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.css" as="style" onload="this.rel='stylesheet'"/>
+<link rel="preload stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css" as="style" onload="this.rel='stylesheet'"/>
+<link rel="stylesheet preconnect" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="print" onload="this.media='all'" crossorigin>
+<head>
+    <meta name = "format-detection" content = "telephone=no">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          loadSiteLoader();
+        })
+    </script>
+</head>
+<style>
+    .site_loading_wrapper.track {
+        position: fixed;
+    display: block;
+    top: 50%;
+    left: 50%;
+    }
+    .lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+.lds-dual-ring:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid black;
+  border-color: black transparent black transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+</style>
+
+<style>
+    :root {
+        --skin-primary: #f9acac;
+        --hair-primary: #217BC9;
+        --skin-accent: #E6F7FF;
+        --hair-accent: #FEE8D8;
+        --hair-gradient: linear-gradient(3.79deg, #247ECB -24.81%, #ABD3FE 66.6%);
+        --skin-gradient: linear-gradient(90deg, rgba(252,220,202,1) 0%, rgba(249,176,174,1) 100%);
+    }
+    .hair-color{
+        color:#217BC9 !important;
+    }
+    .carousel-indicators{
+        z-index:1 !important;
+    }
+    .accordion .card-header:after{
+        display:none !important;
+    }
+    .skin-color{
+        color: #f9acac !important;
+    }
+    .subtext{
+        font-family: Helvetica !important;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 12px !important;
+    }
+    .description_text + p{
+        text-align:left !important;
+        font-family: 'Helvetica' !important;
+        font-weight:400 !important;
+        font-size: 14px !important;
+        line-height: 144.99%;
+
+    }
+    .new_user {
+        background: #fff;
+        padding: 0;
+        margin-top: 100px;
+        padding-bottom: 50px;
+        min-height: calc(100vh - 100px);
+    }
+    .hair-accent:after{
+        background:var(--hair-accent) !important;
+    }
+    .skin-accent:after{
+        background: var(--skin-accent) !important;
+    }
+
+    section.width-box.user-user {
+        margin: 0 auto 70px;
+    }
+
+    section.width-box {
+        width: 90%;
+        margin: 0 auto;
+        padding: 0 40px;
+    }
+
+    section.width-box.user-user .content h6 {
+        font-family: 'HelveticaNeue';
+        font-weight: 300;
+        font-size: 18px;
+        color: #413F3F;
+        line-height: 27px;
+        margin: 0 0 5px;
+    }
+
+    section.width-box.user-user .content h1 {
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        color: #413F3F;
+        margin: 0 0 20px;
+    }
+
+    section.width-box.user-user .content p {
+        font-family: 'HelveticaNeue';
+        font-weight: 300;
+        font-size: 18px;
+        margin: 0 0 21px;
+    }
+
+
+    section.width-box.user-user .content p b {
+        margin-left: 11px;
+        font-family: 'HelveticaNeue';
+    }
+
+    section.retake-quiz {
+        text-align: center;
+        margin-bottom: 48px;
+    }
+
+    section.retake-quiz ul {
+        padding: 0;
+        list-style: none;
+        margin: 0;
+    }
+
+    section.retake-quiz ul li {
+        display: inline-block;
+        padding: 3px 17px;
+        height: 28px;
+        background: #E6F7FF;
+        border-radius: 40px;
+        color: #413F3F;
+        font-size: 14px;
+        margin: 0 14px 17.5px;
+    }
+
+    section.retake-quiz ul li.peach {
+        background: #FEE8D8;
+    }
+
+    section.retake-quiz .box {
+        background: #FAFAFA;
+        padding: 44px 0;
+        border-top: 0.25px solid #000000;
+    }
+
+    .retake-quiz a {
+        font-size: 14px;
+        color: #217BC9;
+        text-decoration: underline;
+        margin: 5px 0 0;
+        display: block;
+        font-family: 'Helvetica';
+        font-weight: 500;
+    }
+
+    section.retake-quiz p {
+        font-size: 14px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        margin: 0 0 13px;
+        color: #413F3F;
+    }
+
+    section.pro-tip .content {
+        padding: 0 5.2rem;
+        height: 100%;
+        background: #FAFAFA;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    section.pro-tip .content h3 {
+        text-align: center;
+        color: #4B4B4B;
+        font-size: 28px;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        margin: 0 0 42px;
+        text-transform: capitalize;
+    }
+
+    section.pro-tip .content p {
+        color: #4B4B4B;
+        margin: 0;
+        line-height: 24px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        font-size: 16px;
+    }
+
+    section.width-box.user-user .content a.review-verify {
+        color: #217BC9;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        text-decoration: underline;
+        margin: 0 0 12px;
+        display: block;
+    }
+
+    section.width-box.user-user .content {
+        color: #413F3F;
+    }
+
+    section.width-box.user-user .content a.review-verify + p {
+        width: 88%;
+        margin: 0 auto 26px;
+        text-align: justify;
+        font-family: 'HelveticaNeue';
+        font-weight: 500;
+        line-height: 20px;
+        display: block;
+        font-size: 14px;
+    }
+
+    section.width-box.user-user .content ul {
+        padding: 0;
+        list-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    section.width-box.user-user .content ul li {
+        text-align: center;
+        width: 100%;
+    }
+
+    section.width-box.user-user .content ul li img {
+        height: 48px;
+        margin: 0 auto 10px;
+    }
+
+    section.width-box.user-user .content ul li h4 {
+        font-family: 'Helvetica';
+        font-weight: 500;
+        font-size: 12px;
+        margin: 0;
+    }
+
+    section.width-box .content button.btn {
+        width: 318px;
+        height: 52px;
+        margin: 31px auto 8px;
+        display: block;
+        border-radius: 0;
+        color: #000;
+        font-size: 16px;
+        text-transform: uppercase;
+        font-family: 'HelveticaNeue';
+        font-weight: 500;
+
+    }
+    .hair{
+        background: var(--hair-gradient);
+        border: 1px solid var(--hair-primary);
+    }
+    .skin{
+        background: var(--skin-gradient);
+        border: 2px solid var(--skin-primary);
+    }
+
+
+    section.width-box.user-user .content span.existing {
+        font-family: 'Helvetica';
+        font-weight: 500;
+        font-size: 14px;
+        margin: 0 0 19px;
+        display: block;
+    }
+
+    section.width-box.user-user .content span.existing a {
+        text-transform: none;
+        color: #217BC9;
+        text-decoration: underline;
+        cursor: pointer;
+    }
+
+    section.width-box.user-user .content span.existing + p {
+        font-size: 12px;
+        margin: 0;
+        font-family: 'Helvetica';
+        font-weight: 500;
+    }
+
+    .carousel-indicators li {
+        width: 10px;
+        height: 10px;
+        border-radius: 50px !important;
+        opacity: 1;
+        border: none;
+        background: #D6D6D6;
+    }
+
+    .carousel-indicators li.active {
+        background: #217BC9;
+    }
+
+    ol.carousel-indicators {
+        margin: 0;
+        bottom: -30px;
+    }
+
+    section.three-step {
+        margin-top: 48px;
+    }
+
+    section.three-step .content {
+        width: 100%;
+    }
+
+    section.three-step .content h3 {
+        font-size: 28px;
+        font-family: 'Playfair Display', serif;
+        font-weight: bold;
+        color: #413F3F;
+        text-align: center;
+        margin: 0 0 62px;
+    }
+
+    section.three-step .content ul {
+        padding: 0;
+        margin: 0 10px 50px;
+        list-style: none;
+        display: flex;
+    }
+
+    section.three-step .content ul li {
+        text-align: center;
+        width: 100%;
+    }
+
+    section.three-step .content ul li img {
+        width: 95px;
+    }
+
+    section.three-step .content ul li h5 {
+        margin: 21px 2rem 0;
+        font-size: 12px;
+        font-family: 'HelveticaNeue';
+        font-weight: 300;
+        line-height: 20px;
+    }
+
+    section.three-step .content ul li span {
+        height: 128px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .content h3 span:after {
+        background: #FEE8D8;
+        content: '';
+        position: absolute;
+        height: 22px;
+        width: 100%;
+        bottom: -3px;
+        left: 0;
+        right: 0;
+        margin: auto;
+        z-index: -1;
+    }
+
+    .content h3 span {
+        position: relative;
+        z-index: 1;
+    }
+
+    section.three-step .content button + p {
+        font-size: 12px;
+        margin: 0;
+        text-align: center;
+        color: #4B4B4B;
+        font-family: 'Helvetica';
+        font-weight: 500;
+    }
+
+    section.width-box.pro-tip.made-just .content {
+        padding: 0 3rem;
+    }
+
+    .img img{
+        width: 100%;
+    }
+
+    section.width-box.partner {
+        margin: 48px 0;
+        padding: 0;
+        width: 100%;
+    }
+
+    section.width-box.partner h4 {
+        color: #4B4B4B;
+        text-align: center;
+        font-size: 14px;
+        margin: 0 0 5px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+    }
+
+    section.width-box.partner .box{
+        border-bottom: 2px solid #217BC9;
+        border-top: 2px solid #217BC9;
+        padding: 18px 0;
+    }
+    section.width-box .content button.btn:active {
+        transform: scale(0.9);
+    }
+
+    section.width-box.partner .autoplay {
+        width: 50%;
+        margin: 0 auto;
+    }
+
+    section.width-box.partner .autoplay img {
+        height: 31px;
+        margin: 0 auto;
+    }
+
+    .made-just .content{
+        background: transparent !important;
+    }
+
+    section.clean_ingredients {
+        margin: 48px 0;
+        background: #FAFAFA;
+        padding: 50px 0;
+    }
+
+    h2.head {
+        text-align: center;
+        color: #4B4B4B;
+        font-size: 28px;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        margin: 0 0 42px;
+        text-transform: capitalize;
+    }
+
+    h2.head span {
+        position: relative;
+        z-index: 1;
+    }
+
+    h2.head span:after {background: #FEE8D8;content: '';position: absolute;height: 22px;width: 100%;bottom: -3px;left: 0;right: 0;margin: auto;z-index: -1;}
+
+    section.clean_ingredients .box {
+        text-align: center;
+    }
+
+    section.clean_ingredients .box span {
+        width: 100%;
+        height: 108px;
+        display: block;
+        margin: 0 auto 21px;
+    }
+
+    section.clean_ingredients .box span img {
+        height: 100%;
+    }
+
+    section.clean_ingredients .box h4 {
+        font-size: 16px;
+        line-height: 24px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        margin: 0;
+    }
+
+    section.clean_ingredients .col-lg-4 {
+        margin: 30px 0;
+    }
+
+    section.width-box.reviews ul {
+        padding: 0;
+        list-style: none;
+        margin: 0;
+        border-top: 5px solid #E5E5E5;
+    }
+
+    section.width-box.reviews ul li {
+        padding: 15px;
+        border-bottom: 2px solid #E5E5E5;
+    }
+
+    section.width-box.reviews ul li .star span img {
+        height: 36px;
+    }
+
+    section.width-box.reviews ul li .star p {
+        margin-bottom: 0;
+        font-size: 18px;
+        color: #413F3F;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        opacity: 40%;
+    }
+
+    section.width-box.reviews ul li h3 {
+        color: #413F3F;
+        font-family: 'Helvetica';
+        font-weight: 800;
+        font-size: 21px;
+        margin: 0 0 12px;
+    }
+    .arrow-faq{
+        font-weight:100;
+        font-size: 58px;
+        -webkit-text-stroke: 3px #FAFAFA
+    }
+
+    section.width-box.reviews ul li .star {
+        margin: 0 0 10px;
+    }
+
+    section.width-box.reviews ul li p {
+        font-size: 18px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        color: #413F3F;
+        margin: 0 0 40px;
+    }
+
+    .d-flex.rate p {
+        margin-bottom: 20px !important;
+        opacity: 0.4;
+    }
+
+    .like h4 {
+        margin: 0;
+        font-size: 18px;
+        color: #413F3F;
+        opacity: 40%;
+        font-family: 'Helvetica';
+        font-weight: 800;
+    }
+
+    .like-inner span {
+        margin-left: 25px;
+        display: flex;
+        align-items: center;
+        color: #B3B2B2;
+        font-family: 'Helvetica';
+        font-weight: 500;
+    }
+
+    .like-inner {
+        display: flex;
+    }
+
+    .like-inner span img {
+        height: 31px;
+        margin-right: 8px;
+    }
+
+    a.read-review {
+        font-size: 18px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        margin: 14px 15px 0;
+        display: block;
+        text-decoration: underline;
+    }
+
+    a.carousel-control-prev, a.carousel-control-next {
+        display: none;
+    }
+
+    .faq .accordion {
+        margin: 0;
+    }
+
+    .faq .accordion .card {
+        border: none;
+        background: transparent;
+    }
+
+    .faq .accordion .card .card-header {
+        background: transparent;
+        margin: 0;
+    }
+
+    .faq .accordion .card .card-header h2 button:hover {
+        color: black;
+        background: #fafafa;
+    }
+
+    .faq .accordion .card .card-header h2 button {
+        border: none;
+        padding: 0;
+        margin: 0;
+        font-size: 21px;
+        font-family: 'HelveticaNeue';
+        font-weight: 500;
+        text-transform: none;
+        padding: 15px 15px;
+        align-items: center;
+        color: #4B4B4B;
+        /*border-bottom: 3px solid #D6D6D6;*/
+        border-radius: 0;
+        display: flex;
+    }
+
+    .faq .accordion .card .card-body {
+        padding: 15px 0px 15px 40px;
+        text-align: left;
+        font-size: 21px;
+        font-family: 'HelveticaNeue';
+        font-weight: 300;
+        color: #4B4B4B;
+        width: 75%;
+    }
+
+    .faq .accordion h2 button span{
+        transition: all 0.5s ease;
+    }
+
+    .faq .accordion .card .card-header h2 button[aria-expanded="true"] span {
+        transform: rotate(180deg);
+    }
+
+    .still-quest {
+        margin: 38px 0 0;
+    }
+
+    .still-quest h4 {
+        text-align: center;
+        font-size: 24px;
+        font-family: 'Helvetica';
+        font-weight: bold;
+        margin: 0 0 50px;
+        color: #4B4B4B;
+    }
+
+    .still-quest ul {
+        padding: 0;
+        margin: 0 auto;
+        list-style: none;
+        width: 80%;
+        display: flex;
+        align-items: center;
+    }
+
+    .still-quest ul li {
+        width: 100%;
+        padding-left: 100px;
+        position: relative;
+    }
+
+    .still-quest ul li img {
+        position: absolute;
+        left: 0;
+        width: 65px;
+        bottom: 0;
+        top: 0;
+        margin: auto;
+        cursor: pointer;
+    }
+
+    .still-quest ul li p {
+        margin: 0;
+        font-size: 21px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+    }
+
+    .still-quest ul li p a {
+        text-decoration: underline;
+        color: #207BC9;
+    }
+
+    .like1 .slick-list{
+        padding-left: 0 !important;
+    }
+
+    .inner-box {
+        width: 94%;
+        overflow: hidden;
+        margin: 12px auto;
+        padding: 35px 15px 25px;
+        border-radius: 3px;
+        box-shadow: 4px 4px 9px 5px rgb(0 0 0 / 8%);
+        background: #fff;
+    }
+
+    .inner-box span {
+        height: 300px;
+        width:263px;
+        overflow: hidden;
+        display: block;
+        margin: 0 0 17px;
+    }
+
+    .inner-box span img {
+        height: 100%;
+        object-fit: cover;
+        width: 100%;
+    }
+
+    .inner-box h3 {
+        color: #413F3F;
+        font-family: 'Helvetica';
+        font-weight: bold;
+        font-size: 28px;
+        margin: 0 0 34px;
+    }
+
+    .like1.slick-initialized.slick-slider {
+        margin-left: 5rem;
+    }
+
+    .inner-box .price {
+        align-items: center;
+        padding: 0;
+        color: #413F3F;
+        font-weight: normal;
+        margin: 0 !important;
+    }
+
+    .inner-box .price button.btn {
+        background: linear-gradient(3.79deg, #247ECB -24.81%, #ABD3FE 66.6%);
+        border: 1px solid #217BC9;
+        font-size: 21px;
+        border-radius: 0;
+        color: #000;
+        font-family: 'HelveticaNeue';
+        font-weight: 500;
+        height: 58px;
+        margin-top: 0;
+    }
+
+    .inner-box .price p {
+        font-size: 28px;
+        margin: 0 30px 0;
+        font-family: 'HelveticaNeue';
+        font-weight: 500;
+        color: #413F3F;
+    }
+
+    section.width-box.also-like h4 {
+        margin-left: 6rem;
+        margin-bottom: 25px;
+        color: #4B4B4B;
+        font-family: 'Helvetica';
+        font-weight: 700;
+    }
+
+    section.width-box.also-like {
+        width: 100%;
+        padding: 0;
+    }
+
+    span.rate-star {
+        width: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        margin: 0 0 22px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        font-size: 21px;
+    }
+
+    span.rate-star img {
+        height: 27px;
+        margin-right: 33px;
+    }
+
+    ol.breadcrumb {
+        background: transparent;
+        padding: 30px 0 0;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+    ol.breadcrumb li.active {
+        color: #413F3F;
+    }
+
+    ol.breadcrumb li {
+        color: #207BC9;
+    }
+
+    .breadcrumb-item+.breadcrumb-item::before {content: '>';}
+
+    .container .content.text-center {
+        padding: 0 15px;
+    }
+
+    @media  only screen and (max-width: 1024px) {
+
+        section.width-box{width: 100%;padding: 0;}
+        section.pro-tip .content,section.pro-tip .content {padding: 0 2rem;}
+        section.three-step .content h3,h2.head,section.pro-tip .content h3 {font-size: 26px;}
+        section.three-step .content ul li h5 {margin: 21px 1rem 0;}
+        section.clean_ingredients .box span {height: 68px;}
+        .faq .accordion .card .card-body{width: 85%;}
+        .like1.slick-initialized.slick-slider,section.width-box.also-like h4{margin-left: 2rem;}
+        .inner-box span{height: 280px;}
+
+
+    }
+
+
+    @media only screen and (max-width: 768px){
+
+        section.width-box.user-user .content {margin: 80px 0 0;}
+        section.pro-tip .content {padding: 4rem 2rem;}
+        section.three-step .content{padding: 4rem 0 0;}
+        section.width-box.partner .autoplay{width: 70%;}
+        .inner-box{margin: 12px 4px;}
+
+
+
+    }
+
+
+
+
+
+    @media only screen and (max-width: 560px){
+        .subtext{
+            font-size:10px !important;
+        }
+        .description_text + p{
+            font-size: 12px !important;
+        }
+        .arrow-faq {
+            font-size: 10px;
+            -webkit-text-stroke: 0;
+        }
+
+        ol.breadcrumb {padding: 0 15px;font-size: 12px;}
+
+        section.width-box.user-user .content h6 {font-size: 14px;}
+
+        section.width-box.user-user .content {margin: 56px 0 0;}
+
+        section.width-box.user-user .content h1 {font-size: 22px;margin: 0 0 8px;}
+
+        section.width-box.user-user .content p {font-size: 14px;}
+
+        section.width-box.user-user .content a.review-verify {font-size: 14px;}
+
+        section.width-box.user-user .content a.review-verify + p {font-size: 12px;width: 80%;}
+
+        .container {padding: 0;overflow: hidden;}
+
+        section.width-box .content button.btn {width: 254px;margin: 26px auto 12px; font-size:14px !important;}
+
+        section.width-box.user-user .content ul li h4 {font-size: 11px;}
+
+        section.width-box.user-user .content ul {width: 80%;}
+
+        section.width-box.user-user .content span.existing + p,section.three-step .content button + p {font-size: 10px;}
+
+        section.width-box.pro-tip .row {flex-direction: column-reverse;}
+
+        section.width-box.pro-tip.made-just .row {flex-direction: unset;}
+
+        section.width-box.user-user {margin: 0 auto 28px;}
+
+        section.three-step .content h3, h2.head, section.pro-tip .content h3 {font-size: 18px;margin: 0 0 19px;}
+
+        section.pro-tip .content p,section.width-box.reviews ul li p{font-size: 12px;line-height:17px;}
+
+        section.three-step{margin: 0;}
+
+        .content h3 span:after{height: 15px;}
+
+        section.width-box.three-step .content h3 {
+            width: 68%;
+            margin: 0 auto 24px;
+        }
+
+        section.width-box.three-step .content h3 span:last-child {
+            margin-top: 8px;
+            display: inline-block;
+        }
+
+        section.three-step .content {
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        section.three-step .content ul li h5{font-size: 12px;margin: 18px 1rem 0;}
+
+        section.width-box.partner {margin: 28px 0 0;}
+
+        section.width-box.partner .autoplay {width: 90%;}
+
+        section.width-box.partner .autoplay img{height: 19px;}
+
+        section.pro-tip .content {padding: 2rem 2rem;}
+
+        section.clean_ingredients{margin: 0;}
+
+        section.clean_ingredients .box h4 {font-size: 11px;line-height: 14px;}
+
+        section.clean_ingredients .box span {height: 46px;}
+
+        section.clean_ingredients .col-lg-4 {margin: 27px 0 0;}
+
+        h2.head span:after{height: 15px;}
+
+        section.width-box.reviews ul {border-top: 2px solid #E5E5E5;}
+
+        section.clean_ingredients .box span {margin: 0 auto 11px;}
+
+        section.width-box.reviews ul li h3 {font-size: 12px;margin: 0 0 5px;}
+
+        section.width-box.reviews ul li p{margin: 0 0 13px;}
+
+        .like h4{font-size: 12px;}
+
+        .like-inner span img {height: 16px;margin-right: 8px;}
+
+        .like-inner span {margin-left: 15px;}
+
+        a.read-review {font-size: 12px;margin: 22px 0 0;}
+
+        .d-flex.rate span img {width: 95px;}
+
+        .d-flex.rate p {margin-bottom: 0 !important;opacity: 40%;}
+
+        .d-flex.rate {margin: 0 0 3px;}
+
+        .d-flex.rate span {display: flex;align-items: center;}
+
+        .faq .accordion .card{padding: 0 2rem;}
+
+        .faq .accordion .card .card-header h2 button{padding: 9px 0;font-size: 12px;}
+
+        .faq .accordion .card .card-header h2 button span img {width: 10px;}
+
+        .faq .accordion .card .card-body {width: 90%;padding: 1rem 0;font-size: 12px;}
+
+        .still-quest h4 {font-size: 12px;margin: 0 0 20px;}
+
+        .still-quest {margin: 21px 0 0;}
+
+        .still-quest ul li p {font-size: 12px;}
+
+        .still-quest ul li {padding-left: 55px;}
+
+        .still-quest ul{width: 100%;}
+
+        .still-quest ul li img {width: 18px;left: 25px;}
+
+        .still-quest ul li:last-child p br {display: none;}
+
+        section.clean_ingredients.faq {padding: 30px 0;}
+
+        .also-like .slick-slider.slick-initialized .slick-list{padding: 0 100px 0 0 !important;}
+
+        section.clean_ingredients{padding: 30px 0 !important;}
+
+        section.width-box.pro-tip.made-just,section.width-box.pro-tip,section.three-step {padding: 0 !important;}
+
+        .inner-box {padding: 30px 20px 25px;}
+
+        section.width-box.also-like h4 {font-size: 12px;margin: 0 2rem 10px;}
+
+        .inner-box span {height: 220px;}
+
+        .inner-box h3 {margin: 0 0 18px;font-size: 12px;}
+
+        .inner-box .price p {font-size: 15px;}
+
+        .inner-box .price button.btn {height: 24px;font-size: 9px;padding: 0 18px;}
+
+        section.width-box.also-like {padding: 30px 0;}
+
+        span.rate-star img {height: 16px;margin-right: 13px;}
+
+        section.retake-quiz ul li {font-size: 12px;padding: 3px 18px;margin: 0 0 11px;}
+
+        section.retake-quiz .box {padding: 28px 0;}
+
+        section.retake-quiz {margin: 0;}
+
+        section.width-box.reviews{padding: 30px 2rem;}
+
+    }
+
+
+    @media only screen and (max-width: 320px){
+
+    }
+
+    .site-nav__dropdown-list a, .site-nav--is-megamenu a{
+        color:#000 !important;
+    }
+
+    .slide-nav__link, .cart__item-title a{
+        color:#000 !important;
+    }
+
+    .site-nav__link:hover {
+        text-decoration : none !important;
+    }
+
+    .black-div {
+        color: white !important;
+    }
+
+</style>
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign current_variant_sale = false -%}
+{% if current_variant.compare_at_price > current_variant.price %}
+    {%- assign current_variant_sale = true -%}
+{% endif %}
+{%- assign currentCollection = '' -%}
+{% for collection in product.collections %}
+    {% if collection.title == 'new-hair-collection' %}
+        {%- assign currentCollection = collection -%}
+    {% elsif collection.title == 'Skin care collection' %}
+        {%- assign currentCollection = collection -%}
+    {% endif %}
+{% endfor %}
+{% assign currentCollection_desc = currentCollection.description | split: "|" %}
+
+
+
+{% comment %}Previous code {% endcomment %}
+<div class="site_loading_wrapper track">
+    <div class="lds-dual-ring"></div>
+  </div>
+
+{% comment %}<div class="product-template" data-section-id="{{ section.id }}" data-section-type="product-template" data-variant-id="{{ current_variant.id }}" itemscope itemtype="http://schema.org/Product">
+   <meta itemprop="name" content="{{ product.title }}">
+   <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+   <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+   {% comment %}
+   ------------------------------------------------------------------------------
+   Product Featured Image
+   ------------------------------------------------------------------------------
+   {% endcomment %}
+   <div class="product-images-info">
+      <!------------ Review for mobile view -------------->
+      <div class="mobile-view-review" style="display:none;">
+         <div class="container">
+            {% if product.metafields['total-reviews']['images'] != blank %}
+            <div class="rating_mob">
+               {{ product.metafields['total-reviews']['images'] }}
+               <h5>{{ product.metafields['total-reviews']['text'] }}</h5>
+            </div>
+            {% endif %}
+         </div>
+      </div>
+      <!------------ Product Images for desktop view Start -------------->
+      <!--<div class="product-single-images product-single-images_desktop owl-carousel-slider owl-carousel owl-theme">
+         {% for image in product.images %}
+         {% if image.alt == 'desktop' %}
+         <div class="item" image-id="{{ image.id }}">
+            <img data-src="{{ image | img_url: '1920x1000' }}" src= "{{'png_img.png' | asset_img_url: '30x'}}" class="lazyload product-images" />
+         </div>
+         {% endif %}
+         {% endfor %}
+      </div>-->
+
+	  <div class="owl-carousel owl-theme product-carousel">
+			{% for image in product.images %}
+				 {% if image.alt == 'desktop' %}
+				 <div class="item" image-id="{{ image.id }}">
+					<img data-src="{{ image | img_url: '1920x1000' }}" src= "{{'png_img.png' | asset_img_url: '30x'}}" class="lazyload product-images" />
+				 </div>
+				 {% endif %}
+				 {% endfor %}
+		</div>
+
+      <!-----  Product Images for mobile view Start ---------->
+      <div class="product-single-images product-single-images_mobile owl-carousel owl-theme product-carousel" style="display: none;">
+         {% for image in product.images %}
+         {% if image.alt == 'mobile' %}
+         <div class="item">
+            <img data-src="{{ image | img_url: '1920x1000' }}" src= "{{'png_img.png' | asset_img_url: '30x'}}"  class="lazyload product-images" />
+         </div>
+         {% endif %}
+         {% endfor %}
+      </div>
+      <h1 class="mobile_title_absolute" style="display:none;">
+         <p class="product_type">{{ product.type }}</p>
+         {{ product.title}}
+      </h1>
+      <!------ Product Information Section Start -------------->
+      <div class="product-single-info">
+         <h1 class="desktop_title">
+            <p class="product_type">{{ product.type }}</p>
+            {{ product.title}}
+         </h1>
+         <div class="product__price">
+            {% for tag in product.tags %}
+            {% if tag contains 'quantity-' %}
+            {% assign tagqty = tag | split: '-' | last %}
+            {% endif %}
+            {% endfor %}
+            <span>{{tagqty}}</span>
+            <span class="money">{{ product.price | money_without_trailing_zeros }}</span>
+         </div>
+         {% form 'product', product, data-productid: product.id %}
+         <ul class="color-swatch">
+            {% if product.variants.size > 1 %}
+            {% for variant in product.variants %}
+            {% assign value = variant.title | handleize %}
+            <li img-src="{% if variant.featured_image %}{{ variant.featured_image | img_url: 'master' }}{% endif %}" variantImage-id="{{ image.id }}" data-index="{{ forloop.index}}" variant-id="{{variant.id}}" style="background-color: {{value}}" {% if forloop.first %}class="active"{% endif %}></li>
+            {% endfor %}
+            {% else %}
+            <li variant-id="{{product.selected_or_first_available_variant.id}}" class="active" style="display:none;"></li>
+            {% endif %}
+         </ul>
+         <div class="banner-pt-cls">
+            <ul class="list-inline">
+               <li class="list-inline-item">
+                  {% if product.metafields['product-icon']['product-icon-1'] != blank %}
+                  <img data-src="{{product.metafields['product-icon']['product-icon-1']}}" src= "{{'png_img.png' | asset_img_url: '30x'}}" class="lazyload"/>
+                  {% endif %}
+                  {% if product.metafields['product-icon']['product-icon-text-1'] != blank %}
+                  <h3>{{ product.metafields['product-icon']['product-icon-text-1'] }}</h3>
+                  {% endif %}
+               </li>
+               <li class="list-inline-item">
+                  {% if product.metafields['product-icon']['product-icon-2'] != blank %}
+                  <img data-src="{{product.metafields['product-icon']['product-icon-2']}}" src= "{{'png_img.png' | asset_img_url: '30x'}}" class="lazyload">
+                  {% endif %}
+                  {% if product.metafields['product-icon']['product-icon-text-2'] != blank %}
+                  <h3>{{ product.metafields['product-icon']['product-icon-text-2'] }}</h3>
+                  {% endif %}
+               </li>
+               <li class="list-inline-item">
+                  {% if product.metafields['product-icon']['product-icon-3'] != blank %}
+                  <img data-src="{{product.metafields['product-icon']['product-icon-3']}}" src= "{{'png_img.png' | asset_img_url: '30x'}}" class="lazyload">
+                  {% endif %}
+                  {% if product.metafields['product-icon']['product-icon-text-3'] != blank %}
+                  <h3>{{ product.metafields['product-icon']['product-icon-text-3'] }}</h3>
+                  {% endif %}
+               </li>
+            </ul>
+         </div>
+         <section class="abt-pr-dv text-center pd-50 pdb-0 mobile_description" style="display: none;">
+            <div class="container">
+               <p class="product_description">{{ product.description }}</p>
+            </div>
+         </section>
+         <div class="form_button d-flex justify-content-center">
+            {% if product.tags contains 'customized' %}
+            <a href="https://bareanatomy.in/pages/quiz" class="btnGetQ qq btn w-auto f-acc-xd-24">TAKE THE QUIZ</a>
+            {% else %}
+            <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+            <input type="submit" value="Add to cart" class="btnGetQ add-to-cart qq btn w-auto" />
+            {% comment %}<a href="javascript:void(0);" class="btnGetQ add-to-cart qq btn">ADD TO CART</a>{% endcomment %}
+            {% endif %}
+         </div>
+         {% endform %}
+      </div>
+   </div>
+   <!------------ Product Images and information section end -------------->
+   <!-------------- product description and Review Section Start ------------>
+   <section class="abt-pr-dv text-center pd-50 pdb-0 desktop_description">
+      <div class="container">
+         <p class="product_description">{{ product.description }}</p>
+         {% if product.metafields['total-reviews']['images'] != blank %}
+         <div class="rating-cls-sty">
+            {{ product.metafields['total-reviews']['images'] }}
+            <h5>{{ product.metafields['total-reviews']['text'] }}</h5>
+         </div>
+         {% endif %}
+      </div>
+   </section>
+   <!-------------- product description and Review Section End ------------>
+   <!---------------- why section Start ----------------->
+   {% if product.metafields['comparison']['heading'] != blank %}
+   <section class="why-cls-dv pd-50 pdb-0">
+      <div class="container">
+         <div class="heading-cls-1 text-center">
+            <h2>
+               {% if product.metafields['comparison']['heading'] != blank %}
+               {{ product.metafields['comparison']['heading'] }}
+               {% endif %}<br>
+               {% if product.metafields['comparison']['subheading'] != blank %}
+               <span>{{ product.metafields['comparison']['subheading'] }}</span>
+               {% endif %}
+            </h2>
+         </div>
+         <div class="why-pt-cd">
+            <div class="d-flex justify-content-center">
+               {% if product.metafields['comparison']['ba-block-1'] != blank %}
+               <figure> <img data-src="{{ product.metafields['comparison']['ba-block-1'] }}" src= "{{'png_img.png' | asset_img_url: '30x'}}" class="lazyload" alt="bare image"></figure>
+               {% endif %}
+               {% if product.metafields['comparison']['ba-block-2'] != blank %}
+               <div class="pt-why">
+                  <h3>{{ product.metafields['comparison']['ba-block-2'] }}</h3>
+               </div>
+               {% endif %}
+               {% if product.metafields['comparison']['ba-block-3'] != blank %}
+               <div class="pt-why">
+                  <h3>{{ product.metafields['comparison']['ba-block-3'] }}</h3>
+               </div>
+               {% endif %}
+               {% if product.metafields['comparison']['ba-block-4'] != blank %}
+               <div class="pt-why">
+                  <h3>{{ product.metafields['comparison']['ba-block-4'] }}</h3>
+               </div>
+               {% endif %}
+               {% if product.metafields['comparison']['ba-block-5'] != blank %}
+               <div class="pt-why">
+                  <h3>{{ product.metafields['comparison']['ba-block-5'] }}</h3>
+               </div>
+               {% endif %}
+            </div>
+            <div class="d-flex justify-content-center">
+               {% if product.metafields['comparison']['others-block-1'] != blank %}
+               <figure><img data-src="{{ product.metafields['comparison']['others-block-1'] }}" src= "{{'png_img.png' | asset_img_url: '30x'}}" class="lazyload" alt="other-img image"></figure>
+               {% endif %}
+               {% if product.metafields['comparison']['others-block-2'] != blank %}
+               <div class="pt-why">
+                  <h3>{{ product.metafields['comparison']['others-block-2'] }}</h3>
+               </div>
+               {% endif %}
+               {% if product.metafields['comparison']['others-block-3'] != blank %}
+               <div class="pt-why">
+                  <h3>{{ product.metafields['comparison']['others-block-3'] }}</h3>
+               </div>
+               {% endif %}
+               {% if product.metafields['comparison']['others-block-4'] != blank %}
+               <div class="pt-why">
+                  <h3>{{ product.metafields['comparison']['others-block-4'] }}</h3>
+               </div>
+               {% endif %}
+               {% if product.metafields['comparison']['others-block-5'] != blank %}
+               <div class="pt-why">
+                  <h3>{{ product.metafields['comparison']['others-block-5'] }}</h3>
+               </div>
+               {% endif %}
+            </div>
+         </div>
+      </div>
+   </section>
+   {% endif %}
+   <!--------- why section end ----------------->
+   <!------------------ clean and conscious beauty section Start -------------->
+   {% if product.metafields['ingredients']['heading'] != blank %}
+   <section class="clean-cons-cls pd-50 pdb-0">
+      <div class="container">
+         <div class="heading-cls-1 text-center">
+            <h2>
+               {% if product.metafields['ingredients']['heading'] != blank %}
+               {{ product.metafields['ingredients']['heading'] }}
+               {% endif %}<br/>
+               {% if product.metafields['ingredients']['subheading'] != blank %}
+               <span>{{ product.metafields['ingredients']['subheading'] }}</span>
+               {% endif %}
+            </h2>
+         </div>
+      </div>
+      <div class="clean-cons-cls d-flex">
+         <div class="left-clean">
+            <div class="row">
+               <div class="col-sm-3 col-md-6">
+                  <div class="lft-pt-cls">
+                     {% if product.metafields['ingredients']['icon-image-1'] != blank %}
+                     <figure> <img data-src="{{ product.metafields['ingredients']['icon-image-1'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}"> </figure>
+                     {% endif %}
+                     <h4>{{ product.metafields['ingredients']['icon-text-1'] }}</h4>
+                  </div>
+               </div>
+               <div class="col-sm-3 col-md-6">
+                  <div class="lft-pt-cls">
+                     {% if product.metafields['ingredients']['icon-image-2'] != blank %}
+                     <figure> <img data-src="{{ product.metafields['ingredients']['icon-image-2'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}"> </figure>
+                     {% endif %}
+                     <h4>{{ product.metafields['ingredients']['icon-text-2'] }}</h4>
+                  </div>
+               </div>
+               <div class="col-sm-3 col-md-6">
+                  <div class="lft-pt-cls">
+                     {% if product.metafields['ingredients']['icon-image-3'] != blank %}
+                     <figure> <img data-src="{{ product.metafields['ingredients']['icon-image-3'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}"> </figure>
+                     {% endif %}
+                     <h4>{{ product.metafields['ingredients']['icon-text-3'] }}</h4>
+                  </div>
+               </div>
+               <div class="col-sm-3 col-md-6">
+                  <div class="lft-pt-cls">
+                     {% if product.metafields['ingredients']['icon-image-4'] != blank %}
+                     <figure> <img data-src="{{ product.metafields['ingredients']['icon-image-4'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}"> </figure>
+                     {% endif %}
+                     <h4>{{ product.metafields['ingredients']['icon-text-4'] }}</h4>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div class="lazyload right-clean" data-bgset= "{{ product.metafields['ingredients']['main-image'] }}">
+            <div class="content-sw-cls">
+               <p>{{ product.metafields['ingredients']['main-image-text'] }}</p>
+               <a href="{{ product.metafields['ingredients']['main-image-link-url'] }}">{{ product.metafields['ingredients']['main-image-link-text'] }}</a>
+            </div>
+         </div>
+      </div>
+   </section>
+   {% endif %}
+   <!------------------ clean and conscious beauty section End-------------->
+   {% if product.metafields['reviews']['heading'] != blank %}
+   <section class="focus-only pd-50 pdb-0">
+      <div class="container">
+         <div class="heading-cls-1 text-center">
+            <h2>
+               {% if product.metafields['reviews']['heading'] != blank %}
+               {{ product.metafields['reviews']['heading'] }}<br/>
+               {% endif %}
+               {% if product.metafields['reviews']['subheading'] != blank %}
+               <span>{{ product.metafields['reviews']['subheading'] }}</span>
+               {% endif %}
+            </h2>
+            {% if product.metafields['reviews']['tagline'] != blank %}
+            <p>{{ product.metafields['reviews']['tagline'] }}</p>
+            {% endif %}
+         </div>
+         <div class="review-dv-cls">
+            <div class="owl-carousel owl-theme owl-carousel-2 product-icon-img">
+			{% if product.metafields['reviews']['review-1-customer-photo'] != blank %}
+               <div class="item">
+
+                  <div class="review-pt-dv">
+                     <div class="mob-review-background-top slider-h3">
+                        {% if product.metafields['reviews']['review-1-customer-name'] != blank %}
+                        <h3>{{ product.metafields['reviews']['review-1-customer-name'] }}</h3>
+                        {% endif %}
+                        {% if product.metafields['reviews']['review-1-heading'] != blank %}
+                        <p>{{ product.metafields['reviews']['review-1-heading'] }}</p>
+                        {% endif %}
+                        <ul class="list-inline">
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-1-ingredient-1-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-1-ingredient-1-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-1-ingredient-1-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-1-ingredient-1-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-1-ingredient-2-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-1-ingredient-2-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-1-ingredient-2-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-1-ingredient-2-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-1-ingredient-3-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-1-ingredient-3-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-1-ingredient-3-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-1-ingredient-3-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                        </ul>
+                     </div>
+                     {% if product.metafields['reviews']['review-1-customer-photo'] != blank %}
+                     <figure> <img data-src="{{ product.metafields['reviews']['review-1-customer-photo'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}"> </figure>
+                     {% endif %}
+                     <div class="content-review mob-review-background-bottom">
+                        {{ product.metafields['reviews']['review-1-text'] }}
+                     </div>
+                  </div>
+
+               </div>
+			   {% endif %}
+			   {% if product.metafields['reviews']['review-2-customer-photo'] != blank %}
+               <div class="item">
+
+                  <div class="review-pt-dv">
+                     <div class="mob-review-background-top">
+                        {% if product.metafields['reviews']['review-2-customer-name'] != blank %}
+                        <h3>{{ product.metafields['reviews']['review-2-customer-name'] }}</h3>
+                        {% endif%}
+                        {% if product.metafields['reviews']['review-2-heading'] != blank %}
+                        <p>{{ product.metafields['reviews']['review-2-heading'] }}</p>
+                        {% endif %}
+                        <ul class="list-inline">
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-2-ingredient-1-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-2-ingredient-1-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-2-ingredient-1-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-2-ingredient-1-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-2-ingredient-2-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-2-ingredient-2-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-2-ingredient-2-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-2-ingredient-2-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-2-ingredient-3-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-2-ingredient-3-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-2-ingredient-3-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-2-ingredient-3-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                        </ul>
+                     </div>
+                     {% if product.metafields['reviews']['review-2-customer-photo'] != blank %}
+                     <figure> <img data-src="{{ product.metafields['reviews']['review-2-customer-photo'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}"> </figure>
+                     {% endif %}
+                     <div class="content-review mob-review-background-bottom">
+                        {{ product.metafields['reviews']['review-2-text'] }}
+                     </div>
+                  </div>
+
+               </div>
+			   {% endif %}
+			   {% if product.metafields['reviews']['review-3-customer-photo'] != blank %}
+               <div class="item">
+
+                  <div class="review-pt-dv">
+                     <div class="mob-review-background-top">
+                        {% if product.metafields['reviews']['review-3-customer-name'] != blank %}
+                        <h3>{{ product.metafields['reviews']['review-3-customer-name'] }}</h3>
+                        {% endif %}
+                        {% if product.metafields['reviews']['review-3-heading'] != blank %}
+                        <p>{{ product.metafields['reviews']['review-3-heading'] }}</p>
+                        {% endif %}
+                        <ul class="list-inline">
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-3-ingredient-1-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-3-ingredient-1-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-3-ingredient-1-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-3-ingredient-1-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-3-ingredient-2-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-3-ingredient-2-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-3-ingredient-2-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-3-ingredient-2-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-3-ingredient-3-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-3-ingredient-3-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-3-ingredient-3-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-3-ingredient-3-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                        </ul>
+                     </div>
+                     {% if product.metafields['reviews']['review-3-customer-photo'] != blank %}
+                     <figure> <img data-src="{{ product.metafields['reviews']['review-3-customer-photo'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}"> </figure>
+                     {% endif %}
+                     <div class="content-review mob-review-background-bottom">
+                        {{ product.metafields['reviews']['review-3-text'] }}
+                     </div>
+                  </div>
+
+               </div>
+			   {% endif %}
+			    {% if product.metafields['reviews']['review-4-customer-photo'] != blank %}
+               <div class="item">
+
+                  <div class="review-pt-dv">
+                     <div class="mob-review-background-top">
+                        {% if product.metafields['reviews']['review-4-customer-name'] != blank %}
+                        <h3>{{ product.metafields['reviews']['review-4-customer-name'] }}</h3>
+                        {% endif %}
+                        {% if product.metafields['reviews']['review-4-heading'] != blank %}
+                        <p>{{ product.metafields['reviews']['review-4-heading'] }}</p>
+                        {% endif %}
+                        <ul class="list-inline">
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-4-ingredient-1-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-4-ingredient-1-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-4-ingredient-1-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-4-ingredient-1-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-4-ingredient-2-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-4-ingredient-2-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-4-ingredient-2-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-4-ingredient-2-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                           <li class="list-inline-item">
+                              {% if product.metafields['reviews']['review-4-ingredient-3-icon'] != blank %}
+                              <img data-src="{{ product.metafields['reviews']['review-4-ingredient-3-icon'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+                              {% endif %}
+                              {% if product.metafields['reviews']['review-4-ingredient-3-text'] != blank %}
+                              <h4>{{ product.metafields['reviews']['review-4-ingredient-3-text'] }}</h4>
+                              {% endif %}
+                           </li>
+                        </ul>
+                     </div>
+                     {% if product.metafields['reviews']['review-4-customer-photo'] != blank %}
+                     <figure> <img data-src="{{ product.metafields['reviews']['review-4-customer-photo'] }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}"> </figure>
+                     {% endif %}
+                     <div class="content-review mob-review-background-bottom">
+                        {{ product.metafields['reviews']['review-4-text'] }}
+                     </div>
+                  </div>
+
+               </div>
+               {% endif %}
+            </div>
+   </section>
+   {% endif %}</div>
+   </div>
+   <!----------- focus only end  --------------->
+   <!----------- video section start -->
+   {% if product.metafields['video']['heading'] != blank %}
+   <section class="video-section-dv pd-50 pdb-0">
+      <div class="container">
+         <div class="heading-cls-1 text-center">
+            {% if product.metafields['video']['heading'] != blank %}
+            <h2>{{ product.metafields['video']['heading'] }}<br/>
+               {% endif %}
+               {% if product.metafields['video']['subheading'] != blank %}
+               <span>{{ product.metafields['video']['subheading'] }}</span>
+            </h2>
+            {% endif %}
+         </div>
+         {% if product.metafields['video']['video-url'] != blank %}
+         <div class="video-banner-cls" style="width: 100%; display: inline-block;">
+            <iframe src="{{ product.metafields['video']['video-url'] }}" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="" style="width:100%; height:100%; background:url()" class="desktop-img"></iframe>
+         </div>
+         {% endif %}
+      </div>
+   </section>
+   {% endif %}
+   <!------------ video section end -------------->
+   <!-------------- faq section start ----------------->
+   <section class="faq-sec-dv pd-50 pdb-0">
+      <div class="container">
+         <div class="heading-cls-1 text-center">
+            <h2>{{ product.metafields['faq']['heading'] }}<br/>
+               <span>{{ product.metafields['faq']['subheading'] }}</span>
+            </h2>
+         </div>
+         <div class="faq_box newFaq">
+            <ul class="accordion">
+               {% if product.metafields['faq']['question-1'] != blank %}
+               <li>
+                  <a class="toggle" href="javascript:void(0);">{{ product.metafields['faq']['question-1'] }}</a>
+                  <div class="inner">
+                     <p> {{ product.metafields['faq']['answer-1'] }}
+                     </p>
+                  </div>
+               </li>
+               {% endif %}
+               {% if product.metafields['faq']['question-2'] != blank %}
+               <li>
+                  <a class="toggle" href="javascript:void(0);">{{ product.metafields['faq']['question-2'] }}</a>
+                  <div class="inner">
+                     <p>{{ product.metafields['faq']['answer-2'] }}
+                     </p>
+                  </div>
+               </li>
+               {% endif %}
+               {% if product.metafields['faq']['question-3'] != blank %}
+               <li>
+                  <a class="toggle" href="javascript:void(0);">{{ product.metafields['faq']['question-3'] }}</a>
+                  <div class="inner">
+                     <p>{{ product.metafields['faq']['answer-3'] }}
+                     </p>
+                  </div>
+               </li>
+               {% endif %}
+               {% if product.metafields['faq']['question-4'] != blank %}
+               <li>
+                  <a class="toggle" href="javascript:void(0);">{{ product.metafields['faq']['question-4'] }}</a>
+                  <div class="inner">
+                     <p>{{ product.metafields['faq']['answer-4'] }} </p>
+                  </div>
+               </li>
+               {% endif %}
+               {% if product.metafields['faq']['question-5'] != blank %}
+               <li>
+                  <a class="toggle" href="javascript:void(0);">{{ product.metafields['faq']['question-5'] }}</a>
+                  <div class="inner">
+                     <p>{{ product.metafields['faq']['answer-5'] }} </p>
+                  </div>
+               </li>
+               {% endif %}
+               {% if product.metafields['faq']['question-6'] != blank %}
+               <li>
+                  <a class="toggle" href="javascript:void(0);">{{ product.metafields['faq']['question-6'] }}</a>
+                  <div class="inner">
+                     <p>{{ product.metafields['faq']['answer-6'] }} </p>
+                  </div>
+               </li>
+               {% endif %}
+            </ul>
+         </div>
+      </div>
+   </section>
+   <!--------------- section result start ----------------->
+   <section class="result-sec-dv pd-50">
+      <div class="container">
+         <div class="heading-cls-1 text-center">
+            <h2>{{ product.metafields['related-products']['heading'] }}<br/>
+               <span>{{ product.metafields['related-products']['subheading'] }}</span>
+            </h2>
+         </div>
+		 <div class="owl-carousel owl-theme owl-carousel-3">
+			{% assign prodhand = product.handle %}
+			{% for collection in product.collections %}
+			{% assign collectionhand = collection.handle %}
+			{% endfor %}
+			{% for product1 in collections[collectionhand].all_products limit: 5 %}
+			{% unless product1.handle == prodhand %}
+			{% for tag in product1.tags %}
+			{% if tag contains 'quantity-' %}
+			{% assign tagqty = tag | split: '-' | last %}
+			{% endif %}
+			{% endfor %}
+			<div class="item">
+				<div class="result-pt-dv">
+				   <figure>
+					  <img data-src="{{ product1.featured_image | img_url: 'master' }}" class="lazyload" src= "{{'png_img.png' | asset_img_url: '30x'}}">
+					  <div class="heading-pg">{{ product1.title }}</div>
+				   </figure>
+				   <div class="price d-flex justify-content-between">{{tagqty}}</span> <span>{{ product1.price | money_without_trailing_zeros }}</span></div>
+				   <p class="product-p">{{ product1.description }}</p>
+				   <a href="{{ product1.url }}" class="konw_more_pro">Know More</a>
+				</div>
+			</div>
+			{% endunless %}
+			{% endfor %}
+		</div>
+      </div>
+   </section>
+   <div class="button-cls-order">
+      {% if product.tags contains 'customized' %}
+      <a href="https://bareanatomy.in/pages/quiz" class="btn">ORDER YOUR CUSTOM FORMULA</a>
+      {% else %}
+      <form method="post" action="/cart/add">
+         <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+         <input type="submit" value="Add to cart" class="add-to-cart btn" />
+      </form>
+      {% comment %}<a href="javascript:void(0);" class="add-to-cart btn">ADD TO CART</a>{% endcomment %}
+      {% endif %}
+   </div>{% endcomment %}
+
+{% comment %}-----------Previous code end------------------{% endcomment %}
+{% assign isHairCare = false %}
+{% assign isSkinCare = false %}
+
+{%if product.tags contains 'hair-care' %}
+    {% assign isHairCare = true%}
+{%elsif product.tags contains 'skin-care'%}
+    {% assign isSkinCare = true%}
+{% endif %}
+{% assign product_desc = product.description | split: "|" %}
+
+<div class="wrapper new_user" id="main">
+
+    <nav aria-label="breadcrumb">
+        <div class="container">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item {% if isHairCare %}hair-color{% else %}skin-color{% endif %}"><a class="{% if isHairCare %}hair-color{% else %}skin-color{% endif %}" href="/">Home</a></li>
+                {% if isHairCare %}
+                    <li class="breadcrumb-item hair-color"><a href="/pages/hair-care" style="color:inherit;">Haircare</a></li>
+                {% elsif isSkinCare %}
+                    <li class="breadcrumb-item skin-color"><a href="/pages/skin-care" style="color:inherit;">Skincare</a></li>
+                {% endif %}
+                {% if product.metafields['details']['displayName'] != blank %}
+                    <li class="breadcrumb-item active">{{ product.metafields['details']['displayName'] }}</li>
+                {% endif %}
+            </ol>
+        </div>
+    </nav>
+
+
+
+
+    <!-- <section class="width-box Hair-scalp cart_products skin-quiz"> -->
+    {%- assign metafield_product_images = product.metafields['details']['featured_images'] |  split: ","  -%}
+
+    <section class="width-box user-user">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            {% for image in metafield_product_images  %}
+                                <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.index0 }}" class="{% if forloop.first == true %}active{% endif %}"></li>
+                            {% endfor %}
+                        </ol>
+                        <div class="carousel-inner">
+                            {% for image in metafield_product_images  %}
+                                <div class="carousel-item {% if forloop.first == true %}active{% endif %}">
+                                    <img class="d-block w-100" src="{{ image }}" alt="First slide">
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+
+                    <div class="content text-center">
+                        <h6>
+                            {% if product.metafields['regime']['step'] != blank and product.tags contains 'hair-care' or product.tags contains 'skin-care' %}
+                                STEP {{ product.metafields['regime']['step'] }}
+                            {% endif %}
+                            <br />
+                            {{ product.metafields['details']['mini_description'] }}
+                        </h6>
+                        {% if product.metafields['details']['displayName'] != blank %}
+                            <h1>{{ product.metafields['details']['displayName'] }}</h1>
+                        {%endif%}
+                        <p>{{ product.type }} |
+                            {% if product.variants.first.compare_at_price != product.variants.first.price %}
+                                <del>
+                                    ₹{{ product.variants.first.compare_at_price | money_without_currency | remove: '.00'}}
+                                </del>
+                            {% endif %}
+                            <b class="prduct-price">₹{{ product.variants.first.price | money_without_currency | remove: '.00'}}</b></p>
+                        {% comment %}{% render 'judgeme_widgets', widget_type: 'judgeme_preview_badge', jm_style: '', concierge_install: false, product: product %}{% endcomment %}
+                        {% assign product_desc = product.description | split: "|" %}
+                        <p class="description_text">{{ product_desc[0] }}</p>
+                        {% if product.metafields['icons']['icons'] != blank %}
+                            {{ product.metafields['icons']['icons'] }}
+                        {% endif %}
+                        {% comment %}TODO: Change the text of button if quiz taken{% endcomment %}
+                        {% if customer %}
+                            {%if product.variants.first.inventory_quantity >0 and product.variants.first.available == true %}
+                                <button class="btn add_to_cart_cst {% if isHairCare %} hair {% else %} skin {% endif %}" style="display:none;" dataId="{{product.metafields['product']['productId'] or  product.id}}">Buy now</button>
+                            {% else %}
+                                <button class="btn add_to_cart_cst disabled-stock-btn {% if isHairCare %} hair {% else %} skin {% endif %}" style="display:none;" dataId="{{product.metafields['product']['productId']}}">Out Of Stock</button>
+                            {% endif %}
+                            <button class="btn {% if isHairCare %} hair hair-quiz{% else %} skin skin-quiz{% endif %}" onclick="window.open('{% if isHairCare %}/pages/quiz-3{% else %}/pages/skin-quiz-3{% endif %}','_self')"> Take your {%if isHairCare %}Hair {%else %} Skin {% endif%} Quiz</button>
+                        {% else %}
+                            <button class="btn {% if isHairCare %} hair hair-quiz{% else %} skin skin-quiz{% endif %}" onclick="window.open('{% if isHairCare %}/pages/quiz-3{% else %}/pages/skin-quiz-3{% endif %}','_self')"> Take your {%if isHairCare %}Hair {%else %} Skin {% endif%} Quiz</button>
+                        {% endif %}
+                        {% if customer %}
+                        {% else %}
+                            <span class="existing">Existing user? <a onclick="login()"  class="{% if isHairCare %} hair-color {% else %} skin-color {% endif %}">login</a></span>
+                                                                    {% comment %} href="/account/login" {% endcomment %}
+                        {% endif %}
+                        <p class="subtext">Free Shipping | COD available | 20% Cashback | Secure transactions</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="retake-quiz" id="quiz-box" style="display:none">
+        <div class="container">
+            <div class="box">
+                <div class="col-lg-6 mx-auto">
+                    <p>Based on your last quiz taken, you selected :</p>
+                    <ul id="quiz_answers">
+                        <li>Anti-dandruff</li>
+                        <li>Daily Maintanence</li>
+                        <li>Repair Damage</li>
+                        <li class="peach">Sprinkle Spurple (purple)</li>
+                        <li class="peach">Milk & Honey</li>
+                    </ul>
+
+                    <a href="{%if isHairCare %}/pages/quiz-3 {% else %}/pages/skin-quiz-3{% endif %}">Retake Quiz Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% if product_desc[1] != blank %}
+        <section class="width-box pro-tip">
+            <div class="container">
+                <div class="row">
+                    {{ product_desc[1] }}
+                </div>
+            </div>
+        </section>
+    {% endif %}
+
+    <section class="width-box three-step">
+        <div class="container">
+            <div class="row">
+                {% if product_desc[2] != blank %}
+
+                    <div class="col-lg-6">
+                        {{ product_desc[2] }}
+                    </div>
+                {% endif %}
+                {% if product_desc[3] != blank %}
+                    <div class="col-lg-6 d-flex align-items-center">
+                        <div class="content">
+                            {{ product_desc[3] }}
+                            <button class="btn {% if isHairCare %} hair {% else %} skin {% endif %}" onclick="gotoAnalysis()">get your regime</button>
+                        </div>
+                    </div>
+                {% endif %}
+
+            </div>
+        </div>
+    </section>
+
+    <section class="width-box partner">
+        <h4>As seen in</h4>
+        <div class="box">
+            <div class="autoplay">
+                {%- assign metafield_images = shop.metafields['carousel']['pr_logos'] |  split: ","  -%}
+                {% for image in metafield_images %}
+                    <div><img src="{{ image }}" alt=""></div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    {%if isHairCare or isSkinCare %}
+        {{ currentCollection_desc[1] }}
+        {{ currentCollection_desc[2] }}
+    {% endif %}
+
+
+
+    {% comment %}<section class="width-box reviews">{% endcomment %}
+    {% comment %}<h2 class="head"><span>Real Reviews By Real Customers</span></h2>{% endcomment %}
+    {% comment %}{% render 'judgeme_widgets', widget_type: 'judgeme_review_widget', concierge_install: false, product: product %}{% endcomment %}
+    {% comment %}{% endcomment %}
+    {% comment %}</section>{% endcomment %}
+
+
+    <section class="clean_ingredients faq">
+        <h2 class="head"><span>Frequently asked questions (FAQs)</span></h2>
+        <div class="container">
+            <div class="accordion w-100" id="accordionExample">
+                {% assign faqs = product.metafields['faq']['questions'] | split: "|" %}
+                {% assign faq_answers = product.metafields['faq']['answers'] | split: "|" %}
+                {%  for faq in faqs %}
+                    <div class="card">
+                        <div class="card-header" id="heading{{ forloop.index0 }}">
+                            <h2 class="mb-0">
+                                <button class="btn btn-block text-left" type="button" data-toggle="collapse" data-target="#collapse{{forloop.index0}}" aria-expanded="true" aria-controls="collapse{{forloop.index0}}">
+                                    {{ faq }} <span class="ml-auto"><i class="fa fa-angle-up arrow-faq {% if isHairCare %}hair-color{% else %}skin-color{% endif %}" aria-hidden="true"></i></span>
+                                </button>
+                            </h2>
+                        </div>
+
+                        <div id="collapse{{forloop.index0}}" class="collapse" aria-labelledby="heading{{forloop.index0}}" data-parent="#accordionExample">
+                            <div class="card-body">
+                                {{ faq_answers[forloop.index0] }}
+                            </div>
+                        </div>
+                    </div>
+
+                {% endfor %}
+
+            </div>
+
+            <div class="still-quest">
+                <h4>Still got questions?</h4>
+                {% if isHairCare %}
+                    <ul>
+                        <a href="tel:+919711170970">
+                            <li>
+                                <img src=" https://cdn.shopify.com/s/files/1/0255/3302/2244/files/phone.svg?v=1612254024" alt="">
+                                <p><a href="tel:+919711170970">Call us</a> at 9711170970<br />(10am - 7pm)</p>
+                            </li>
+                        </a>
+                        <a onclick="sendMessage()">
+                            <li>
+                                <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/message.svg?v=1612253970" alt="">
+                                <p><a onclick="sendMessage()" style="text-decoration:underline;color:#007bff;cursor:pointer;">Chat</a> with a customer support <br />executive</p>
+                            </li>
+                        </a>
+                    </ul>
+                {% else %}
+                    <ul>
+                        <a href="tel:+919711170970">
+                            <li>
+                                <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/phone.svg?v=1612276851" alt="">
+                                <p><a href="tel:+919711170970" style="color:#f9acac;">Call us</a> at 9711170970<br />(10am - 7pm)</p>
+                            </li>
+                        </a>
+                        <a onclick="sendMessage()">
+                            <li>
+                                <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/message.svg?v=1612276851" alt="">
+                                <p><a onclick="sendMessage()" style="text-decoration:underline;color:#f9acac;cursor:pointer;">Chat</a> with a customer support <br />executive</p>
+                            </li>
+                        </a>
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="width-box also-like" style="display:none">  <!--TODO:fix this-->
+        <h4>You may also like: </h4>
+        <div class="box">
+            <div class="like1">
+
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+</div>
+</div>
+
+
+<script type="application/json" data-product-json>
+{{ product | json }}
+   </script>
+<script>
+    function login(){
+        localStorage.setItem("redirect_url", window.location.href);
+        let width=window.screen.availWidth;
+        let modal = document.getElementById("myModal");
+        let mobile_modal = document.getElementById("mobile-myModal");
+
+        if(width<601)
+        {
+            modal.style.display='none'
+            mobile_modal.style.display='block'       
+        }
+        else if(width>601)
+        {
+            modal.style.display='block'
+            mobile_modal.style.display='none'   
+        } 
+        {% comment %} window.location.href = '/account/login'; {% endcomment %}
+    }
+    function sendMessage() {
+        const message = '';
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            window.location = `https://api.whatsapp.com/send?phone=+919711170970&text=${message}`;
+        } else {
+            window.open(`https://web.whatsapp.com/send?phone=+919711170970&text=${message}`,'_blank');
+        }
+    }
+    {% if isHairCare %}
+    $('h3 span').addClass('hair-accent');
+    $('h2 span').addClass('hair-accent');
+    {% else %}
+    $('h3 span').addClass('skin-accent');
+    $('h2 span').addClass('skin-accent');
+    {% endif %}
+    function gotoAnalysis(){
+        {% if isHairCare %}
+        window.location.href = '/pages/hair-analysis';
+        {% else %}
+        window.location.href = '/pages/skin-analysis';
+        {% endif %}
+    }
+    document.addEventListener('DOMContentLoaded' , function() {
+        $('.autoplay').slick({
+            slidesToShow: 3,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            arrows: false,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        infinite: true,
+                        dots: true
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 1
+                    }
+                }
+                // You can unslick at a given breakpoint now by adding:
+                // settings: "unslick"
+                // instead of a settings object
+            ]
+        });
+        $.getJSON("/recommendations/products.json?product_id={{ product.id }}&limit=6", function(response) {
+            var recommendedProducts = response.products;
+            if (recommendedProducts.length > 0) {
+                recommendedProducts.forEach((product)=> {
+                    $(".like1").append(`<div>
+					<div class="inner-box">
+						<span><img src="${product.featured_image}" alt=""></span>
+						<h3>${product.title}</h3>
+						<div class="price d-flex">
+                            <p>₹${product.price / 100}</p>
+                            ${(product.variants[0].available == true) ?
+                        `<button class="btn ml-auto add_to_cart_cst {% if isHairCare%}hair{% else %}skin{% endif %}" dataId="{{product.variants.first.id}}">buy</button>` :
+                        `<button class="btn ml-auto disabled-stock-btn {% if isHairCare%}hair{% else %}skin{% endif %}" dataId="{{product.variants.first.id}}">out of stock</button>`}
+                        </div>
+					</div>
+				</div>`)
+                });
+                $('.like1').slick({
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
+                    autoplay: true,
+                    autoplaySpeed: 2000,
+                    arrows: false,
+                    centerMode: true,
+                    centerPadding: '310px',
+                    responsive: [
+                        {
+                            breakpoint: 1024,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1,
+                                infinite: true,
+                            }
+                        },
+                        {
+                            breakpoint: 600,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 2
+                            }
+                        },
+                        {
+                            breakpoint: 480,
+                            settings: {
+                                slidesToShow: 1,
+                                slidesToScroll: 1
+                            }
+                        }
+// You can unslick at a given breakpoint now by adding:
+// settings: "unslick"
+// instead of a settings object
+                    ]
+                });
+                // var firstRecommendedProduct = recommendedProducts[0];
+                // alert(
+                // 		"The title of the first recommended product is: " +
+                // 		firstRecommendedProduct.title
+                // );
+            }
+        });
+        let isQuizCompleted = false
+        let quizId = 1;
+        {% if customer %}
+        {% if isHairCare %}
+        quizId = 2;
+        {% for tag in customer.tags %}
+            if('{{tag}}'.includes('gender-male')) {
+              quizId = 3;
+            }
+        {% endfor %}
+        {% elsif isSkinCare %}
+            quizId = 1;
+        {% endif %}
+        $.ajax({
+            url: `https://api-quiz.bareanatomy.in/submit?quiz_id=${quizId}&customer_id={{ customer.id }}&profile_id=1`,
+            type: "GET",
+            success: function(data) {
+                if (data.data.is_quiz_completed ==1) {
+                    isQuizCompleted = true;
+                    let quizStateId = data.data.quiz_state_id;
+                    $.ajax({
+                        url: `https://api-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+                        type: "GET",
+                        success: function(data) {
+                            if(data.data){
+                                $(`#quiz-box`).show();
+                                let goals, color, fragrance;
+                                {% if isHairCare %}
+                                goals = data.data.quiz_data.goals.split(',');
+                                color = data.data.quiz_data.color;
+                                fragrance = data.data.quiz_data.fragrance;
+                                $('.text-center .btn.add_to_cart_cst.hair').css('display','block');
+                                $('.text-center .btn.hair-quiz').css('display','none');
+                                {% else %}
+                                goals = data.data.quiz_data.skin_goals.split(',');
+                                fragrance = data.data.quiz_data.fragnance_intensity;
+                                $('.text-center .btn.add_to_cart_cst.skin').css('display','block');
+                                $('.text-center .btn.skin-quiz').css('display','none');
+                                {% endif %}
+                                $('#quiz_answers').empty();
+                                unloadSiteLoader();
+                                goals.forEach((goal) => { $('#quiz_answers').append(`<li>${goal}</li>`) });
+                                {% if isHairCare %}
+                                    $('#quiz_answers').append(`<li class="peach">${color}</li>`)
+                                {% endif %}
+                                    $('#quiz_answers').append(`<li class="peach">${fragrance}</li>`)
+                            }
+                        }
+                    });
+                }else{
+                    unloadSiteLoader();
+                }
+            },
+            error : (err)=>{ unloadSiteLoader(); }
+        });
+        {% else %}
+  		    unloadSiteLoader();
+        {% endif %}
+    });
+</script>
+
+<script>
+   jQuery('.add_to_cart_cst').click(function(event){
+        event.preventDefault();
+        const btnHtml = $(this).html();
+        var data_Id = jQuery(this).attr("dataid");
+        $(this).html('<i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Adding to cart');
+        var variantId = jQuery('#variantId-'+data_Id).val() || '';
+        var qty       = 1;
+     	console.log(data_Id);
+        jQuery.ajax({
+            type    : "POST",
+            url     : "/cart/add.js",
+            data    : { id : data_Id, quantity: qty },
+            dataType: 'json',
+            async   : false,
+            success : function(data){
+                jQuery.getJSON('/cart.js', function(cart) {
+                    fetch('/cart.js')
+                        .then(response => response.json())
+                        .then(async res => {
+                            try{
+                                await theme.sendAddToCartEvent();
+                            }catch(error){
+                                console.log(error);
+                            }
+                            $('.add_to_cart_cst').html(btnHtml);
+                            window.location.href = '/cart';
+                        });
+                });
+            },
+            error : function(){ console.log('error'); }
+        });
+    });
+
+    function loadSiteLoader(){
+        $('.site_loading_wrapper').css("display", "block");
+        $(' #main').css("display", "none");
+    }
+
+    function unloadSiteLoader(){
+      $('.site_loading_wrapper').css("display", "none");
+      $(' #main').css("display", "block");
+    }
+</script>

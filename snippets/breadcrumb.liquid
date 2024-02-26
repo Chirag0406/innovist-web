@@ -1,0 +1,242 @@
+{% if template contains 'product' %}
+   <style>
+   .breadcrumbs {
+    margin: 0em 0 2em;
+  }
+nav.breadcrumbs {
+    display: block!important;
+margin-bottom: 10px;
+}
+   .breadcrumbs__link {
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.0em;
+    line-height: 1.4px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeSpeed;
+    text-transform: capitalize;
+     font-weight:400;
+  }
+   </style>
+{% endif %}
+
+{% if template contains 'article' %}
+   <style>
+   .breadcrumbs {
+    margin: 0em 0 2em;
+  }
+   .breadcrumbs__link {
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.0em;
+    line-height: 1.4px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeSpeed;
+    text-transform: capitalize;
+  }
+   </style>
+{% endif %}
+
+{% if template contains 'collection' %}
+   <style>
+   .breadcrumbs {
+    margin: 3em 0 0em;
+  }
+   .breadcrumbs__link {
+    text-decoration: none;
+    font-family: 'Helvetica Neue', Arial, 'Lucida Grande', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.0em;
+    line-height: 1.4px;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeSpeed;
+  }
+   .home-link{
+    text-decoration: none;
+    color: #A4A4A4;
+  }
+   </style>
+{% endif %}
+<style>
+
+  .rte h1{
+    margin-top: 0px;
+  }
+  
+  .breadcrumbs__list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .breadcrumbs__item {
+    display: inline-block;
+  }
+
+  .home-link{
+    text-decoration: none;
+    color: #A4A4A4;
+  }
+
+  .breadcrumbs__item:not(:last-child):after {
+    border-style: solid;
+    border-width: 0.1em 0.1em 0 0;
+    content: '';
+    display: inline-block;
+    height: 0.4em;
+    margin: 0px 0.4em 4px 0.4em;
+    position: relative;
+    transform: rotate(45deg);
+    vertical-align: middle;
+    width: 0.4em;
+  }
+
+  .breadcrumbs__link[aria-current="page"] {
+    color: inherit;
+    font-weight: normal;
+    text-decoration: none;
+  }
+
+  .breadcrumbs__link[aria-current="page"]:hover,
+  .breadcrumbs__link[aria-current="page"]:focus {
+    text-decoration: none;
+  }
+.blog-layout__main nav.breadcrumbs {
+    display: block!important;
+}
+.blog-layout__main nav.breadcrumbs ol li{
+font-size: 12px;
+}
+    
+</style>
+
+{%- unless template == 'index' or template == 'cart' or template == 'list-collections' or template == '404' -%}
+{%- assign t = template | split: '.' | first -%}
+
+<nav class="breadcrumbs new" role="navigation" aria-label="breadcrumbs">
+  <ol class="breadcrumbs__list" data-temp = "{{ template.suffix }}" data-vendor="{{ product.vendor }}">
+    <li class="breadcrumbs__item">
+      <a class="breadcrumbs__link" href="/">Home</a>
+    </li>
+    {%- case t -%}
+      {%- when 'page' -%}
+        <li class="breadcrumbs__item">
+          <a class="breadcrumbs__link" href="{{ page.url }}" aria-current="page">{{ page.title }}</a>
+        </li>
+      {%- when 'product' -%}
+
+     {% if product.metafields.custom.breadcrumb_heading != blank
+        and product.metafields.custom.breadcrumb_links != blank
+      %}
+  
+            {%- for tit_breadcrumb in product.metafields.custom.breadcrumb_heading.value -%}
+              {% if tit_breadcrumb != blank
+                and product.metafields.custom.breadcrumb_links.value[forloop.index0] != blank
+              %}
+                <li class="breadcrumbs__item">
+                  <a
+                    class="breadcrumbs__link"
+                    href="{{ product.metafields.custom.breadcrumb_links.value[forloop.index0] }}"
+                  >
+                    {{- tit_breadcrumb -}}
+                  </a>
+                </li>
+              {% endif %}
+            {%- endfor -%}
+            <li class="breadcrumbs__item">
+              <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+            </li>
+  
+      {% else %}
+        {%- if product.vendor contains 'Chemist' -%}
+          <li class="breadcrumbs__item">
+             <a class="breadcrumbs__link" href="https://innovist.com/collections/chemist-at-play" aria-current="page">Chemist At Play</a>
+          </li>
+        {% elsif product.vendor contains 'Bare' %}
+          <li class="breadcrumbs__item">
+             <a class="breadcrumbs__link" href="https://innovist.com/collections/bare-anatomy-store" aria-current="page">Bare Anatomy</a>
+          </li>
+        {% elsif product.vendor contains 'Sun' %}
+          <li class="breadcrumbs__item">
+             <a class="breadcrumbs__link" href="https://innovist.com/collections/sunscoop" aria-current="page">Sunscoop</a>
+          </li>
+      {% endif %}
+        <li class="breadcrumbs__item">
+          <a class="breadcrumbs__link" href="{{ product.url }}" aria-current="page">{{ product.title }}</a>
+        </li>
+      {% endif %}
+      
+      {%- when 'collection' and collection.handle -%}
+        {%- if current_tags -%}
+          <li class="breadcrumbs__item">
+            {{ collection.title | link_to: collection.url }}
+          </li>
+          <li class="breadcrumbs__item">
+            {%- capture tag_url -%}{{ collection.url }}/{{ current_tags | join: "+"}}{%- endcapture -%}
+            <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + "}}</a>
+          </li>
+        {%- else -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ collection.url }}" aria-current="page">{{ collection.title }}</a>
+          </li>
+        {%- endif -%}
+      {%- when 'blog' -%}
+        {%- if current_tags -%}
+          <li class="breadcrumbs__item">
+            {{ blog.title | link_to: blog.url }}
+          </li>
+          <li class="breadcrumbs__item">
+            {%- capture tag_url -%}{{blog.url}}/tagged/{{ current_tags | join: "+" }}{%- endcapture -%}
+            <a class="breadcrumbs__link" href="{{ tag_url }}" aria-current="page">{{ current_tags | join: " + " }}</a>
+          </li>
+        {%- else -%}
+          <li class="breadcrumbs__item">
+            <a class="breadcrumbs__link" href="{{ blog.url }}" aria-current="page">{{ blog.title }}</a>
+          </li>
+        {%- endif -%}
+      {%- when 'article' -%}
+        <li class="breadcrumbs__item">
+          {{ blog.title | link_to: blog.url }}
+        </li>
+        <li class="breadcrumbs__item">
+          <a class="breadcrumbs__link" href="{{ article.url }}" aria-current="page">{{ article.title }}</a>
+        </li>
+      {%- else -%}
+        <li class="breadcrumbs__item last case">
+          <a class="breadcrumbs__link" href="{{ request.path }}" aria-current="page">{{ page_title }}</a>
+        </li>
+    {%- endcase -%}
+  </ol>
+</nav>
+{%- endunless -%}
+
+<script>
+      var breadcrumbListArray = [];
+
+      $(".breadcrumbs__item").each(function(index, item) {
+        var linkData = $(this).find("a")[0];
+
+        var breadcrumbItem = {};
+        breadcrumbItem["@type"] = "ListItem";
+        breadcrumbItem["position"] = index + 1;
+        breadcrumbItem["name"] = linkData.text;
+        breadcrumbItem["item"] = linkData.href;
+        breadcrumbListArray.push(breadcrumbItem);
+      });
+
+      console.log(breadcrumbListArray);
+
+      var el = document.createElement('script');
+      el.type = 'application/ld+json';
+
+      el.text = JSON.stringify({"@context": "http://schema.org/", "@type": "BreadcrumbList", "itemListElement": breadcrumbListArray});
+
+      document.querySelector('body').appendChild(el);
+</script>
+
+    

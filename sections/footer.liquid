@@ -1,0 +1,339 @@
+<style>
+    .footer__social li{
+       margin: 0 15px 4px 0;
+    }
+    .footer__block--mobile .footer__title{
+      margin-top: 4px;
+      margin-bottom: 8px;
+    }
+    .footer__social .icon {
+      width: 19px;
+      height: 19px;
+  }
+</style>
+
+{%- if section.settings.show_newsletter -%}
+  <div class="footer__section footer__section--border">
+    <div class="page-width">
+      <div class="footer__newsletter">
+        {%- if section.settings.newsletter_richtext != blank -%}
+          <div class="footer__subscribe rte rte--nomargin">
+            {{ section.settings.newsletter_richtext }}
+          </div>
+        {%- endif -%}
+
+        {%- render 'newsletter-form', section_id: section.id, snippet_context: 'footer' -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% comment %}
+  Main navigation is copied here with JS for mobile users
+{% endcomment %}
+{%- if section.settings.footer_main_menu -%}
+  <div id="FooterMobileNavWrap" class="footer__section footer__section--border medium-up--hide hide">
+    <div id="FooterMobileNav" class="page-width"></div>
+  </div>
+{%- endif -%}
+
+<footer class="site-footer" data-section-id="{{ section.id }}" data-section-type="footer-section">
+  <div id="FooterMenus" class="footer__section footer__section--menus">
+    <div class="page-width">
+      <div class="footer__blocks">
+        {%- for block in section.blocks -%}
+          {% unless block.type == 'social' %}
+            <div {{ block.shopify_attributes }} class="footer__block" data-type="{{ block.type }}">
+              {%- liquid
+                case block.type
+                  when 'menu'
+                    render 'footer-menu', block: block
+                  when 'payment'
+                    render 'footer-payments', block: block
+                  when 'contact'
+                    render 'footer-contact', block: block
+                endcase
+              -%}
+            </div>
+          {% endunless %}
+        {%- endfor -%}
+        <div class="footer__block" data-type="social">
+          {%- for block in section.blocks -%}
+            {%- liquid
+              case block.type
+                when 'social'
+                  render 'social-media', block: block
+              endcase
+            -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer__section">
+    <div class="page-width text-center small--text-left">
+      <div class="footer__base-links">
+        {%- if section.settings.show_copyright -%}
+          <span>
+            Onesto Labs Pvt Ltd
+            <!-- &copy; {{ 'now' | date: '%Y' }} {{ shop.name }} -->
+            {%- if section.settings.copyright_text != blank -%}
+              {{ section.settings.copyright_text }}
+            {%- endif -%}
+          </span>
+        {%- endif -%}
+        {%- if linklists[section.settings.policies_menu].links.size > 0 -%}
+          {%- for link in linklists[section.settings.policies_menu].links -%}
+            <a href="{{ link.url }}">{{ link.title }}</a>
+          {%- endfor -%}
+        {%- endif -%}
+
+        {% comment %}{{ powered_by_link }}{% endcomment %}
+      </div>
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+ {
+   "name": "Footer",
+   "max_blocks": 12,
+   "settings": [
+     {
+       "type": "header",
+       "content": "Newsletter"
+     },
+     {
+       "type": "checkbox",
+       "id": "show_newsletter",
+       "label": "Show newsletter signup",
+       "info": "Customers who subscribe will have their email address added to the 'accepts marketing' [customer list](/admin/customers?query=&accepts_marketing=1).",
+       "default": true
+     },
+     {
+       "type": "richtext",
+       "id": "newsletter_richtext",
+       "label": "Text",
+       "default": "<p>Subscribe today to hear first about our sales</p>"
+     },
+     {
+       "type": "header",
+       "content": "Additional footer content"
+     },
+     {
+       "type": "checkbox",
+       "id": "footer_main_menu",
+       "label": "Repeat main menu on mobile",
+       "default": true
+     },
+     {
+       "type": "checkbox",
+       "id": "show_copyright",
+       "label": "Show copyright"
+     },
+     {
+       "type": "text",
+       "id": "copyright_text",
+       "label": "Additional copyright text"
+     },
+     {
+       "type": "link_list",
+       "id": "policies_menu",
+       "label": "Policies menu",
+       "info": "This menu will only show top-level links"
+     }
+   ],
+   "blocks": [
+     {
+       "type": "payment",
+       "name": "Payments and localization",
+       "limit": 1,
+       "settings": [
+         {
+           "type": "checkbox",
+           "id": "show_payment_icons",
+           "label": "Show payment icons",
+           "default": true
+         },
+         {
+           "type": "checkbox",
+           "id": "show_locale_selector",
+           "label": "Show language selector",
+           "info": "To add a language, go to your [language settings.](/admin/settings/languages)",
+           "default": true
+         },
+         {
+           "type": "checkbox",
+           "id": "show_currency_selector",
+           "label": "Show currency selector",
+           "info": "To add a currency, go to your [currency settings.](/admin/settings/payments)",
+           "default": true
+         }
+       ]
+     },
+     {
+       "type": "menu",
+       "name": "Navigation",
+       "settings": [
+         {
+           "type": "text",
+           "id": "title",
+           "label": "Title",
+           "info": "Defaults to menu title"
+         },
+         {
+           "type": "link_list",
+           "id": "menu",
+           "label": "Choose a menu",
+           "default": "footer",
+           "info": "This menu will only show top-level links"
+         },
+         {
+           "type": "checkbox",
+           "id": "enable_account_link",
+           "label": "Add 'My account' link if customer accounts enabled"
+         }
+       ]
+     },
+     {
+       "type": "contact",
+       "name": "Contact",
+       "settings": [
+         {
+           "type": "header",
+           "content": "Contact"
+         },
+         {
+           "type": "text",
+           "id": "phone",
+           "label": "Phone number"
+         },
+         {
+           "type": "page",
+           "id": "contact",
+           "label": "Contact page"
+         },
+         {
+           "type": "page",
+           "id": "chat",
+           "label": "Chat link"
+         }
+       ]
+     },
+{
+       "type": "social",
+       "name": "social media",
+       "settings": [
+         {
+           "type": "header",
+           "content": "Social"
+         },
+         {
+           "type": "checkbox",
+           "id": "enable_social",
+           "label": "Show social accounts",
+           "default": true
+         },
+        {
+       "type": "text",
+       "id": "social_text",
+       "label": "Store name",
+       "info": "Store's name"
+        },
+        {
+       "type": "text",
+       "id": "social_facebook_link",
+       "label": "Facebook",
+       "info": "https:\/\/www.facebook.com\/shopify"
+     },
+     {
+       "type": "text",
+       "id": "social_twitter_link",
+       "label": "Twitter",
+       "info": "https:\/\/twitter.com\/shopify"
+     },
+     {
+       "type": "text",
+       "id": "social_pinterest_link",
+       "label": "Pinterest",
+       "info": "https:\/\/www.pinterest.com\/shopify"
+     },
+     {
+       "type": "text",
+       "id": "social_instagram_link",
+       "label": "Instagram",
+       "info": "https:\/\/instagram.com\/shopify"
+     },
+     {
+       "type": "text",
+       "id": "social_snapchat_link",
+       "label": "Snapchat",
+       "info": "https:\/\/www.snapchat.com\/add\/shopify"
+     },
+     {
+       "type": "text",
+       "id": "social_tiktok_link",
+       "label": "TikTok",
+       "info": "https:\/\/www.tiktok.com\/@shopify"
+     },
+     {
+       "type": "text",
+       "id": "social_tumblr_link",
+       "label": "Tumblr",
+       "info": "http:\/\/shopify.tumblr.com"
+     },
+     {
+       "type": "text",
+       "id": "social_linkedin_link",
+       "label": "LinkedIn",
+       "info": "https:\/\/www.linkedin.com\/in\/shopify"
+     },
+     {
+       "type": "text",
+       "id": "social_youtube_link",
+       "label": "YouTube",
+       "info": "https:\/\/www.youtube.com\/user\/shopify"
+     },
+     {
+       "type": "text",
+       "id": "social_vimeo_link",
+       "label": "Vimeo",
+       "info": "https:\/\/vimeo.com\/shopify"
+     },
+     {
+       "type": "checkbox",
+       "id": "share_facebook",
+       "label": "Share on Facebook",
+       "default": true
+     },
+     {
+       "type": "checkbox",
+       "id": "share_twitter",
+       "label": "Tweet on Twitter",
+       "default": true
+     },
+     {
+       "type": "checkbox",
+       "id": "share_pinterest",
+       "label": "Pin on Pinterest",
+       "default": true
+     }
+       ]
+     }
+   ],
+   "default": {
+     "settings": {},
+     "blocks": [
+       {
+         "type": "menu",
+         "settings": {}
+       },
+       {
+         "type": "payment",
+         "settings": {}
+       }
+     ]
+   }
+ }
+{% endschema %}

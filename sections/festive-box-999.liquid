@@ -1,0 +1,98 @@
+<link rel="stylesheet" href="{{ 'builder.css' | asset_url }}" type="text/css" media="all">
+<div class="top_part">
+  {% include 'builder-hero' %}
+  {% include 'how-it-work' %}
+</div>
+
+{% schema %}
+{
+  "name": "Festive Box",
+  "class": "page-hero-section index-section--flush",
+  "max_blocks": 4,
+  "settings": [
+    {
+        "type": "header",
+        "content": "Builder Hero"
+      },
+    {
+        "type": "image_picker",
+        "id": "bg_image",
+        "label": "Background Image"
+      },
+{
+        "type": "image_picker",
+        "id": "desktop_image",
+        "label": "Desktop Image"
+        },
+        {
+        "type": "image_picker",
+        "id": "mobile_image",
+        "label": "Mobile Image"
+      },
+{
+	"type": "text",
+	"id": "title",
+	"label": "Title"
+},
+{
+	"type": "richtext",
+	"id": "text",
+	"label": "Content"
+},
+      {
+	"type": "richtext",
+	"id": "bottom_content",
+	"label": "Bottom Content"
+},
+    {
+        "type": "header",
+        "content": "How It Work"
+      },
+    {
+	  "type": "text",
+	  "id": "linklabel",
+	  "label": "Button Text"
+	},
+	{
+	  "type": "url",
+	  "id": "linkurl",
+	  "label": "Button Link"
+	},
+	{
+	  "type": "text",
+	  "id": "bottom_text",
+	  "label": "Button Text"
+	}
+  ],
+  "blocks": [
+    {
+      "type": "carslide",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Pick your Image"
+        },
+        {
+          "type": "richtext",
+          "id": "step_content",
+          "label": "Step Content"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Festive Box",
+      "category": "Festive Box"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

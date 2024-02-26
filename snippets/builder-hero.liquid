@@ -1,0 +1,75 @@
+<style>
+      .text_part h1{font-size:100px}
+      {% if section.settings.desktop_image != blank %}
+  /*   .top_hero_banner{background:url({{section.settings.bg_image | img_url:"master"}});
+                    background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+      padding: 20px 0px 60px 0px;
+                    } */
+      {% endif %}
+      .hero_wrapper{ display: flex;
+        justify-content: space-between;
+        align-items: center;}
+     .image_part,.text_part {
+        width: 50%;
+        flex: 0 0 50%;
+       padding:0px 15px;
+    }
+    .bottom_part{background: #fff;padding:25px 0px;text-align: center; }
+  .desktop_image{display:block !important;}
+  .mobile_image{display:none !important;}
+
+    @media (max-width:767px){
+      .hero_wrapper{
+        flex-direction: column-reverse;
+      }
+      .desktop_image{display:none !important;}
+  .mobile_image{display:block !important;}
+    }
+</style>
+<div class="top_hero_banner">
+  {% if section.settings.desktop_image != blank %}
+    <img
+      src="{{section.settings.desktop_image | img_url:"master"}}"
+      alt=""
+      class="desktop_image  {% if section.settings.mobile_image == blank %}mobile_image{% endif %}"
+    >
+  {% endif %}
+  {% if section.settings.mobile_image != blank %}
+    <img src="{{section.settings.mobile_image | img_url:"master"}}" alt="" class="mobile_image">
+  {% endif %}
+  {% if section.settings.desktop_image != blank %}
+    <div class="page-width">
+      <div class="hero_wrapper">
+        <div class="image_part">
+          <!--
+            {% if section.settings.desktop_image != blank %}
+              <img
+                src="{{section.settings.desktop_image | img_url:"master"}}"
+                alt=""
+                class="desktop_image  {% if section.settings.mobile_image == blank %}mobile_image{% endif %}"
+              >
+            {% endif %}
+            {% if section.settings.mobile_image != blank %}
+              <img src="{{section.settings.mobile_image | img_url:"master"}}" alt="" class="mobile_image">
+            {% endif %}
+          -->
+        </div>
+        {% if section.settings.title != blank %}
+          <div class="text_part">
+            {% if section.settings.title != blank %}
+              <h1>{{ section.settings.title }}</h1>
+            {% endif %}
+            {{ section.settings.text }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endif %}
+</div>
+<div class="bottom_part">
+  <div class="page-width">
+    {{ section.settings.bottom_content }}
+  </div>
+</div>

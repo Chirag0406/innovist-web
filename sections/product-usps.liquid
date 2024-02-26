@@ -1,0 +1,169 @@
+<style>
+    .usp-div {
+        display: flex;
+        align-items: center;
+    }
+    .product-block--usps {
+      display: inherit;
+    }
+
+    .product-usps {
+      margin-top: 30px;
+    }
+
+    .usp-div div {
+        font-family: Helvetica Neue;
+font-style: normal;
+font-weight: 500;
+
+font-feature-settings: 'cpsp' on;
+font-size: 16px;
+line-height: 19px;
+color: #4B4B4B;
+    }
+    
+    .usp-div img {
+        margin-right: 5%;
+        height: 36px;
+        width: 36px;
+    }
+.page-width-usp {
+    display: grid;
+  grid-template-columns: auto auto;
+  margin-bottom: 60px;
+  gap: 5% 0;
+  /* float: right; */
+}
+
+
+.usp-div .tab-img {
+  height: 10px;
+        width: 10px;
+}
+
+.usp-redirect  {
+  /* text-decoration: underline; */
+  cursor: pointer;
+}
+
+.arrow-redirect {
+  display: inline-block;
+}
+
+@media only screen and (max-width: 769px){
+  .usp-div div{
+    font-size: 12px;
+line-height: 14px;
+  }
+  .product-usps {
+      margin-top: 0px;
+    }
+  .usp-div img {
+    height: 30px;
+    width: 30px;
+    margin-right: 5%;
+
+  }
+  .product-block--usps {
+  margin-bottom: 12px;
+}
+
+.page-width-usp {
+  margin-bottom: 40px;
+  gap: 0 10%;
+}
+.usp-div .tab-img {
+  height: 7px;
+        width: 7px;
+}
+}
+
+
+  
+    </style>
+   <script>
+    function scrollView(block) {
+      console.log("****",block)
+      // let tab_name = $(".usp-redirect")
+      let classes = $(block).attr('class');
+      console.log(classes)
+      let tab_name = classes.substring(classes.indexOf('tab-name') + 8);
+      console.log(tab_name);
+      $('html,body').animate({
+          scrollTop: $(`.tabs-heading .tab-name-${tab_name}`).offset().top},
+    100);
+    $(`.tabs-heading .tab-name-${tab_name}`).click();
+  }
+
+
+  </script> 
+    
+    
+    {%- if section.blocks.size > 0 -%}
+    <div class="grid__item medium-up--one-half">
+    </div>
+      <div class="page-width-usp grid__item medium-up--one-half page-width{% if section.settings.max_width %} page-width--narrow{% endif %}">
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'product-usps-description' -%}
+              <div class=" product-block--usps" {{ block.shopify_attributes }}> 
+                <div class="usp-div"> 
+                    <img src="{{ block.settings.usp_image | img_url: '540x' }}" class="usps-description-image lazyloaded"> 
+                   
+                    <div class="{% if block.settings.usb_is_tab %} usp-redirect tab-name{{block.settings.tab_name_id | downcase | replace: ' ', '_'}} {%endif%}" onclick= "scrollView(this);">    
+                        {{ block.settings.usp_content }}
+                    {{ block.settings.page.content }}
+                    {% if block.settings.usb_is_tab %}
+                    <span class="arrow-redirect">
+                      <img src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/Vector.png?v=1643804152" class="tab-img">
+                    </span>
+                  {% endif %}
+                    </div>
+                 
+                </div>
+              </div>
+       
+          {%- endcase -%}
+        {%- endfor -%}
+      </div>
+   
+    {%- endif -%}
+    
+    {% schema %}
+      {
+        "name": "Full USPs Details",
+        "class": "product-usps",
+        "blocks": [{
+            "type": "product-usps-description",
+            "name": "Product USPs",
+            "settings":
+            [
+                {
+                "type": "image_picker",
+                "id": "usp_image",
+                "label": "USP Image"
+              },
+              {
+                "type": "text",
+                "id": "usp_content",
+                "label": "USP Description",
+                "default": "<p>Use collapsible tabs for more detailed information that will help customers make a purchasing decision.</p><p>Ex: Shipping and return policies, size guides, and other common questions.</p>"
+              },
+              {
+                "type": "checkbox",
+                "id": "usb_is_tab",
+                "label": "Redirect To Tab",
+                "default": false
+              },
+              {
+                "type": "text",
+                "id": "tab_name_id",
+                "default": "tab name",
+                "label": "Tab Name"
+              }
+            ]
+        }]
+      }
+      
+    {% endschema %}
+    

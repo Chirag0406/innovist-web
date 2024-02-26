@@ -1,0 +1,2056 @@
+{% schema %}
+{
+"name": "refill",
+"settings": []
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<head>
+    <link href="{{'custom_hair_quiz.css' | asset_url }}" rel="stylesheet">
+    <link rel="preload stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.css" as="style" onload="this.rel='stylesheet'"/>
+    <link rel="preload stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css" as="style" onload="this.rel='stylesheet'"/>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+</head>
+
+
+
+{% if customer %}
+    <script>
+        let urlParam_thm = new URL(window.location.href);
+        let previous_stp_theme = new URLSearchParams(urlParam_thm.search); ̰
+        let previous_step = "";
+        if(previous_stp_theme.toString() && previous_stp_theme.toString().includes('previous_step')) {
+            previous_step = "?previous_step=hair-quiz";
+        }
+
+        let customer_id = 0;
+        {% if customer %}
+        customer_id  = {{customer.id}};
+        {% endif %}
+
+        // if(customer_id > 5226759290926){
+        //     document.location = '/pages/hair-analysis-5'+ previous_step;
+        // }else
+        // if(customer_id > 5033760161838){
+        //     document.location = '/pages/hair-analysis-2'+ previous_step;
+        // }
+    </script>
+{%endif %}
+
+<div id="message" style="display:none;">
+    <div id="inner-message" class="alert alert-primary alert-fixed">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Item added to cart
+    </div>
+</div>
+<div class="wrapper  skin_an" id="hair-analysis">
+    {% if customer %}
+    <section class="update_dropdown" id="accordion" >
+        <div class="container">
+            <h2>We're glad you're back</h2>
+            <p class="update_dropdown_desc">Pick your favourite products below</p>
+
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="sec_update">
+                        <p id="updateprefOne">
+                            <button class="btn dropbox_btn" data-toggle="collapse" data-target="#updatepref" aria-expanded="false" aria-controls="updatepref">
+                                Update your preferences
+                                <span>Edit your hair goals, color and fragrance.</span>
+                            </button>
+                        </p>
+                        <div id="updatepref" class="collapse" aria-labelledby="updateprefOne" data-parent="#accordion">
+                            <div class="card card-body">
+                                <span>Answers from your last quiz have been auto selected.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 col-12">
+                    <div class="sec_update">
+                        <p id="updateprefTwo">
+                            <button class="btn dropbox_btn" data-toggle="collapse" data-target="#updateskin" aria-expanded="false" aria-controls="updateskin">
+                                Update your hair profile
+                                <span>Edit basic information about your hair and scalp.</span>
+                            </button>
+                        </p>
+                        <div id="updateskin" class="collapse" aria-labelledby="updateprefTwo" data-parent="#accordion">
+                            <div class="card card-body">
+                                <span>Answers from your last quiz have been auto selected.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        {% else %}
+        <section class="update_dropdown login-div">
+            <div class="container" style="background: #FFFFFF;
+box-shadow: 0px 6px 12px -6px rgba(0, 0, 0, 0.12), 0px 4px 32px -4px rgba(0, 0, 0, 0.1);
+border-radius: 5px; text-align:center;">
+                <h2>Login to fetch your data</h2>
+                <br>
+                <button class="black-div" onclick="login()" style="padding: 0.5em 1em;
+    margin-bottom: 2em;">Login</button>
+            </div>
+        </section>
+    {% endif %}
+
+    <!--<section class="expert-range-div">
+        <div class="container">
+            {% comment %} <h2>Looking to solve <br/> just 1 primary concern?</h2> {% endcomment %}
+            <h2>Looking for something particular?</h2>
+            <p class="desc_text">Explore our <b>EXPERT RANGE</b> to discover perfect hair solutions for every concern</p>
+            <div class="w3-black tabs-heading w3-product-switch">
+
+
+            </div>
+            <div class="tab-content-product">
+
+            </div>
+        </div>
+
+
+    </section>-->
+
+
+
+    <section class="make_it_wholesome" style="display: none;">
+        <div class="container">
+            <div class="head text-center">
+                <h2>Make it wholesome</h2>
+            </div>
+            <!--<div class="biotin text-center">
+                <div class="biotin_img">
+                    <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Gummies_2x_9f471c8a-8163-4cf7-9f7b-ab7e27234b08.png?v=1607506058" alt="biotin_img"/>
+                </div>
+                <div class="biotin_info">
+                    <h2 class="biotin_title">Biotin Gummies</h2>
+                    <span class="biotin_subtitle">60 Gummies  |  1 month supply</span>
+                    <ul class="vegan-details">
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-vegan.svg?v=1607085112" alt="vegan" /><p>Vegan</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-soy.svg?v=1607085226" alt="vegan" /><p>Soy free</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-gluten.svg?v=1607085498" alt="vegan" /><p>Gluten free</p></li>
+                    </ul>
+                    <p class="hair-analysis-price">Rs.799</p>
+                    <p class="biotin_text">Enriched with Vitamin A,C,E and H, our delicious gummies help strengthen hair and improve hair growth
+                        Take 2 gummies everyday for stronger hair!</p>
+                    <input id="variantId-32843254693934" type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                    {% if all_products["biotin-gummies-1"].variants.first.available == true and all_products["biotin-gummies-1"].variants.first.inventory_quantity > 0 %}
+                        <button type="button" class="btn desktop_btn add_to_cart_cst add_to_cart" dataID="32843254693934"><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/beauty_cart.svg?v=1606718080">ADD TO CART</button>
+                    {% else %}
+                        <button type="button" class="btn desktop_btn disabled-stock-btn">Out of stock</button>
+                    {% endif %}
+                </div>
+            </div>-->
+
+            <div class="biotin text-center omega">
+                <div class="biotin_img">
+                    <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-analysis-pack-2.png?v=1607083440" alt="omega_img"/>
+                </div>
+                <div class="biotin_info">
+                    <h2 class="biotin_title">Hair [O]mega</h2>
+                    <span class="biotin_subtitle">60 capsules  |  2 months supply</span>
+                    <ul class="vegan-details">
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-vegan.svg?v=1607085112" alt="vegan" /><p>Vegan</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-soy.svg?v=1607085226" alt="vegan" /><p>Soy free</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-gluten.svg?v=1607085498" alt="vegan" /><p>Gluten free</p></li>
+                    </ul>
+                    <p class="hair-analysis-price">Rs.899</p>
+                    <p class="biotin_text">With essential Omega 3,6,9 fatty acids, our Hair Omega is a great vegetarian alternative to fish oil.
+                        Take 1 capsule everyday for healthy scalp and hair!</p>
+                    <input id="variantId-32843244208174" type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                    {% if all_products["hair-omega-1"].variants.first.available == true and all_products["hair-omega-1"].variants.first.inventory_quantity > 0 %}
+                        <button type="button" class="btn desktop_btn add_to_cart_cst add_to_cart" dataID="32843244208174"><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/beauty_cart.svg?v=1606718080">ADD TO CART</button>
+                    {% else %}
+                        <button type="button" class="btn desktop_btn disabled-stock-btn">Out of stock</button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="biotin text-center aid">
+                <div class="biotin_img">
+                    <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-analysis-pack-3.png?v=1607083440" alt="biotin_img"/>
+                </div>
+                <div class="biotin_info">
+                    <h2 class="biotin_title">S[tress] Aid</h2>
+                    <span class="biotin_subtitle">60 capsules  |  2 months supply</span>
+                    <ul class="vegan-details">
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-vegan.svg?v=1607085112" alt="vegan" /><p>Vegan</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-soy.svg?v=1607085226" alt="vegan" /><p>Soy free</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-gluten.svg?v=1607085498" alt="vegan" /><p>Gluten free</p></li>
+                    </ul>
+                    <p class="hair-analysis-price">Rs.899</p>
+                    <p class="biotin_text">With Ashwagandha, Lemon Balm and Magnesium, this supplement helps reduce stress induced hair fall.
+                        Take 1 capsule everyday for stronger, nourished hair!</p>
+                    <input id="variantId-32843245912110" type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                    {% if all_products["stress-aid-1"].variants.first.available == true and all_products["stress-aid-1"].variants.first.inventory_quantity > 0 %}
+                        <button type="button" class="btn desktop_btn add_to_cart_cst add_to_cart" dataID="32843245912110"><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/beauty_cart.svg?v=1606718080">ADD TO CART</button>
+                    {% else %}
+                        <button type="button" class="btn desktop_btn disabled-stock-btn">Out of stock</button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+    <div class="products_section">
+        <div
+                id="CollectionAjaxResult"
+                class="collection-content"
+                data-section-id="{{ section.id }}"
+                data-section-type="collection-template"
+                data-collection-template="true"
+        >
+        <div class="container">
+        <div class="product-recommendations">
+            <div class="new-grid product-grid collection-grid" data-view="small" data-scroll-to>
+                {%- for product in collections['refill-1'].products -%}
+                    {%- render 'product-grid-item', product: product -%}
+                {%- endfor -%}
+            </div>
+
+            {%- liquid
+                    for product in collections['refill-1'].products
+                        render 'quick-shop-modal', product: product
+                    endfor
+            -%}
+        </div>
+        </div>
+    </div>
+
+    </section>
+
+
+    <section class="our_standards padding" style="background: #F7F7F7;width: 76%;margin: 0 auto;height: 900px;">
+        <div class="container">
+            <h2 class="our_standards_head">Our Standards</h2>
+            <div class="our_standards_cards">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="{{ 'our_standards_icon4.svg' | asset_url }}">
+                        </div>
+                        <h3 class="standards_card_title">Freshly Made</h3>
+                        <p class="standards_card_subtitle">Individually and freshly formulated once you place your order</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="{{ 'our_standards_icon3.svg' | asset_url }}">
+                        </div>
+                        <h3 class="standards_card_title">Formulated for Different Hair Types</h3>
+                        <p class="standards_card_subtitle">Suited for different hair and scalp types  including chemically treated hair and sensitive scalp</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="{{ 'our_standards_icon5.svg' | asset_url }}">
+                        </div>
+                        <h3 class="standards_card_title">Long Lasting Results</h3>
+                        <p class="standards_card_subtitle">Advance actives which work deep into your scalp and repair damage</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="{{ 'our_standards_icon1.svg' | asset_url }}">
+                        </div>
+                        <h3 class="standards_card_title">Complete Hair and Scalp Health</h3>
+                        <p class="standards_card_subtitle">Formulations which penetrate deep into the scalp and hair</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="{{ 'our_standards_icon6.svg' | asset_url }}">
+                        </div>
+                        <h3 class="standards_card_title">Scientific</h3>
+                        <p class="standards_card_subtitle">Formulations backed by rigorous research and advanced technology</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="{{ 'our_standards_icon2.svg' | asset_url }}">
+                        </div>
+                        <h3 class="standards_card_title">Effective High-Grade Ingredients</h3>
+                        <p class="standards_card_subtitle">Made using potent, botanical ingredients backed by advanced science</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+</div>
+<style>
+    .cart__item-title a{
+        color: #000 !important;
+    }
+    .quick-product__btn {
+        display: none !important;
+    }
+    .header-section {
+        display:block !important;
+    }
+    .announcement-bar {
+        display:block !important;
+
+    }
+    .page_hide{
+        display:none;
+    }
+    .navbar.navbar-expand-lg.nav_default {
+        margin-top: 0px;
+    }
+
+    nav.navbar.navbar-expand-lg.nav_default {
+        margin-top: 0px !important;
+        padding-top: 0;
+    }
+    }
+    .loading_wrapper .personalised{
+        margin: 0 auto;
+    }
+    .Loading-page {
+        margin: 36px auto;
+        height:300px;
+    }
+    .loading_wrapper {
+        /* height: 100vh; */
+        /* overflow-y: hidden; */
+
+    }
+    .unique .box{
+        background: rgb(210,210,210);
+    }
+    .small-text{
+        font-weight: 300;
+        font-size: 12px;
+        text-transform: lowercase;
+    }
+    .buttonClicked{
+
+    }
+    @media only screen and (max-width: 576px){
+        .Loading-page {
+            margin-top: 12px !important;
+        }
+    }
+
+    .inner_wrapper_hair {
+        padding: 100px 0;
+        background: rgb(210,210,210);}
+    .alert-fixed {
+        position:fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index: 9999999999999;
+        border-radius:0px
+    }
+
+    nav.navbar.navbar-expand-lg.nav_default{
+        margin-top: 0 !important;
+        padding-top: 0;
+    }
+
+    /**** update quiz section css */
+    .update_dropdown .hidden {
+        display: none;
+    }
+
+    .update_dropdown{
+        padding   : 30px 0;
+        border-top: none;
+    }
+
+    .sec_update {
+        padding: 1rem;
+        background: #000;
+        border-radius:5px;
+        color:#fff;
+        box-shadow: 2px 2px 6px 0px rgb(228 226 228);
+    }
+
+    .sec_update p {
+        margin-bottom: 0;
+    }
+
+    .btn.dropbox_btn {
+        color: #fff;
+        font-family: Helvetica;
+        font-size: 20px;
+        line-height: 24px;
+        font-weight: bold;
+        position: relative;
+        text-align: left;
+        padding: 0 0 0 22px;
+        line-height: 38px;
+        width: 100%;
+        margin: 0;
+        text-transform: none;
+    }
+
+    .bogo_add{
+        padding: 1em 0 0 0;
+        font-size: 14px;
+        font-weight:normal;
+    }
+    @media(max-width:500px) {
+        .bogo_add{
+            padding: 1em 0 0 0;
+            font-size: 14px;
+        }
+    }
+
+
+    .btn.dropbox_btn::after {
+        position: absolute;
+        content: "\f107";
+        top: 15px;
+        right: 0;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 14px;
+        font-size: 27px;
+        color: #e5e5e5;
+
+
+    }
+
+    .btn.dropbox_btn span {
+        display: block;
+        font-size: 14px;
+        line-height: 24px;
+        font-weight: 500;
+        font-family: Helvetica;
+        color: #C4C4C4;
+
+    }
+
+    .sec_update .card.card-body {
+        background: transparent;
+        border: none;
+        margin: 0;
+        padding: 0 22px;
+    }
+
+    .sec_update .card.card-body span {
+        margin-bottom: 40px;
+        font-size: 18px;
+        color: #1C1111;
+        text-align: center;
+        font-weight: 500;
+        font-family: Helvetica;
+
+    }
+
+    .skin_goals h3 {
+        font-family: Helvetica Neue;
+        font-size: 20px;
+        font-weight: 500;
+        text-align: left;
+        margin-bottom: 30px;
+    }
+
+    .sec_update .card.card-body ul {
+        padding: 0;
+        margin: 0 auto;
+        list-style: none;
+        width: 100%;
+        text-align: left;
+    }
+
+    .sec_update .card.card-body .color {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    .sec_update .card.card-body ul li {
+        width: 48%;
+        height: 35px;
+        margin: 13px 0 13px;
+        position: relative;
+        background: #FFFFFF;
+        box-sizing: border-box;
+        border-radius: 3px;
+        margin-right: 4%;
+        font-size: 18px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        display: inline-block;
+    }
+
+    .sec_update .card.card-body ul.treatment li {
+        width: 32%;
+    }
+
+
+
+    .sec_update .card.card-body .color li {
+        width: calc(100% / 3);
+        text-align: center;
+        height: 100%;
+        padding: 0;
+        height: auto;
+    }
+
+
+
+    .sec_update .card.card-body .color li h5 {
+        font-size: 13px;
+        font-family: 'Helvetica';
+        color: #1C1111;
+        margin: 10px 0;
+        display: block;
+    }
+
+    .sec_update .card.card-body ul li:nth-child(even) {
+        margin-right: 0;
+    }
+
+    .sec_update .card.card-body ul li input {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 2;
+        opacity: 0;
+    }
+
+    .sec_update .card.card-body ul li input[type="text"] {
+        opacity: 1;
+        cursor: text;
+        border-radius: 3px;
+        padding: 1rem;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: 'Helvetica';
+        font-size: 13px;
+        border: 1px dashed #000;
+        background-color: initial;
+    }
+
+    .sec_update .card.card-body ul li input[type="checkbox"]:checked + span,
+    .sec_update .card.card-body ul li input[type="radio"]:checked + span {
+        color:#fff;
+    }
+
+    .sec_update .card.card-body ul li input[type="checkbox"]:checked + span + h5,
+    .sec_update .card.card-body ul li input[type="radio"]:checked + span + h5 {
+        font-weight: bold;
+    }
+
+    .sec_update .card.card-body .color li > span {
+        width: 100%;
+        height: 92px;
+        display: block;
+        background: #fff;
+        margin: 0;
+        border-radius: 7px;
+    }
+
+
+    .sec_update .card.card-body ul li span.check {
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        border-radius: 3px;
+        z-index: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        border: 0.5px solid #000000;
+        padding: 1rem;
+        font-family: 'Helvetica';
+        font-size: 13px;
+    }
+
+    .sec_update .card.card-body .color li input {
+        opacity: 0;
+    }
+
+    .sec_update .card.card-body .color li > span {
+        width: 92px;
+        height: 99px;
+        display: block;
+        background: #fff;
+        margin: 0 auto;
+        border-radius: 7px;
+    }
+
+    .sec_update .card.card-body .color li > span img {
+        width: 58px;
+        margin-top: -30px;
+    }
+
+
+    .sec_update .card.card-body ul li input[type="checkbox"]:checked + .check,
+    .sec_update .card.card-body ul li input[type="radio"]:checked + .check {
+        background: #000;
+        color:#fff;
+        font-weight: 600;
+    }
+
+    .sec_update .card.card-body ul.fragrance li {
+        width: 30%;
+        height: 35px;
+        margin-right: 2% !important;
+    }
+
+
+    .sec_update .card.card-body ul.update_name li {
+        width: 43%;
+        height: 35px;
+    }
+
+    .sec_update .card.card-body button.btn {
+        background:#000;
+        border-radius: 3px;
+        color:#fff;
+        text-transform: uppercase;
+        padding:22px 0;
+        margin: 20px 0;
+    }
+
+    .sec_update .card.card-body .color li {margin: 60px 0 0;}
+    .sec_update .card.card-body .color li:nth-child(1),.sec_update .card.card-body .color li:nth-child(2),
+    .sec_update .card.card-body .color li:nth-child(3){margin-top: 0;}
+
+    /* -------------media starts------------------------- */
+
+    @media only screen and (max-width: 1200px){
+        .btn.dropbox_btn {
+            font-size: 23px;
+            line-height: 30px;
+        }
+
+        .btn.dropbox_btn span {
+            font-size: 15px;
+        }
+
+        .sec_update .card.card-body span {
+            font-size: 15px;
+            margin: 0 0px 16px 0;
+        }
+
+        .btn.dropbox_btn::before {
+            height: 137%;
+        }
+    }
+
+    @media only screen and (max-width: 992px){
+        .sec_update .card.card-body span {
+            font-size: 14px;
+        }
+    }
+
+    @media only screen and (max-width: 767px){
+        .sec_update {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media only screen and (max-width: 560px){
+
+        .sec_update .card.card-body .color li > span {width: 52px;height: 49px;}
+        .sec_update .card.card-body .color li h5{font-size: 8px;margin: 8px 0 5px;}
+        .sec_update .card.card-body .color li > span img {width: 36px;}
+        .sec_update .card.card-body .color li {margin: 35px 0 0;}
+        .sec_update .card.card-body .color li:nth-child(1),.sec_update .card.card-body .color li:nth-child(2),
+        .sec_update .card.card-body .color li:nth-child(3){margin-top: 0;}
+
+
+        .btn.dropbox_btn {
+            font-size: 19px;
+        }
+
+        .btn.dropbox_btn span {
+            font-size: 10px;
+            line-height: 21px;
+
+        }
+
+        .skin_goals h3 {
+            font-size: 12px;
+            margin: 16px 0 2px 0;
+        }
+
+        .sec_update .card.card-body ul li span.check {
+            font-family: Helvetica Neue;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 12px;
+            line-height: 15px;
+        }
+
+        .sec_update .card.card-body ul li, .sec_update .card.card-body ul.update_name li {
+            height: 20px;
+        }
+
+        .sec_update .card.card-body button.btn {
+            padding: 7px 0;
+            margin: 30px 0 10px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .sec_update .card.card-body ul.fragrance li {
+            height: 20px;
+        }
+
+        .sec_update .card.card-body span {
+            font-size: 12px;
+        }
+    }
+
+    @media only screen and (max-width: 375px){
+        .sec_update {padding: 35px 12px;}
+    }
+
+
+
+
+</style>
+<script>
+    function login(){
+        localStorage.setItem("redirect_url", "/pages/refill-1");
+        
+        let width=window.screen.availWidth;
+        let modal = document.getElementById("myModal");
+        let mobile_modal = document.getElementById("mobile-myModal");
+
+        if(width<601)
+        {
+            modal.style.display='none'
+            mobile_modal.style.display='block'       
+        }
+        else if(width>601)
+        {
+            modal.style.display='block'
+            mobile_modal.style.display='none'   
+        } 
+
+        {% comment %} window.location = location.origin + '/account/login' {% endcomment %}
+    }
+
+    function plusSlides(n) {
+        showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+        showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("dot");
+        if (n > slides.length) {slideIndex = 1}
+        if (n < 1) {slideIndex = slides.length}
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+    }
+
+    jQuery("#shopify-section-header, .announcement-bar").hide();
+    $(document).ready(function(){
+        setTimeout(function(){
+            $('input#3').prop('checked', true);
+            $('input#option3').prop('checked', true);
+
+        },10);
+        let productPrice = '{{ all_products["copy-of-3-step-haircare-regime"].price | money_without_currency | remove: '.00' }}';
+        let initialPrice = '₹' + '{{ all_products["copy-of-3-step-haircare-regime"].price | money_without_currency | remove: '.00' }}';
+        $('.price_change').html(`${initialPrice}`);
+        $('.form-check-input').change(function() {
+            let price = parseFloat($(this).attr("data-price").replace(/,/g, ''));
+            console.log("price---->", price);
+            if($('.bogo_add #hair-oil-3').is(":checked")) {
+                price +=  Number($('.bogo_add #hair-oil-3').attr('data-price'));
+            }
+            if($('.bogo_add #hair-serum-3').is(":checked")) {
+                price +=  Number($('.bogo_add #hair-serum-3').attr('data-price'));
+            }
+            if($('.bogo_add #hair-omega-2').is(":checked")) {
+                price +=  Number($('.bogo_add #hair-omega-2').attr('data-price'));
+            }
+            if($('.bogo_add #biotin-gummies-2').is(":checked")) {
+                price +=  Number($('.bogo_add #biotin-gummies-2').attr('data-price'));
+            }
+            if($('.bogo_add #stress-aid-3').is(":checked")) {
+                price +=  Number($('.bogo_add #stress-aid-3').attr('data-price'));
+            }
+            console.log("price===>", price , $('.price_change'));
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>${price}`);
+
+        });
+        changeText();
+        getAnalysisData();
+    });
+
+    function changeText(){
+        const images = ['https://cdn.shopify.com/s/files/1/0255/3302/2244/files/personalized.png?v=1607074298','https://cdn.shopify.com/s/files/1/0255/3302/2244/files/cruelty_free.svg?v=1606817017'];
+        const text_headers = ['Personalized for You', 'Cruelty Free'];
+        var i = 0;
+        var renew = setInterval(function(){
+            i = i < images.length ? i : 0;
+            $(".personalised_title").text(text_headers[i]);
+            $('.personalised').attr('src', images[i]);
+            i++;
+        },1000);
+    }
+    function postData(ajaxurl, data) {
+        return $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json'
+        });
+    }
+    async function getAnalysisData(){
+        let quizMapping = localStorage.getItem('hair_quiz_mapping');
+        let quizStateId = localStorage.getItem("hairQuizStateId");
+        let quiz_id = 2;
+        {% for tag in customer.tags %}
+        console.log('{{tag}}',"&&&&")
+        if('{{tag}}'.includes('gender-male')) {
+            quiz_id = 3;
+        }
+        {% endfor %}
+        if(quizMapping){
+            // if(localStorage.getItem("gender")) {
+            //     let updateTags = await postData('https://api-automation.bareanatomy.in/api/v1/customers/tags' , {
+            //     customer_id: '{{customer.id}}',
+            //     tag: "gender-" + localStorage.getItem("gender")
+            // });
+            // if(localStorage.getItem("gender").includes('male')) {
+            //     quiz_id = 3;
+            // }
+            // }
+
+            let quizMappingData = {
+                'customer_id':'{{customer.id}}' ,
+                'profile_id': 1,
+                'quiz_id': quiz_id,
+                'quiz_state_id':localStorage.getItem("hairQuizStateId")
+            };
+            $.ajax({
+                url: "https://api-quiz.bareanatomy.in/quiz/mapQuiz",
+                cache: false,
+                dataType: 'json',
+                contentType: 'application/json',
+                type: "POST",
+                data: JSON.stringify(quizMappingData),
+                success: function(data) {
+                    localStorage.removeItem("hair_quiz_mapping");
+                    $.ajax({
+                        //url: `https://api-test-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+                        url: `https://api-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+                        type: "GET",
+                        success: function(data) {
+                            setTimeout(function(){
+                                jQuery("#shopify-section-header, .announcement-bar").show();
+                                jQuery(".skin_an").removeClass("page_hide");
+                            }, 4000);
+                            if(data.data){
+                                renderQuizData(data.data.quiz_data, data.data.quiz_analysis);
+                                data.data.goals_analysis.forEach((goal, i) => {
+                                    appendHairGoals(goal, i);
+                                });
+                                renderReview(data.data.review_analysis, data.data.goals_analysis);
+                                renderScaleAnalysis(data.data.hair_feel_analysis, data.data.scalp_feel_analysis);
+                                changeImages(data.data.quiz_data.color);
+                                changeBannerImages(data.data.quiz_data.color);
+                                if(data.data.upsell_listing_analysis) {
+                                    showUpsellProducts(data.data.upsell_listing_analysis);
+                                }
+                                {% for tag in customer.tags %}
+                                if('{{tag}}'.includes('gender-male')) {
+                                    changeMenBannerImages(data.data.quiz_data.color);
+                                }
+                                {%endfor%}
+                                /*appendSkinTypeAnalysis(data.data.quiz_analysis,data.data.skin_type_analysis);
+                                renderReview(data.data.review_analysis, data.data.skin_goals_analysis);
+                                $(".beauty_text").text(data.data.collagen_analysis.description);
+                                $(".beauty_text").append(`<br> ${data.data.collagen_analysis.text}`);*/
+
+                            }
+
+                        }
+                    });
+                }
+
+
+            });
+
+
+        }
+        else{
+            let customerId = '{{customer.id}}'
+            $.ajax({
+                url: `https://api-quiz.bareanatomy.in/submit?quiz_id=${quiz_id}&customer_id=${customerId}&profile_id=1`,
+                //url: `https://api-test-quiz.bareanatomy.in/submit?quiz_id=2&customer_id=${customerId}&profile_id=1`,
+                type: "GET",
+                success: function(data) {
+                    if(data.data){
+                        let quizStateId = data.data.quiz_state_id;
+                        {% if customer %}
+                        if(data.data.is_quiz_completed !=1){
+                            window.location.href = '/pages/quiz-3';
+                        }else{
+                            quiz_id == 2 ? localStorage.setItem("hairQuizStateId", quizStateId) : localStorage.setItem("menHairQuizStateId", quizStateId);
+                        }
+                        {% endif %}
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const previous_step = urlParams.get('previous_step');
+                        if(!previous_step || previous_step != 'hair-quiz') {
+                            $('#hair-analysis .update_dropdown').css('display','block');
+                        }
+                        getQuizQuestions(data.data);
+
+                        $.ajax({
+                            //url: `https://api-test-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+                            url: `https://api-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+                            type: "GET",
+                            success: function(data) {
+                                setTimeout(function(){
+                                    jQuery("#shopify-section-header, .announcement-bar").show();
+                                    jQuery(".skin_an").removeClass("page_hide");
+                                }, 4000);
+                                if(data.data){
+                                    renderQuizData(data.data.quiz_data, data.data.quiz_analysis);
+                                    data.data.goals_analysis.forEach((goal, i) => {
+                                        appendHairGoals(goal, i);
+                                    });
+                                    renderReview(data.data.review_analysis, data.data.goals_analysis);
+                                    renderScaleAnalysis(data.data.hair_feel_analysis, data.data.scalp_feel_analysis);
+                                    changeImages(data.data.quiz_data.color);
+                                    changeBannerImages(data.data.quiz_data.color);
+                                    if(data.data.upsell_listing_analysis) {
+                                        showUpsellProducts(data.data.upsell_listing_analysis);
+                                    }
+                                    {% for tag in customer.tags %}
+                                    if('{{tag}}'.includes('gender-male')) {
+                                        changeMenBannerImages(data.data.quiz_data.color);
+                                    }
+                                    {%endfor%}
+                                    /*appendSkinTypeAnalysis(data.data.quiz_analysis,data.data.skin_type_analysis);
+                                    renderReview(data.data.review_analysis, data.data.skin_goals_analysis);
+                                    $(".beauty_text").text(data.data.collagen_analysis.description);
+                                    $(".beauty_text").append(`<br> ${data.data.collagen_analysis.text}`);*/
+
+                                }
+
+                            }
+                        });
+
+
+                    }
+
+                },
+                error: function (jqXHR, exception) {
+                    {% if customer %}
+                    window.location.href = '/pages/quiz-3';
+                    {% endif %}
+                }
+            });
+        }
+    }
+
+    function getQuizQuestions(quiz_answer) {
+        let quiz_id = 2;
+        {% for tag in customer.tags %}
+        if('{{tag}}'.includes('gender-male')) {
+            quiz_id = 3;
+        }
+        {% endfor %}
+        $.ajax({
+            url: `https://api-quiz.bareanatomy.in/quiz/get?quiz_id=${quiz_id}`,
+            type: "GET",
+            success: function(data) {
+                if(data && data.data && data.data["quizzes"].length && data.data.quizzes[0] && data.data.quizzes[0].questions) {
+                    displayQuestions(data.data.quizzes[0].questions, quiz_answer);
+                    $('.hair-new-look .chngeColor').on('click', function(){
+                        console.log(data.data.quizzes[0].questions, quiz_answer)
+                        updateQuizColor(data.data.quizzes[0].questions, quiz_answer,$(this));
+                    });
+                }
+
+            },
+            error: function (jqXHR, exception) {
+            }
+        })
+    }
+
+    function displayQuestions(questions, quiz_answer) {
+        let updateskinQuestions = [];
+        let updateprefQuestions = [];
+        let user_answers = [];
+        if(quiz_answer && quiz_answer.answers && quiz_answer.answers.length) {
+            user_answers = quiz_answer.answers.map(x => {
+                return {option_ids: x.answer.option_ids,text_array: x.answer.text_array, question_id: x.quiz_question_id}});
+        }
+        for(let i=0;i<questions.length;i++) {
+            if([34,37,53,46,40,43,63,65,69,70,68].indexOf(questions[i].quiz_question_id) > -1) {
+                addQuestion(quiz_answer, questions, questions[i].quiz_question_id, i, 1);
+            }
+        }
+        dependentToggleQuestion(quiz_answer, questions);
+        $('#updateskin .card-body').find('li input').on('keyup change',function() {
+            let display = false;
+            $('#updateskin .card-body').find('.skin_goals:visible').each(function (index, ob) {
+                let question_id = parseInt($(ob).attr('data-q-id'));
+                let answer_option_id = [];
+                let text_answers = [];
+                $(ob).find('li input[type=checkbox]:checked, li input[type=radio]:checked, li input[type=text]').each((x, ib) => {
+                    answer_option_id.push(parseInt($(ib).attr('data-o-id')));
+                    if ($(ib).attr('type') == 'text') {
+                        text_answers.push($(ib).val());
+                    }
+                });
+                let questionFindInQuizAnswers = user_answers.filter(x => x.question_id == question_id);
+                if (text_answers.length && questionFindInQuizAnswers.length && questionFindInQuizAnswers[0].text_array[0] != text_answers[0]) {
+                    display = true;
+                    return false;
+                }
+                else if (answer_option_id.length && questionFindInQuizAnswers.length &&
+                    JSON.stringify(questionFindInQuizAnswers[0].option_ids) != JSON.stringify(answer_option_id)) {
+                    display = true;
+                    return false;
+                }
+            });
+            let buttondiv = $('#updateskin .card-body').find('.btn.update-hair-quiz');
+            if(display == true) {
+                if($(buttondiv).hasClass('hidden')) {
+                    $(buttondiv).removeClass('hidden');
+                }
+            } else {
+                if(!$(buttondiv).hasClass('hidden')) {
+                    $(buttondiv).addClass('hidden');
+                }
+            }
+
+        });
+        $('#updatepref .card-body').find('li input').on('keyup change',function() {
+            let display = false;
+            $('#updatepref .card-body').find('.skin_goals:visible').each(function (index, ob) {
+                let question_id = parseInt($(ob).attr('data-q-id'));
+                let answer_option_id = [];
+                let text_answers = [];
+                $(ob).find('li input[type=checkbox]:checked, li input[type=radio]:checked, li input[type=text]').each((x, ib) => {
+                    answer_option_id.push(parseInt($(ib).attr('data-o-id')));
+                    if ($(ib).attr('type') == 'text') {
+                        text_answers.push($(ib).val());
+                    }
+                });
+                let questionFindInQuizAnswers = user_answers.filter(x => x.question_id == question_id);
+                if (text_answers.length && questionFindInQuizAnswers.length && questionFindInQuizAnswers[0].text_array[0] != text_answers[0]) {
+                    display = true;
+                    return false;
+                }
+                else if (answer_option_id.length && questionFindInQuizAnswers.length &&
+                    JSON.stringify(questionFindInQuizAnswers[0].option_ids) != JSON.stringify(answer_option_id)) {
+                    display = true;
+                    return false;
+                }
+            });
+            let buttondiv = $('#updatepref .card-body').find('.btn.update-hair-quiz');
+            if(display == true) {
+                if(buttondiv.hasClass('hidden')) {
+                    $(buttondiv).removeClass('hidden');
+                }
+            } else {
+                if(!buttondiv.hasClass('hidden')) {
+                    $(buttondiv).addClass('hidden');
+                }
+            }
+        });
+        $('#updateskin .card-body').append(`<button class="btn update-hair-quiz hidden" type="button" >Save</button>`);
+        $('#updatepref .card-body').append(`<button class="btn update-hair-quiz hidden" type="button" >Save</button>`);
+        $('#updatepref .update-hair-quiz').on('click', function(){
+            updateQuiz(quiz_answer,questions,$(this));
+        });
+        $('#updateskin .update-hair-quiz').on('click', function(){
+            updateQuiz(quiz_answer,questions,$(this));
+        });
+    }
+
+    function dependentToggleQuestion(quiz_answer, questions) {
+        let quiz_answers_questions = [];
+        if(quiz_answer && quiz_answer.answers && quiz_answer.answers.length) {
+            quiz_answers_questions = quiz_answer.answers.map( x=> x.quiz_question_id);
+        }
+        if(questions && questions.length) {
+            for(let question of questions) {
+                let findDiv = $(".update_dropdown").find(`.skin_goals.${question.question_key}[data-q-id=${question.quiz_question_id}]`);
+                if(findDiv && findDiv.length && parseInt($(findDiv).attr('data-q-id')) == question.quiz_question_id && (
+                    quiz_answers_questions.includes(question.quiz_question_id) || question.quiz_question_id == 53 || question.quiz_question_id == 69)) {
+                    $(findDiv).removeClass('hidden');
+                }
+            }
+        }
+    }
+
+    function addQuestion(quiz_answer, questions, quiz_question_id, index) {
+        if(quiz_question_id == questions[index].quiz_question_id) {
+            let sub_next_question = [];
+            let next_question_id = questions[index].next_quiz_question_id;
+            let QuestionDiv = $(`
+            <div class="skin_goals ${questions[index].question_key} hidden" data-q-id=${questions[index].quiz_question_id}>
+               <h3>${questions[index].name}</h3>
+                  <ul>
+                  </ul>
+            </div>`);
+            let type = 'radio';
+            if(questions[index].type === 2 && questions[index].maximum_selection == 1) {
+                type = "radio";
+            } else if(questions[index].type === 2 && questions[index].maximum_selection > 1) {
+                type = 'checkbox';
+            } else if(questions[index].type === 1) {
+                type = 'text';
+            }
+            let answer_option_ids = [];
+            let customerAnswer = [];
+            if(quiz_answer && quiz_answer.answers && quiz_answer.answers.length) {
+                customerAnswer = quiz_answer.answers.filter( x => x.quiz_question_id == questions[index].quiz_question_id).map(x => {
+                    return {option_ids: x.answer.option_ids,text_array: x.answer.text_array}});
+                if(customerAnswer && customerAnswer.length) {
+                    answer_option_ids = customerAnswer[0].option_ids;
+                }
+            }
+            for(let option of questions[index].options) {
+                let optionDiv;
+                if(quiz_question_id == 53 || quiz_question_id == 69) {
+                    $(QuestionDiv).find('ul').addClass('color');
+                    optionDiv = $(`<li><input type="${type}" name="${questions[index].question_key}" value="${option.option_id}" data-o-id="${option.option_id}">
+                  <span><img src="${option.image_url}" alt="" style="height:auto;width:auto;margin:auto;"></span><h5>${option.name}</h5></li>`);
+                } else {
+                    if(quiz_question_id == 42) {
+                        $(QuestionDiv).find('ul').addClass('fragrance');
+                    }
+                    if(quiz_question_id == 43 || quiz_question_id==70) {
+                        $(QuestionDiv).find('ul').addClass('bot_names');
+                    }
+                    if(type == 'text') {
+                        optionDiv = $(`<li><input type="${type}" name="${questions[index].question_key}" data-o-id="${option.option_id}" maxlength="15" minlength="1" required></li>`);
+                    } else {
+                        optionDiv = $(`<li><input type="${type}" name="${questions[index].question_key}" value="${option.option_id}" data-o-id="${option.option_id}" >
+                        <span class="check">${option.name}</span></li>`);
+                    }
+                }
+                let option_div_temp = ''
+                if(quiz_question_id == 53 || quiz_question_id == 69) {
+                    let optionDivForColor = `<li><input type="${type}" name="${questions[index].question_key}_color" data-q-id="${questions[index].quiz_question_id}" value="${option.option_id}" data-o-id="${option.option_id}" >
+                  <span class="check">${option.name}</span></li>`;
+                    $('#updateColorFragrance').find('ul').append(optionDivForColor);
+                    option_div_temp = (optionDivForColor);
+
+                }
+                $(QuestionDiv).find('ul').append(optionDiv);
+                sub_next_question.push({
+                    option_id: option.option_id,
+                    next_quiz_question_id: option.next_quiz_question_id
+                });
+                if(answer_option_ids.length && answer_option_ids.indexOf(option.option_id) >-1 && questions[index].type != 1) {
+                    $(optionDiv).find("input").attr("checked", true);
+                    if(quiz_question_id == 53 || quiz_question_id == 69) {
+                        $('#updateColorFragrance').find('ul').find(`input[value="${option.option_id}"]`).attr("checked", true);
+                    }
+                } else if(answer_option_ids.length && answer_option_ids.indexOf(option.option_id)>-1 && questions[index].type == 1) {
+                    $(optionDiv).find("input").attr("value", customerAnswer[0].text_array);
+                }
+            }
+            if([34,46,37,54,55,63,65].includes(questions[index].quiz_question_id)) {
+                $('#updateskin .card-body').append(QuestionDiv);
+            } else {
+                $('#updatepref .card-body').append(QuestionDiv);
+            }
+            $(QuestionDiv).find('li input[type=checkbox], li input[type=radio]').change(function() {
+                if($(QuestionDiv).find('li input[type=checkbox]:checked, li input[type=radio]:checked').length > questions[index].maximum_selection) {
+                    $(this).prop('checked', false);
+                } else if($(QuestionDiv).find('li input[type=checkbox]:checked, li input[type=radio]:checked').length < questions[index].minimum_selection) {
+                    $(this).prop('checked', true);
+                }
+                let option_id = parseInt($(this).attr('data-o-id'));
+                toggleQuestion(questions, index, quiz_question_id, option_id, 1, true);
+            });
+            if($(QuestionDiv).hasClass('bot_names')) {
+                $(QuestionDiv).find('li input[type=text]').keypress(function (e) {
+                    var keyCode = e.keyCode || e.which;
+                    var regex = /^[A-Za-z]+$/;
+                    var isValid = regex.test(String.fromCharCode(keyCode));
+                    return isValid;
+                });
+            }
+            let if_sub_question_exists = sub_next_question.filter(x => x.next_quiz_question_id != null);
+            while(if_sub_question_exists && if_sub_question_exists.length) {
+                let sub_question_index = questions.findIndex(x=> x.quiz_question_id == if_sub_question_exists[0].next_quiz_question_id);
+                addQuestion(quiz_answer, questions, if_sub_question_exists[0].next_quiz_question_id, sub_question_index);
+                if_sub_question_exists.shift();
+            }
+            if(next_question_id != null) {
+                let sub_question_index = questions.findIndex(x=> x.quiz_question_id == next_question_id);
+                addQuestion(quiz_answer, questions, next_question_id, sub_question_index);
+            }
+        }
+    }
+
+    function toggleQuestion(questions, index, quiz_question_id, quiz_option_id, displayDiv = 1, option = false) {
+        if(quiz_question_id == questions[index].quiz_question_id) {
+            let findDiv = $(".update_dropdown").find(`.skin_goals.${questions[index].question_key}[data-q-id=${quiz_question_id}]`);
+            if(findDiv && findDiv.length && parseInt($(findDiv).attr('data-q-id')) == questions[index].quiz_question_id) {
+                if((displayDiv == 1) && $(findDiv).hasClass('hidden')) {
+                    $(findDiv).removeClass('hidden');
+                } else if((displayDiv == 0) && !$(findDiv).hasClass('hidden')) {
+                    $(findDiv).addClass('hidden');
+                }
+            }
+
+            let sub_next_question = [];
+            let next_question_id = questions[index].next_quiz_question_id;
+            displayDiv = 0;
+            let if_sub_question_exists = [];
+            questions[index].options.forEach(y => {
+                $(findDiv).find('input[type=checkbox], li input[type=radio]').each((x, ib)=> {
+                    if(y.option_id == parseInt($(ib).attr('data-o-id')) && y.next_quiz_question_id != null) {
+                        if(parseInt($(ib).attr('data-o-id')) == quiz_option_id && $(ib).is(':checked'))  {
+                            displayDiv = 1;
+                            y["displayDiv"] = 1;
+                            y["option_display"] = true;
+                            if_sub_question_exists.push(y);
+                        } else if(parseInt($(ib).attr('data-o-id')) == quiz_option_id) {
+                            y["displayDiv"] = 0;
+                            y["option_display"] = false;
+                            if_sub_question_exists.push(y);
+                        }
+                        else if($(ib).is(':checked') && y.next_quiz_question_id != null) {
+                            y["displayDiv"] = 1;
+                            y["option_display"] = true;
+                            if_sub_question_exists.push(y);
+                        }
+
+                        else if(y.next_quiz_question_id != null) {
+                            y["displayDiv"] = 0;
+                            y["option_display"] = false;
+                            if_sub_question_exists.push(y);
+                        }
+                    }})
+            });
+            if(displayDiv == 1) {
+                option = true;
+            }
+            while(if_sub_question_exists && if_sub_question_exists.length) {
+                let sub_question_index = questions.findIndex(x=> x.quiz_question_id == if_sub_question_exists[0].next_quiz_question_id);
+                toggleQuestion(questions, sub_question_index, if_sub_question_exists[0].next_quiz_question_id, null, if_sub_question_exists[0].displayDiv, if_sub_question_exists[0].option_display);
+                if_sub_question_exists.shift();
+            }
+            displayDiv = 0;
+            if(next_question_id != null) {
+                if(option == true) {
+                    displayDiv = 1;
+                }
+                let sub_question_index = questions.findIndex(x=> x.quiz_question_id == next_question_id);
+                toggleQuestion(questions, sub_question_index, next_question_id, null, displayDiv, option);
+            }
+        }
+    }
+
+
+    function updateQuiz(quiz_answer,questions, self) {
+        let answers = [];
+        let mainQuizDiv = $(self).parent();
+        let quizChanged = false;
+        $(mainQuizDiv).find('.skin_goals:visible').each(function(index, ob) {
+            let answerObj = {};
+            let question_id = parseInt($(ob).attr('data-q-id'));
+            let answer_option_id = [];
+            let text_answers = [];
+            $(ob).find('li input[type=checkbox]:checked, li input[type=radio]:checked, li input[type=text]').each((x, ib)=> {
+                answer_option_id.push(parseInt($(ib).attr('data-o-id')));
+                if($(ib).attr('type') == 'text') {
+                    text_answers.push($(ib).val());
+                }
+            });
+            if($(ob).find('.error.alert').is(':visible')) {
+                $(ob).find('.error').remove();
+            }
+            if(!answer_option_id.length || (text_answers.length && text_answers[0] && !text_answers[0].length)) {
+                let error_message = `<div class="alert alert-danger error" role="alert">Required*</div>`
+                let addedDiv = $(ob).append(error_message);
+                return;
+            }
+            if(questions && questions.length && answer_option_id.length) {
+                customerAnswer = questions.filter( x => x.quiz_question_id == question_id)[0];
+                if(customerAnswer.type != 1) {
+                    customerAnswer = customerAnswer.options.filter(x => (answer_option_id.indexOf(x.option_id)>-1 ));
+                }
+                answerObj = {
+                    quiz_question_id: question_id,
+                    option_ids: customerAnswer.type != 1 ? customerAnswer.map(x => x.option_id): customerAnswer.options.filter(x => (answer_option_id.indexOf(x.option_id)>-1 )).map(x => x.option_id),
+                    "text_array": customerAnswer.type != 1 ? customerAnswer.map(x => x.name) : text_answers
+                }
+                answers.push(answerObj);
+                let originalCustomerQuestion = quiz_answer.answers.filter( x => x.quiz_question_id == question_id);
+                if(quizChanged == false && originalCustomerQuestion && originalCustomerQuestion.length && originalCustomerQuestion[0].answer &&
+                    (JSON.stringify(originalCustomerQuestion[0].answer.option_ids) != JSON.stringify(answerObj.option_ids )
+                        || JSON.stringify(originalCustomerQuestion[0].answer.text_array) != JSON.stringify(answerObj.text_array ))) {
+                    quizChanged = true;
+                }
+            }
+        });
+        if(!$(mainQuizDiv).find('.alert.error').length) {
+            if(quizChanged == false) {
+                let addedDiv = $('<div class="alert alert-danger" role="alert">Please update your answers for your quiz to be updated</div>').insertAfter($(self));
+                setTimeout(function() {
+                    addedDiv.hide(1000);
+                }, 2000);
+            } else {
+                $(self).html('<i class="fa fa-spinner fa-spin"></i>Updating Quiz');
+                $.ajax({
+                    url: `https://api-quiz.bareanatomy.in/quiz/edit`,
+                    type: "POST",
+                    data: JSON.stringify({
+                        customer_id : '{{customer.id}}',
+                        quiz_state_id: quiz_answer.quiz_state_id,
+                        answers: answers
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.status == 200) {
+                            let addedDiv = $('<div class="alert alert-success" role="alert">Updated Quiz</div>').insertAfter($(self));
+                            setTimeout(function() {
+                                addedDiv.hide(1000);
+                            }, 2000);
+                            //location.href =  '/pages/hair-analysis';
+                        }
+                        $(self).html('Save');
+                    },
+                    error: function (jqXHR, exception) {
+                    }
+                })
+            }
+        }
+
+    }
+
+    function updateQuizColor(questions, quiz_answer, self) {
+        $(self).html('<i class="fa fa-spinner fa-spin"></i>Updating Quiz');
+        let question_id = parseInt($('#updateColorFragrance ul li input').attr('data-q-id'));
+        let answer_option_id = [];
+        let answerObj = {};
+        let quizChanged = false;
+        let answers=[];
+        $('#updateColorFragrance ul li input[type=radio]:checked').each((x, ib)=> {
+            answer_option_id.push(parseInt($(ib).attr('data-o-id')));
+        });
+
+        if($('#updateColorFragrance').find('.error.alert').is(':visible')) {
+            $('#updateColorFragrance').find('.error').remove();
+        }
+        if(!answer_option_id.length) {
+            let error_message = `<div class="alert alert-danger error" role="alert">Required*</div>`
+            let addedDiv = $('#updateColorFragrance .skin_goals').append(error_message);
+            return;
+        }
+
+        if(questions && questions.length && answer_option_id.length) {
+            customerAnswer = questions.filter( x => x.quiz_question_id == question_id)[0];
+            if(customerAnswer.type != 1) {
+                customerAnswer = customerAnswer.options.filter(x => (answer_option_id.indexOf(x.option_id)>-1 ));
+            }
+            answerObj = {
+                quiz_question_id: question_id,
+                option_ids: customerAnswer.type != 1 ? customerAnswer.map(x => x.option_id): customerAnswer.options.filter(x => (answer_option_id.indexOf(x.option_id)>-1 )).map(x => x.option_id),
+                "text_array": customerAnswer.type != 1 ? customerAnswer.map(x => x.name) : text_answers
+            }
+            answers.push(answerObj);
+            let originalCustomerQuestion = quiz_answer.answers.filter( x => x.quiz_question_id == question_id);
+            if(quizChanged == false && originalCustomerQuestion && originalCustomerQuestion.length && originalCustomerQuestion[0].answer &&
+                (JSON.stringify(originalCustomerQuestion[0].answer.option_ids) != JSON.stringify(answerObj.option_ids )
+                    || JSON.stringify(originalCustomerQuestion[0].answer.text_array) != JSON.stringify(answerObj.text_array ))) {
+                quizChanged = true;
+            }
+        }
+
+        if(!$('#updateColorFragrance').find('.alert.error').length) {
+            if(quizChanged == false) {
+                let addedDiv = $('<div class="alert alert-danger" role="alert">Please update your answers for your quiz to be updated</div>').insertAfter($(self));
+                setTimeout(function() {
+                    addedDiv.hide(1000);
+                }, 2000);
+            } else {
+                $.ajax({
+                    url: `https://api-quiz.bareanatomy.in/quiz/edit`,
+                    type: "POST",
+                    data: JSON.stringify({
+                        customer_id : '{{customer.id}}',
+                        quiz_state_id: quiz_answer.quiz_state_id,
+                        answers: answers
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.status == 200) {
+                            let addedDiv = $('<div class="alert alert-success" role="alert">Updated Quiz</div>').insertAfter($(self));
+                            setTimeout(function() {
+                                addedDiv.hide(1000);
+                            }, 2000);
+                            //location.href =  '/pages/hair-analysis';
+                        }
+                        $(self).html('Save');
+                    },
+                    error: function (jqXHR, exception) {
+                    }
+                })
+            }
+
+
+        }
+    }
+
+
+
+    function renderQuizData(quizData, hairAnalysisData){
+        $("#structure").text(quizData.hair_type || '');
+        $("#scalp-type").text(hairAnalysisData.scalp_feel|| '');
+        if(hairAnalysisData.hair_feel) {
+            $(`<li class="list-group-item d-flex justify-content-between align-items-center" xmlns="http://www.w3.org/1999/html"><span><img style="padding-right: 1em" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_Type.svg?v=1643698417"><b>Hair Type</b></span><span id="hair-type">${hairAnalysisData.hair_feel}</span></li>`).insertAfter($('.hair_analysis_listing ul #scalp-type').parent('li'));
+        }
+        if(hairAnalysisData.hair_lose) {
+            $(`<li class="list-group-item d-flex justify-content-between align-items-center"><span><img style="padding-right: 1em" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_Fall_Intensity.svg?v=1643698417"><b>Hair Fall Intensity</b></span><span id="intensity">${hairAnalysisData.hair_lose}</span></li>`).insertAfter($('.hair_analysis_listing ul #scalp-type').parent('li'));
+        }
+        if(hairAnalysisData.formulation_preference) {
+            $(`<li class="list-group-item d-flex justify-content-between align-items-center">Chosen Range<span id="hair-formulation_preference">${hairAnalysisData.formulation_preference}</span></li>`).insertAfter($('.hair_analysis_listing ul #scalp-type').parent('li'));
+        }
+        if(hairAnalysisData.stress) {
+            $(`<li class="list-group-item d-flex justify-content-between align-items-center"><span><img style="padding-right: 1em" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Stress_Level.svg?v=1643698417"><b>Stress Level</b></span><span id="stress-level">${hairAnalysisData.stress}</span></li>`).insertAfter($('.hair_analysis_listing ul #scalp-type').parent('li'));
+        }
+        // $("#intensity").text(hairAnalysisData.hair_lose || '');
+    }
+
+    function hideSubscriptionButton() {
+        if($('#mySidenav').hasClass('sidenav-size') || $('#mySidenav1').hasClass('sidenav-size')) {
+            $('#hair-analysis .wrapper.skin_an .formula_btn').css('visibility', 'hidden');
+        } else {
+            $('#hair-analysis .formula_btn').css('visibility', 'unset');
+        }
+    }
+
+    setInterval(hideSubscriptionButton, 100);
+
+    function changeImages(color){
+        switch(color){
+            case 'Hotty Naughty (Red)':
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Red_mask.svg?v=1607661819');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/red-shampoo.svg?v=1607662355');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/red-conditioner.svg?v=1607662954');
+                break;
+            case 'Plush Blush (pink)':
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_mask.svg?v=1607662177');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/pink-shampoo.svg?v=1607662354');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/pink-conditioner.svg?v=1607662952');
+                break;
+            case 'Tea Green' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Green_Moringa_Mask_svg.svg?v=1632980152');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Green_Moringa_Shampoo_svg.svg?v=1632980152');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Green_Moringa_Conditioner_svg.svg?v=1632980152');
+                break;
+            case 'Floozy Bloozy (Blue)' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Blue_mask.svg?v=1607661577');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/blue-shampoo.svg?v=1607662349');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/blue-conditioner.svg?v=1607662951');
+                break;
+            case 'Sprinkle Spurple (purple)' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/purple_mask.svg?v=1607661868');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/purple-_shampoo.svg?v=1607662337');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/purple-conditioner.svg?v=1607662946');
+                break;
+            case 'Poppy Peachy (Peach)' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Peach_mask.svg?v=1607661936');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/peach-shampoo.svg?v=1607662354');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/yellow-conditioner.svg?v=1607662954');
+                break;
+            case 'Color Free' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_mask.svg?v=1607661844');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/white-shampoo.svg?v=1607662347');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/white-conditioner.svg?v=1607662952');
+                break;
+            case 'Beige' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/buttercream_frosting_Mask.svg?v=1637638839');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Buttercream_frosting_Shampoo.svg?v=1637638839');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/buttercream_frosting_Connditioner.svg?v=1637638839');
+                break;
+            default:
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_mask.svg?v=1607661844');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/white-shampoo.svg?v=1607662347');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/white-conditioner.svg?v=1607662952');
+                break;
+
+
+
+
+        }
+    }
+    function changeMenBannerImages(color){
+        switch(color){
+            case 'Hotty Naughty (Red)':
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_red_12bbd166-a2e5-4302-a70b-86962333c226.png?v=1607677501');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_Red_3e12c91b-4f54-4273-84a0-342a1b589107.png?v=1607677447');
+                break;
+            case 'Plush Blush (pink)':
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_Desktop.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_Mobile.jpg?v=1636531811');
+                break;
+
+            case 'Tea Green' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Moringa_Desktop.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Moringa_Mobile.jpg?v=1636531811');
+                break;
+            case 'Floozy Bloozy (Blue)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Blue_Desktop.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Blue_Mobile.jpg?v=1636531811');
+                break;
+            case 'Sprinkle Spurple (purple)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_Desktop.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_Mobile.jpg?v=1636531811');
+                break;
+            case 'Poppy Peachy (Peach)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_peach_986c1b5f-9401-4b5a-adee-e08c18a4b736.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_peach_d7175628-459d-468c-aaa5-df110fb235bc.png?v=1607677447');
+                break;
+            case 'Color Free' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_Desktop-1.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_Mobile-1.jpg?v=1636531811');
+                break;
+            case 'Beige' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Male_Desktop.jpg?v=1637638840');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Male_Mobile.jpg?v=1637638840');
+                break;
+            default:
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_white_9fe2a512-817f-4db2-bd38-00f1ca56a68d.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_White_a6f38c49-9b33-4374-a8df-8e64047c52dc.png?v=1607677447');
+                break;
+
+
+
+
+        }
+    }
+
+    function changeBannerImages(color){
+        switch(color){
+            case 'Hotty Naughty (Red)':
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_red_12bbd166-a2e5-4302-a70b-86962333c226.png?v=1607677501');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_Red_3e12c91b-4f54-4273-84a0-342a1b589107.png?v=1607677447');
+                break;
+            case 'Plush Blush (pink)':
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_pink_dc5ebf33-4546-452b-b8f1-278844c05567.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_pink_b12045d1-3eec-4633-8360-8e2fb624d134.png?v=1607677447');
+                break;
+
+            case 'Tea Green' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Desktop.jpg?v=1632910666');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Moringa_mobile_pink.jpg?v=1632910817');
+                break;
+            case 'Floozy Bloozy (Blue)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_green_1b2d0975-7561-4319-93b1-d5179f91bf1a.png?v=1607677499');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_green_4cbe3eb8-ed63-464d-a969-cae307b39225.png?v=1607677448');
+                break;
+            case 'Sprinkle Spurple (purple)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_purple_11d430dd-9625-42f9-b4e5-44de201fb102.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_purple_ffd7cb78-e98a-4765-b198-b4b4b1e1c4ca.png?v=1607677451');
+                break;
+            case 'Poppy Peachy (Peach)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_peach_986c1b5f-9401-4b5a-adee-e08c18a4b736.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_peach_d7175628-459d-468c-aaa5-df110fb235bc.png?v=1607677447');
+                break;
+            case 'Color Free' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_white_9fe2a512-817f-4db2-bd38-00f1ca56a68d.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_White_a6f38c49-9b33-4374-a8df-8e64047c52dc.png?v=1607677447');
+                break;
+            case 'Beige' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Female_Desktop.jpg?v=1637638840');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Female_Mobile.jpg?v=1637638840');
+                break;
+            default:
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_white_9fe2a512-817f-4db2-bd38-00f1ca56a68d.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_White_a6f38c49-9b33-4374-a8df-8e64047c52dc.png?v=1607677447');
+                break;
+
+
+
+
+        }
+    }
+    function switchIngredientTab(i){
+        var x = document.getElementsByClassName("tab_div");
+        for (let j = 0; j < x.length; j++) {
+            x[j].classList.remove("show");
+            x[j].classList.add("hide");
+
+        }
+        var buttons = document.getElementsByClassName("w3-button");
+        for (let j = 0; j < x.length; j++) {
+            buttons[j].classList.remove("selected-btn");
+        }
+        document.getElementById(`block${i}`).classList.remove('hide');
+        document.getElementById(`tab-heading-button-${i+1}`).classList.add('selected-btn');
+
+    }
+    function switchProductTab(i){
+        var x = document.getElementsByClassName("goal-content");
+        for (let j = 0; j < x.length; j++) {
+            x[j].classList.remove("show");
+            x[j].classList.add("hide");
+
+        }
+        var buttons = document.getElementsByClassName("w3-item-product");
+        for (let j = 0; j < x.length; j++) {
+            buttons[j].classList.remove("selected-btn");
+        }
+        document.getElementById(`goal_block${i}`).classList.remove('hide');
+        document.getElementById(`tab-product-heading-button-${i+1}`).classList.add('selected-btn');
+
+    }
+    function appendHairGoals(skinGoal, i){
+        console.log("index", i);
+        $(".w3-bar").append(`<button id="tab-heading-button-${i+1}" class="w3-bar-item  w3-button ${i === 0?'selected-btn':''}" onClick="switchIngredientTab(${i})">${skinGoal.name || ''}</button>`);
+        $(".w3-product-switch").append(`<button id="tab-product-heading-button-${i+1}" class="w3-bar-item w3-item-product  w3-button ${i === 0?'selected-btn':''}" onClick="switchProductTab(${i})">${skinGoal.name || ''}</button>`);
+        $(".tab-content").append(`<div id=block${i} class="tab_div tab-content-${i+1} ${i === 0 ? 'show' : 'hide'}">
+<p class="tab-content-desc" style="font-size: 12px;line-height: 14px;">${skinGoal.description || ''}</p>
+<div class="d-flex ingredient-div">
+<div class="d-flex-item">
+   <img width="82px" height="82px" src="${skinGoal.ingredients[0].image_url || 'https://cdn.shopify.com/s/files/1/0255/3302/2244/files/skin_humectant.png?v=1606718539'}" alt="">
+     <h5>${skinGoal.ingredients[0].name}</h5>
+     <p>${skinGoal.ingredients[0].benefit}</p>
+    <span>EWG Score - ${skinGoal.ingredients[0].ewg_rating}</span>
+</div>
+<div class="d-flex-item">
+   <img width="82px" height="82px" src="${skinGoal.ingredients[1].image_url || 'https://cdn.shopify.com/s/files/1/0255/3302/2244/files/skin_humectant.png?v=1606718539'}" alt="">
+     <h5>${skinGoal.ingredients[1].name}</h5>
+     <p>${skinGoal.ingredients[1].benefit}</p>
+    <span>EWG Score - ${skinGoal.ingredients[1].ewg_rating}</span>
+</div>
+<div class="d-flex-item">
+   <img width="82px" height="82px" src="${skinGoal.ingredients[2].image_url || 'https://cdn.shopify.com/s/files/1/0255/3302/2244/files/skin_humectant.png?v=1606718539'}" alt="">
+     <h5>${skinGoal.ingredients[2].name}</h5>
+     <p>${skinGoal.ingredients[2].benefit}</p>
+    <span>EWG Score - ${skinGoal.ingredients[2].ewg_rating}</span>
+</div>
+</div>
+</div>`);
+        renderGoalWiseProducts(skinGoal, i)
+
+
+    }
+    function renderGoalWiseProducts(hairGoal, index) {
+        console.log("hair goal------->", hairGoal);
+        $(".tab-content-product").append(`<div id="goal_block${index}" class="goal-content goal-tab-content-${index+1} ${index === 0 ? 'show' : 'hide'}"><p class="range_text" style="font-size:12px;padding:0 1rem;"><b style="text-transform: uppercase;">${hairGoal.range}</b>, powered by <b>${hairGoal.technology}</b></p> <div class="row expert-products"></div></div>`);
+        $.getJSON('/collections/expert-series/products.json', function (response) {
+            response.products.forEach((product) => {
+                console.log("product----->", product);
+                if (product.tags.includes(hairGoal.name)) {
+                    {% assign curentProduct = '' %}
+                    {% for shopify_product in collections['new-hair-collection'].products %}
+                    if({{shopify_product.id}} == product.id) {
+                        {% assign curentProduct = shopify_product %}
+                    }
+                    {% endfor %}
+                    $(`.goal-tab-content-${index+1} .expert-products`).append(`<div class="single_option_tab col-sm-12 col-md-4 d-flex"><div class="img_div"><img src="${product.images[0]['src']}"></div>
+            <div class="img_title" style="cursor: pointer !important;" onclick="window.location.href = '/products/${product.handle}'">
+<p class="range_text">${product.title}</p>
+<div class="row">
+<div class="col-6">
+<p class="product_price">₹${(product.variants[0].price)/100}</p>
+</div>
+
+<div class="col-6">
+<p class="product_type">${product.product_type.split(" (")[0]}</p>
+</div>
+</div>
+<form method="post" action="/cart/add">
+  <input type="hidden" name="id" value="${product.variants[0].id}" />
+  <input type="submit" style="background: #000;
+    color: #fff;
+    margin: 1rem 0;
+    border: none;" class="add-to-card-btn shopify-payment-button__button shopify-payment-button__button--unbranded _2ogcW-Q9I-rgsSkNbRiJzA _2EiMjnumZ6FVtlC7RViKtj _2-dUletcCZ2ZL1aaH0GXxT" value="Add to cart" class="btn" />
+</form>
+
+</div></div>`);
+
+                }
+            })
+        })
+    }
+
+
+    function renderReview(reviewData, hairAnalysisGoal){
+        $("#rating").text(reviewData.review_rating+'%');
+        $(".smoother_skin_info_subtitle").text(reviewData.header_descriptive_text);
+        $(".review-heading").text(reviewData.header_line || '');
+        $(".before_skin_img").attr("src",reviewData.image_url_before);
+        $(".after_skin_img").attr("src",reviewData.image_url_after);
+        $(".review-text").text(reviewData.review || '');
+    }
+
+    function showUpsellProducts(upsell_products) {
+        if(upsell_products && upsell_products.length == 0) {
+            $('.bogo_add').css('display','none');
+        } else {
+            for(const upsell_product of upsell_products) {
+                let handle = upsell_product.product;
+                let productUrl = ''; price = 0, comparePrice = 0, product_handle = '', product_available = true, inventory_quantity = 0, image= "";
+                if(handle.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().includes("hairoil")) {
+                    product_handle = 'hair-oil-3';
+                    {% for variant in all_products["hair-oil-3"].variants %}
+                    if({{variant.id}} == upsell_product.variant_id) {
+                        price = {{ variant.price }}/100;
+                        comparePrice = {{ variant.compare_at_price }}/100;
+                        product_available = {{ variant. available }};
+                        inventory_quantity = {{ variant.inventory_quantity }} ;
+                        image = '{{all_products["hair-oil-3"] | img_url }}';
+                    }
+                    {%endfor %}
+                }
+                if(handle.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().includes("hairserum")) {
+                    product_handle = 'hair-serum-3';
+                    {% for variant in all_products["hair-serum-3"].variants %}
+                    if({{variant.id}} == upsell_product.variant_id) {
+                        price = {{ variant.price }}/100;
+                        comparePrice = {{ variant.compare_at_price }}/100;
+                        product_available = {{ variant. available }};
+                        inventory_quantity = {{ variant.inventory_quantity }} ;
+                        image = '{{all_products["hair-serum-3"] | img_url }}';
+                    }
+                    {%endfor %}
+                }
+                if(handle.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().includes("biotingummies")) {
+                    product_handle = 'biotin-gummies-2';
+                    {% for variant in all_products["biotin-gummies-2"].variants %}
+                    if({{variant.id}} == upsell_product.variant_id) {
+                        price = {{ variant.price }}/100;
+                        comparePrice = {{ variant.compare_at_price }}/100;
+                        product_available = {{ variant. available }};
+                        inventory_quantity = {{ variant.inventory_quantity }} ;
+                        image = '{{all_products["biotin-gummies-2"] | img_url }}';
+                    }
+                    {%endfor %}
+                }
+                if(handle.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().includes("hairomega")) {
+                    product_handle = 'hair-omega-2';
+                    {% for variant in all_products["hair-omega-2"].variants %}
+                    if({{variant.id}} == upsell_product.variant_id) {
+                        price = {{ variant.price }}/100;
+                        comparePrice = {{ variant.compare_at_price }}/100;
+                        product_available = {{ variant. available }};
+                        inventory_quantity = {{ variant.inventory_quantity }} ;
+                        image = '{{all_products["hair-omega-2"] | img_url }}';
+                    }
+                    {%endfor %}
+                }
+                let percentOff = Math.round(((comparePrice - price) * 100)/comparePrice);
+                if (product_available == true && inventory_quantity > 0) {
+                    $('.bogo_add').append(`<label><div class="left_text" style="float:left; font-weight:normal; font-size:16px;width:85%;">
+                        <input type="checkbox" id="${product_handle}" value="${upsell_product.variant_id}" data-price="${price}">
+                        <span style="font-weight:bold;">Offer!&nbsp;</span>Add <a style="color:#000; font-weight: bold !important;" href="${upsell_product.product_url}" target="_blank">${upsell_product.product}</a> (₹${price} <del>₹${comparePrice}</del>)
+                        <p style="padding-left:19px;margin-bottom:5px;">${upsell_product.marketing_msg}<span style="font-weight:bold;"> @${percentOff}% off.</span></p></div><div class="right_text" style="float:right;width:15%;"><img src="${image}"></div>
+                        </label><br>`);
+                }
+            }
+
+        }
+        $('#hair-oil-3').change(function() {
+            let productprice = parseFloat($('.price_change').text().replace(/,/g, '').replace('₹' , ''));
+            console.log("productPrice------->", productprice);
+            let upsellPrice = Number($('.bogo_add #hair-oil-3').attr('data-price'));
+            let totalPrice = productprice + upsellPrice;
+            if(!$('.bogo_add #hair-oil-3').is(":checked")) {
+                totalPrice = productprice - upsellPrice ;
+            }
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        });
+        $('#hair-serum-3').change(function() {
+            let productprice = parseFloat($('.price_change').text().replace(/,/g, ''));
+            let upsellPrice = Number($('.bogo_add #hair-serum-3').attr('data-price'));
+            let totalPrice = productprice + upsellPrice;
+            if(!$('.bogo_add #hair-serum-3').is(":checked")) {
+                totalPrice = productprice - upsellPrice ;
+            }
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        });
+        $('#biotin-gummies-2').change(function() {
+            let productprice = parseFloat($('.price_change').text().replace(/,/g, ''));
+            let upsellPrice = Number($('.bogo_add #biotin-gummies-2').attr('data-price'));
+            let totalPrice = productprice + upsellPrice;
+            if(!$('.bogo_add #biotin-gummies-2').is(":checked")) {
+                totalPrice = productprice - upsellPrice ;
+            }
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        });
+        $('#hair-omega-2').change(function() {
+            let productprice = parseFloat($('.price_change').text().replace(/,/g, ''));
+            let upsellPrice = Number($('.bogo_add #hair-omega-2').attr('data-price'));
+            let totalPrice = productprice + upsellPrice;
+            if(!$('.bogo_add #hair-omega-2').is(":checked")) {
+                totalPrice = productprice - upsellPrice ;
+            }
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        });
+        // let productUrl = ''; price = 0, comparePrice = 0, product_handle = '', product_available = true, inventory_quantity = 0, image= "";
+        // product_handle = 'ashwagandha-for-hair';
+        // {% for variant in all_products["ashwagandha-for-hair"].variants %}
+        //     if({{variant.id}} == 39436671451182) {
+        //         price = {{ variant.price }}/100;
+        //         comparePrice = {{ variant.compare_at_price }}/100;
+        //         product_available = {{ variant. available }};
+        //         inventory_quantity = {{ variant.inventory_quantity }} ;
+        //         image = '{{all_products["ashwagandha-for-hair"] | img_url }}';
+        //      }
+        // {%endfor %}
+        // let percentOff = Math.round(((comparePrice - price) * 100)/comparePrice);
+
+        // if (product_available == true && inventory_quantity > 0) {
+        //     $('.bogo_add').append(`<label style="width:100%"><div class="left_text" style="float:left;width:85%;">
+        //         <input type="checkbox" id="stress-aid-3" value="39436671451182" data-price="${price}">
+        //         <span style="color:red;">Offer!&nbsp;</span>Add <a href="/products/stress-aid-1" target="_blank">Ashwagandha for Hair</a> <span style="color:red;"> @${percentOff}% off</span> <p style="padding-left:19px;margin-bottom:5px;">(₹${price} <del style="color:grey;">₹${comparePrice}</del>)</p>
+        //         </div><div class="right_text" style="float:right;width:15%;"><img src="${image}"></div>
+        //         </label><br>`);
+        // }
+        // $('#stress-aid-3').change(function() {
+        //     let productprice = parseFloat($('.price_change').text().replace(/,/g, ''));
+        //     let upsellPrice = Number($('.bogo_add #stress-aid-3').attr('data-price'));
+        //     let totalPrice = productprice + upsellPrice;
+        //     if(!$('.bogo_add #stress-aid-3').is(":checked")) {
+        //         totalPrice = productprice - upsellPrice ;
+        //     }
+        //     $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        // });
+    }
+
+    async function updateColorFragrance(e) {
+
+        jQuery.noConflict();
+        $('.updateColor')[0].click();
+    }
+
+    function buySubscription(e){
+        console.log("buy subs--------->", $('#updateColorFragrance ul li input[type=radio]:checked').length);
+        // if( $('#updateColorFragrance ul li input[type=radio]:checked').length == 0) {
+        //     updateColorFragrance(e);
+        //     return;
+        // }
+
+        $(e).html('<i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Adding to cart');
+        $('.buy-subs').attr('disabled', true);
+        var isMobile = ( ( window.innerWidth <= 768 ));
+        if (isMobile) {
+            let variantId = '{{ product.variants.first.id }}';
+            let addUpsellProducts = [];
+            if($('.mobile-form #hair-omega-2').is(":checked")) {
+                addUpsellProducts.push(Number($('.mobile-form #hair-omega-2').val()));
+            }
+            if($('.mobile-form #biotin-gummies-2').is(":checked")) {
+                addUpsellProducts.push(Number($('.mobile-form #biotin-gummies-2').val()));
+            }
+            if($('.mobile-form #hair-serum-3').is(":checked")) {
+                addUpsellProducts.push(Number($('.mobile-form #hair-serum-3').val()));
+            }
+            if($('.mobile-form #hair-oil-3').is(":checked")) {
+                addUpsellProducts.push(Number($('.mobile-form #hair-oil-3').val()));
+            }
+            if($('.mobile-form #stress-aid-3').is(":checked")) {
+                addUpsellProducts.push(Number($('.mobile-form #stress-aid-3').val()));
+            }
+            buyFormulation(variantId, e, addUpsellProducts);
+        }
+        else{
+            let variantId = '{{ product.variants.first.id }}';
+            let addUpsellProducts = [];
+            if($('.web-form #hair-omega-2').is(":checked")) {
+                addUpsellProducts.push( Number($('.web-form #hair-omega-2').val()));
+            }
+            if($('.web-form #biotin-gummies-2').is(":checked")) {
+                addUpsellProducts.push(Number($('.web-form #biotin-gummies-2').val()));
+            }
+            if($('.web-form #hair-serum-3').is(":checked")) {
+                addUpsellProducts.push(Number($('.web-form #hair-serum-3').val()));
+            }
+            if($('.web-form #hair-oil-3').is(":checked")) {
+                addUpsellProducts.push(Number($('.web-form #hair-oil-3').val()));
+            }
+            if($('.web-form #stress-aid-3').is(":checked")) {
+                addUpsellProducts.push(Number($('.web-form #stress-aid-3').val()));
+            }
+            buyFormulation(variantId, e, addUpsellProducts);
+        }
+    }
+    function buyFormulation(variantId, e,addUpsellProducts ){
+        for(const upsellProduct of addUpsellProducts){
+            jQuery.ajax({
+                type: "POST",
+                url: "/cart/add.js",
+                data: {
+                    id: upsellProduct, quantity: 1
+                },
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+
+                    window.location.href = '/cart';
+
+
+                }
+            });
+        }
+        var data_Id = variantId;
+        var qty = 1;
+        jQuery.ajax({
+            type: "POST",
+            url : "/cart/add.js",
+            data : {
+                id : data_Id, quantity: qty
+            },
+            dataType : 'json',
+            async : false,
+            success : function(data){
+                jQuery.getJSON('/cart.js', function(cart) {
+                    var cartCount = cart.item_count
+                    jQuery('.cart_items').text(cartCount);
+                    var cartContents = fetch('/cart.js')
+                        .then(response => response.json())
+                        .then(es => {
+                            window.location.href = '/cart';
+                            populateData(res);
+                            jQuery('.cart_items').text(cartCount);
+                            jQuery('.cart_items').addClass('cart_ball_bouncing');
+                            setTimeout(function(){
+                                $('.cart_items').removeClass('cart_ball_bouncing');
+                            }, 3000);
+                            $('#total_price').text(res.items_subtotal_price/100);
+                            $('#total_price').text(Math.max(Math.round((Number($('#total_price').text().replace(/[^a-zA-Z0-9.]/g, "")) - Number($('.wallet_bal').text().replace(/[^a-zA-Z0-9.]/g, ""))) * 100) / 100, 0));
+                            $('#subtotal_price').text(res.items_subtotal_price/100);
+                            $(e).html('buy my formula');
+                            $('.buy-subs').attr('disabled', false);
+                        });
+
+                    //window.location.href = "/cart";
+
+                });
+            },
+            error : function(){
+                console.log('error');
+            }
+        });
+
+    }
+    function populateData(data){
+        console.log('data=====>', data);
+        $('#product_wrapper').empty();
+        if(data.items.length){
+            $('.make_payment_cart').css('display', 'block');
+            $('.pay').show();
+            $('.shop').hide();
+            data.items.forEach(function(item, i ) {
+                $.ajax({
+                    url: '/products/' + item.handle + '.js',
+                    dataType: 'json',
+                    async: false,
+                    success: function(product){
+                        product.variants.forEach(function(variant) {
+
+                            if (variant.compare_at_price != null && variant.id == item.variant_id){
+                                item["compare_at_price"] = variant.compare_at_price;
+                            }
+                        });
+                        console.log("price=====>", item);
+                        $('#product_wrapper').append(`<div class="product_detail_cart">
+              <div class="product_image">
+              <img class="cart-item__image ls-is-cached lazyloaded" src="${item.image}" alt="${item.title}" data-cart-item-image="">
+           </div>
+           <div class="product_detail_box"><div class="product_box_1">
+             <div class="product_name">
+             <h5 class="d-flex w-80 justify-content-between"><span class="text-left">
+              ${(item.product_title.length > 50 ) ? item.product_title.slice(0, 49)+ '...' : item.product_title}</span>
+              ${product.tags.includes("PERSONALISED GIFT") ? '<mark style="background-color: #f8cbc0;">Gift</mark>' : ''}
+              ${product.tags.includes("FREE GIFT") ? '<mark style="background-color: #f8cbc0;">Free</mark>' : ''}
+            </h5>
+            <h4 class="d-flex w-80 justify-content-between">
+             ${(item.variant_options[2] ? `<b> ${item.variant_options[2]}-month membership</b>`: `` )}
+             </h4>
+            <p>${item.product_type}</p>
+            </div>
+            <div class="product_price_box"><h5 class="w-20 justify-content-between text-right">
+              <span class="text-right"><i class="fa fa-inr" aria-hidden="true"></i>${(item.price / 100) * item.quantity }</span>
+             </h5>
+             <h4 class="w-20 justify-content-between text-right">
+             ${item["compare_at_price"]? `<del><span class="price_compare"><i class="fa fa-inr" aria-hidden="true"></i>${(item.compare_at_price/ 100) * item.quantity }</del></span>` :''}
+
+             </h4>
+            </div></div>
+
+             <div class="items_number">
+                <button type="button" onclick="changeQuantityToCart(${item.id},-1)">
+                   <i class="fa fa-minus" aria-hidden="true"></i>
+                </button>
+                 <input type="number" id="input_${item.id}" class="form-control cart-item__qty_input" value="${item.quantity}" data-key="${item.id}" readonly>
+                 <button type="button" onclick="changeQuantityToCart(${item.id},1)">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                 </button>
+              </div>
+           </div>
+         </div>`)
+
+                    }
+
+
+                });
+
+            });
+        }
+        else{
+            $('#product_wrapper').append('<img class="empty-cart-img" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Empty_cart_icon_final-01.jpg?v=1610091095" alt="Empty Cart">');
+            $('.make_payment_cart').css('display', 'none');
+            $('.pay').hide();
+            $('.shop').show();
+
+        }
+
+
+
+    }
+    function renderScaleAnalysis(hair, scalp){
+        console.log("hair is=====>", hair, scalp);
+        $(".hair-desc").text(hair.description);
+        $(".scalp-desc").text(scalp.description);
+        var body = $(".slider");
+        var sliderContainer = $(".slider-1");
+        body.val((hair.rating/5)*100);
+        sliderContainer.val((scalp.rating/5)*100)
+        body.append(`<style>.slider{background: linear-gradient(
+            90deg
+            , #000 ${(hair.rating/5)*100}%, #E5E5E5 20.1%) !important;}</style>`);
+        sliderContainer.append(`<style>.slider-1{background: linear-gradient(
+            90deg
+            , #000 ${(scalp.rating/5)*100}%, #E5E5E5 20.1%) !important;}</style>`);
+
+
+    }
+
+</script>

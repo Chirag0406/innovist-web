@@ -1,0 +1,476 @@
+<style>
+* {
+    font-family: 'HelveticaNeue';
+}
+
+</style>
+<link rel="stylesheet" href="{{ 'about-us.css' | asset_url }}">
+
+<div class="about-banner">
+	{% if section.settings.desktop_banner_image != blank %}
+		<img src='{{section.settings.desktop_banner_image | img_url : "master"}}' class="d-none d-sm-block w-100" />
+	{%else%}
+		<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Desktop-about-banner.png?v=1604397994" class="d-none d-sm-block w-100" />
+	{%endif%}
+	{% if section.settings.mb_banner_image != blank %}
+		<img src='{{section.settings.mb_banner_image | img_url : "master"}}' class="d-sm-none w-100" />
+	{%else%}
+		<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Mobile-about-banner.png?v=1604401146" class="d-sm-none w-100" />
+	{%endif%}
+	
+	
+</div>
+<div class="personalize-section pt-0">
+    <div class="container">
+	<h5 class="about-heading">{{section.settings.second_section_heading}}</h5>
+        <div class="row align-items-center">
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-4">
+                <div class="per-block">
+                    {{section.settings.second_section_content1}}
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="per-block">
+                    {% if section.settings.second_section_content2 != blank %}
+                        <img src='{{section.settings.second_section_content2 | img_url : "master"}}'>
+                    {%else%}
+                        <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/and-img.png?v=1602671368">
+                    {%endif%}
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="per-block">
+                    {{section.settings.second_section_content3}}
+                </div>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div> <!-- end row -->
+
+    </div>
+</div>
+
+<div class="mission">
+	<div class="container-fluid">
+		<div class="our-mission text-center">
+			<h6> {{section.settings.third_section_heading}}</h6>
+			<p class="nanum_myeongjo"> {{section.settings.third_section_cntnt}}</p>
+		</div>
+	</div>
+</div>
+
+<div class="about-img">
+	<div class="container">
+		{% if section.settings.fourth_desktop_img != blank %}
+			<img src='{{section.settings.fourth_desktop_img | img_url : "master"}}' class="d-none d-sm-block" />
+		{%else%}
+			<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Desktop_Gif_panel.gif?v=1604385599" alt="..." class="d-none d-sm-block" />
+		{%endif%}
+		{% if section.settings.fourth_mb_img != blank %}
+			<img src='{{section.settings.fourth_mb_img | img_url : "master"}}' class="d-sm-none" />
+		{%else%}
+			<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Mobile-about-1.png?v=1604401553" alt="..." class="d-sm-none" />
+		{%endif%}
+		
+	</div>
+</div>
+
+<div class="about-bare">
+	<div class="bare-content">
+		<h3>{{section.settings.fifth_section_heading1}}</h3>
+		{{section.settings.fifth_section_cntnt1}}
+	</div>
+	<div class="bare-content about-anatomy">
+		<h3>{{section.settings.fifth_section_heading2}}</h3>
+		{{section.settings.fifth_section_cntnt2}}
+	</div>
+	<div class="bare-content about-bare-logo">
+		{% if section.settings.fifth_section_heading3 != blank %}
+			<h3>{{section.settings.fifth_section_heading3}}</h3>
+		{%else%}
+			<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/about_logo_icon_2fb416cb-3e3a-489e-91cd-d55e57a14d97.png?v=1604382703" class="m-60-lg"/>
+		{%endif%}
+		
+		{{section.settings.fifth_section_cntnt3}}
+	</div>
+</div>
+
+<div class="about-discover">
+	<h6 class="text-center">{{section.settings.six_section_heading}}</h6>
+	<div class="discover-content">
+		<div class="about-beauty">
+			<div class="beauty-img"></div>
+			<div class="beauty-content">
+			<div class="w-80">
+				<h3 class="nanum_myeongjo">{{section.settings.six_section_title1}}</h3>
+				{{section.settings.six_section_cntnt1}}
+				</div>
+			</div>
+		</div>
+		
+		<div class="about-beauty">
+			<div class="beauty-tech-img"></div>
+			<div class="beauty-tech-content">
+			<div class="w-80 ml-auto">
+				<h3 class="nanum_myeongjo">{{section.settings.six_section_title2}}</h3>
+				{{section.settings.six_section_cntnt2}}
+				</div>
+			</div>
+		</div>
+		
+		<div class="about-beauty">
+			<div class="people-plant"></div>
+			<div class="people-plant-content">
+				<div class="w-80">
+				<h3 class="nanum_myeongjo">{{section.settings.six_section_title3}}</h3>
+				{{section.settings.six_section_cntnt3}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="about-science">
+	<div class="container">
+		<div class="about-science-logo text-center">
+		{% if section.settings.seventh_img != blank %}
+			<img src='{{section.settings.seventh_img | img_url : "master"}}' class="d-sm-none" />
+		{%else%}
+			<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/about_icon_2.png?v=1604389054" />
+		{%endif%}
+			
+		</div>
+		
+		<div class="row">
+			<div class="col-12 col-md-4">
+				<div class="about-science-content">
+					<div class="square-shape"></div>
+					<h4 class="nanum_myeongjo">{{section.settings.seventh_section_title1}}</h4>
+					{{section.settings.seventh_section_cntnt1}}
+				</div>
+			</div>
+				
+				<div class="col-12 col-md-4">
+				<div class="about-science-content">
+					<div class="triangle-shape position-relative"></div>
+					<h4 class="nanum_myeongjo">{{section.settings.seventh_section_title2}}</h4>
+					{{section.settings.seventh_section_cntnt2}}
+				</div>
+				</div>
+				
+				<div class="col-12 col-md-4">
+				<div class="about-science-content">
+					<div class="circle-shape"></div>
+					<h4 class="nanum_myeongjo">{{section.settings.seventh_section_title3}}</h4>
+					{{section.settings.seventh_section_cntnt3}}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="bare-brainy">
+	<div class="container">
+		<h6 class="text-center">{{section.settings.team_maintitle}}</h6>
+		<div class="row">
+			<div class="col-12 col-md-4">
+				<div class="about-science-content">
+					<div class="brainy-img-1">
+					{% if section.settings.team_img_1 != blank %}
+						<img src='{{section.settings.team_img_1 | img_url : "master"}}' />
+					{%else%}
+						<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Desktop_robot_2x_ebe352f6-bebb-43a9-9a55-55cef7a9e99d.png?v=1604395725" />
+					{%endif%}
+					</div>
+					<h4 class="nanum_myeongjo">{{section.settings.team_title_1}}</h4>
+					<p class="rectangle-before position-relative">{{section.settings.team_content_1}}</p>
+				</div>
+			</div>
+				
+				<div class="col-12 col-md-4">
+				<div class="about-science-content">
+					<div class="brainy-img-2">
+					{% if section.settings.team_img_2 != blank %}
+						<img src='{{section.settings.team_img_2 | img_url : "master"}}' />
+					{%else%}
+						<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Desktop_Sifat_2x_a00640f0-04ff-4a04-ae8f-5ee1f5640c6e.png?v=1604395750" />
+					{%endif%}
+					</div>
+					<h4 class="nanum_myeongjo">{{section.settings.team_title_2}}</h4>
+					<p class="rectangle-before position-relative">{{section.settings.team_content_2}}</p>
+				</div>
+				</div>
+				
+				<div class="col-12 col-md-4">
+				<div class="about-science-content">
+					<div class="brainy-img-3">
+					{% if section.settings.team_img_3 != blank %}
+						<img src='{{section.settings.team_img_3 | img_url : "master"}}' />
+					{%else%}
+						<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Desktop_Vimal_2x_3f4e3abf-1dc0-4827-9aba-aa376eb1426d.png?v=1604395758" />
+					{%endif%}</div>
+					<h4 class="nanum_myeongjo">{{section.settings.team_title_3}}</h4>
+					<p class="rectangle-before position-relative">{{section.settings.team_content_3}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="beauty-heroes text-center">
+	<h6>{{section.settings.bottom_section_title3}}</h6>
+</div>
+
+<div class="about-footer-img">
+		{% if section.settings.bottom_img_desktop != blank %}
+			<img src='{{section.settings.bottom_img_desktop | img_url : "master"}}' class="d-none d-sm-block w-100" />
+		{%else%}
+			<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Desktop_5th_Banner_2x_4c4f5307-268e-4395-9c49-79b048299bea.png?v=1604396976" class="d-none d-sm-block w-100" />
+		{%endif%}
+		{% if section.settings.bottom_img_mb != blank %}
+			<img src='{{section.settings.bottom_img_mb | img_url : "master"}}' class="d-sm-none w-100" />
+		{%else%}
+			<img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/mobile-about-footer.png?v=1604404314" class="d-sm-none w-100" />
+		{%endif%}
+	
+	
+</div>
+
+
+{% schema %}
+    {
+    "name": "About Page",
+    "settings": [{
+    "type": "header",
+    "content": "Banner section"
+    },{
+    "type": "image_picker",
+    "id": "desktop_banner_image",
+    "label": {
+    "en": "Banner Image Desktop"
+    }
+    },{
+    "type": "image_picker",
+    "id": "mb_banner_image",
+    "label": {
+    "en": "Banner Image Mobile"
+    }
+    },{
+    "type": "header",
+    "content": "Second section"
+    },{
+    "id": "second_section_heading",
+    "type": "textarea",
+    "label": "Heading"
+    },{
+    "id": "second_section_content1",
+    "type": "textarea",
+    "label": "Section Content 1"
+    },{
+    "type": "image_picker",
+    "id": "second_section_content2",
+    "label": {
+    "en": "Center Image"
+    }
+    },{
+    "id": "second_section_content3",
+    "type": "textarea",
+    "label": "Section Content 2"
+    },{
+    "type": "header",
+    "content": "Third section"
+    },{
+    "id": "third_section_heading",
+    "type": "text",
+    "label": "Heading"
+    },{
+    "id": "third_section_cntnt",
+    "type": "textarea",
+    "label": "Content"
+    },{
+    "type": "header",
+    "content": "Fourth section"
+    },{
+    "type": "image_picker",
+    "id": "fourth_desktop_img",
+    "label": {
+    "en": "Desktop Image"
+    }
+    },{
+    "type": "image_picker",
+    "id": "fourth_mb_img",
+    "label": {
+    "en": "Mobile Image"
+    }
+    },{
+    "type": "header",
+    "content": "Fifth section"
+    },{
+    "id": "fifth_section_heading1",
+    "type": "text",
+    "label": "Heading 1"
+    },{
+    "id": "fifth_section_cntnt1",
+    "type": "textarea",
+    "label": "Content 1"
+    },{
+    "id": "fifth_section_heading2",
+    "type": "text",
+    "label": "Heading 2"
+    },{
+    "id": "fifth_section_cntnt2",
+    "type": "textarea",
+    "label": "Content 2"
+    },{
+    "id": "fifth_section_heading3",
+    "type": "text",
+    "label": "Heading 3"
+    },{
+    "id": "fifth_section_cntnt3",
+    "type": "textarea",
+    "label": "Content 3"
+    },{
+    "type": "header",
+    "content": "Sixth section"
+    },{
+    "id": "six_section_heading",
+    "type": "text",
+    "label": "Heading"
+    },{
+    "id": "six_section_title1",
+    "type": "text",
+    "label": "Title 1"
+    },{
+    "id": "six_section_cntnt1",
+    "type": "textarea",
+    "label": "Content 1"
+    },{
+    "id": "six_section_title2",
+    "type": "text",
+    "label": "Title 2"
+    },{
+    "id": "six_section_cntnt2",
+    "type": "textarea",
+    "label": "Content 2"
+    },{
+    "id": "six_section_title3",
+    "type": "text",
+    "label": "Title 3"
+    },{
+    "id": "six_section_cntnt3",
+    "type": "textarea",
+    "label": "Content 3"
+    },{
+    "type": "header",
+    "content": "Seventh section"
+    },{
+    "type": "image_picker",
+    "id": "seventh_img",
+    "label": {
+    "en": "Image"
+    }
+    },{
+    "id": "seventh_section_title1",
+    "type": "text",
+    "label": "Title 1"
+    },{
+    "id": "seventh_section_cntnt1",
+    "type": "textarea",
+    "label": "Content 1"
+    },{
+    "id": "seventh_section_title2",
+    "type": "text",
+    "label": "Title 2"
+    },{
+    "id": "seventh_section_cntnt2",
+    "type": "textarea",
+    "label": "Content 2"
+    },{
+    "id": "seventh_section_title3",
+    "type": "text",
+    "label": "Title 3"
+    },{
+    "id": "seventh_section_cntnt3",
+    "type": "textarea",
+    "label": "Content 3"
+    },{
+    "type": "header",
+    "content": "Team section"
+    },{
+    "id": "team_maintitle",
+    "type": "text",
+    "label": "Title"
+    },{
+    "type": "image_picker",
+    "id": "team_img_1",
+    "label": {
+    "en": "Image 1"
+    }
+    },{
+    "id": "team_title_1",
+    "type": "text",
+    "label": "Name 1"
+    },{
+    "id": "team_content_1",
+    "type": "textarea",
+    "label": "Description 1"
+    },{
+    "type": "image_picker",
+    "id": "team_img_2",
+    "label": {
+    "en": "Image 2"
+    }
+    },{
+    "id": "team_title_2",
+    "type": "text",
+    "label": "Name 2"
+    },{
+    "id": "team_content_2",
+    "type": "textarea",
+    "label": "Description 2"
+    },{
+    "type": "image_picker",
+    "id": "team_img_3",
+    "label": {
+    "en": "Image 3"
+    }
+    },{
+    "id": "team_title_3",
+    "type": "text",
+    "label": "Name 3"
+    },{
+    "id": "team_content_3",
+    "type": "textarea",
+    "label": "Description 3"
+    },{
+    "type": "header",
+    "content": "Bottom section"
+    },{
+    "id": "bottom_section_title3",
+    "type": "text",
+    "label": "Title"
+    },{
+    "type": "image_picker",
+    "id": "bottom_img_desktop",
+    "label": {
+    "en": "Desktop Image"
+    }
+    },{
+    "type": "image_picker",
+    "id": "bottom_img_mb",
+    "label": {
+    "en": "Mobile Image"
+    }
+    }
+    ]
+    }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

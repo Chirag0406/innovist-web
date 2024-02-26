@@ -1,0 +1,2869 @@
+{% schema %}
+{
+"name": "Section name",
+"settings": []
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<head>
+    <link href="{{'custom_hair_quiz.css' | asset_url }}" rel="stylesheet">
+    <link rel="preload stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.css" as="style" onload="this.rel='stylesheet'"/>
+    <link rel="preload stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick-theme.min.css" as="style" onload="this.rel='stylesheet'"/>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.8/slick.min.js"></script>
+</head>
+
+
+
+<style>
+    .btn{
+        background: inherit;
+        color: #000;
+    }
+    .btn:hover{
+        background:unset !important;
+    }
+    .d-md-none{
+        display: none;
+    }
+    .formula_btn .btn {
+        background: rgb(90,90,90);
+        border: rgb(60,60,60) 1px solid;
+    }
+    .head.heading span,.our_standards_head span{
+        background: linear-gradient(to bottom,transparent 42%,#feeed0 5%,#feeed0 151%,transparent 95%);
+    }
+    .our_standards_head {
+        font-weight: bold;
+        font-size: 35px;
+        font-family: Playfair Display ;
+    }
+    /* .our_standards_head::before {
+        content: "";
+        display: inline-block;
+        background: #f7dec8;
+        width: 231px;
+        height: 33px;
+        position: absolute;
+        z-index: -1;
+        top: 40%;
+        left: 42%;
+    } */
+    .formula_btn .btn span {
+        background: linear-gradient(90deg,rgb(120,120,120) 0,rgb(150,150,150) 100%);
+    }
+    .before_skin_type:after,.after_skin_type:after,.before_skin_type_mob:after,.after_skin_type_mob:after {
+        background: #B7D9FE;
+        display: none;
+    }
+    .smoother_skin_info::before {
+        background-image: url(https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair_type_png.png?v=1607165428);
+    }
+    .make_it_wholesome,.haircare_regime,.review-box,.review-box-mob {
+        display: none;
+    }
+    .hair_health {
+        border-radius: 0px;
+        padding: 15px 30px;
+    }
+    .hair_health h4 {
+        margin-bottom: 35px;
+    }
+    .hair_health p {
+        font-family: 'Helvetica';
+        font-size: 16px !important;
+        line-height: unset !important;
+    }
+    .add_sub_product {
+        width: 60%;
+        margin: auto;
+    }
+    .add_sub_product label,.add_sub_product .product_display > div{
+        display: flex;
+        flex-direction: row;
+    }
+    .add_sub_product .product_display {
+        display: flex;
+        flex-direction: column;
+    }
+    .add_sub_product .product_display img   {
+        /* height: fit-content; */
+        margin: auto;
+    }
+    .add_sub_product .product_display div.product_image_u {
+        /* margin: 5px 0 10px 0px; */
+        width: 25%;
+        /* text-align: center; */
+        display: flex;
+        justify-content: center;
+        background: #F8F8F8;
+    }
+    .add_sub_product .product_display div .offer {
+        font-family: 'Playfair Display';
+        font-size: 24px;
+        font-weight: bold;
+        text-transform: uppercase;
+        color: #01385E;
+    }
+    .add_sub_product .product_display div .product_link,.product_display .product_msg {
+        font-size: 20px;
+        font-family: 'Helvetica';
+    }
+    .add_sub_product .product_display div .product_link {
+        margin: 5px 0;
+    }
+    .add_sub_product .product_display {
+        padding-left: 10px;
+    }
+    .product_msg.mob-msg {
+        display: none;
+    }
+    .product_display .product_link a {
+        color: #01385E;
+        font-family: Playfair Display;
+    }
+    .add_sub_product .product_display .product_des{
+        padding: 0 20px;
+    }
+    .product_display .product_link span, .product_display .product_msg span {
+        color: #01385E;
+
+    }
+    @media only screen and (min-width: 991px) {
+        .products_box_analysis {
+            /* -ms-flex: 0 0 33.333333%; */
+            flex: 0 0 24.333333%;
+            max-width: 24.333333%;
+            margin-right: 9%;
+        }
+    }
+
+    .custom_box_analysis {
+        margin-bottom: 90px;
+        width: 100%;
+        position: relative;
+    }
+    .custom_box_analysis input {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        opacity: 0;
+    }
+    .check {
+        height: 10px;
+        width: 10px;
+        border-radius: 50%;
+        display: inline-block;
+        border: 1px solid rgb(150,150,150);
+    }
+    .hair_analysis_products input[type=radio]:checked+.img_thumnail_analysis+.product_desc_box .check  {
+        background: #468ecb;
+        border: 1px solid #468ecb;
+    }
+    .product_msg.mob-msg {
+        margin-top: 15px;
+        margin-bottom: 0px;
+    }
+    @media (min-width: 1300px) {
+        .img_thumnail_analysis {
+            width: 100%;
+        }
+    }
+    .img_thumnail_analysis {
+        width: 272px;
+        height: 244px;
+        background: #F8F8F8;
+        border-radius: 4px;
+        position: relative;
+        margin-bottom: 40px;
+    }
+    .custom_box_analysis .box_analysis {
+        cursor: pointer;
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+    }
+    .hair_analysis_products {
+        padding-top: 70px;
+    }
+    .img_thumnail_analysis img {
+        position: absolute;
+        top: -25px;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    .grid_text_analysis h4 {
+        font-family: Playfair Display;
+        font-weight: bold;
+        font-size: 21px;
+        line-height: 28px;
+        color: #01385E;
+    }
+    .grid_price_analysis del {
+        font-weight: 300;
+        margin-right: 30px;
+        font-family: Helvetica;
+        font-weight: 300;
+        font-size: 16px;
+        line-height: 21px;
+        color: #01385E;
+    }
+    .grid_price_analysis span {
+        font-size: 18px;
+        line-height: 21px;
+        color: #01385E;
+        font-family: Helvetica;
+        font-weight: 600;
+    }
+    .product_desc_box {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .product_desc_box .list_group {
+        margin-right: 8px;
+    }
+    .hair_analysis_membership .hair_btn {
+        width: 52%;
+    }
+
+    @media only screen and (max-width: 991px) {
+        .add_sub_product .product_display div .product_link, .product_display .product_msg{
+            font-size: 16px;
+        }
+        .add_sub_product .product_display div .offer {
+            font-size: 21px;
+        }
+        .product_msg.mob-msg {
+            display: block;
+        }
+        .product_msg.web-msg {
+            display: none;
+        }
+        .add_sub_product {
+            width: 100%;
+        }
+        .img_thumnail_analysis {
+            border-radius: 10 px;
+            box-shadow: 4px 4px 9px 5px rgb(0 0 0 / 8%);
+        }
+        .custom_box_analysis {
+            margin-bottom: 0;
+        }
+        .hair_health p {
+            font-size: 10px !important;
+        }
+        .hair_health {
+            padding: 40px 20px 20px 20px;
+        }
+        .add_products {
+            margin-top: 60px;
+        }
+        .product_desc_box {
+            width: 90%;
+        }
+        .container.heading {
+            margin-top: 20px;
+            margin-bottom: 0px;
+        }
+    }
+</style>
+
+{% if customer %}
+    <script>
+        let urlParam_thm = new URL(window.location.href);
+        let previous_stp_theme = new URLSearchParams(urlParam_thm.search);
+        let previous_step = "";
+        if(previous_stp_theme.toString() && previous_stp_theme.toString().includes('previous_step')) {
+            previous_step = "?previous_step=hair-quiz";
+        }
+
+        let customer_id = 0;
+        {% if customer %}
+        customer_id  = {{customer.id}};
+        {% endif %}
+
+        // if(customer_id > 5226759290926){
+        //     document.location = '/pages/hair-analysis-5'+ previous_step;
+        // }else
+        if(customer_id > 5033760161838){
+            document.location = '/pages/hair-analysis-2'+ previous_step;
+        }
+    </script>
+{%endif %}
+
+<div class="loader_first">
+    <div class="loading_wrapper">
+        <div class="containers">
+            <div class="inner_wrapper_hair">
+                <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/personalized.png?v=1607074298" alt="personalised" class="personalised" >
+                <div class="personalised_box">
+                    <h2 class="personalised_title">Personalized for You</h2>
+                    <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Loading-page-GIF_Hair-care_PNG.gif?v=1607581953" class="Loading-page" >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="message" style="display:none;">
+    <div id="inner-message" class="alert alert-primary alert-fixed">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        Item added to cart
+    </div>
+</div>
+<div class="wrapper page_hide skin_an">
+    <div class="skin_analysis">
+        <div class="skin_analysis_bg">
+            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair_analysis_bg.png?v=1607074166"  class="d-none d-md-block w-100 img-banner-web" />
+            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair_analysis_mb.png?v=1607169140"  class="d-md-none w-100 img-banner-mb" />
+        </div>
+
+        <div class="skin-bg-overlay">
+            <h2 class="skin-heading">{{customer.first_name}}'s<br>
+                personalized <br>
+                hair-care regime</h2>
+            <p>This 3-step regime will nourish, cleanse, and strengthen your hair. Your freshly made, clean formula has handpicked ingredients that help you achieve your hair goals.
+            </p>
+        </div>
+
+    </div>
+
+    <section class="skin-care padding" style="display:none;">
+        <div class="container">
+            <div class="row">
+                <div class="col-4">
+                    <div class="box d-flex flex-row">
+                        <span><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/clean_beauty_6f1e79b1-ea40-478d-9da3-5f9881f03771.png?v=1607074243" alt=""></span>
+                        <h2>Clean Beauty</h2>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="box d-flex flex-row">
+                        <span><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Group_1350_2x_3debd0f3-1515-4b30-81c4-d2027833ba12.png?v=1613132632" alt=""></span>
+                        <h2>Cruelty Free</h2>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="box d-flex flex-row">
+                        <span><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/personalized.png?v=1607074298" alt=""></span>
+                        <h2>Personalized</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container heading">
+            <div class="head text-center heading">
+                <h2><span>Your Analysis</span></h2>
+            </div>
+        </div>
+    </section>
+
+    <section class="update_dropdown" id="accordion" style="display:none">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="sec_update">
+                        <p id="updateprefOne">
+                            <button class="btn dropbox_btn" data-toggle="collapse" data-target="#updatepref" aria-expanded="false" aria-controls="updatepref">
+                                Update your preferences
+                                <span>Edit your hair goals, color and fragrance.</span>
+                            </button>
+                        </p>
+                        <div id="updatepref" class="collapse" aria-labelledby="updateprefOne" data-parent="#accordion">
+                            <div class="card card-body">
+                                <span>Answers from your last quiz have been auto selected.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="sec_update">
+                        <p id="updateprefTwo">
+                            <button class="btn dropbox_btn" data-toggle="collapse" data-target="#updateskin" aria-expanded="false" aria-controls="updateskin">
+                                Update your hair profile
+                                <span>Edit basic information about your hair and scalp.</span>
+                            </button>
+                        </p>
+                        <div id="updateskin" class="collapse" aria-labelledby="updateprefTwo" data-parent="#accordion">
+                            <div class="card card-body">
+                                <span>Answers from your last quiz have been auto selected.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="row">
+        <a style="margin:0 auto;" href="/pages/hair-quiz?mode=retake"><p class="text-right"><i class="fa fa-repeat" aria-hidden="true"></i> Retake Quiz</p></a>
+    </div>
+
+    <section class="hair_care membership">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-lg-6 col-12">
+                    <div class="hair_analysis_listing">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Hair Structure
+                                <span id="structure">Straight</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Scalp Type
+                                <span id="scalp-type">Dry</span>
+                            </li>
+                            <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Hair Type
+                                <span id="hair-type">Dry</span>
+                            </li> -->
+                            <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Hair Fall Intensity
+                                <span id="intensity">Medium</span>
+                            </li> -->
+                            <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Stress Level
+                                <span id="stress-level">Low</span>
+                            </li> -->
+                        </ul>
+                    </div>
+
+                    <div class="review-box text-center">
+                        <h4>30,256+ reviews</h4>
+                        <span>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+               </span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12 d-sma-none d-md-block">
+                    <div class="hair_health">
+                        <h4>Your Hair Health</h4>
+                        <figure>
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair_health_308e8e52-15db-4c4c-a063-63d79c5e1dfa.png?v=1607429803" />
+                            <div class="scale_results">
+                                <span class="scale_text_right"> Under <br>Nourished Hair</span>
+                                <span class="scale_text_left"> Healthy <br>Hair</span>
+                            </div>
+                        </figure>
+                        <p class="hair-desc"></p>
+                    </div>
+                    <!-- <div class="hair_analysis_membership">
+                        {% for product in collections['hair-subscription'].products %}
+                            <form class="web-form">
+                                    <ul class="list-group">
+                                        {% for variant in product.variants%}
+                                            <li class="list-group-item list-group-item-action flex-column align-items-start">
+                                                <input class="form-check-input" type="radio" name="one" id="{{variant.option3}}" value="{{variant.id}}" data-price="{{variant.price | money_without_currency | remove: '.00'}}">
+                                                <span class="check"></span>
+                                                <div class="overlay"></div>
+                                                <div class="box" for="first">
+                                                    <h5 class="d-flex w-100 justify-content-between">{{variant.option1}}<span><i class="fa fa-inr" aria-hidden="true"></i>{{variant.price| money_without_currency | remove: '.00'}}
+                                                            {% if variant.option3 != "1" %}
+                                                                <span class="small-text">per kit</span>
+                                                            {%endif%}
+                        </span></h5>
+                                                    <p class="d-flex w-100 justify-content-between"><em>Pre-Shampoo Hair Mask, Shampoo & Conditioner</em><del><i class="fa fa-inr" aria-hidden="true"></i>{{variant.compare_at_price| money_without_currency | remove: '.00'}}</del></p>
+                                                    {% if variant.option3 != "1" %}
+                                                        <p class="d-flex w-100 justify-content-between"><b>Fresh kit delivered every month at {{ variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | money_without_currency | times: 100 | remove: '.0'}}% off.</b><small>paid monthly</small></p>
+                                                        <p>Free reformulation and priority support.<br />Cancel anytime.</p>
+                                                    {% endif %}
+                                                </div>
+                                            </li>
+                                        {%endfor%}
+
+
+                                    </ul>
+                                <div class="bogo_add">
+                                </div>
+                            </form>
+
+
+                        {% endfor %}
+
+                        <button type="button" class="btn buy-subs" onclick="buySubscription(this)">buy my formula</button>
+                        <s>Delivered in 7 days. Free Shipping. COD Available</s>
+                        <div class="review-box-mob text-center">
+                            <h4>over 3,450</h4>
+                            <span>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+               </span>
+                            <p>product reviews and counting!</p>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <section class="haircare_regime padding">
+        <div class="head text-center">
+            <h2>Your 3-step Haircare Regime</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="accordion padding" id="accordionExample">
+                    <div class="card_outer">
+                        <div class="steps_img mt-md-5">
+                            <img class="mask_img" src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/step-1_43fd05b7-0bd6-49d6-9fc1-29c93bcad08c.png?v=1607424537"/>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <div class="collapse_steps">
+                                    <h4>Step 1</h4>
+                                    <h2>Nourish + Detoxify</h2>
+                                    <h6>Pre - Shampoo Hair Mask</h6>
+                                    <h6>125gms</h6>
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Our fast absorbing, silicone free formula nourishes your hair and scalp and eliminates build up.This luxurious mask just needs 20 mins on your hair and scalp for complete nourishment!
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card_outer">
+                        <div class="steps_img">
+                            <img class="shampoo_img" src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/step-2_3785d393-6f26-47e8-ab8f-692f05c2431b.png?v=1607519124"/>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <div class="collapse_steps">
+                                    <h4>Step 2</h4>
+                                    <h2>Cleanse + Balance</h2>
+                                    <h6>Shampoo</h6>
+                                    <h6>150ml</h6>
+
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Our mild shampoo deeply cleanses from root to tips and maintains optimal pH levels. This formula is free from harmful chemicals like sulphates which is why it lathers less!
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="card_outer">
+                        <div class="steps_img">
+                            <img class="conditioner_img" src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/repair-_-strengthen.png?v=1607522476"/>
+                        </div>
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                                <div class="collapse_steps">
+                                    <h4>Step 3</h4>
+                                    <h2>Repair + Strengthen</h2>
+                                    <h6>Conditioner </h6>
+                                    <h6>150ml</h6>
+
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            Our conditioner has a water soluble silicone based deep conditioning formula and advanced actives for damage repair. It's rich, intense texture adds a great boost of moisture to unruly hair!
+                                        </div>
+                                    </div>
+                                </div>
+                                <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="hair_care_mob membership">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-12 d-sma-none">
+                    <div class="hair_analysis_listing">
+                        <ul class="list-group">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                age group
+                                <span>31-40 years</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Hair Structure
+                                <span>Straight</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Scalp Type
+                                <span>Dry</span>
+                            </li>
+                            <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Hair Type
+                                <span>Dry</span>
+                            </li> -->
+                            <!-- <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Hair Fall Intensity
+                                <span>Medium</span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                Stress Level
+                                <span>Low</span>
+                            </li> -->
+                        </ul>
+                    </div>
+
+                    <div class="review-box text-center">
+                        <h4>30,256+ reviews</h4>
+                        <span>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+               </span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-12">
+                    <div class="hair_health">
+                        <h4>Your Hair Health</h4>
+                        <figure>
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair_health_308e8e52-15db-4c4c-a063-63d79c5e1dfa.png?v=1607429803" />
+                            <div class="scale_results">
+                                <span class="scale_text_right"> Under <br>Nourished Hair</span>
+                                <span class="scale_text_left"> Healthy <br>Hair</span>
+                            </div>
+                        </figure>
+                        <p class="hair-desc"></p>
+                    </div>
+                    <!-- <div class="hair_analysis_membership">
+                        {% for product in collections['hair-subscription'].products %}
+                            <form class="mobile-form">
+                                <ul class="list-group">
+                                    {% for variant in product.variants%}
+                                        <li class="list-group-item list-group-item-action flex-column align-items-start">
+                                            <input class="form-check-input" type="radio" name="one" id="option{{variant.option3}}" value="{{variant.id}}" data-price="{{variant.price | money_without_currency | remove: '.00'}}">
+                                            <span class="check"></span>
+                                            <div class="overlay"></div>
+                                            <div class="box" for="first">
+                                                <h5 class="d-flex w-100 justify-content-between">{{variant.option1}}<span><i class="fa fa-inr" aria-hidden="true"></i>{{variant.price| money_without_currency | remove: '.00'}}
+                                                        {% if variant.option3 != "1" %}
+                                                            <span class="small-text">per kit</span>
+                                                        {%endif%}
+                        </span></h5>
+                                                <p class="d-flex w-100 justify-content-between"><em>Pre-Shampoo Hair Mask, Shampoo & Conditioner</em><del><i class="fa fa-inr" aria-hidden="true"></i>{{variant.compare_at_price| money_without_currency | remove: '.00'}}</del></p>
+                                                {% if variant.option3 != "1" %}
+                                                    <p class="d-flex w-100 justify-content-between"><b>Fresh kit delivered every month at {{ variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | money_without_currency | times: 100 | remove: '.0'}}% off.</b><small>paid monthly</small></p>
+                                                    <p>Free reformulation and priority support.<br />Cancel anytime.</p>
+                                                {% endif %}
+                                            </div>
+                                        </li>
+                                    {%endfor%}
+                                </ul>
+                                <div class="bogo_add">
+                                </div>
+                            </form>
+
+
+
+                        {% endfor %}
+                        <button type="button" class="btn buy-subs" onclick="buySubscription(this)">buy my formula</button>
+                        <s>Delivered in 7 days. Free Shipping. COD Available</s>
+                        <div class="review-box-mob text-center">
+                            <h4>30,256+ reviews</h4>
+                            <span>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+                  <i class="fa fa-star"></i>
+               </span>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- <section class="your_analysis">
+        <div class="head text-center">
+            <h2>Your Analysis</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-6">
+                    <div class="hair_health">
+                        <h4>Your Scalp Health</h4>
+                        <figure class="scalp">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair_health_308e8e52-15db-4c4c-a063-63d79c5e1dfa.png?v=1607429803" />
+                            <div class="scale_results">
+                                <span class="scale_text_right"> Under <br>Nourished Scalp</span>
+                                <span class="scale_text_left"> Healthy <br>Scalp</span>
+                            </div>
+                        </figure>
+                        <p class="scalp-desc"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="hair_analysis_products hair_analysis_membership">
+        <div class="container">
+            <div class="analysis_products">
+                <div class="hair_analysis_products_inner">
+                    <div class="row pl-3 pr-2">
+                        {% for product in collections['hair-analysis'].products %}
+                            <div class="products_box_analysis">
+                                <div class="custom_box_analysis">
+                                    <input class="form-input" type="radio" name="one" id="input--{{ forloop.index }}" value="{{product.variants.first.id}}" data-price="{{product.price | money_without_currency | remove: '.00'}}" {%if forloop.first == true %}checked{% endif%}>
+                                    <div class="img_thumnail_analysis {{product.handle | trim }}" >
+                                        <img
+                                                src="{{ product.featured_image | product_img_url: 'large' }}"
+                                                alt=""/>
+                                    </div>
+                                    <div class="product_desc_box">
+                                        <div class="list_group">
+                                            <span class="check"></span>
+                                        </div>
+                                        <div class="box_analysis" >
+
+                                            <div class="grid_text_analysis">
+                                                <h4>{{product.title}}</h4>
+                                                <!-- <p>150 ml + 150 ml + 125 gm + 100 ml + 100 ml</p> -->
+                                            </div>
+                                            <div class="grid_price_analysis">
+                                                {% if product.compare_at_price > product.price %}
+                                                    <del> ₹ {{ product.compare_at_price | money_without_currency | remove: '.00' }}</del>
+                                                {% endif%}
+
+                                                <span>₹ {{ product.price | money_without_currency | remove: '.00' }}</span>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- <form class="">
+                        <ul class="">
+                            {% for variant in product.variants%}
+                                <li class="list-group-item list-group-item-action flex-column align-items-start">
+                                    <input class="form-check-input" type="radio" name="one" id="{{variant.option3}}" value="{{variant.id}}" data-price="{{variant.price | money_without_currency | remove: '.00'}}">
+                                    <span class="check"></span>
+                                    <div class="overlay"></div>
+                                    <div class="box" for="first">
+                                        <h5 class="d-flex w-100 justify-content-between">{{variant.option1}}<span><i class="fa fa-inr" aria-hidden="true"></i>{{variant.price| money_without_currency | remove: '.00'}}
+                                                {% if variant.option3 != "1" %}
+                                                    <span class="small-text">per kit</span>
+                                                {%endif%}
+            </span></h5>
+                                        <p class="d-flex w-100 justify-content-between"><em>Pre-Shampoo Hair Mask, Shampoo & Conditioner</em><del><i class="fa fa-inr" aria-hidden="true"></i>{{variant.compare_at_price| money_without_currency | remove: '.00'}}</del></p>
+                                        {% if variant.option3 != "1" %}
+                                            <p class="d-flex w-100 justify-content-between"><b>Fresh kit delivered every month at {{ variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | money_without_currency | times: 100 | remove: '.0'}}% off.</b><small>paid monthly</small></p>
+                                            <p>Free reformulation and priority support.<br />Cancel anytime.</p>
+                                        {% endif %}
+                                    </div>
+                                </li>
+                            {%endfor%}
+
+
+                        </ul>
+                    <div class="bogo_add">
+                    </div>
+                </form> -->
+
+
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="add_products">
+                    <div class="add_sub_product">
+                    </div>
+                </div>
+            </div>
+            <div style="text-align:center;">
+                <a href="#" data-toggle="modal" data-target="#updateColorFragrance" class="updateColor"></a>
+                <button type="button" class="btn hair_btn buy-subs" onclick="buySubscription(this)">buy my formula</button>
+                <s>Delivered in 7 days. Free Shipping. COD Available</s>
+            </div>
+        </div>
+    </section>
+
+    <section class="smoother_skin padding">
+        <div class="container">
+            <div class="head text-center">
+                <h2 class="review-heading">Nourished Hair</h2>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="skin_types_img">
+                        <div class="before_skin_type">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/before_hair_type_7b6ac42f-1b74-4cc8-9ec7-814488a8199c.png?v=1607521530" alt="before_skin_type" class="before_skin_img">
+                        </div>
+                        <div class="before_skin_type_mob w-100">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/before_skin_type_mob_c600d2dc-cb3e-4164-bacc-5d87334bccb9.png?v=1607521870" class="before_skin_img">
+                        </div>
+                        <div class="after_skin_type">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/after_hair_type_da72ec63-9e75-45e3-9d46-560b56f0dadb.png?v=1607521530" alt="after_skin_type" class="after_skin_img">
+                        </div>
+                        <div class="after_skin_type_mob w-100">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/after_skin_type_mob.png?v=1607521880" alt="after_skin_type_mob" class="after_skin_img">
+                        </div>
+                    </div>
+                    <div class="smoother_skin_info hair_type_info">
+                        <h2 id="rating">81%</h2>
+                        <span class="smoother_skin_info_subtitle">of users see an overall improvement in <br>hair health</span>
+                        <p class="review-text">My hair is stronger and doesn't break very easily now. This regime has helped me improve my hair elasticity and I love trying out different hairstyles with my nourished hair!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="unique padding hair-unique">
+        <div class="container">
+            <div class="head text-center" id="boxed-div">
+                <h2>Your unique haircare</h2>
+                <p>A multi tasking regime with high performance ingredients, custom made for your unique hair</p>
+            </div>
+
+
+
+            <button type="button" class="btn hair_btn buy-subs" onclick="buySubscription(this)">buy my formula</button>
+            <s>Delivered in 7 days. Free Shipping. COD Available</s>
+
+        </div>
+    </section>
+
+    <section class="make_it_wholesome">
+        <div class="container">
+            <div class="head text-center">
+                <h2>Make it wholesome</h2>
+            </div>
+            <!--<div class="biotin text-center">
+                <div class="biotin_img">
+                    <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Gummies_2x_9f471c8a-8163-4cf7-9f7b-ab7e27234b08.png?v=1607506058" alt="biotin_img"/>
+                </div>
+                <div class="biotin_info">
+                    <h2 class="biotin_title">Biotin Gummies</h2>
+                    <span class="biotin_subtitle">60 Gummies  |  1 month supply</span>
+                    <ul class="vegan-details">
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-vegan.svg?v=1607085112" alt="vegan" /><p>Vegan</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-soy.svg?v=1607085226" alt="vegan" /><p>Soy free</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-gluten.svg?v=1607085498" alt="vegan" /><p>Gluten free</p></li>
+                    </ul>
+                    <p class="hair-analysis-price">Rs.799</p>
+                    <p class="biotin_text">Enriched with Vitamin A,C,E and H, our delicious gummies help strengthen hair and improve hair growth
+                        Take 2 gummies everyday for stronger hair!</p>
+                    <input id="variantId-32843254693934" type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                    {% if all_products["biotin-gummies-1"].variants.first.available == true and all_products["biotin-gummies-1"].variants.first.inventory_quantity > 0 %}
+                        <button type="button" class="btn desktop_btn add_to_cart_cst add_to_cart" dataID="32843254693934"><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/beauty_cart.svg?v=1606718080">ADD TO CART</button>
+                    {% else %}
+                        <button type="button" class="btn desktop_btn disabled-stock-btn">Out of stock</button>
+                    {% endif %}
+                </div>
+            </div>-->
+
+            <div class="biotin text-center omega">
+                <div class="biotin_img">
+                    <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-analysis-pack-2.png?v=1607083440" alt="omega_img"/>
+                </div>
+                <div class="biotin_info">
+                    <h2 class="biotin_title">Hair [O]mega</h2>
+                    <span class="biotin_subtitle">60 capsules  |  2 months supply</span>
+                    <ul class="vegan-details">
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-vegan.svg?v=1607085112" alt="vegan" /><p>Vegan</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-soy.svg?v=1607085226" alt="vegan" /><p>Soy free</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-gluten.svg?v=1607085498" alt="vegan" /><p>Gluten free</p></li>
+                    </ul>
+                    <p class="hair-analysis-price">Rs.899</p>
+                    <p class="biotin_text">With essential Omega 3,6,9 fatty acids, our Hair Omega is a great vegetarian alternative to fish oil.
+                        Take 1 capsule everyday for healthy scalp and hair!</p>
+                    <input id="variantId-32843244208174" type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                    {% if all_products["hair-omega-1"].variants.first.available == true and all_products["hair-omega-1"].variants.first.inventory_quantity > 0 %}
+                        <button type="button" class="btn desktop_btn add_to_cart_cst add_to_cart" dataID="32843244208174"><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/beauty_cart.svg?v=1606718080">ADD TO CART</button>
+                    {% else %}
+                        <button type="button" class="btn desktop_btn disabled-stock-btn">Out of stock</button>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="biotin text-center aid">
+                <div class="biotin_img">
+                    <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-analysis-pack-3.png?v=1607083440" alt="biotin_img"/>
+                </div>
+                <div class="biotin_info">
+                    <h2 class="biotin_title">S[tress] Aid</h2>
+                    <span class="biotin_subtitle">60 capsules  |  2 months supply</span>
+                    <ul class="vegan-details">
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-vegan.svg?v=1607085112" alt="vegan" /><p>Vegan</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-soy.svg?v=1607085226" alt="vegan" /><p>Soy free</p></li>
+                        <li><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-gluten.svg?v=1607085498" alt="vegan" /><p>Gluten free</p></li>
+                    </ul>
+                    <p class="hair-analysis-price">Rs.899</p>
+                    <p class="biotin_text">With Ashwagandha, Lemon Balm and Magnesium, this supplement helps reduce stress induced hair fall.
+                        Take 1 capsule everyday for stronger, nourished hair!</p>
+                    <input id="variantId-32843245912110" type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                    {% if all_products["stress-aid-1"].variants.first.available == true and all_products["stress-aid-1"].variants.first.inventory_quantity > 0 %}
+                        <button type="button" class="btn desktop_btn add_to_cart_cst add_to_cart" dataID="32843245912110"><img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/beauty_cart.svg?v=1606718080">ADD TO CART</button>
+                    {% else %}
+                        <button type="button" class="btn desktop_btn disabled-stock-btn">Out of stock</button>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+    <section class="our_standards padding" style="background: rgb(210,210,210);">
+        <div class="container">
+            <h2 class="our_standards_head"><span>Our Standards</span></h2>
+            <div class="our_standards_cards">
+                <div class="row">
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Group_1354_2x_6f561486-e210-4941-808e-ec9d7a4051cd.png?v=1613132669">
+                        </div>
+                        <h3 class="standards_card_title">Freshly Made</h3>
+                        <p class="standards_card_subtitle">Individually and freshly formulated once you place your order</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/different_hair_types.png?v=1607496591">
+                        </div>
+                        <h3 class="standards_card_title">Formulated for Different Hair Types</h3>
+                        <p class="standards_card_subtitle">Suited for different hair and scalp types  including chemically treated hair and sensitive scalp</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/results.png?v=1607496654">
+                        </div>
+                        <h3 class="standards_card_title">Long Lasting Results</h3>
+                        <p class="standards_card_subtitle">Advance actives which work deep into your scalp and repair damage</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/scalp_health.png?v=1607496710">
+                        </div>
+                        <h3 class="standards_card_title">Complete Hair and Scalp Health</h3>
+                        <p class="standards_card_subtitle">Formulations which penetrate deep into the scalp and hair</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/scientific.png?v=1607496783">
+                        </div>
+                        <h3 class="standards_card_title">Scientific</h3>
+                        <p class="standards_card_subtitle">Formulations backed by rigorous research and advanced technology</p>
+                    </div>
+                    <div class="col-md-4 col-sm-6">
+                        <div class="standards_card_img">
+                            <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/high-grade_ingredients.png?v=1607496851">
+                        </div>
+                        <h3 class="standards_card_title">Effective High-Grade Ingredients</h3>
+                        <p class="standards_card_subtitle">Made using potent, botanical ingredients backed by advanced science</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="EWG_score hair_score padding">
+        <div class="container">
+            <div class="head text-center">
+                <h2>EWG Score</h2>
+            </div>
+            <div>
+                <p class="EWG_score_info">EWG (Environmental Working Group) is an American not for profit organisation dedicated to protecting human health and the environment.  The EWG rating analyzes and rates individual ingredients according to their toxicity. </p>
+                <ul class="safety_measures">
+                    <li class="measures1">1-2: High safety</li>
+                    <li class="measures2">3-6: Moderate safety</li>
+                    <li class="measures3">7-10: Low safety
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div class="disclaimer">
+        <p>Please note, this analysis is not a clinical diagnosis. For any severe scalp or hair issues, please consult a tricologist. </p>
+    </div>
+
+    <div class="formula_btn">
+        <button type="button" class="btn buy-subs" onclick="buySubscription(this)" >BUY MY FORMULA<span class="price_change"><i class="fa fa-inr" aria-hidden="true"></i>4195</span></button>
+    </div>
+</div>
+<style>
+    .page_hide{
+        display:none;
+    }
+    .navbar.navbar-expand-lg.nav_default {
+        margin-top: 0px;
+    }
+
+    nav.navbar.navbar-expand-lg.nav_default {
+        margin-top: 0px !important;
+        padding-top: 0;
+    }
+    }
+    .loading_wrapper .personalised{
+        margin: 0 auto;
+    }
+    .Loading-page {
+        margin: 36px auto;
+        height:300px;
+    }
+    .loading_wrapper {
+        /* height: 100vh; */
+        /* overflow-y: hidden; */
+
+    }
+    .unique .box{
+        background: rgb(210,210,210);
+    }
+    .small-text{
+        font-weight: 300;
+        font-size: 12px;
+        text-transform: lowercase;
+    }
+    .buttonClicked{
+
+    }
+    @media only screen and (max-width: 576px){
+        .Loading-page {
+            margin-top: 12px !important;
+        }
+    }
+
+    .inner_wrapper_hair {
+        padding: 100px 0;
+        background: rgb(210,210,210);}
+    .alert-fixed {
+        position:fixed;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index: 9999999999999;
+        border-radius:0px
+    }
+
+    nav.navbar.navbar-expand-lg.nav_default{
+        margin-top: 0 !important;
+        padding-top: 0;
+    }
+
+    /**** update quiz section css */
+    .update_dropdown .hidden {
+        display: none;
+    }
+
+    .update_dropdown{
+        padding   : 30px 0;
+        border-top: none;
+    }
+
+    .sec_update {
+        padding: 35px 32px;
+        background: #fafafa;
+        box-shadow: 2px 2px 6px 0px rgb(228 226 228);
+    }
+
+    .sec_update p {
+        margin-bottom: 0;
+    }
+
+    .btn.dropbox_btn {
+        color: #413F3F;
+        font-family: 'Playfair Display', serif;
+        font-size: 30px;
+        font-weight: bold;
+        position: relative;
+        text-align: left;
+        padding: 0 0 0 22px;
+        line-height: 38px;
+        width: 100%;
+        margin: 0;
+        text-transform: none;
+    }
+
+    .btn.dropbox_btn::before {
+        position: absolute;
+        content: "";
+        width: 8px;
+        height:100%;
+        top: 0;
+        background: #FFCBC0;
+        left: 0;
+    }
+    .bogo_add{
+        padding: 1em 0;
+        font-size: 16px;
+        font-weight:bold;
+    }
+    @media(max-width:500px) {
+        .bogo_add{
+            padding: 1em 0 0 0;
+            font-size: 12px;
+        }
+    }
+
+
+    .btn.dropbox_btn::after {
+        position: absolute;
+        content: "\f107";
+        top: 24px;
+        right: 0;
+        font: normal normal normal 14px/1 FontAwesome;
+        font-size: 14px;
+        font-size: 27px;
+        color: #6E6E6E;
+
+    }
+
+    .btn.dropbox_btn span {
+        display: block;
+        font-size: 18px;
+        font-weight: 500;
+        font-family: 'Helvetica-Oblique';
+        color: #1C1111;
+    }
+
+    .sec_update .card.card-body {
+        background: transparent;
+        border: none;
+        margin: 0;
+        padding: 0 22px;
+    }
+
+    .sec_update .card.card-body span {
+        margin-bottom: 40px;
+        font-size: 18px;
+        color: #1C1111;
+        font-weight: 500;
+        font-family: 'Helvetica-Oblique';
+    }
+
+    .skin_goals h3 {
+        font-family: 'Playfair Display', serif;
+        font-size: 20px;
+        font-weight: bold;
+        margin-bottom: 30px;
+    }
+
+    .sec_update .card.card-body ul {
+        padding: 0;
+        margin: 0 auto;
+        list-style: none;
+        width: 100%;
+        text-align: left;
+    }
+
+    .sec_update .card.card-body ul.bot_names{
+        text-align: center;
+    }
+
+    .sec_update .card.card-body .color {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        margin: 0;
+    }
+
+    .sec_update .card.card-body ul li {
+        width: 48%;
+        height: 35px;
+        margin: 0 0 13px;
+        position: relative;
+        border-radius: 50px;
+        margin-right: 2%;
+        font-size: 18px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        display: inline-block;
+    }
+
+    .sec_update .card.card-body ul.treatment li {
+        width: 32%;
+    }
+
+
+
+    .sec_update .card.card-body .color li {
+        width: calc(100% / 3);
+        text-align: center;
+        height: 100%;
+        padding: 0;
+        height: auto;
+    }
+
+
+
+    .sec_update .card.card-body .color li h5 {
+        font-size: 13px;
+        font-family: 'Helvetica';
+        color: #1C1111;
+        margin: 10px 0;
+        display: block;
+    }
+
+    .sec_update .card.card-body ul li:nth-child(even) {
+        margin-right: 0;
+    }
+
+    .sec_update .card.card-body ul li input {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 2;
+        opacity: 0;
+    }
+
+    .sec_update .card.card-body ul li input[type="text"] {
+        opacity: 1;
+        cursor: text;
+        border-radius: 50px;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: 'Helvetica';
+        font-size: 13px;
+        border: 1px solid #B5B5B5;
+        background-color: initial;
+    }
+
+    .sec_update .card.card-body ul li input[type="checkbox"]:checked + span,
+    .sec_update .card.card-body ul li input[type="radio"]:checked + span {
+        background: rgb(210,210,210);
+        box-shadow: 2px 2px 6px 0px rgb(228 226 228);
+    }
+
+    .sec_update .card.card-body ul li input[type="checkbox"]:checked + span + h5,
+    .sec_update .card.card-body ul li input[type="radio"]:checked + span + h5 {
+        font-weight: bold;
+    }
+
+    .sec_update .card.card-body .color li > span {
+        width: 100%;
+        height: 92px;
+        display: block;
+        background: #fff;
+        margin: 0;
+        border-radius: 7px;
+    }
+
+
+    .sec_update .card.card-body ul li span.check {
+        border: 1px solid #B5B5B5;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        border-radius: 50px;
+        z-index: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: 'Helvetica';
+        font-size: 13px;
+    }
+
+    .sec_update .card.card-body .color li input {
+        opacity: 0;
+    }
+
+    .sec_update .card.card-body .color li > span {
+        width: 92px;
+        height: 99px;
+        display: block;
+        background: #fff;
+        margin: 0 auto;
+        border-radius: 7px;
+    }
+
+    .sec_update .card.card-body .color li > span img {
+        width: 58px;
+        margin-top: -30px;
+    }
+
+
+    .sec_update .card.card-body ul li input[type="checkbox"]:checked + .check,
+    .sec_update .card.card-body ul li input[type="radio"]:checked + .check {
+        background: rgb(210,210,210);
+        border-color:#B5B5B5;
+        font-weight: 600;
+    }
+
+    .sec_update .card.card-body ul.fragrance li {
+        width: 30%;
+        height: 35px;
+        margin-right: 2% !important;
+    }
+
+
+    .sec_update .card.card-body ul.update_name li {
+        width: 43%;
+        height: 35px;
+    }
+
+    .sec_update .card.card-body button.btn {
+        background: linear-gradient(90deg, rgb(120,120,120) 0%, rgb(150,150,150) 100%);
+        border: 2px solid rgb(150,150,150);
+        border-radius: 0;
+        text-transform: uppercase;
+        padding:22px 0;
+        margin: 20px 0;
+    }
+
+    .sec_update .card.card-body .color li {margin: 60px 0 0;}
+    .sec_update .card.card-body .color li:nth-child(1),.sec_update .card.card-body .color li:nth-child(2),
+    .sec_update .card.card-body .color li:nth-child(3){margin-top: 0;}
+
+    /* -------------media starts------------------------- */
+
+    @media only screen and (max-width: 1200px){
+        .btn.dropbox_btn {
+            font-size: 23px;
+            line-height: 30px;
+        }
+
+        .btn.dropbox_btn span {
+            font-size: 15px;
+        }
+
+        .sec_update .card.card-body span {
+            font-size: 15px;
+            margin-bottom: 16px;
+        }
+
+        .btn.dropbox_btn::before {
+            height: 137%;
+        }
+    }
+
+    @media only screen and (max-width: 992px){
+        .sec_update .card.card-body span {
+            font-size: 14px;
+        }
+    }
+
+    @media only screen and (max-width: 767px){
+        .sec_update {
+            margin-bottom: 20px;
+        }
+    }
+
+    @media only screen and (max-width: 560px){
+
+        .sec_update .card.card-body .color li > span {width: 52px;height: 49px;}
+        .sec_update .card.card-body .color li h5{font-size: 8px;margin: 8px 0 5px;}
+        .sec_update .card.card-body .color li > span img {width: 36px;}
+        .sec_update .card.card-body .color li {margin: 35px 0 0;}
+        .sec_update .card.card-body .color li:nth-child(1),.sec_update .card.card-body .color li:nth-child(2),
+        .sec_update .card.card-body .color li:nth-child(3){margin-top: 0;}
+
+
+        .btn.dropbox_btn {
+            font-size: 19px;
+        }
+
+        .btn.dropbox_btn span {
+            font-size: 10px;
+        }
+
+        .skin_goals h3 {
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+
+        .sec_update .card.card-body ul li span.check {
+            font-size: 8px;
+        }
+
+        .sec_update .card.card-body ul li, .sec_update .card.card-body ul.update_name li {
+            height: 20px;
+        }
+
+        .sec_update .card.card-body button.btn {
+            padding: 7px 0;
+            margin: 30px 0 10px;
+            font-size: 12px;
+        }
+
+        .sec_update .card.card-body ul.fragrance li {
+            height: 20px;
+        }
+
+        .sec_update .card.card-body span {
+            font-size: 10px;
+        }
+    }
+
+    @media only screen and (max-width: 375px){
+        .sec_update {padding: 35px 12px;}
+    }
+
+
+
+
+</style>
+<script>
+    jQuery("#shopify-section-header, .announcement-bar").hide();
+    $(document).ready(function(){
+        document.title = "Hair Analysis of " + "{{customer.first_name}}";
+        setTimeout(function(){
+            $('#input--1').prop('checked', true);
+            // $('input#option3').prop('checked', true);
+
+        },10);
+
+        let initialPrice = $('#input--1').attr("data-price");
+        $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>${initialPrice}`);
+        $('.form-input').change(function() {
+            let price = parseFloat($(this).attr("data-price").replace(/,/g, ''));
+            if($('.hair_analysis_products #hair-oil-3').is(":checked")) {
+                price +=  Number($('.hair_analysis_products #hair-oil-3').attr('data-price'));
+            }
+            if($('.hair_analysis_products #hair-serum-3').is(":checked")) {
+                price +=  Number($('.hair_analysis_products #hair-serum-3').attr('data-price'));
+            }
+            if($('.hair_analysis_products #hair-omega-2').is(":checked")) {
+                price +=  Number($('.hair_analysis_products #hair-omega-2').attr('data-price'));
+            }
+            if($('.hair_analysis_products #biotin-gummies-2').is(":checked")) {
+                price +=  Number($('.hair_analysis_products #biotin-gummies-2').attr('data-price'));
+            }
+            if($('.hair_analysis_products #stress-aid-3').is(":checked")) {
+                price +=  Number($('.hair_analysis_products #stress-aid-3').attr('data-price'));
+            }
+            console.log("price===>", price , $('.price_change'));
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>${price}`);
+
+        });
+        changeText();
+        getAnalysisData();
+    });
+
+    function changeText(){
+        const images = ['https://cdn.shopify.com/s/files/1/0255/3302/2244/files/personalized.png?v=1607074298','https://cdn.shopify.com/s/files/1/0255/3302/2244/files/cruelty_free.svg?v=1606817017'];
+        const text_headers = ['Personalized for You', 'Cruelty Free'];
+        var i = 0;
+        var renew = setInterval(function(){
+            i = i < images.length ? i : 0;
+            $(".personalised_title").text(text_headers[i]);
+            $('.personalised').attr('src', images[i]);
+            i++;
+        },1000);
+    }
+    function postData(ajaxurl, data) {
+        return $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json'
+        });
+    }
+    async function getAnalysisData(){
+        let quizMapping = localStorage.getItem('hair_quiz_mapping');
+        let quizStateId = localStorage.getItem("hairQuizStateId");
+        let quiz_id = 2;
+        {% for tag in customer.tags %}
+        console.log('{{tag}}',"&&&&")
+        if('{{tag}}'.includes('gender-male')) {
+            quiz_id = 3;
+        }
+        {% endfor %}
+        if(quizMapping){
+            // if(localStorage.getItem("gender")) {
+            //     let updateTags = await postData('https://api-automation.bareanatomy.in/api/v1/customers/tags' , {
+            //     customer_id: '{{customer.id}}',
+            //     tag: "gender-" + localStorage.getItem("gender")
+            // });
+            // if(localStorage.getItem("gender").includes('male')) {
+            //     quiz_id = 3;
+            // }
+            // }
+
+            let quizMappingData = {
+                'customer_id':'{{customer.id}}' ,
+                'profile_id': 1,
+                'quiz_id': quiz_id,
+                'quiz_state_id':localStorage.getItem("hairQuizStateId")
+            };
+            $.ajax({
+                url: "https://api-quiz.bareanatomy.in/quiz/mapQuiz",
+                cache: false,
+                dataType: 'json',
+                contentType: 'application/json',
+                type: "POST",
+                data: JSON.stringify(quizMappingData),
+                success: function(data) {
+                    localStorage.removeItem("hair_quiz_mapping");
+                    $.ajax({
+                        //url: `https://api-test-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+                        url: `https://api-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+                        type: "GET",
+                        success: function(data) {
+                            // executeSlider();
+                            setTimeout(function(){
+                                jQuery(".loader_first").addClass("page_hide");
+                                jQuery("#shopify-section-header, .announcement-bar").show();
+                                jQuery(".skin_an").removeClass("page_hide");
+                            }, 4000);
+                            if(data.data){
+
+                                renderQuizData(data.data.quiz_data, data.data.quiz_analysis);
+                                data.data.goals_analysis.forEach((goal, i) => {
+                                    appendHairGoals(goal, i);
+                                });
+                                renderReview(data.data.review_analysis, data.data.goals_analysis);
+                                renderScaleAnalysis(data.data.hair_feel_analysis, data.data.scalp_feel_analysis);
+                                changeImages(data.data.quiz_data.color);
+                                changeBannerImages(data.data.quiz_data.color);
+                                if(data.data.upsell_listing_analysis) {
+                                    showUpsellProducts(data.data.upsell_listing_analysis);
+                                }
+                                executeSlider();
+                                {% for tag in customer.tags %}
+                                if('{{tag}}'.includes('gender-male')) {
+                                    changeMenBannerImages(data.data.quiz_data.color);
+
+                                }
+                                {%endfor%}
+                                /*appendSkinTypeAnalysis(data.data.quiz_analysis,data.data.skin_type_analysis);
+                                renderReview(data.data.review_analysis, data.data.skin_goals_analysis);
+                                $(".beauty_text").text(data.data.collagen_analysis.description);
+                                $(".beauty_text").append(`<br> ${data.data.collagen_analysis.text}`);*/
+
+                            }
+
+                        }
+                    });
+                }
+
+
+            });
+
+
+        }
+        else{
+            let customerId = '{{customer.id}}'
+            $.ajax({
+                url: `https://api-quiz.bareanatomy.in/submit?quiz_id=${quiz_id}&customer_id=${customerId}&profile_id=1`,
+                //url: `https://api-test-quiz.bareanatomy.in/submit?quiz_id=2&customer_id=${customerId}&profile_id=1`,
+                type: "GET",
+                success: function(data) {
+                    if(data.data){
+                        let quizStateId = data.data.quiz_state_id;
+                        if(data.data.is_quiz_completed !=1){
+                            window.location.href = '/pages/quiz-3';
+                        }else{
+                            quiz_id == 2 ? localStorage.setItem("hairQuizStateId", quizStateId) : localStorage.setItem("menHairQuizStateId", quizStateId);
+                        }
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const previous_step = urlParams.get('previous_step');
+                        if(!previous_step || previous_step != 'hair-quiz') {
+                            $(' .update_dropdown').css('display','block');
+                        }
+                        getQuizQuestions(data.data);
+                        $.ajax({
+                            //url: `https://api-test-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+                            url: `https://api-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+                            type: "GET",
+                            success: function(data) {
+
+                                setTimeout(function(){
+                                    
+                                    jQuery(".loader_first").addClass("page_hide");
+                                    jQuery("#shopify-section-header, .announcement-bar").show();
+                                    jQuery(".skin_an").removeClass("page_hide");
+                                    
+                                }, 4000);
+                                if(data.data){
+                                    renderQuizData(data.data.quiz_data, data.data.quiz_analysis);
+                                    data.data.goals_analysis.forEach((goal, i) => {
+                                        appendHairGoals(goal, i);
+                                    });
+                                    renderReview(data.data.review_analysis, data.data.goals_analysis);
+                                    renderScaleAnalysis(data.data.hair_feel_analysis, data.data.scalp_feel_analysis);
+                                    changeImages(data.data.quiz_data.color);
+                                    changeBannerImages(data.data.quiz_data.color);
+                                    if(data.data.upsell_listing_analysis) {
+                                        showUpsellProducts(data.data.upsell_listing_analysis);
+                                    }
+                                    executeSlider();
+                                    {% for tag in customer.tags %}
+                                    if('{{tag}}'.includes('gender-male')) {
+                                        changeMenBannerImages(data.data.quiz_data.color);
+                                    }
+                                    {%endfor%}
+                                    /*appendSkinTypeAnalysis(data.data.quiz_analysis,data.data.skin_type_analysis);
+                                    renderReview(data.data.review_analysis, data.data.skin_goals_analysis);
+                                    $(".beauty_text").text(data.data.collagen_analysis.description);
+                                    $(".beauty_text").append(`<br> ${data.data.collagen_analysis.text}`);*/
+
+                                }
+
+                            }
+                        });
+
+
+                    }
+
+                },
+                error: function (jqXHR, exception) {
+                    window.location.href = '/pages/quiz-3';
+                }
+            });
+        }
+    }
+
+    function executeSlider() {
+        $(window).resize(function(){
+            console.log($(window).width(),"****")
+            if($(window).width() < 991) {
+                if(!$('.hair_analysis_products_inner .row').hasClass('slick-initialized')){
+
+                    $('.hair_analysis_products_inner .row').slick({
+                        slidesToShow: 3.5,
+                        slidesToScroll: 1,
+                        autoplay: false,
+                        autoplaySpeed: 2000,
+                        arrows: false,
+                        infinite: false,
+                        dots:false,
+                        variableWidth:true,
+                        responsive: [
+                            {
+                                breakpoint: 1024,
+                                settings: {
+                                    slidesToShow: 2.5,
+                                    slidesToScroll: 1,
+                                    infinite: true,
+                                }
+                            },
+                            {
+                                breakpoint: 768,
+                                settings: {
+                                    slidesToShow: 2.5,
+                                    slidesToScroll: 1
+                                }
+                            },
+                            {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1
+                                }
+                            }
+
+                        ]
+                    });
+
+                }
+            } else {
+                if($('.hair_analysis_products_inner .row').hasClass('slick-initialized')){
+                    $('.hair_analysis_products_inner .row').slick('unslick');
+                }
+
+            }
+
+        })
+
+
+        if(!$('.hair_analysis_products_inner .row').hasClass('slick-initialized') && $(window).width() < 991){
+
+            $('.hair_analysis_products_inner .row').slick({
+                slidesToShow: 3.5,
+                slidesToScroll: 1,
+                autoplay: false,
+                autoplaySpeed: 2000,
+                arrows: false,
+                infinite: false,
+                dots:false,
+                variableWidth:true,
+
+                responsive: [
+                    {
+                        breakpoint: 1024,
+                        settings: {
+                            slidesToShow: 2.5,
+                            slidesToScroll: 1,
+                            infinite: true,
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: 2.5,
+                            slidesToScroll: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            slidesToShow: 1,
+                            slidesToScroll: 1
+                        }
+                    }
+
+                ]
+            });
+        }
+        else if($('.hair_analysis_products_inner .row').hasClass('slick-initialized')){
+            $('.hair_analysis_products_inner .row').slick('unslick');
+        }
+
+// $('.slick-track').css("min-width", $(window).width());
+// $('.slick-slide').css("min-width", $(window).width());
+
+    }
+
+    function getQuizQuestions(quiz_answer) {
+        let quiz_id = 2;
+        {% for tag in customer.tags %}
+        if('{{tag}}'.includes('gender-male')) {
+            quiz_id = 3;
+        }
+        {% endfor %}
+        $.ajax({
+            url: `https://api-quiz.bareanatomy.in/quiz/get?quiz_id=${quiz_id}`,
+            type: "GET",
+            success: function(data) {
+                if(data && data.data && data.data["quizzes"].length && data.data.quizzes[0] && data.data.quizzes[0].questions) {
+                    displayQuestions(data.data.quizzes[0].questions, quiz_answer);
+                    $('.hair-new-look .chngeColor').on('click', function(){
+                        console.log(data.data.quizzes[0].questions, quiz_answer)
+                        updateQuizColor(data.data.quizzes[0].questions, quiz_answer,$(this));
+                    });
+                }
+            },
+            error: function (jqXHR, exception) {
+            }
+        })
+    }
+
+    function displayQuestions(questions, quiz_answer) {
+        let updateskinQuestions = [];
+        let updateprefQuestions = [];
+        let user_answers = [];
+        if(quiz_answer && quiz_answer.answers && quiz_answer.answers.length) {
+            user_answers = quiz_answer.answers.map(x => {
+                return {option_ids: x.answer.option_ids,text_array: x.answer.text_array, question_id: x.quiz_question_id}});
+        }
+        for(let i=0;i<questions.length;i++) {
+            if([34,37,53,46,40,43,63,65,69,70,68].indexOf(questions[i].quiz_question_id) > -1) {
+                addQuestion(quiz_answer, questions, questions[i].quiz_question_id, i, 1);
+            }
+        }
+        dependentToggleQuestion(quiz_answer, questions);
+        $('#updateskin .card-body').find('li input').on('keyup change',function() {
+            let display = false;
+            $('#updateskin .card-body').find('.skin_goals:visible').each(function (index, ob) {
+                let question_id = parseInt($(ob).attr('data-q-id'));
+                let answer_option_id = [];
+                let text_answers = [];
+                $(ob).find('li input[type=checkbox]:checked, li input[type=radio]:checked, li input[type=text]').each((x, ib) => {
+                    answer_option_id.push(parseInt($(ib).attr('data-o-id')));
+                    if ($(ib).attr('type') == 'text') {
+                        text_answers.push($(ib).val());
+                    }
+                });
+                let questionFindInQuizAnswers = user_answers.filter(x => x.question_id == question_id);
+                if (text_answers.length && questionFindInQuizAnswers.length && questionFindInQuizAnswers[0].text_array[0] != text_answers[0]) {
+                    display = true;
+                    return false;
+                }
+                else if (answer_option_id.length && questionFindInQuizAnswers.length &&
+                    JSON.stringify(questionFindInQuizAnswers[0].option_ids) != JSON.stringify(answer_option_id)) {
+                    display = true;
+                    return false;
+                }
+            });
+            let buttondiv = $('#updateskin .card-body').find('.btn.update-hair-quiz');
+            if(display == true) {
+                if($(buttondiv).hasClass('hidden')) {
+                    $(buttondiv).removeClass('hidden');
+                }
+            } else {
+                if(!$(buttondiv).hasClass('hidden')) {
+                    $(buttondiv).addClass('hidden');
+                }
+            }
+
+        });
+        $('#updatepref .card-body').find('li input').on('keyup change',function() {
+            let display = false;
+            $('#updatepref .card-body').find('.skin_goals:visible').each(function (index, ob) {
+                let question_id = parseInt($(ob).attr('data-q-id'));
+                let answer_option_id = [];
+                let text_answers = [];
+                $(ob).find('li input[type=checkbox]:checked, li input[type=radio]:checked, li input[type=text]').each((x, ib) => {
+                    answer_option_id.push(parseInt($(ib).attr('data-o-id')));
+                    if ($(ib).attr('type') == 'text') {
+                        text_answers.push($(ib).val());
+                    }
+                });
+                let questionFindInQuizAnswers = user_answers.filter(x => x.question_id == question_id);
+                if (text_answers.length && questionFindInQuizAnswers.length && questionFindInQuizAnswers[0].text_array[0] != text_answers[0]) {
+                    display = true;
+                    return false;
+                }
+                else if (answer_option_id.length && questionFindInQuizAnswers.length &&
+                    JSON.stringify(questionFindInQuizAnswers[0].option_ids) != JSON.stringify(answer_option_id)) {
+                    display = true;
+                    return false;
+                }
+            });
+            let buttondiv = $('#updatepref .card-body').find('.btn.update-hair-quiz');
+            if(display == true) {
+                if(buttondiv.hasClass('hidden')) {
+                    $(buttondiv).removeClass('hidden');
+                }
+            } else {
+                if(!buttondiv.hasClass('hidden')) {
+                    $(buttondiv).addClass('hidden');
+                }
+            }
+        });
+        $('#updateskin .card-body').append(`<button class="btn update-hair-quiz hidden" type="button" >Save</button>`);
+        $('#updatepref .card-body').append(`<button class="btn update-hair-quiz hidden" type="button" >Save</button>`);
+        $('#updatepref .update-hair-quiz').on('click', function(){
+            updateQuiz(quiz_answer,questions,$(this));
+        });
+        $('#updateskin .update-hair-quiz').on('click', function(){
+            updateQuiz(quiz_answer,questions,$(this));
+        });
+    }
+
+    function dependentToggleQuestion(quiz_answer, questions) {
+        let quiz_answers_questions = [];
+        if(quiz_answer && quiz_answer.answers && quiz_answer.answers.length) {
+            quiz_answers_questions = quiz_answer.answers.map( x=> x.quiz_question_id);
+        }
+        if(questions && questions.length) {
+            for(let question of questions) {
+                let findDiv = $(".update_dropdown").find(`.skin_goals.${question.question_key}[data-q-id=${question.quiz_question_id}]`);
+                if(findDiv && findDiv.length && parseInt($(findDiv).attr('data-q-id')) == question.quiz_question_id && (
+                    quiz_answers_questions.includes(question.quiz_question_id) || question.quiz_question_id == 53 || question.quiz_question_id == 69)) {
+                    $(findDiv).removeClass('hidden');
+                }
+            }
+        }
+    }
+
+    function addQuestion(quiz_answer, questions, quiz_question_id, index) {
+        if(quiz_question_id == questions[index].quiz_question_id) {
+            let sub_next_question = [];
+            let next_question_id = questions[index].next_quiz_question_id;
+            let QuestionDiv = $(`
+            <div class="skin_goals ${questions[index].question_key} hidden" data-q-id=${questions[index].quiz_question_id}>
+               <h3>${questions[index].name}</h3>
+                  <ul>
+                  </ul>
+            </div>`);
+            let type = 'radio';
+            if(questions[index].type === 2 && questions[index].maximum_selection == 1) {
+                type = "radio";
+            } else if(questions[index].type === 2 && questions[index].maximum_selection > 1) {
+                type = 'checkbox';
+            } else if(questions[index].type === 1) {
+                type = 'text';
+            }
+            let answer_option_ids = [];
+            let customerAnswer = [];
+            if(quiz_answer && quiz_answer.answers && quiz_answer.answers.length) {
+                customerAnswer = quiz_answer.answers.filter( x => x.quiz_question_id == questions[index].quiz_question_id).map(x => {
+                    return {option_ids: x.answer.option_ids,text_array: x.answer.text_array}});
+                if(customerAnswer && customerAnswer.length) {
+                    answer_option_ids = customerAnswer[0].option_ids;
+                }
+            }
+            for(let option of questions[index].options) {
+                let optionDiv;
+                if(quiz_question_id == 53 || quiz_question_id == 69) {
+                    $(QuestionDiv).find('ul').addClass('color');
+                    optionDiv = $(`<li><input type="${type}" name="${questions[index].question_key}" value="${option.option_id}" data-o-id="${option.option_id}">
+                  <span><img src="${option.image_url}" alt="" style="height:auto;width:auto;margin:auto;"></span><h5>${option.name}</h5></li>`);
+                } else {
+                    if(quiz_question_id == 42) {
+                        $(QuestionDiv).find('ul').addClass('fragrance');
+                    }
+                    if(quiz_question_id == 43 || quiz_question_id==70) {
+                        $(QuestionDiv).find('ul').addClass('bot_names');
+                    }
+                    if(type == 'text') {
+                        optionDiv = $(`<li><input type="${type}" name="${questions[index].question_key}" data-o-id="${option.option_id}" maxlength="15" minlength="1" required></li>`);
+                    } else {
+                        optionDiv = $(`<li><input type="${type}" name="${questions[index].question_key}" value="${option.option_id}" data-o-id="${option.option_id}" >
+                        <span class="check">${option.name}</span></li>`);
+                    }
+                }
+                let option_div_temp = ''
+                if(quiz_question_id == 53 || quiz_question_id == 69) {
+                    let optionDivForColor = `<li><input type="${type}" name="${questions[index].question_key}_color" data-q-id="${questions[index].quiz_question_id}" value="${option.option_id}" data-o-id="${option.option_id}" >
+                  <span class="check">${option.name}</span></li>`;
+                    $('#updateColorFragrance').find('ul').append(optionDivForColor);
+                    option_div_temp = (optionDivForColor);
+
+                }
+                $(QuestionDiv).find('ul').append(optionDiv);
+                sub_next_question.push({
+                    option_id: option.option_id,
+                    next_quiz_question_id: option.next_quiz_question_id
+                });
+                if(answer_option_ids.length && answer_option_ids.indexOf(option.option_id) >-1 && questions[index].type != 1) {
+                    $(optionDiv).find("input").attr("checked", true);
+                    if(quiz_question_id == 53 || quiz_question_id == 69) {
+                        $('#updateColorFragrance').find('ul').find(`input[value="${option.option_id}"]`).attr("checked", true);
+                    }
+                } else if(answer_option_ids.length && answer_option_ids.indexOf(option.option_id)>-1 && questions[index].type == 1) {
+                    $(optionDiv).find("input").attr("value", customerAnswer[0].text_array);
+                }
+            }
+            if([34,46,37,54,55,63,65].includes(questions[index].quiz_question_id)) {
+                $('#updateskin .card-body').append(QuestionDiv);
+            } else {
+                $('#updatepref .card-body').append(QuestionDiv);
+            }
+            $(QuestionDiv).find('li input[type=checkbox], li input[type=radio]').change(function() {
+                if($(QuestionDiv).find('li input[type=checkbox]:checked, li input[type=radio]:checked').length > questions[index].maximum_selection) {
+                    $(this).prop('checked', false);
+                } else if($(QuestionDiv).find('li input[type=checkbox]:checked, li input[type=radio]:checked').length < questions[index].minimum_selection) {
+                    $(this).prop('checked', true);
+                }
+                let option_id = parseInt($(this).attr('data-o-id'));
+                toggleQuestion(questions, index, quiz_question_id, option_id, 1, true);
+            });
+            if($(QuestionDiv).hasClass('bot_names')) {
+                $(QuestionDiv).find('li input[type=text]').keypress(function (e) {
+                    var keyCode = e.keyCode || e.which;
+                    var regex = /^[A-Za-z]+$/;
+                    var isValid = regex.test(String.fromCharCode(keyCode));
+                    return isValid;
+                });
+            }
+            let if_sub_question_exists = sub_next_question.filter(x => x.next_quiz_question_id != null);
+            while(if_sub_question_exists && if_sub_question_exists.length) {
+                let sub_question_index = questions.findIndex(x=> x.quiz_question_id == if_sub_question_exists[0].next_quiz_question_id);
+                addQuestion(quiz_answer, questions, if_sub_question_exists[0].next_quiz_question_id, sub_question_index);
+                if_sub_question_exists.shift();
+            }
+            if(next_question_id != null) {
+                let sub_question_index = questions.findIndex(x=> x.quiz_question_id == next_question_id);
+                addQuestion(quiz_answer, questions, next_question_id, sub_question_index);
+            }
+        }
+    }
+
+    function toggleQuestion(questions, index, quiz_question_id, quiz_option_id, displayDiv = 1, option = false) {
+        if(quiz_question_id == questions[index].quiz_question_id) {
+            let findDiv = $(".update_dropdown").find(`.skin_goals.${questions[index].question_key}[data-q-id=${quiz_question_id}]`);
+            if(findDiv && findDiv.length && parseInt($(findDiv).attr('data-q-id')) == questions[index].quiz_question_id) {
+                if((displayDiv == 1) && $(findDiv).hasClass('hidden')) {
+                    $(findDiv).removeClass('hidden');
+                } else if((displayDiv == 0) && !$(findDiv).hasClass('hidden')) {
+                    $(findDiv).addClass('hidden');
+                }
+            }
+
+            let sub_next_question = [];
+            let next_question_id = questions[index].next_quiz_question_id;
+            displayDiv = 0;
+            let if_sub_question_exists = [];
+            questions[index].options.forEach(y => {
+                $(findDiv).find('input[type=checkbox], li input[type=radio]').each((x, ib)=> {
+                    if(y.option_id == parseInt($(ib).attr('data-o-id')) && y.next_quiz_question_id != null) {
+                        if(parseInt($(ib).attr('data-o-id')) == quiz_option_id && $(ib).is(':checked'))  {
+                            displayDiv = 1;
+                            y["displayDiv"] = 1;
+                            y["option_display"] = true;
+                            if_sub_question_exists.push(y);
+                        } else if(parseInt($(ib).attr('data-o-id')) == quiz_option_id) {
+                            y["displayDiv"] = 0;
+                            y["option_display"] = false;
+                            if_sub_question_exists.push(y);
+                        }
+                        else if($(ib).is(':checked') && y.next_quiz_question_id != null) {
+                            y["displayDiv"] = 1;
+                            y["option_display"] = true;
+                            if_sub_question_exists.push(y);
+                        }
+
+                        else if(y.next_quiz_question_id != null) {
+                            y["displayDiv"] = 0;
+                            y["option_display"] = false;
+                            if_sub_question_exists.push(y);
+                        }
+                    }})
+            });
+            if(displayDiv == 1) {
+                option = true;
+            }
+            while(if_sub_question_exists && if_sub_question_exists.length) {
+                let sub_question_index = questions.findIndex(x=> x.quiz_question_id == if_sub_question_exists[0].next_quiz_question_id);
+                toggleQuestion(questions, sub_question_index, if_sub_question_exists[0].next_quiz_question_id, null, if_sub_question_exists[0].displayDiv, if_sub_question_exists[0].option_display);
+                if_sub_question_exists.shift();
+            }
+            displayDiv = 0;
+            if(next_question_id != null) {
+                if(option == true) {
+                    displayDiv = 1;
+                }
+                let sub_question_index = questions.findIndex(x=> x.quiz_question_id == next_question_id);
+                toggleQuestion(questions, sub_question_index, next_question_id, null, displayDiv, option);
+            }
+        }
+    }
+
+    function updateQuizColor(questions, quiz_answer, self) {
+        $(self).html('<i class="fa fa-spinner fa-spin"></i>Updating Quiz');
+        let question_id = parseInt($('#updateColorFragrance ul li input').attr('data-q-id'));
+        let answer_option_id = [];
+        let answerObj = {};
+        let quizChanged = false;
+        let answers=[];
+        $('#updateColorFragrance ul li input[type=radio]:checked').each((x, ib)=> {
+            answer_option_id.push(parseInt($(ib).attr('data-o-id')));
+        });
+
+        if($('#updateColorFragrance').find('.error.alert').is(':visible')) {
+            $('#updateColorFragrance').find('.error').remove();
+        }
+        if(!answer_option_id.length) {
+            let error_message = `<div class="alert alert-danger error" role="alert">Required*</div>`
+            let addedDiv = $('#updateColorFragrance .skin_goals').append(error_message);
+            return;
+        }
+
+        if(questions && questions.length && answer_option_id.length) {
+            customerAnswer = questions.filter( x => x.quiz_question_id == question_id)[0];
+            if(customerAnswer.type != 1) {
+                customerAnswer = customerAnswer.options.filter(x => (answer_option_id.indexOf(x.option_id)>-1 ));
+            }
+            answerObj = {
+                quiz_question_id: question_id,
+                option_ids: customerAnswer.type != 1 ? customerAnswer.map(x => x.option_id): customerAnswer.options.filter(x => (answer_option_id.indexOf(x.option_id)>-1 )).map(x => x.option_id),
+                "text_array": customerAnswer.type != 1 ? customerAnswer.map(x => x.name) : text_answers
+            }
+            answers.push(answerObj);
+            let originalCustomerQuestion = quiz_answer.answers.filter( x => x.quiz_question_id == question_id);
+            if(quizChanged == false && originalCustomerQuestion && originalCustomerQuestion.length && originalCustomerQuestion[0].answer &&
+                (JSON.stringify(originalCustomerQuestion[0].answer.option_ids) != JSON.stringify(answerObj.option_ids )
+                    || JSON.stringify(originalCustomerQuestion[0].answer.text_array) != JSON.stringify(answerObj.text_array ))) {
+                quizChanged = true;
+            }
+        }
+
+        if(!$('#updateColorFragrance').find('.alert.error').length) {
+            if(quizChanged == false) {
+                let addedDiv = $('<div class="alert alert-danger" role="alert">Please update your answers for your quiz to be updated</div>').insertAfter($(self));
+                setTimeout(function() {
+                    addedDiv.hide(1000);
+                }, 2000);
+            } else {
+                $.ajax({
+                    url: `https://api-quiz.bareanatomy.in/quiz/edit`,
+                    type: "POST",
+                    data: JSON.stringify({
+                        customer_id : '{{customer.id}}',
+                        quiz_state_id: quiz_answer.quiz_state_id,
+                        answers: answers
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.status == 200) {
+                            let addedDiv = $('<div class="alert alert-success" role="alert">Updated Quiz</div>').insertAfter($(self));
+                            setTimeout(function() {
+                                addedDiv.hide(1000);
+                            }, 2000);
+                            location.href =  '/pages/hair-analysis';
+                        }
+                        $(self).html('Save');
+                    },
+                    error: function (jqXHR, exception) {
+                    }
+                })
+            }
+
+
+        }
+    }
+
+
+    function updateQuiz(quiz_answer,questions, self) {
+        let answers = [];
+        let mainQuizDiv = $(self).parent();
+        let quizChanged = false;
+        $(mainQuizDiv).find('.skin_goals:visible').each(function(index, ob) {
+            let answerObj = {};
+            let question_id = parseInt($(ob).attr('data-q-id'));
+            let answer_option_id = [];
+            let text_answers = [];
+            $(ob).find('li input[type=checkbox]:checked, li input[type=radio]:checked, li input[type=text]').each((x, ib)=> {
+                answer_option_id.push(parseInt($(ib).attr('data-o-id')));
+                if($(ib).attr('type') == 'text') {
+                    text_answers.push($(ib).val());
+                }
+            });
+            if($(ob).find('.error.alert').is(':visible')) {
+                $(ob).find('.error').remove();
+            }
+            if(!answer_option_id.length || (text_answers.length && text_answers[0] && !text_answers[0].length)) {
+                let error_message = `<div class="alert alert-danger error" role="alert">Required*</div>`
+                let addedDiv = $(ob).append(error_message);
+                return;
+            }
+            if(questions && questions.length && answer_option_id.length) {
+                customerAnswer = questions.filter( x => x.quiz_question_id == question_id)[0];
+                if(customerAnswer.type != 1) {
+                    customerAnswer = customerAnswer.options.filter(x => (answer_option_id.indexOf(x.option_id)>-1 ));
+                }
+                answerObj = {
+                    quiz_question_id: question_id,
+                    option_ids: customerAnswer.type != 1 ? customerAnswer.map(x => x.option_id): customerAnswer.options.filter(x => (answer_option_id.indexOf(x.option_id)>-1 )).map(x => x.option_id),
+                    "text_array": customerAnswer.type != 1 ? customerAnswer.map(x => x.name) : text_answers
+                }
+                answers.push(answerObj);
+                let originalCustomerQuestion = quiz_answer.answers.filter( x => x.quiz_question_id == question_id);
+                if(quizChanged == false && originalCustomerQuestion && originalCustomerQuestion.length && originalCustomerQuestion[0].answer &&
+                    (JSON.stringify(originalCustomerQuestion[0].answer.option_ids) != JSON.stringify(answerObj.option_ids )
+                        || JSON.stringify(originalCustomerQuestion[0].answer.text_array) != JSON.stringify(answerObj.text_array ))) {
+                    quizChanged = true;
+                }
+            }
+        });
+        if(!$(mainQuizDiv).find('.alert.error').length) {
+            if(quizChanged == false) {
+                let addedDiv = $('<div class="alert alert-danger" role="alert">Please update your answers for your quiz to be updated</div>').insertAfter($(self));
+                setTimeout(function() {
+                    addedDiv.hide(1000);
+                }, 2000);
+            } else {
+                $(self).html('<i class="fa fa-spinner fa-spin"></i>Updating Quiz');
+                $.ajax({
+                    url: `https://api-quiz.bareanatomy.in/quiz/edit`,
+                    type: "POST",
+                    data: JSON.stringify({
+                        customer_id : '{{customer.id}}',
+                        quiz_state_id: quiz_answer.quiz_state_id,
+                        answers: answers
+                    }),
+                    contentType: 'application/json; charset=utf-8',
+                    dataType: 'json',
+                    success: function(response) {
+                        if(response.status == 200) {
+                            let addedDiv = $('<div class="alert alert-success" role="alert">Updated Quiz</div>').insertAfter($(self));
+                            setTimeout(function() {
+                                addedDiv.hide(1000);
+                            }, 2000);
+                            location.href =  '/pages/hair-analysis';
+                        }
+                        $(self).html('Save');
+                    },
+                    error: function (jqXHR, exception) {
+                    }
+                })
+            }
+        }
+
+    }
+
+    function renderQuizData(quizData, hairAnalysisData){
+        $("#structure").text(quizData.hair_type || '');
+        $("#scalp-type").text(hairAnalysisData.scalp_feel|| '');
+        if(hairAnalysisData.hair_feel) {
+            $(`<li class="list-group-item d-flex justify-content-between align-items-center">Hair Type<span id="hair-type">${hairAnalysisData.hair_feel}</span></li>`).insertAfter($('.hair_analysis_listing ul #scalp-type').parent('li'));
+        }
+        if(hairAnalysisData.hair_lose) {
+            $(`<li class="list-group-item d-flex justify-content-between align-items-center">Hair Fall Intensity<span id="intensity">${hairAnalysisData.hair_lose}</span></li>`).insertAfter($('.hair_analysis_listing ul #scalp-type').parent('li'));
+        }
+        if(hairAnalysisData.formulation_preference) {
+            $(`<li class="list-group-item d-flex justify-content-between align-items-center">Chosen Range<span id="hair-formulation_preference">${hairAnalysisData.formulation_preference}</span></li>`).insertAfter($('.hair_analysis_listing ul #scalp-type').parent('li'));
+        }
+        if(hairAnalysisData.stress) {
+            $(`<li class="list-group-item d-flex justify-content-between align-items-center">Stress Level<span id="stress-level">${hairAnalysisData.stress}</span></li>`).insertAfter($('.hair_analysis_listing ul #scalp-type').parent('li'));
+        }
+        // $("#intensity").text(hairAnalysisData.hair_lose || '');
+    }
+
+    function hideSubscriptionButton() {
+        if($('#mySidenav').hasClass('sidenav-size') || $('#mySidenav1').hasClass('sidenav-size')) {
+            $('#hair-analysis .wrapper.skin_an .formula_btn').css('visibility', 'hidden');
+        } else {
+            $('#hair-analysis .formula_btn').css('visibility', 'unset');
+        }
+    }
+
+    setInterval(hideSubscriptionButton, 100);
+
+    function changeImages(color){
+        switch(color){
+            case 'Hotty Naughty (Red)':
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Red_mask.svg?v=1607661819');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/red-shampoo.svg?v=1607662355');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/red-conditioner.svg?v=1607662954');
+                $('.custom_box_analysis .copy-of-3-step-haircare-regime img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_Red_Final_175_200.png?v=1607015011');
+                $('.custom_box_analysis .shampoo-conditionernew img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/S_C_Red_Final_175_200.png?v=1606989037');
+
+                break;
+            case 'Plush Blush (pink)':
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_mask.svg?v=1607662177');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/pink-shampoo.svg?v=1607662354');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/pink-conditioner.svg?v=1607662952');
+                $('.custom_box_analysis .copy-of-3-step-haircare-regime img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_shampoo_Conditioner_Mask.png?v=1620815277');
+                $('.custom_box_analysis .shampoo-conditionernew img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_shampoo_Conditioner.png?v=1620815276');
+                $('.custom_box_analysis .customized-shampoo-hair-oil img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/S_Oil_Pink.png?v=1636531830');
+
+                break;
+            case 'Tea Green' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Green_Moringa_Mask_svg.svg?v=1632980152');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Green_Moringa_Shampoo_svg.svg?v=1632980152');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Green_Moringa_Conditioner_svg.svg?v=1632980152');
+                $('.custom_box_analysis .copy-of-3-step-haircare-regime img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Haircare_3step_regime.png?v=1632980953');
+                $('.custom_box_analysis .shampoo-conditionernew img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Green_Moringa_shampoo_Conditioner.png?v=1632980953');
+                $('.custom_box_analysis .customized-shampoo-hair-oil img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/S_Oil_Moringa.png?v=1636531830');
+
+                break;
+            case 'Beige' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/buttercream_frosting_Mask.svg?v=1637638839');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Buttercream_frosting_Shampoo.svg?v=1637638839');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/buttercream_frosting_Connditioner.svg?v=1637638839');
+                $('.custom_box_analysis .copy-of-3-step-haircare-regime img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Haircare_3step_regime_1fe2d8ad-1d88-49a2-bc4d-90bb331e2bb3.png?v=1637638839');
+                $('.custom_box_analysis .shampoo-conditionernew img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Buttercream_frosting_shampoo_Conditioner.png?v=1637638839');
+                $('.custom_box_analysis .customized-shampoo-hair-oil img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Group_2898.png?v=1637655667');
+
+                break;
+            case 'Floozy Bloozy (Blue)' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Blue_mask.svg?v=1607661577');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/blue-shampoo.svg?v=1607662349');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/blue-conditioner.svg?v=1607662951');
+                $('.custom_box_analysis .copy-of-3-step-haircare-regime img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_Blue_Final_175_200.png?v=1607015012');
+                $('.custom_box_analysis .shampoo-conditionernew img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/S_C_Blue_Final_175_200.png?v=1606989037');
+                $('.custom_box_analysis .customized-shampoo-hair-oil img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/S_Oil_Blue.png?v=1636531830');
+
+                break;
+            case 'Sprinkle Spurple (purple)' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/purple_mask.svg?v=1607661868');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/purple-_shampoo.svg?v=1607662337');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/purple-conditioner.svg?v=1607662946');
+                $('.custom_box_analysis .copy-of-3-step-haircare-regime img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_conditioner_Shampoo_Mask.png?v=1620814451');
+                $('.custom_box_analysis .shampoo-conditionernew img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_conditioner_Shampoo.png?v=1620814451');
+                $('.custom_box_analysis .customized-shampoo-hair-oil img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/S_Oil_Purple.png?v=1636531830');
+
+                break;
+            case 'Poppy Peachy (Peach) ':
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Peach_mask.svg?v=1607661936');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/peach-shampoo.svg?v=1607662354');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/yellow-conditioner.svg?v=1607662954');
+                $('.custom_box_analysis .copy-of-3-step-haircare-regime img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Peach_shampoo_conditioner_mask.png?v=1620815646');
+                $('.custom_box_analysis .shampoo-conditionernew img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Peach_shampoo_conditioner.png?v=1620815646');
+
+                break;
+            case 'Color Free' :
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_mask.svg?v=1607661844');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/white-shampoo.svg?v=1607662347');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/white-conditioner.svg?v=1607662952');
+                $('.custom_box_analysis .copy-of-3-step-haircare-regime img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_conditioner_Shampoo_Mask.png?v=1620816116');
+                $('.custom_box_analysis .shampoo-conditionernew img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_conditioner_Shampoo.png?v=1620816115');
+                $('.custom_box_analysis .customized-shampoo-hair-oil img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/S_Oil_White.png?v=1636531830');
+
+                break;
+            default:
+                $(".mask_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_mask.svg?v=1607661844');
+                $(".shampoo_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/white-shampoo.svg?v=1607662347');
+                $(".conditioner_img").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/white-conditioner.svg?v=1607662952');
+                $('.custom_box_analysis .copy-of-3-step-haircare-regime img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_conditioner_Shampoo_Mask.png?v=1620816116');
+                $('.custom_box_analysis .shampoo-conditionernew img').attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_conditioner_Shampoo.png?v=1620816115');
+
+                break;
+
+
+
+
+        }
+        // switch (color) {
+        //     case 'Shampoo + Conditioner':
+        //     case 'Customized Shampoo + Conditioner':
+        //         switch (bottleColorId.toString()) {
+        //             case 'Plush Blush (pink)':
+        //                 $('.custom_box_analysis ')
+        //                 return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_shampoo_Conditioner.png?v=1620815276';
+        //             case 'Tea Green' :
+        //                 return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Green_Moringa_shampoo_Conditioner.png?v=1632980953';
+        //             case 'Floozy Bloozy (Blue)':
+        //                 return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/S_C_Blue_Final_175_200.png?v=1606989037';
+        //             case 'Sprinkle Spurple (purple)':
+        //                 return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_conditioner_Shampoo.png?v=1620814451';
+        //             case 'Poppy Peachy (Peach) ':
+        //                 return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Peach_shampoo_conditioner.png?v=1620815646';
+        //             case 'Color Free':
+        //                 return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_conditioner_Shampoo.png?v=1620816115';
+        //             case 'Hotty Naughty (Red)':
+        //                 return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/S_C_Red_Final_175_200.png?v=1606989037';
+        //             default:
+        //                 return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_conditioner_Shampoo.png?v=1620816115';
+        //         }
+
+
+
+        // case "3 Step Haircare Regime":
+        // case "3 Step Customized Haircare Regime":
+        //     switch (bottleColorId.toString()) {
+        //         case 'Plush Blush (pink)':
+        //             return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_shampoo_Conditioner_Mask.png?v=1620815277';
+        //             case 'Tea Green' :
+        //             return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Haircare_3step_regime.png?v=1632980953';
+        //         case 'Floozy Bloozy (Blue)':
+        //             return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_Blue_Final_175_200.png?v=1607015012';
+        //         case 'Sprinkle Spurple (purple)':
+        //             return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_conditioner_Shampoo_Mask.png?v=1620814451';
+        //         case 'Poppy Peachy (Peach) ':
+        //             return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Peach_shampoo_conditioner_mask.png?v=1620815646';
+        //         case 'Color Free':
+        //             return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_conditioner_Shampoo_Mask.png?v=1620816116';
+        //         case 'Hotty Naughty (Red)':
+        //             return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_Red_Final_175_200.png?v=1607015011';
+        //         default:
+        //             return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/White_conditioner_Shampoo_Mask.png?v=1620816116';
+        //     }
+
+
+        // }
+
+    }
+
+    function changeMenBannerImages(color){
+        switch(color){
+            case 'Hotty Naughty (Red)':
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_red_12bbd166-a2e5-4302-a70b-86962333c226.png?v=1607677501');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_Red_3e12c91b-4f54-4273-84a0-342a1b589107.png?v=1607677447');
+                break;
+            case 'Plush Blush (pink)':
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_Desktop.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Pink_Mobile.jpg?v=1636531811');
+                break;
+
+            case 'Tea Green' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Moringa_Desktop.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Moringa_Mobile.jpg?v=1636531811');
+                break;
+            case 'Floozy Bloozy (Blue)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Blue_Desktop.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Blue_Mobile.jpg?v=1636531811');
+                break;
+            case 'Sprinkle Spurple (purple)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_Desktop.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_Mobile.jpg?v=1636531811');
+                break;
+            case 'Poppy Peachy (Peach)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_peach_986c1b5f-9401-4b5a-adee-e08c18a4b736.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_peach_d7175628-459d-468c-aaa5-df110fb235bc.png?v=1607677447');
+                break;
+            case 'Color Free' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_Desktop-1.jpg?v=1636531750');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Purple_Mobile-1.jpg?v=1636531811');
+                break;
+            case 'Beige' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Male_Desktop.jpg?v=1637638840');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Male_Mobile.jpg?v=1637638840');
+            default:
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_white_9fe2a512-817f-4db2-bd38-00f1ca56a68d.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_White_a6f38c49-9b33-4374-a8df-8e64047c52dc.png?v=1607677447');
+                break;
+        }
+    }
+
+
+    function changeBannerImages(color){
+        switch(color){
+            case 'Hotty Naughty (Red)':
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_red_12bbd166-a2e5-4302-a70b-86962333c226.png?v=1607677501');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_Red_3e12c91b-4f54-4273-84a0-342a1b589107.png?v=1607677447');
+                break;
+            case 'Plush Blush (pink)':
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_pink_dc5ebf33-4546-452b-b8f1-278844c05567.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_pink_b12045d1-3eec-4633-8360-8e2fb624d134.png?v=1607677447');
+                break;
+
+            case 'Tea Green' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Desktop.jpg?v=1632910666');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Moringa_mobile_pink.jpg?v=1632910817');
+                break;
+            case 'Floozy Bloozy (Blue)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_green_1b2d0975-7561-4319-93b1-d5179f91bf1a.png?v=1607677499');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_green_4cbe3eb8-ed63-464d-a969-cae307b39225.png?v=1607677448');
+                break;
+            case 'Sprinkle Spurple (purple)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_purple_11d430dd-9625-42f9-b4e5-44de201fb102.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_purple_ffd7cb78-e98a-4765-b198-b4b4b1e1c4ca.png?v=1607677451');
+                break;
+            case 'Poppy Peachy (Peach)' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_peach_986c1b5f-9401-4b5a-adee-e08c18a4b736.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_peach_d7175628-459d-468c-aaa5-df110fb235bc.png?v=1607677447');
+                break;
+            case 'Color Free' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_white_9fe2a512-817f-4db2-bd38-00f1ca56a68d.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_White_a6f38c49-9b33-4374-a8df-8e64047c52dc.png?v=1607677447');
+                break;
+            case 'Beige' :
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Female_Desktop.jpg?v=1637638840');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Female_Mobile.jpg?v=1637638840');
+                break;
+            default:
+                $(".img-banner-web").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Dynamic_content_banner_white_9fe2a512-817f-4db2-bd38-00f1ca56a68d.png?v=1607677500');
+                $(".img-banner-mb").attr("src",'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_care_Analysis_page_Mob_Dynamic_content_banner_White_a6f38c49-9b33-4374-a8df-8e64047c52dc.png?v=1607677447');
+                break;
+
+
+
+
+        }
+    }
+    function appendHairGoals(skinGoal, i){
+        console.log("index", i);
+        $("#boxed-div").after(`<div class="box ${i % 2 === 1?'active':''}">
+         <div class="sub-head">
+            <span><i>Since your goal is to</i></span>
+            <h3>${skinGoal.name || ''}</h3>
+            <p>${skinGoal.description || ''}</p>
+         </div>
+
+         <div class="row line-list">
+            <div class="col-lg-2 col-md-3 col-sm-3 col-4">
+               <div class="list d-flex flex-column">
+                  <img src="${skinGoal.ingredients[0].image_url || 'https://cdn.shopify.com/s/files/1/0255/3302/2244/files/skin_humectant.png?v=1606718539'}" alt="">
+                  <h5>${skinGoal.ingredients[0].name}</h5>
+                  <p>${skinGoal.ingredients[0].benefit}</p>
+                  <span>EWG Score - ${skinGoal.ingredients[0].ewg_rating}</span>
+               </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-3 col-4">
+              <div class="list d-flex flex-column">
+                  <img src="${skinGoal.ingredients[1].image_url || 'https://cdn.shopify.com/s/files/1/0255/3302/2244/files/skin_humectant.png?v=1606718539'}" alt="">
+                  <h5>${skinGoal.ingredients[1].name}</h5>
+                  <p>${skinGoal.ingredients[1].benefit}</p>
+                  <span>EWG Score - ${skinGoal.ingredients[1].ewg_rating}</span>
+               </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-3 col-4">
+               <div class="list d-flex flex-column">
+                  <img src="${skinGoal.ingredients[2].image_url || 'https://cdn.shopify.com/s/files/1/0255/3302/2244/files/skin_humectant.png?v=1606718539'}" alt="">
+                  <h5>${skinGoal.ingredients[2].name}</h5>
+                  <p>${skinGoal.ingredients[2].benefit}</p>
+                  <span>EWG Score - ${skinGoal.ingredients[2].ewg_rating}</span>
+               </div>
+            </div>
+         </div>
+      </div>`)
+
+    }
+    function renderReview(reviewData, hairAnalysisGoal){
+        $("#rating").text(reviewData.review_rating+'%');
+        $(".smoother_skin_info_subtitle").text(reviewData.header_descriptive_text);
+        $(".review-heading").text(reviewData.header_line || '');
+        $(".before_skin_img").attr("src",reviewData.image_url_before);
+        $(".after_skin_img").attr("src",reviewData.image_url_after);
+        $(".review-text").text(reviewData.review || '');
+    }
+
+    function showUpsellProducts(upsell_products) {
+        if(upsell_products && upsell_products.length == 0) {
+            $('.bogo_add').css('display','none');
+        } else {
+            for(const upsell_product of upsell_products) {
+                let handle = upsell_product.product;
+                let productUrl = ''; price = 0, comparePrice = 0, product_handle = '', product_available = true, inventory_quantity = 0, image= "";
+                if(handle.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().includes("hairoil")) {
+                    product_handle = 'hair-oil-3';
+                    {% for variant in all_products["hair-oil-3"].variants %}
+                    if({{variant.id}} == upsell_product.variant_id) {
+                        price = {{ variant.price }}/100;
+                        comparePrice = {{ variant.compare_at_price }}/100;
+                        product_available = {{ variant. available }};
+                        inventory_quantity = {{ variant.inventory_quantity }} ;
+                        image = '{{all_products["hair-oil-3"] | img_url }}';
+                    }
+                    {%endfor %}
+                }
+                if(handle.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().includes("hairserum")) {
+                    product_handle = 'hair-serum-3';
+                    {% for variant in all_products["hair-serum-3"].variants %}
+                    if({{variant.id}} == upsell_product.variant_id) {
+                        price = {{ variant.price }}/100;
+                        comparePrice = {{ variant.compare_at_price }}/100;
+                        product_available = {{ variant. available }};
+                        inventory_quantity = {{ variant.inventory_quantity }} ;
+                        image = '{{all_products["hair-serum-3"] | img_url }}';
+                    }
+                    {%endfor %}
+                }
+                if(handle.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().includes("biotingummies")) {
+                    product_handle = 'biotin-gummies-2';
+                    {% for variant in all_products["biotin-gummies-2"].variants %}
+                    if({{variant.id}} == upsell_product.variant_id) {
+                        price = {{ variant.price }}/100;
+                        comparePrice = {{ variant.compare_at_price }}/100;
+                        product_available = {{ variant. available }};
+                        inventory_quantity = {{ variant.inventory_quantity }} ;
+                        image = '{{all_products["biotin-gummies-2"] | img_url }}';
+                    }
+                    {%endfor %}
+                }
+                if(handle.replace(/[^a-zA-Z0-9]/g, "").toLowerCase().includes("hairomega")) {
+                    product_handle = 'hair-omega-2';
+                    {% for variant in all_products["hair-omega-2"].variants %}
+                    if({{variant.id}} == upsell_product.variant_id) {
+                        price = {{ variant.price }}/100;
+                        comparePrice = {{ variant.compare_at_price }}/100;
+                        product_available = {{ variant. available }};
+                        inventory_quantity = {{ variant.inventory_quantity }} ;
+                        image = '{{all_products["hair-omega-2"] | img_url }}';
+                    }
+                    {%endfor %}
+                }
+                let percentOff = Math.round(((comparePrice - price) * 100)/comparePrice);
+                if (product_available == true && inventory_quantity > 0) {
+                    $('.bogo_add').append(`<label><div class="left_text" style="float:left;width:85%;">
+                        <input type="checkbox" id="${product_handle}" value="${upsell_product.variant_id}" data-price="${price}">
+                        <span style="color:red;">Offer!&nbsp;</span>Add <a href="${upsell_product.product_url}" target="_blank">${upsell_product.product}</a> (₹${price} <del style="color:grey;">₹${comparePrice}</del>)
+                        <p style="padding-left:19px;margin-bottom:5px;">${upsell_product.marketing_msg}<span style="color:red;"> @${percentOff}% off.</span></p></div><div class="right_text" style="float:right;width:15%;"><img src="${image}"></div>
+                        </label><br>`);
+                    $('.add_sub_product').append(`<div class="flex-column"><label><input type="checkbox" id="${product_handle}" value="${upsell_product.variant_id}" data-price="${price}">
+                        <div class="product_display"><div><div class="product_image_u"><img src="${image}"></div><div class="product_des"><span class="offer">Offer!</span><p class="product_link"><a href="${upsell_product.product_url}" target="_blank">
+                        Add ${upsell_product.product}</a><span> (₹${price} </span><del style="font-weight:bold;"><span>₹${comparePrice}</span></del>)
+                        </p><p class="product_msg web-msg"><span>${upsell_product.marketing_msg}</span><span style="font-weight:bold;"> @${percentOff}% off.</span></p></div></div><p class="product_msg mob-msg"><span>${upsell_product.marketing_msg}</span><span style="font-weight:bold;"> @${percentOff}% off.</span></p></div></label></div>`);
+                }
+            }
+
+        }
+        $('#hair-oil-3').change(function() {
+            let productprice = parseFloat($('.price_change').text().replace(/,/g, ''));
+            let upsellPrice = Number($('.hair_analysis_products #hair-oil-3').attr('data-price'));
+            let totalPrice = productprice + upsellPrice;
+            if(!$('.hair_analysis_products #hair-oil-3').is(":checked")) {
+                totalPrice = productprice - upsellPrice ;
+            }
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        });
+        $('#hair-serum-3').change(function() {
+            let productprice = parseFloat($('.price_change').text().replace(/,/g, ''));
+            let upsellPrice = Number($('.hair_analysis_products #hair-serum-3').attr('data-price'));
+            let totalPrice = productprice + upsellPrice;
+            if(!$('.hair_analysis_products #hair-serum-3').is(":checked")) {
+                totalPrice = productprice - upsellPrice ;
+            }
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        });
+        $('#biotin-gummies-2').change(function() {
+            let productprice = parseFloat($('.price_change').text().replace(/,/g, ''));
+            let upsellPrice = Number($('.hair_analysis_products #biotin-gummies-2').attr('data-price'));
+            let totalPrice = productprice + upsellPrice;
+            if(!$('.hair_analysis_products #biotin-gummies-2').is(":checked")) {
+                totalPrice = productprice - upsellPrice ;
+            }
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        });
+        $('#hair-omega-2').change(function() {
+            let productprice = parseFloat($('.price_change').text().replace(/,/g, ''));
+            let upsellPrice = Number($('.hair_analysis_products #hair-omega-2').attr('data-price'));
+            let totalPrice = productprice + upsellPrice;
+            if(!$('.hair_analysis_products #hair-omega-2').is(":checked")) {
+                totalPrice = productprice - upsellPrice ;
+            }
+            $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        });
+        // let productUrl = ''; price = 0, comparePrice = 0, product_handle = '', product_available = true, inventory_quantity = 0, image= "";
+        // product_handle = 'ashwagandha-for-hair';
+        // {% for variant in all_products["ashwagandha-for-hair"].variants %}
+        //     if({{variant.id}} == 39436671451182) {
+        //         price = {{ variant.price }}/100;
+        //         comparePrice = {{ variant.compare_at_price }}/100;
+        //         product_available = {{ variant. available }};
+        //         inventory_quantity = {{ variant.inventory_quantity }} ;
+        //         image = '{{all_products["ashwagandha-for-hair"] | img_url }}';
+        //      }
+        // {%endfor %}
+        // let percentOff = Math.round(((comparePrice - price) * 100)/comparePrice);
+
+        // if (product_available == true && inventory_quantity > 0) {
+        //     $('.bogo_add').append(`<label style="width:100%"><div class="left_text" style="float:left;width:85%;">
+        //         <input type="checkbox" id="stress-aid-3" value="39436671451182" data-price="${price}">
+        //         <span style="color:red;">Offer!&nbsp;</span>Add <a href="/products/stress-aid-1" target="_blank">Ashwagandha for Hair</a> <span style="color:red;"> @${percentOff}% off</span> <p style="padding-left:19px;margin-bottom:5px;">(₹${price} <del style="color:grey;">₹${comparePrice}</del>)</p>
+        //         </div><div class="right_text" style="float:right;width:15%;"><img src="${image}"></div>
+        //         </label><br>`);
+        // }
+        // $('#stress-aid-3').change(function() {
+        //     let productprice = parseFloat($('.price_change').text().replace(/,/g, ''));
+        //     let upsellPrice = Number($('.bogo_add #stress-aid-3').attr('data-price'));
+        //     let totalPrice = productprice + upsellPrice;
+        //     if(!$('.bogo_add #stress-aid-3').is(":checked")) {
+        //         totalPrice = productprice - upsellPrice ;
+        //     }
+        //     $('.price_change').html(`<i class="fa fa-inr" aria-hidden="true"></i>` + totalPrice );
+        // });
+    }
+
+
+    async function updateColorFragrance(e) {
+        jQuery.noConflict();
+        $('.updateColor')[0].click();
+    }
+
+    function buySubscription(e){
+        let btnHtml = $(e).html();
+        if( $('#updateColorFragrance ul li input[type=radio]:checked').length == 0) {
+            updateColorFragrance(e);
+            return;
+        }
+
+
+        $(e).html('<i class="fa fa-circle-o-notch fa-spin"></i>&nbsp;Adding to cart');
+        $('.buy-subs').attr('disabled', true);
+        console.log(e);
+        var isMobile = ( ( window.innerWidth <= 768 ));
+        let variantId = $('.hair_analysis_products input[name=one]:checked').val();
+        let addUpsellProducts = [];
+        if($('.hair_analysis_products #hair-omega-2').is(":checked")) {
+            addUpsellProducts.push(Number($('.hair_analysis_products #hair-omega-2').val()));
+        }
+        if($('.hair_analysis_products #biotin-gummies-2').is(":checked")) {
+            addUpsellProducts.push(Number($('.hair_analysis_products #biotin-gummies-2').val()));
+        }
+        if($('.hair_analysis_products #hair-serum-3').is(":checked")) {
+            addUpsellProducts.push(Number($('.hair_analysis_products #hair-serum-3').val()));
+        }
+        if($('.hair_analysis_products #hair-oil-3').is(":checked")) {
+            addUpsellProducts.push(Number($('.hair_analysis_products #hair-oil-3').val()));
+        }
+        if($('.hair_analysis_products #stress-aid-3').is(":checked")) {
+            addUpsellProducts.push(Number($('.hair_analysis_products #stress-aid-3').val()));
+        }
+        variantId = $('input[name=one]:checked').val();
+        // console.log(variantId)
+        buyFormulation(variantId, e, addUpsellProducts, btnHtml);
+        // if (isMobile) {
+        //     let variantId = $('.hair_analysis_products input[name=one]:checked').val();
+        //     let addUpsellProducts = [];
+        //     if($('.mobile-form #hair-omega-2').is(":checked")) {
+        //         addUpsellProducts.push(Number($('.mobile-form #hair-omega-2').val()));
+        //     }
+        //     if($('.mobile-form #biotin-gummies-2').is(":checked")) {
+        //         addUpsellProducts.push(Number($('.mobile-form #biotin-gummies-2').val()));
+        //     }
+        //     if($('.mobile-form #hair-serum-3').is(":checked")) {
+        //         addUpsellProducts.push(Number($('.mobile-form #hair-serum-3').val()));
+        //     }
+        //     if($('.mobile-form #hair-oil-3').is(":checked")) {
+        //         addUpsellProducts.push(Number($('.mobile-form #hair-oil-3').val()));
+        //     }
+        //     if($('.mobile-form #stress-aid-3').is(":checked")) {
+        //         addUpsellProducts.push(Number($('.mobile-form #stress-aid-3').val()));
+        //     }
+        //     variantId = $('input[name=one]:checked').val();
+        //     console.log(variantId)
+        //     buyFormulation(variantId, e, addUpsellProducts);
+        // }
+        // else{
+        // let variantId = $('.web-form input[name=one]:checked').val();
+        // let addUpsellProducts = [];
+        // if($('.web-form #hair-omega-2').is(":checked")) {
+        //     addUpsellProducts.push(Number($('.web-form #hair-omega-2').val()));
+        // }
+        // if($('.web-form #biotin-gummies-2').is(":checked")) {
+        //     addUpsellProducts.push(Number($('.web-form #biotin-gummies-2').val()));
+        // }
+        // if($('.web-form #hair-serum-3').is(":checked")) {
+        //     addUpsellProducts.push(Number($('.web-form #hair-serum-3').val()));
+        // }
+        // if($('.web-form #hair-oil-3').is(":checked")) {
+        //     addUpsellProducts.push(Number($('.web-form #hair-oil-3').val()));
+        // }
+        // if($('.web-form #stress-aid-3').is(":checked")) {
+        //     addUpsellProducts.push(Number($('.web-form #stress-aid-3').val()));
+        // }
+        // variantId = $('input[name=one]:checked').val();
+
+        //     console.log(variantId)
+        //     buyFormulation(variantId, e, addUpsellProducts);
+        // }
+    }
+    function buyFormulation(variantId, e,addUpsellProducts, btnHtml ){
+        for(const upsellProduct of addUpsellProducts){
+            jQuery.ajax({
+                type: "POST",
+                url: "/cart/add.js",
+                data: {
+                    id: upsellProduct, quantity: 1
+                },
+                dataType: 'json',
+                async: false,
+                success: function (data) {
+                    window.location.href = '/cart';
+
+                }
+            });
+        }
+        var data_Id = variantId;
+        var qty = 1;
+        jQuery.ajax({
+            type: "POST",
+            url : "/cart/add.js",
+            data : {
+                id : data_Id, quantity: qty
+            },
+            dataType : 'json',
+            async : false,
+            success : function(data){
+                jQuery.getJSON('/cart.js', function(cart) {
+                    var cartCount = cart.item_count
+                    jQuery('.cart_items').text(cartCount);
+                    var cartContents = fetch('/cart.js')
+                        .then(response => response.json())
+                        .then(res => {
+                            window.location.href = '/cart';
+                            populateData(res);
+                            jQuery('.cart_items').text(cartCount);
+                            jQuery('.cart_items').addClass('cart_ball_bouncing');
+                            setTimeout(function(){
+                                $('.cart_items').removeClass('cart_ball_bouncing');
+                            }, 3000);
+                            $('#total_price').text(res.items_subtotal_price/100);
+                            $('#total_price').text(Math.max(Math.round((Number($('#total_price').text().replace(/[^a-zA-Z0-9.]/g, "")) - Number($('.wallet_bal').text().replace(/[^a-zA-Z0-9.]/g, ""))) * 100) / 100, 0));
+                            $('#subtotal_price').text(res.items_subtotal_price/100);
+                            $(e).html(btnHtml);
+                            $('.buy-subs').attr('disabled', false);
+                        });
+
+                    //window.location.href = "/cart";
+
+                });
+            },
+            error : function(){
+                console.log('error');
+            }
+        });
+
+    }
+    function populateData(data){
+        console.log('data=====>', data);
+        $('#product_wrapper').empty();
+        if(data.items.length){
+            $('.make_payment_cart').css('display', 'block');
+            $('.pay').show();
+            $('.shop').hide();
+            data.items.forEach(function(item, i ) {
+                $.ajax({
+                    url: '/products/' + item.handle + '.js',
+                    dataType: 'json',
+                    async: false,
+                    success: function(product){
+                        product.variants.forEach(function(variant) {
+
+                            if (variant.compare_at_price != null && variant.id == item.variant_id){
+                                item["compare_at_price"] = variant.compare_at_price;
+                            }
+                        });
+                        console.log("price=====>", item);
+                        $('#product_wrapper').append(`<div class="product_detail_cart">
+              <div class="product_image">
+              <img class="cart-item__image ls-is-cached lazyloaded" src="${item.image}" alt="${item.title}" data-cart-item-image="">
+           </div>
+           <div class="product_detail_box"><div class="product_box_1">
+             <div class="product_name">
+             <h5 class="d-flex w-80 justify-content-between"><span class="text-left">
+              ${(item.product_title.length > 50 ) ? item.product_title.slice(0, 49)+ '...' : item.product_title}</span>
+              ${product.tags.includes("PERSONALISED GIFT") ? '<mark style="background-color: #f8cbc0;">Gift</mark>' : ''}
+              ${product.tags.includes("FREE GIFT") ? '<mark style="background-color: #f8cbc0;">Free</mark>' : ''}
+            </h5>
+            <h4 class="d-flex w-80 justify-content-between">
+             ${(item.variant_options[2] ? `<b> ${item.variant_options[2]}-month membership</b>`: `` )}
+             </h4>
+            <p>${item.product_type}</p>
+            </div>
+            <div class="product_price_box"><h5 class="w-20 justify-content-between text-right">
+              <span class="text-right"><i class="fa fa-inr" aria-hidden="true"></i>${(item.price / 100) * item.quantity }</span>
+             </h5>
+             <h4 class="w-20 justify-content-between text-right">
+             ${item["compare_at_price"]? `<del><span class="price_compare"><i class="fa fa-inr" aria-hidden="true"></i>${(item.compare_at_price/ 100) * item.quantity }</del></span>` :''}
+
+             </h4>
+            </div></div>
+
+             <div class="items_number">
+                <button type="button" onclick="changeQuantityToCart(${item.id},-1)">
+                   <i class="fa fa-minus" aria-hidden="true"></i>
+                </button>
+                 <input type="number" id="input_${item.id}" class="form-control cart-item__qty_input" value="${item.quantity}" data-key="${item.id}" readonly>
+                 <button type="button" onclick="changeQuantityToCart(${item.id},1)">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                 </button>
+              </div>
+           </div>
+         </div>`)
+
+                    }
+
+
+                });
+
+            });
+        }
+        else{
+            $('#product_wrapper').append('<img class="empty-cart-img" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Empty_cart_icon_final-01.jpg?v=1610091095" alt="Empty Cart">');
+            $('.make_payment_cart').css('display', 'none');
+            $('.pay').hide();
+            $('.shop').show();
+
+        }
+
+
+
+    }
+    function renderScaleAnalysis(hair, scalp){
+        console.log("hair is=====>", hair, scalp);
+        $(".hair-desc").text(hair.description);
+        $(".scalp-desc").text(scalp.description);
+        var body = $("body");
+        body.append(`<style>.hair_health figure:after{left:${(hair.rating/5)*100}%;}</style>`);
+        body.append(`<style>.hair_health .scalp:after{left:${(scalp.rating/5)*100}%;}</style>`);
+    }
+
+
+</script>
+

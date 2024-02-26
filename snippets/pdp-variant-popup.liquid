@@ -1,0 +1,170 @@
+<div class="pdp-variant-popup-section">
+  <div class="pdp-variant-popup">
+    <div class="pdp-variant-popup-head">
+      <h2><span>Buy Smart, Save Big!</span> <div class="pdp-variant-popup-close"></div></h2>
+    </div>
+    <div class="pdp-variant-popup-body">
+      <div class="pdp-variant-popup-img">
+      <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/doctor-2.gif?v=1708937090" /></figure>
+      </div>
+      {% assign var_size = product.variants.size %}
+      {% if var_size == 4 %}
+        {% assign var_limit = 3 %}
+        {% elsif var_size == 3 %}
+        {% assign var_limit = 2 %}
+        {% endif %}
+      {% for variant in product.variants %}
+      <div class="pdp-variant-popup-list" data-title="{{ variant.title }}">
+        <div class="pdp-variant-popup-wrap">
+          <div class="pdp-variant-popup-left">
+        {{ variant.title }}
+          </div>
+          <div class="pdp-variant-popup-right">
+            <span>{{ variant.price | money }}</span>
+            <s>{{ variant.compare_at_price | money }}</s>
+            {%- capture saved_amount -%}{{ variant.compare_at_price | minus: variant.price | times: 100.0 | divided_by: variant.compare_at_price | round }}%{%- endcapture -%}
+            <em>FLAT {{ saved_amount }} OFF</em>
+          </div>
+        </div>
+      </div>
+      {% if forloop.index == var_limit %}
+        <div class="pdp-variant-popup-img">
+      <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/b-a-2.gif?v=1708937091" /></figure>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="bottom-footer-cart-section">
+      <div class="bottom-footer-cart">
+        <div class="bottom-footer-cart-price">
+          <span>{{ product.price | money }}</span>
+          {% if product.price < product.compare_at_price %}
+          <s>{{ product.compare_at_price | money }}</s> | 
+          <em>Save {{ product.compare_at_price | minus: product.price | money }}</em>
+            {% endif %}
+        </div>
+        <div class="bottom-footer-cart-btn">
+          <!-- <a href="#">Buy Now</a> -->
+          <a href="#" class="main-cart-btn-add">{% render 'cart-icon' %} Buy Now</a>
+        </div>
+    </div>
+  </div>
+  </div>
+</div>
+
+<style>
+  .pdp-variant-popup-section .bottom-footer-cart{padding-left:7px;}
+  .pdp-variant-popup-section .bottom-footer-cart-section{position:unset;display:block;max-width:600px;}
+  /* .pdp-variant-popup-section .bottom-footer-cart-price span{font-size:13px;}
+  .pdp-variant-popup-section .bottom-footer-cart-price em{font-size:9px;}
+  .pdp-variant-popup-section .bottom-footer-cart-btn{width:110px;}
+  .pdp-variant-popup-section .bottom-footer-cart-price{width:calc(100% - 110px);}
+  .pdp-variant-popup-section .bottom-footer-cart-btn a{font-size:12px;padding:8px 10px;min-width:auto;margin:0;} */
+  .pdp-variant-popup-section{width:100%;position:fixed;top:0;left:0;background:rgba(0,0,0,0.5);height:100vh;z-index:99999;display:none;}
+  .pdp-variant-popup-body .pdp-variant-popup-section{display:block;}
+  .pdp-variant-popup{max-width:600px;width:94%;margin:12vh auto;max-height:80vh;overflow:hidden;overflow-y:auto;background:#fff;border-radius:8px;}
+  .pdp-variant-popup-head{width:100%;}
+  .pdp-variant-popup-head h2{position:relative;margin:0;background:#FCEDE1;font-size:14px;font-weight:700;color:#000;padding:15px 15px;font-family:'Inter';border-bottom:solid 2px #b4b4b4;}
+  .pdp-variant-popup-close{height:30px;width:30px;display:inline-block;position:absolute;top:5px;right:5px;transform:rotate(45deg);-webkit-transform:rotate(45deg);-o-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);}
+.pdp-variant-popup-close:after{content:'';width:15px;height:2px;background:#000;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);}
+.pdp-variant-popup-close:before{content:'';width:2px;height:15px;background:#000;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);-webkit-transform:translate(-50%,-50%);-o-transform:translate(-50%,-50%);-moz-transform:translate(-50%,-50%);-ms-transform:translate(-50%,-50%);}
+.pdp-variant-popup-body{width:100%;padding:15px 15px;background:#f2f2f2;}
+  .pdp-variant-popup-img{width:100%;margin:0 0 15px;}
+  .pdp-variant-popup-list{width:100%;margin:0 0 15px;background:#FFF6EF;border:solid 1px #432009;position:relative;padding:12px 10px;}
+  .pdp-variant-popup-wrap{width:100%;display:flex;flex-wrap:wrap;justify-content:space-between;}
+  .pdp-variant-popup-left{font-size:12px;font-weight:700;color:#000000;width:50%;padding-left:18px;position:relative;line-height:1.8;}
+  .pdp-variant-popup-left:after{content:'';position:absolute;top:50%;left:0;border-radius:50%;transform:translateY(-50%);-webkit-transform:translateY(-50%);-o-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);height:13px;width:13px;border:solid 1px #432009;background:#FFE1C9;}
+  .pdp-variant-popup-list.active .pdp-variant-popup-left:before{display:block;content:'';position:absolute;top:50%;left:3px;border-radius:50%;transform:translateY(-50%);-webkit-transform:translateY(-50%);-o-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);height:7px;width:7px;background:#432009;z-index:99;}
+  .pdp-variant-popup-right{width:45%;}
+  .pdp-variant-popup-left:before{display:block;}
+  .pdp-variant-popup-right span{font-size:14px;font-weight:700;color:#242424;letter-spacing:0;}
+  .pdp-variant-popup-right s{font-size:8px;font-weight:300;color:#242424;letter-spacing:0;}
+  .pdp-variant-popup-right em{font-size:8px;font-weight:500;color:#fff;padding:1px 5px;letter-spacing:0;background:#DA0000;font-style:normal;position:absolute;top:0;right:0;}
+  .add-to-cart-main.btn--full{font-size: 25px;
+    font-weight: 400;
+    line-height: 1.2;
+    text-transform: uppercase;background:#000;color:#fff;}
+
+  @media(max-width:767px){
+    .btn.add-to-cart-main{display:none;}
+    .pdp-variant-popup-section {    bottom: 10px;
+    left: 0px;
+    top: auto;
+    height: auto;}
+    .pdp-variant-popup{    width: 99%; margin:0px;border-radius:2px;}
+    .pdp-variant-popup-body {padding:0px;}
+  }
+  
+</style>
+
+<script>
+  $(document).ready(function(){
+    $('.pdp-variant-popup-list').removeClass('active');
+    var sel_data_title = $('.variant-input input:checked').val();
+  $('.pdp-variant-popup-list[data-title="'+sel_data_title+'"]').addClass('active');
+  
+$('.variant-input label').on('click', function(e){
+  
+    setTimeout(function(){
+        var price_c_m = $('.product-block.product-block--price .product__price.product__price--compare').text();
+        var price_m = $('.product-block.product-block--price .product__price.on-sale').text();
+        var price_save = $('.product-block.product-block--price .product__price-savings').text();
+        $('.bottom-footer-cart-price span').text(price_m)
+        $('.bottom-footer-cart-price s').text(price_c_m)
+        $('.bottom-footer-cart-price em').text(price_save)
+      $('.pdp-variant-popup-list').removeClass('active');
+      var sel_data_title = $('.variant-input input:checked').val();
+      $('.pdp-variant-popup-list[data-title="'+sel_data_title+'"]').addClass('active');
+  
+      }, 100);
+  
+})
+    $('.pdp-variant-popup-left').on('click', function(e){
+      e.preventDefault();
+      $('.pdp-variant-popup-list').removeClass('active');
+      $(this).parents('.pdp-variant-popup-list').addClass('active');
+      var data_title = $(this).parents('.pdp-variant-popup-list').attr('data-title');
+      $('.variant-input').each(function(){
+        var data_val = $(this).attr('data-value');
+        if(data_title == data_val){
+          $(this).find('label').trigger('click');
+        }
+      })
+    })
+      $('.pdp-variant-popup-close').on('click', function(e){
+        e.preventDefault();
+        $('body').removeClass('pdp-variant-popup-body');
+      })
+    $('.add-to-cart-main').on('click', function(e){
+        e.preventDefault();
+        $('body').addClass('pdp-variant-popup-body');
+      })
+     $('.main-cart-btn-add').on('click', function(e){
+        e.preventDefault();
+       
+       $('.btn.btn--full.add-to-cart').trigger('click');
+       setTimeout(function(){
+       $('.pdp-variant-popup-close').trigger('click');
+    }, 300)
+      })
+    
+    
+  })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

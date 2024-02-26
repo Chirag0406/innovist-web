@@ -1,0 +1,56 @@
+{% if section.settings.desktop_img != blank %}
+  <div class="inner-pages-banner-section">
+    <figure
+      {% if section.settings.mobile_img != blank %}
+        class="inner-banner-desktop"
+      {% endif %}
+    >
+      <img src="{{ section.settings.desktop_img | img_url: 'master' }}">
+    </figure>
+    {% if section.settings.mobile_img != blank %}
+      <figure class="inner-banner-mobile"><img src="{{ section.settings.mobile_img | img_url: 'master' }}"></figure>
+    {% endif %}
+  </div>
+{% endif %}
+
+<style>
+  .inner-pages-banner-section{width:100%;}
+  .inner-pages-banner-section figure{margin:0;}
+  .inner-pages-banner-section figure img{width:100%;}
+  .inner-banner-desktop{display:block !important;}
+  .inner-banner-mobile{display:none !important;}
+  @media(max-width:767px){
+    .inner-banner-desktop{display:none !important;}
+  .inner-banner-mobile{display:block !important;}
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Inner Page Banner",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "desktop_img",
+      "label": "Desktop Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "mobile_img",
+      "label": "Mobile Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Inner Page Banner",
+      "category": "Inner Page Banner"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,38 @@
+<style>
+    .brands{
+        display       : flex;
+        flex-direction: row;
+        height: 50px;
+        margin: 0 2em;
+    }
+
+    .brand-item{
+        display        : flex;
+        align-items    : center;
+        justify-content: center;
+        flex-basis     : 100%;
+    }
+</style>
+
+    <div data-section-id="brands-list">
+        <div class="brands">
+            {% for block in brands_list %}
+                <a onClick="sendEventToGA('Homepage', '{{block.settings.brand_name}}','Brand_Click')" href="{{block.settings.brand_url}}" target={% if block.settings.brand_url %} "_blank" {%else%} "_self" {%endif%} class="brand-item" style="
+                background-color: {{block.settings.bg_color}};
+                color           : {{block.settings.font_color}};
+                border-left:2px solid {{block.settings.border_color}};
+                border-right:2px solid {{block.settings.border_color}};
+                min-width: 124px;
+                ">
+                {% if block.settings.brand_logo %}
+                    <img data-name="{{ block.settings.brand_name }}" src="{{block.settings.brand_logo | image_url }}" style="
+                            height:95%;
+                            ">
+                {% endif %}
+                {% if block.settings.brand_text %}
+                    <span>{{block.settings.brand_text}}</span>
+                {% endif %}
+                </a>
+            {% endfor %}
+        </div>
+    </div>

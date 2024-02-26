@@ -1,0 +1,801 @@
+{% schema %}
+{
+"name": "concerns",
+"settings": []
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+<style>
+
+    .concern{
+        font-family: Helvetica !important;
+    }
+    .concern h2{
+        font-family: Helvetica !important;
+    }
+
+    .product_rec img {
+        height: 100%;
+        width: 100%;
+    }
+    img{
+        max-width:unset !important;
+    }
+    /* bootstap class */
+    .visually-hidden,
+    .visually-hidden-focusable:not(:focus):not(:focus-within) {
+        position: absolute !important;
+        width: 1px !important;
+        height: 1px !important;
+        padding: 0 !important;
+        margin: -1px !important;
+        overflow: hidden !important;
+        clip: rect(0, 0, 0, 0) !important;
+        white-space: nowrap !important;
+        border: 0 !important
+    }
+
+    .clearfix::after {
+        display: block;
+        clear: both;
+        content: ""
+    }
+
+    .accordion-header {
+        margin-bottom: 0
+    }
+
+    .accordion-item {
+        background-color: #fff;
+        border: 1px solid rgba(0, 0, 0, .125)
+    }
+
+    .accordion-item:first-of-type {
+        border-top-left-radius: .25rem;
+        border-top-right-radius: .25rem
+    }
+
+    .accordion-item:first-of-type .accordion-button {
+        border-top-left-radius: calc(.25rem - 1px);
+        border-top-right-radius: calc(.25rem - 1px)
+    }
+
+    .accordion-item:not(:first-of-type) {
+        border-top: 0
+    }
+
+    .accordion-item:last-of-type {
+        border-bottom-right-radius: .25rem;
+        border-bottom-left-radius: .25rem
+    }
+
+    .accordion-item:last-of-type .accordion-button.collapsed {
+        border-bottom-right-radius: calc(.25rem - 1px);
+        border-bottom-left-radius: calc(.25rem - 1px)
+    }
+
+    .accordion-item:last-of-type .accordion-collapse {
+        border-bottom-right-radius: .25rem;
+        border-bottom-left-radius: .25rem
+    }
+
+    .accordion-body {
+        padding: 1rem 1.25rem
+    }
+
+    .accordion-button:hover {
+        z-index: 2
+    }
+
+    .accordion-button:focus {
+        z-index: 3;
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 .25rem rgba(13, 110, 253, .25)
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+        .accordion-button::after {
+            transition: none
+        }
+    }
+
+    .accordion-button {
+        position: relative;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        padding: 1rem 1.25rem;
+        font-size: 1rem;
+        color: #212529;
+        text-align: left;
+        background-color: #fff;
+        border: 0;
+        border-radius: 0;
+        overflow-anchor: none;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, border-radius .15s ease
+    }
+
+    @media (prefers-reduced-motion:reduce) {
+        .accordion-button {
+            transition: none
+        }
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #0c63e4;
+        background-color: #e7f1ff;
+        box-shadow: inset 0 -1px 0 rgba(0, 0, 0, .125)
+    }
+
+    .accordion-button:not(.collapsed)::after {
+        background-image: url("https://cdn.shopify.com/s/files/1/0564/5444/7262/files/dash-lg.svg?v=1628308539");
+        /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%230c63e4'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e"); */
+        /* transform: rotate(-180deg) */
+    }
+
+    .accordion-button::after {
+        flex-shrink: 0;
+        width: 1rem;
+        height: 1rem;
+        margin-left: auto;
+        content: "";
+        background-image: url("https://cdn.shopify.com/s/files/1/0564/5444/7262/files/plus-lg.svg?v=1628308539");
+        /* background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23212529'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e"); */
+        background-repeat: no-repeat;
+        background-size: 1rem;
+        transition: transform .2s ease-in-out
+    }
+
+    .collapse:not(.show) {
+        display: none
+    }
+
+    .collapsing {
+        height: 0;
+        overflow: hidden;
+        transition: height .35s ease
+    }
+
+    .btn.product__submit__add {
+        display: inline-block;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        background-color: transparent;
+        border: 1px solid transparent;
+        padding: .375rem .5rem;
+        font-size: 1rem;
+        border-radius: .25rem;
+        transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+    }
+
+
+    .second_banner_sec img {
+        width: 100%;
+        height: 100%;
+    }
+
+    .container,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+        max-width: unset;
+    }
+
+    .container,
+    .container-fluid,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container-xl,
+    .container-xxl {
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+        margin-right: 0 !important;
+        margin-left: 0 !important;
+        width: unset;
+    }
+
+    .accordion-item {
+        border: unset !important;
+        border-bottom: 1px solid rgba(0, 0, 0, .125) !important;
+        background-color: #fff;
+    }
+
+    .accordion-button,
+    .accordion-body {
+        padding: 1rem 0rem !important;
+    }
+
+    .accordion-button {
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 24px;
+        letter-spacing: -0.25px;
+        text-transform: uppercase;
+        color: #1D232E;
+    }
+
+    .product__price--strike,
+    .product__price,
+    .product__type {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 23.2px;
+        font-feature-settings: 'case'on;
+        color: #6B6B6B;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: black !important;
+        background-color: #fff !important;
+    }
+
+    .accordion-button:focus {
+        box-shadow: unset !important;
+    }
+
+    .inner_sec {
+        display: flex;
+        width: 40%;
+        flex-direction: column;
+    }
+
+    .inner_sec p {
+        margin-top: 14px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 144.99%;
+        font-feature-settings: 'case'on;
+        color: #6B6B6B;
+    }
+
+    .inner_sec_2 {
+        display: inline-block;
+        width: 40%;
+    }
+
+    .accordion-body {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .inner_sec_2 h2 {
+        font-size: 16px;
+        line-height: 144.99%;
+        text-align: left;
+        font-feature-settings: 'case'on;
+        color: #363636;
+    }
+
+    .second_sec_text1 {
+        margin-top: 26px;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 144.99%;
+        font-feature-settings: 'case'on;
+        color: #363636;
+    }
+
+    .second_banner_sec {
+        text-align: center;
+        width: 100%;
+        margin-bottom:2em;
+    }
+
+    .page {
+        margin: 0;
+        max-width: unset;
+        padding: 0;
+    }
+
+    .second_sec_text2 {
+        font-size: 16px;
+        font-weight: 500;
+        line-height: 23px;
+        letter-spacing: 144.99%;
+        padding: 0 210px;
+        text-align: center;
+        font-feature-settings: 'case'on;
+        color: #6B6B6B;
+    }
+
+    .second_sec_button {
+        background: #000000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 16px 32px;
+        margin: 24px auto 14px;
+    }
+
+    .second_sec_button span {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+        letter-spacing: -0.25px;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        flex: none;
+        order: 0;
+        flex-grow: 0;
+    }
+
+    .second_sec_href {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 144.99%;
+        /* or 23px */
+        text-decoration-line: underline;
+        font-feature-settings: 'case'on;
+        color: #525252;
+    }
+
+    .first_banner {
+        /*background-image: url('https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Top_Banner.jpg?v=1628062543');*/
+
+    }
+
+    .text_section {
+        padding: 176px 130px 188px;
+    }
+
+    .banner_title_1 {
+        font-weight: bold;
+        font-size: 48px;
+        line-height: 54px;
+        text-transform: capitalize;
+        color: #FFE800;
+    }
+
+    .banner_title_2 {
+        font-weight: 600;
+        font-size: 32px;
+        line-height: 50px;
+        text-transform: capitalize;
+        color: #FFFFFF;
+    }
+
+    .banner_title_3 {
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 144.99%;
+        font-feature-settings: 'case'on;
+        color: #FFFFFF;
+    }
+
+    .first_banner .mob {
+        display: none;
+    }
+
+    .first_banner .desk {
+        display: block;
+    }
+
+    .second_banner {
+        padding: 0 180px;
+    }
+
+    .subtitle_text {
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 25px;
+        text-transform: uppercase;
+        font-feature-settings: 'case'on;
+        color: #363636;
+        margin-bottom: 10px;
+    }
+
+    .product__price {
+        margin-bottom: 11px;
+    }
+
+    .product__submit_cus {
+        border: 1px solid #000000;
+    }
+
+    .product__submit__buttons {
+        margin: 0;
+    }
+
+    .btn.product__submit__add {
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        color: #000000;
+        flex: none;
+        order: 0;
+    }
+
+    .product-form {
+        margin-top: 10px;
+    }
+
+    .product_add_sec {
+        padding-left: 14px;
+    }
+
+    .btn.product__submit__add:hover {
+        background-color: var(---color-primary);
+        color: var(---color-primary-opposite);
+        border: 1px solid var(---color-primary);
+    }
+
+    .product_text {
+        margin-top: 22px;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 144.99%;
+        font-feature-settings: 'case'on;
+        color: #6B6B6B;
+    }
+
+    .inner_sec img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .product_link{
+        margin: 20px 0;
+    }
+
+    .product_link a {
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 144.99%;
+        font-feature-settings: 'case'on;
+        color: #000000 !important;
+        display:flex;
+        align-items:center;
+        border-bottom: 1px solid black;
+    }
+
+    .product_link svg{
+        width : 22px;
+        margin-left: 2%;
+        flex : 20%;
+    }
+
+    .product_link span{
+        flex : 90%;
+    }
+
+    .accordion-header {
+        border-bottom: 1px solid rgba(0, 0, 0, .125) !important;
+    }
+
+    .accordion,
+    .accordion_faq {
+        border-bottom: unset;
+    }
+
+    .faq {
+        margin-top: 109px;
+        margin-bottom: 51px;
+    }
+
+    .product_add_sec {
+        width: 45%;
+    }
+
+    .product_price_div {
+        width: 200%;
+    }
+
+    .recommended_product {
+        margin-top: 20px;
+    }
+
+    .product_rec h2 {
+        font-family: Playfair !important;
+        font-size:24px
+    }
+
+    /**/
+    @media only screen and (max-width: 600px) {
+        .second_banner_sec img {
+            /*width: 305px; */
+            /*height: 170px; */
+        }
+
+        .second_sec_text1 {
+            margin-top: 21px;
+            font-size: 18px;
+        }
+
+        .second_sec_text2 {
+            margin-top: 18px;
+            padding: 0;
+        }
+
+        .second_sec_button {
+            padding: 16px 30px;
+        }
+
+        .first_banner .mob {
+            display: block;
+        }
+
+        .first_banner .desk {
+            display: none;
+        }
+
+        .text_section {
+            padding: 79px 30px 0px;
+        }
+
+        .banner_title_1 {
+            font-size: 36px;
+            line-height: 39px;
+            margin-bottom: 5px;
+        }
+
+        .banner_title_2 {
+            font-size: 20px;
+            line-height: 50px;
+            margin-bottom: 16px;
+        }
+
+        .banner_title_3 {
+            font-size: 16px;
+        }
+
+        .second_banner {
+            padding: 0 34px;
+        }
+
+        .inner_sec,
+        .inner_sec_2 {
+            display: inline-block;
+            width: 100%;
+        }
+
+        .inner_sec img {
+            /* height: 307px;
+            width: 307px; */
+            width: 100%;
+            height: 100%;
+        }
+
+        .inner_sec p {
+            margin-top: 14px;
+            margin-top: 25px;
+            font-size: 16px;
+            margin-bottom: 2rem;
+        }
+
+        .inner_sec_2 {
+            padding-left: 0px;
+        }
+
+        .accordion-body {
+            display: inline-block;
+        }
+
+        .inner_sec_2 h2 {
+            font-size: 14px;
+        }
+
+        .product_rec h2 {
+            font-size: 24px;
+        }
+
+        .recommended_product{
+            margin-top: 0px;
+        }
+
+        .inner_sec_2 img {
+            height: 100%;
+            min-width: 110px;
+        }
+
+        .subtitle_text {
+            font-size: 16px;
+            line-height: 116.99%;
+        }
+
+        .faq {
+            margin-top: 60px;
+            margin-bottom: 48px;
+        }
+
+        .product_add_sec,
+        .product_price_div {
+            width: 100%;
+        }
+
+        .first_banner {
+           /* background-image: url('https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Top_Banner_1.jpg?v=1628065111');
+            height: calc(100vh - 125px);*/
+        }
+
+        .product__price--strike,
+        .product__price,
+        .product__type {
+            line-height: 17.2px;
+            font-size: 12px;
+        }
+
+    }
+</style>
+
+<section class="page concern">
+    <div class="first_banner">
+        <img class="mob" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Mobile_Square.png?v=1648020425" style="width: 100%; height: 100%;">
+        <img class="desk" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Concerns_Banner_without_CTA.png?v=1647952255" style="width: 100%; height: 100%;">
+    </div>
+    <div class="second_banner">
+        <div class="faq">
+            <div class="accordion concerns-accordion" id="accordionExample">
+            </div>
+        </div>
+        <div class="second_banner_sec">
+            <img data-src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Concerns_Botton_banner.png?v=1648029711"
+                 class="lazyload" />
+            {% comment %} <p class="second_sec_text1">
+                Let's Explore The Buzziest Ingredients In The Beauty Verse
+            </p>
+            <p class="second_sec_text2">
+                Consumers are becoming smart; they want to know exactly how a particular ingredient will benefit
+                their
+                skin in the long run.
+                Luckily for them, we are doing just that.
+            </p>
+            <button class="second_sec_button" onclick="location.href='/pages/ingredient'">
+                <span>View Ingredients List</span>
+            </button>
+            <a href="/collections/all" class="second_sec_href">Or Shop Our Bestsellers</a> {% endcomment %}
+        </div>
+    </div>
+</section>
+
+<script>
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+        let accordionItems = [
+          {
+            "heading"               : "DAMAGED HAIR",
+            "heading_image"         : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Damage_2fd837c4-0a55-443e-a8ca-6e39c3c13f85.png?v=1648645841",
+            "heading_description"   : "If your hair is dry, rough, thinning and breaks easily, it needs intervention. You need a product that delivers 3x strengthening!.",
+            "collection_heading"    : "Expert | Damage Repair Range",
+            "collection_image"      : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Untitled-1_aacacac8-a7b8-4b1c-bc18-f2bf8fcdba6e.png?v=1649051980",
+            "collection_description": "Enriched with Coconut Milk Protein and Ceramides A2 is your best bet as it promises to nourish and protect.",
+            "shop_link"             : "/collections/concerns-damage-repair"
+          },
+          {
+            "heading"               : "FRIZZY HAIR",
+            "heading_image"         : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Frizz.png?v=1648646650",
+            "heading_description"   : "Does your hair turn into a poof as soon as you step out? Straightening frizzy hair won’t help, heat tools can worsen the damage. You need products that offer 24 hour frizz control.",
+            "collection_heading"    : "Expert | Anti Frizz Range",
+            "collection_image"      : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Frizz_65abdd4a-03a7-458d-ad8e-5f5d61f31758.png?v=1649069869",
+            "collection_description": "Potent ingredients like Hyaluronic Acid and Fatty Acids in the Anti-Frizz range will not only control frizz but also prevent it. The Anti Frizz mask is the perfect pick for you.",
+            "shop_link"             : "/collections/concerns-anti-frizz"
+          },
+          {
+            "heading"               : "ROUGH HAIR",
+            "heading_image"         : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Rough.png?v=1648646703",
+            "heading_description"   : "Hair looking coarse, dry and a tangled mess. Heat, pollution, chemical treatments—the culprits are many. We have nourishing products that reduce damage by 27%.",
+            "collection_heading"    : "Expert | Ultra Smoothing Range",
+            "collection_image"      : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Smoothing.png?v=1649069869",
+            "collection_description": "Moisturising ingredients like Omega-3,6,9 and Phytosqualan in the Ultra Smoothing range will work to smoothen your strands. Try the Ultra Smoothing Serum.",
+            "shop_link"             : "/collections/concerns-ultra-smooth"
+          },
+          {
+            "heading"               : "COLOR TREATED HAIR",
+            "heading_image"         : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Colour.png?v=1648646750",
+            "heading_description"   : "Hair fried by color treatments? Hairfall, dry and porous hair that doesn’t even hold color anymore? Your hair needs intense moisturisation and color protection.",
+            "collection_heading"    : "Expert | Color Protect Range",
+            "collection_image"      : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Colour_1e1c81d9-3c12-4f55-a11e-d769fd059b88.png?v=1649069869",
+            "collection_description": "It will nourish your hair back to health with Quinoa Protein & Amino Acid Complex while our ProPigment Technology provides ™65% color protection.",
+            "shop_link"             : "/collections/concerns-color-protect"
+          },
+          {
+            "heading"               : "THIN HAIR",
+            "heading_image"         : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Thin_Hair.png?v=1649747874",
+            "heading_description"   : "Transform your fine, thin strands into full bodied and more textured hair with a product that delivers voluminous hair for up to 24 hours.",
+            "collection_heading"    : "Expert | Volumizing Range",
+            "collection_image"      : "https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Main.png?v=1649748222",
+            "collection_description": "The EXPERT Volumizing range formulated with high grade ingredients like Rice Milk Protein and Peptides help to add an instant lift to the hair imparting a shine for up to 24 hours. Try the Volumizing Shampoo.",
+            "shop_link"             : "/collections/volumizing"
+          }
+        ]
+        let accordionElement = document.querySelector('.concerns-accordion');
+        for(let item of accordionItems){
+            let className = item.heading.toLowerCase().split(" ").join("-");
+            let html = `
+            <div class="accordion-item" id="${className}">
+                <h2 class="accordion-header" id="heading-${className}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapse${className}" aria-expanded="false" aria-controls="#collapse${className}">
+                        ${item.heading}
+                    </button>
+                </h2>
+                <div id="collapse${className}" class="accordion-collapse collapse" aria-labelledby="heading${className}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div class="inner_sec">
+                            <img data-src="${item.heading_image}" class="lazyload " />
+                            <p>${item.heading_description}</p>
+                        </div>
+                        <div class="inner_sec_2">
+                            <h2><b>WE RECOMMEND</b></h2>
+                            <div class="product_rec recommended_product">
+                                <div>
+                                    <h2> ${item.collection_heading}</h2>
+                                    <img data-src="${item.collection_image}" class="lazyload" />
+                                </div>
+                                <p class="product_text">
+                                    ${item.collection_description}
+                                </p>
+                                <p class="product_link" style="display:flex">
+                                    <a href="${item.shop_link}">
+                                        <span>SHOP NOW </span>
+                                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 476.213 476.213" style="enable-background:new 0 0 476.213 476.213;" xml:space="preserve">
+                                            <polygon points="345.606,107.5 324.394,128.713 418.787,223.107 0,223.107 0,253.107 418.787,253.107 324.394,347.5 345.606,368.713 476.213,238.106 "/>
+                                            <g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
+                                        </svg>
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            `
+            accordionElement.innerHTML += html;
+        }
+        
+        
+        for(let item of accordionItems){
+            let className = item.heading.toLowerCase().split(" ").join("-");
+            document.querySelector(`#collapse${className}`).addEventListener('click', function(){
+                window.location.href = item.shop_link;
+            })
+        }
+      
+        function hashChangeEvent(){
+            console.log("ssssss")
+            let hash = window.location.hash;
+            if(hash){
+                let hashId = hash.substring(1);
+                let accordionItem = document.getElementById(hashId);
+                if(accordionItem){
+                    let button = accordionItem.querySelector(".accordion-button");
+                    button.classList.remove('collapsed');
+                    let accordionBody = accordionItem.querySelector(`#collapse${hashId}`);
+                    accordionBody.classList.add("show");
+                    accordionItem.scrollIntoView();
+                }
+            }
+        }
+        hashChangeEvent();
+        window.onhashchange = function(){
+            location.reload();
+        };
+    });
+</script>

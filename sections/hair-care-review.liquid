@@ -1,0 +1,106 @@
+
+
+<section class="testimonials hair-care-testmonial">
+	<div class="container">
+	<h6>{{ section.settings.hair_care_review_heading}}</h6>
+	{% if section.blocks.size > 0 %}
+      <div class="row">
+        <div class="col-sm-12">
+			<div id="customers-testimonials" class="owl-carousel">
+				{% for block in section.blocks %}
+					<div class="item">
+					{% if block.settings.hair_care_review_title != blank %}
+						<h2>{{ block.settings.hair_care_review_title}}</h2>
+					{% endif %}
+						<div class="star-img">
+						{% if block.settings.hair_care_review_star == "1" %}
+							{% assign rt_url = 'Rating-1.png' %}
+						{% elsif block.settings.hair_care_review_star == "2" %}
+							{% assign rt_url = 'Rating2.png' %}
+						{% elsif block.settings.hair_care_review_star == "3" %}
+							{% assign rt_url = 'Rating-3.png' %}
+						{% elsif block.settings.hair_care_review_star == "4" %}
+							{% assign rt_url = 'Rating-4.png' %}
+						{% elsif block.settings.hair_care_review_star == "5" %}
+							{% assign rt_url = 'Rating-5.png' %}
+						{% else %}
+							{% assign rt_url = 'Rating-5.png' %}
+						{% endif %}
+							<img src="//cdn.shopify.com/s/files/1/0255/3302/2244/files/{{rt_url}}">
+						</div>
+						<div class="shadow-effect">
+							<img class="img-circle" src='{{block.settings.hair_care_review_image | img_url : "master"}}' alt="">
+							{% if block.settings.hair_care_review_content != blank %}
+								<p>“{{block.settings.hair_care_review_content}}”</p>
+							{% endif %}
+							{% if block.settings.hair_care_review_name != blank %}
+								<div class="per-name">{{block.settings.hair_care_review_name}}</div>
+							{% endif %}
+							{% if block.settings.hair_care_review_desc != blank %}
+								<div class="per-desg">{{block.settings.hair_care_review_desc}}</div>
+							{% endif %}
+						</div>
+						
+					</div>
+				{% endfor %}
+				<!--TESTIMONIAL 1 -->
+			</div>
+        </div>
+      </div>
+	  {% endif %}
+      </div>
+    </section>
+{% schema %}
+  {
+    "name": "Customer Reviews",
+    "class": "review-slider-section",
+	 "settings": [
+        {
+          "type": "text",
+          "id": "hair_care_review_heading",
+          "label": "Heading"
+        }
+    ],
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Customer Review",
+        "settings": [
+		  {
+            "type": "text",
+            "id": "hair_care_review_title",
+            "label": "Review Title"
+          },{
+            "type": "text",
+            "id": "hair_care_review_name",
+            "label": "Name"
+          },{
+            "type": "text",
+            "id": "hair_care_review_desc",
+            "label": "Designation"
+          },{
+			  "type": "image_picker",
+			  "id": "hair_care_review_image",
+			  "label": {
+				"en": "Review Image"
+			  }
+			},{
+            "type": "text",
+            "id": "hair_care_review_content",
+            "label": "Review Content"
+          },{
+            "type": "text",
+            "id": "hair_care_review_star",
+            "label": "Review Star"
+          } 
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

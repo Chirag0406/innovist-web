@@ -1,0 +1,195 @@
+<head>
+  <!-- Add the slick-theme.css if you want default styling -->
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css" />
+  <!-- Add the slick-theme.css if you want default styling -->
+  <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css" />
+  <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+</head>
+
+<style>
+  .benefits-div {
+    width: 290px;
+  }
+
+  .heading_line {
+    color: #000000;
+    background-color: black;
+    width: 50%;
+    height: 2px;
+  }
+
+  .page-width-benefits {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    padding: 0 15%;
+    margin-bottom: 5%;
+  }
+  .benefit_heading {
+    font-family: Playfair Display;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 32px;
+      line-height: 43px;
+    font-feature-settings: 'cpsp'on;
+
+    color: #4B4B4B;
+  }
+  .benefits-div {
+    margin-right: 5%;
+  }
+  .benefit_description {
+    margin-top: 12px;
+    font-family: Helvetica Neue;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 23px;
+    font-feature-settings: 'cpsp' on;
+    color: #4B4B4B;
+  }
+  .heading-div {
+    font-family: Playfair Display;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 32px;
+    /* identical to box height */
+
+    font-feature-settings: 'cpsp'on;
+
+    color: #4B4B4B;
+  }
+
+  .benefits_content {
+    margin-top: 5px;
+  }
+  @media only screen and (max-width: 769px) {
+    .benefits-div {
+      width: 145px;
+    }
+    .benefit_description {
+      font-weight: 500;
+font-size: 12px;
+line-height: 14px;
+    }
+    .heading_line {
+      height: 1px;
+    }
+    .benefit_heading {
+      font-size: 16px;
+    line-height: 21px;
+    }
+    .page-width-benefits  {
+      padding: 0;
+      margin-bottom: 10%;
+    }
+  }
+
+  @media only screen and (min-width: 769px) {
+    .heading-div {
+      text-align: center;
+      font-size: 40px;
+line-height: 53px;
+    }
+
+  }
+
+
+</style>
+
+
+
+{%- if section.blocks.size > 0 -%}
+  <div class="page-width{% if section.settings.max_width %} page-width--narrow{% endif %}">
+      <h1 class="heading-div"> {{section.settings.main_benefit_heading}} </h1>
+      <div class="page-width-benefits">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'benefits-description' -%}
+          <div class="product-block product-block--benefits" {{ block.shopify_attributes }}>
+
+            <div class="benefits-div"> 
+                <img src="{{ block.settings.benefits_image | img_url: '540x' }}" class="benefits-description-image lazyloaded ">
+                
+                <div class="benefits_content">  
+                    <div class="benefit_heading">
+                        {{block.settings.benefit_heading}}
+                    </div>  
+                    <hr class="heading_line"> 
+                    <div class="benefit_description">
+                        {{ block.settings.benefit_content }}
+                        {{ block.settings.page.content }}
+                    </div>
+                    
+            </div></div>
+          </div>
+   
+      {%- endcase -%}
+    {%- endfor -%}
+</div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Full-benefit details",
+    "class": "product-full-benefits",
+    "blocks": [{
+        "type": "benefits-description",
+        "name": "Benefits Description",
+        "settings":
+        [
+            {
+            "type": "image_picker",
+            "id": "benefits_image",
+            "label": "Benefits Image"
+          },
+          {
+            "type": "richtext",
+            "id": "benefit_content",
+            "label": "Benefits Description",
+            "default": "<p>Use collapsible tabs for more detailed information that will help customers make a purchasing decision.</p><p>Ex: Shipping and return policies, size guides, and other common questions.</p>"
+          },
+          {
+            "type": "text",
+            "id": "benefit_heading",
+            "label": "Benefits Heading",
+            "default": "Heading"
+          }
+        ]
+    }],
+    "settings": [
+      {
+        "type": "text",
+        "id": "main_benefit_heading",
+        "label": "Benefits Section Heading",
+        "default": "Benefits"
+      }
+    ]
+  }
+{% endschema %}
+<script>
+    $(document).ready(function(){
+    $('.page-width-benefits').slick({
+      infinite      : true,
+      slidesToShow  : 2.2,
+      slidesToScroll: 2,
+      mobileFirst   : true,
+      dots          : true,
+      //centerMode    : true,
+      //centerPadding : '60px',
+      responsive    : [
+            {
+              breakpoint: 767,
+              settings: "unslick"
+            }
+        ]
+    });
+    });
+    document.addEventListener("DOMContentLoaded", function(event) {
+   var source =Array.from(document.getElementsByClassName("benefit_description"));
+for(let i=0;i<source.length;i++){
+source[i].innerHTML=source[i].textContent ;
+}
+  });
+</script>

@@ -1,0 +1,3234 @@
+<link rel="stylesheet" href="{{ 'login.css' | asset_url }}">
+{% comment %} {% include 'offer_msg' %} {% endcomment %}
+
+<style>
+  /* Modal */
+  .modal-login-web {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+      padding-top:10rem;
+      margin-top:0.5rem;
+  }
+
+  /* Modal Content */
+  .modal-content-login-web {
+      background-color: #fefefe;
+      color: #000;
+      padding:30px 10px 10px 10px;
+      width: 27%;
+      margin: auto;
+      border-radius: 15px;
+  }
+
+  #mobile-myModal,.mobile-modal-content
+  {
+    display:none;
+  }
+
+   @media screen and (min-width:601px ) and (max-width:900px)
+  {
+
+    .modal-content-login-web {
+      background-color: #fefefe;
+      color: #000;
+      padding: 10px;
+      width:50%;
+      margin: auto;
+      border-radius: 15px;
+  }
+
+  #mobile-myModal,.mobile-modal-content
+  {
+    display:none;
+  }
+
+
+   #myModal
+  {
+    display:none;
+  }
+
+
+  }
+
+
+
+
+
+  @media screen and (max-width:600px)
+  {
+
+    .modal-login-web,.modal-content-login-web
+    {
+      display:none;
+    }
+
+    #myModal
+    {
+      display:none;
+    }
+
+  }
+
+
+
+  @media screen and (min-width:1000px ) and (max-width:1200px)
+  {
+
+    .modal-content-login-web{
+      background-color: #fefefe;
+      color: #000;
+      padding: 10px;
+      width:40%;
+      margin: auto;
+      border-radius: 15px;
+  }
+  }
+
+
+
+
+
+  /* The Close Button */
+  .close {
+      color: #aaaaaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+  }
+</style>
+
+{%- liquid
+  assign hide_icon_labels = true
+  if nav_position == 'below'
+    assign hide_icon_labels = false
+  endif
+-%}
+{% comment %} href="{{ routes.account_url }}" {% endcomment %}
+<div class="site-nav">
+  <div class="site-nav__icons">
+    {% if customer %}
+      <a
+        onclick="sendEventToGA('Homepage','Account', 'Header')"
+        class="site-nav__link site-nav__link--icon small--hide"
+        href="/account"
+      >
+        <svg
+          id="myBtnn"
+          aria-hidden="true"
+          focusable="false"
+          role="presentation"
+          class="icon icon-user"
+          viewBox="0 0 64 64"
+        >
+          <defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="cls-1" d="M35 39.84v-2.53c3.3-1.91 6-6.66 6-11.42 0-7.63 0-13.82-9-13.82s-9 6.19-9 13.82c0 4.76 2.7 9.51 6 11.42v2.53c-10.18.85-18 6-18 12.16h42c0-6.19-7.82-11.31-18-12.16z"/>
+        </svg>
+        <span class="site-nav__icon-label small--hide{% if hide_icon_labels %} icon__fallback-text{% endif %}">
+          {{ 'layout.customer.account' | t }}
+        </span>
+      </a>
+    {% else %}
+      <a href="/account/login"
+        onclick="sendEventToGA('Homepage','Account', 'Header')"
+        class="site-nav__link site-nav__link--icon small--hide"
+      >
+        <svg
+          id="myBtn"
+          aria-hidden="true"
+          focusable="false"
+          role="presentation"
+          class="icon icon-user"
+          viewBox="0 0 64 64"
+        >
+          <defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="cls-1" d="M35 39.84v-2.53c3.3-1.91 6-6.66 6-11.42 0-7.63 0-13.82-9-13.82s-9 6.19-9 13.82c0 4.76 2.7 9.51 6 11.42v2.53c-10.18.85-18 6-18 12.16h42c0-6.19-7.82-11.31-18-12.16z"/>
+        </svg>
+        <span class="site-nav__icon-label small--hide{% if hide_icon_labels %} icon__fallback-text{% endif %}">
+          {{ 'layout.customer.account' | t }}
+        </span>
+      </a>
+    {%- endif -%}
+
+    <a
+      href="{{ routes.cart_url }}"
+      onclick="sendEventToGA('Homepage','Cart', 'Header')"
+      id="HeaderCartTrigger"
+      aria-controls="HeaderCart"
+      class="site-nav__link site-nav__link--icon js-no-transition"
+      data-icon="{{ settings.cart_icon }}"
+    >
+      <span class="cart-link">
+        {%- if settings.cart_icon == 'cart' -%}
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-cart" viewBox="0 0 64 64">
+            <defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="cls-1" d="M14 17.44h46.79l-7.94 25.61H20.96l-9.65-35.1H3"/><circle cx="27" cy="53" r="2"/><circle cx="47" cy="53" r="2"/>
+          </svg>
+        {%- elsif settings.cart_icon == 'bag-minimal' -%}
+          <svg
+            aria-hidden="true"
+            focusable="false"
+            role="presentation"
+            class="icon icon-bag-minimal"
+            viewBox="0 0 64 64"
+          >
+            <defs><style>.cls-1{fill:none;stroke:#000;stroke-width:2px}</style></defs><path id="svg_2" data-name="svg 2" class="cls-1" d="M22.53 16.61c0-7.1 4.35-9 9.75-9s9.75 1.9 9.75 9"/><path id="svg_4" data-name="svg 4" class="cls-1" d="M11.66 16.65h41.25V53.4H11.66z"/>
+          </svg>
+        {%- else -%}
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-bag" viewBox="0 0 64 64">
+            <defs><style>.cls-1{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="cls-1" d="M24.23 18c0-7.75 3.92-14 8.75-14s8.74 6.29 8.74 14M14.74 18h36.51l3.59 36.73h-43.7z"/>
+          </svg>
+        {%- endif -%}
+        <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}">
+          <span class="cart-link__bubble-num">{{ cart.item_count }}</span>
+        </span>
+      </span>
+      <span class="site-nav__icon-label small--hide{% if hide_icon_labels %} icon__fallback-text{% endif %}">
+        {{ 'layout.cart.title' | t }}
+      </span>
+      {% comment %}
+      {% endcomment %}
+      <div class="cart-popup-part">Product has been added to cart. &nbsp; &nbsp; <u>View Cart</u></div>
+    </a>
+
+    <button
+      type="button"
+      onclick="sendEventToGA('Homepage','Mobile_Hamburger', 'Header')"
+      aria-controls="MobileNav"
+      class="site-nav__link site-nav__link--icon medium-up--hide mobile-nav-trigger"
+    >
+      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-hamburger" viewBox="0 0 64 64">
+        <path class="cls-1" d="M7 15h51">.</path><path class="cls-1" d="M7 32h43">.</path><path class="cls-1" d="M7 49h51">.</path>
+      </svg>
+      <span class="icon__fallback-text">{{ 'general.drawers.navigation' | t }}</span>
+    </button>
+  </div>
+
+  <div class="site-nav__close-cart">
+    <button type="button" class="site-nav__link site-nav__link--icon js-close-header-cart">
+      <span>{{ 'general.accessibility.close' | t }}</span>
+      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-close" viewBox="0 0 64 64">
+        <defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="cls-1" d="M19 17.61l27.12 27.13m0-27.13L19 44.74"/>
+      </svg>
+    </button>
+  </div>
+</div>
+
+{% comment %} Modal {% endcomment %}
+<div id="myModal" class="modal-login-web">
+  <div class="modal-content-login-web">
+    <span class="close"></span>
+
+    <div class="signin-screen-1">
+      <div class="container">
+        <div id="sign-page">Sign in</div>
+
+        <div class="login-content">
+          <p class="login-content_text">Find your favourite items, saved addresses and payments.</p>
+
+          <p class="incorrect otp-fail" id="verify-msg" style="display:none;"></p>
+          <p class="login_border"></p>
+          {% comment %}
+             <p class="login-content-rewards">Register now to get the best offers and discounts.</p>
+
+
+            <img class='login-content-img' src="{{ 'login-image.png' | asset_url }}" />
+          {% endcomment %}
+          <p class="err-msg" id="screen1-err-msg"></p>
+
+          <form id="customer_otp" accept-charset="UTF-8" novalidate="novalidate">
+            <div id="mobile-input-box" class="input-box form-group inline-container mb-0">
+              <input
+                type="text"
+                style="width:100%;"
+                oninput="check()"
+                name="customer[emailnumber]"
+                id="CustomerEmailNumber"
+                placeholder="Enter your phone number or email"
+                autocapitalize="off"
+                required
+              >
+
+              <input type="hidden" class="popup-screen-1-hidden">
+            </div>
+
+            <button id="otp_target" class="login-content-btn">
+              Submit
+              <span class="loading-web" style="display:none"> <i class="fa fa-circle-o-notch fa-spin"></i></span>
+            </button>
+          </form>
+
+          <div class="divider-container">
+            <div class="divider"></div>
+            <p>OR</p>
+            <div class="divider"></div>
+          </div>
+
+          <button class="google-btn">
+            <img class="google-logo-desktop" src="{{ 'login-google-logo.png' | asset_url }}">
+            Sign in
+            <span class="google-web-loading" style="display:none"> <i class="fa fa-circle-o-notch fa-spin"></i></span>
+          </button>
+          <br>
+        </div>
+      </div>
+    </div>
+
+    <div class="signin-email-screen" style="display:none">
+      <div class="container">
+        <div id="otp-mode-change">Sign In</div>
+
+        <div class="otp-content">
+          <p class="otp-content-rewards"><span>Find your favourite items, saved addresses and payments.</span></p>
+          <p class="login_border"></p>
+
+          <p class="otp-helper-text"><span class="email-phn"></span></p>
+
+          <br>
+          <form
+            class="otp-input-field-container"
+            id="digit-group"
+            data-group-name="digits"
+            data-autosubmit="false"
+            autocomplete="off"
+          >
+            <input oninput="checkOtpField()" class="otp-input-field" id="digit-1" name="digit-1" data-next="digit-2">
+            <input
+              oninput="checkOtpField()"
+              class="otp-input-field"
+              id="digit-2"
+              name="digit-2"
+              data-next="digit-3"
+              data-previous="digit-1"
+            >
+            <input
+              oninput="checkOtpField()"
+              class="otp-input-field"
+              id="digit-3"
+              name="digit-3"
+              data-next="digit-4"
+              data-previous="digit-2"
+            >
+            <input
+              oninput="checkOtpField()"
+              class="otp-input-field"
+              id="digit-4"
+              name="digit-4"
+              data-previous="digit-3"
+            >
+            <span class="otp-loading" style="display:none"> <i class="fa-2x fa fa-circle-o-notch fa-spin"></i></span>
+          </form>
+          <input type="hidden" name="customer_id" value="" id="customer_opt_id">
+
+          <input type="hidden" class="otp-content-hidden">
+
+          <button class="otp-btn" id="resend-otp">
+            Resend OTP
+            <span class="resend-otp-loading" style="display:none"> <i class="fa fa-circle-o-notch fa-spin"></i></span>
+          </button>
+          <button class="otp-btn" id="use-password-instead">Use Password Instead</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="register-page" style="display:none">
+      <div class="container">
+        <div class="register-page-popup">Almost There</div>
+
+        <div class="otp-content">
+          <p class="otp-login-content_heading-2">Welcome to Innovist!</p>
+          {% comment %}   <p class="otp-content-rewards"><span>Register now to get the best offers and discounts.</span></p> {% endcomment %}
+          <p class="register-err-msg" style="display:none"></p>
+          <p class="login_border"></p>
+
+          <input
+            type="text"
+            style="width:100%;"
+            oninput="checkRegister()"
+            class="login-content-input"
+            name="customer[firstname]"
+            id="CustomerFirstName"
+            placeholder="Enter your first name"
+            autocapitalize="off"
+            required
+          >
+          <input
+            type="text"
+            style="width:100%;"
+            oninput="checkRegister()"
+            class="login-content-input"
+            name="customer[lastname]"
+            id="CustomerLastName"
+            placeholder="Enter your last name"
+            autocapitalize="off"
+            required
+          >
+          <input
+            type="text"
+            style="width:100%;"
+            oninput="checkRegister()"
+            class="login-content-input"
+            name="customer[emailaddress]"
+            id="CustomerEmailAddress"
+            placeholder="Enter your email address"
+            autocapitalize="off"
+            required
+          >
+          <input
+            type="number"
+            style="width:100%;"
+            oninput="checkRegister()"
+            class="login-content-input"
+            name="customer[phonenumber]"
+            id="CustomerPhoneNumber"
+            placeholder="Enter your phone number"
+            autocapitalize="off"
+            required
+          >
+          <input
+            type="password"
+            style="width:100%;"
+            oninput="checkRegister()"
+            class="login-content-input"
+            name="customer[password]"
+            id="CustomerPassword"
+            placeholder="Set a Password"
+            autocapitalize="off"
+            required
+          >
+
+          <button class="login-content-btn registerBtn">
+            Continue
+            <span class="register-loading" style="display:none"> <i class="fa fa-circle-o-notch fa-spin"></i></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="register-email-screen" style="display:none">
+      <div class="container">
+        <div id="otp-mode-change">Almost There</div>
+
+        <p class="otp-login-content_heading-2">Welcome to Innovist!</p>
+
+        <div class="otp-content">
+          <p class="otp-content-rewards"><span>Register now to get the best offers and discounts.</span></p>
+          <p class="login_border"></p>
+
+          <p class="otp-register-helper-text"><span class="email-phn-register"></span></p>
+
+          <br>
+          <form
+            class="otp-register-input-field-container"
+            id="register-digit-group"
+            data-group-name="digits"
+            data-autosubmit="false"
+            autocomplete="off"
+          >
+            <input
+              oninput="validateregisterOtpField()"
+              class="otp-input-field"
+              id="register-digit-1"
+              name="register-digit-1"
+              data-next="register-digit-2"
+            >
+            <input
+              oninput="validateregisterOtpField()"
+              class="otp-input-field"
+              id="register-digit-2"
+              name="register-digit-2"
+              data-next="register-digit-3"
+              data-previous="register-digit-1"
+            >
+            <input
+              oninput="validateregisterOtpField()"
+              class="otp-input-field"
+              id="register-digit-3"
+              name="register-digit-3"
+              data-next="register-digit-4"
+              data-previous="register-digit-2"
+            >
+            <input
+              oninput="validateregisterOtpField()"
+              class="otp-input-field"
+              id="register-digit-4"
+              name="register-digit-4"
+              data-previous="register-digit-3"
+            >
+          </form>
+          <input type="hidden" class="reg-otp-heading">
+
+          <input type="hidden" class="otp-re-fname-hidden">
+          <input type="hidden" class="otp-re-lname-hidden">
+          <input type="hidden" class="otp-re-email-hidden">
+          <input type="hidden" class="otp-re-phone-hidden">
+          <input type="hidden" class="otp-re-pwd-hidden">
+          <input type="hidden" class="register-otp-hidden">
+
+          <button class="otp-btn" id="register-verify-otp" onclick="registercheckOtpField()">
+            Verify
+            <span class="otp-register-loading" style="display:none">
+              <i class="fa fa fa-circle-o-notch fa-spin"></i
+            ></span>
+          </button>
+          <button class="otp-btn" id="register-resend-otp">
+            Resend OTP
+            <span class="register-resend-otp-loading" style="display:none">
+              <i class="fa fa-circle-o-notch fa-spin"></i
+            ></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="signin-page" style="display:none">
+      <div class="container">
+        <div id="otp-mode-change">Sign In</div>
+        <div class="otp-content">
+          <p class="otp-content-rewards"><span>Find your favourite items, saved addresses and payments.</span></p>
+          <p class="login_border"></p>
+          <br>
+          <p class="sign-in-password-popup-err"></p>
+
+          <input
+            type="text"
+            style="width:100%;"
+            class="login-content-input"
+            oninput="signinpasswordcheck()"
+            name="customer[emailnumber]"
+            id="signin_CustomerEmailNumber"
+            placeholder="Enter your phone number or email"
+            autocapitalize="off"
+            required
+          >
+          <input
+            type="password"
+            style="width:100%;"
+            class="login-content-input"
+            oninput="signinpasswordcheck()"
+            name="customer[password]"
+            id="signin_CustomerPassword"
+            placeholder="Enter your password"
+            autocapitalize="off"
+            required
+          >
+          <button id="login-with-password" class="login-content-btn">
+            Submit
+            <span class="signin-loading" style="display:none"> <i class="fa fa-circle-o-notch fa-spin"></i></span>
+          </button>
+          <br>
+          <button class="forgot-password">Forgot Password? Use OTP</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% comment %} Modal Ends {% endcomment %}
+
+<div id="mobile-myModal" style="display:none" class="mobile-myModal-up">
+  <span class="mobile-close"></span>
+  <div class="mobile-modal-content">
+    <div class="mobile-screen-1">
+      <p id="mobile-sign-page">Sign In</p>
+      <p class="login-content_text_mob">Find your favourite items, saved addresses and payments.</p>
+      <p class="err-msg" id="mobile-screen1-err-msg"></p>
+
+      <div>
+        <label class="mobile-text-field-heading">Mobile Number:</label>
+        <div class="mobile-input-btn-container">
+          <input
+            class="mobile-email-phn-field"
+            type="number"
+            id="mobile-CustomerEmailNumber"
+            oninput="checkMobileScreen1()"
+            placeholder="Enter your Mobile Number"
+          >
+          <input type="hidden" class="mobile-screen-1-hidden">
+          <button class="mobile-go-btn-screen-1">
+            <img class="mobile-login-content-img" src="{{ 'arrow-circle-login.png' | asset_url }}">
+          </button>
+          <span class="mobile-loading-screen-1" style="display:none">
+            <i class="fa-2x fa fa-circle-o-notch fa-spin"></i
+          ></span>
+        </div>
+      </div>
+
+      <div class="mobile-divider-container">
+        <div class="mobile-divider"></div>
+        <p>Or Sign In Using</p>
+        <div class="mobile-divider-2"></div>
+      </div>
+
+      <div class="mobile-btn-container">
+        <button class="google-mobile-btn" id="g-btn">
+          <img class="google-logo-desktop" src="{{ 'login-google-logo.png' | asset_url }}">
+          Sign in
+          <span class="google-mobile-loading" style="display:none"> <i class="fa fa-circle-o-notch fa-spin"></i></span>
+        </button>
+        <button class="mobile-email-phn-btn">Email</button>
+      </div>
+    </div>
+
+    <div class="mobile-screen-2" style="display:none">
+      <p id="mobile-sign-page">Sign In</p>
+      <p class="login-content_text_mob">Find your favourite items, saved addresses and payments.</p>
+      <p class="mobile-err-otp-page"></p>
+
+      <div>
+        <label class="mobile-text-field-heading-screen-2">Enter the OTP sent to your number:</label>
+        <div class="mobile-input-btn-container-screen-2">
+          <form
+            class="mobile-otp-input-field-container"
+            id="mobile-digit-group"
+            data-group-name="digits"
+            data-autosubmit="false"
+            autocomplete="off"
+          >
+            <input
+              class="mobile-otp-input-field"
+              id="mobile-digit-1"
+              name="mobile-digit-1"
+              type="number"
+              maxlength="1"
+              oninput="checkField(1,'mobile-digit')"
+              onkeyup="onKeyUpEvent(1, event,'mobile-digit')"
+              onselect="onFocusEvent(1,'mobile-digit')"
+            >
+            <input
+              class="mobile-otp-input-field"
+              id="mobile-digit-2"
+              name="mobile-digit-2"
+              type="number"
+              maxlength="1"
+              oninput="checkField(2,'mobile-digit')"
+              onkeyup="onKeyUpEvent(2, event,'mobile-digit')"
+              onselect="onFocusEvent(2,'mobile-digit')"
+            >
+            <input
+              class="mobile-otp-input-field"
+              id="mobile-digit-3"
+              name="mobile-digit-3"
+              type="number"
+              maxlength="1"
+              oninput="checkField(3,'mobile-digit')"
+              onkeyup="onKeyUpEvent(3, event,'mobile-digit')"
+              onselect="onFocusEvent(3,'mobile-digit')"
+            >
+            <input
+              class="mobile-otp-input-field"
+              id="mobile-digit-4"
+              name="mobile-digit-4"
+              type="number"
+              maxlength="1"
+              oninput="checkField(4,'mobile-digit')"
+              onkeyup="onKeyUpEvent(4, event,'mobile-digit')"
+              onselect="onFocusEvent(4,'mobile-digit')"
+            >
+          </form>
+          <input type="hidden" name="customer_id" value="" id="mobile-customer_opt_id">
+
+          <div class="otp-btn-loading-container">
+            <span class="mobile-loading-screen-2" style="display:none">
+              <i class="fa-2x fa fa-circle-o-notch fa-spin"></i
+            ></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mobile-btn-container">
+        <button class="resend-otp-phn-btn-screen-2" id="mobile-resend-otp">
+          Resend OTP
+          <span class="mobile-resend-otp-loading" style="display:none">
+            <i class="fa fa-circle-o-notch fa-spin"></i
+          ></span>
+        </button>
+
+        <button class="mobile-email-phn-btn-screen-2">Use Email</button>
+      </div>
+      <button class="mobile-use-password-btn">Use Password Instead</button>
+    </div>
+
+    <div class="mobile-register-page" style="display:none">
+      <div class="container">
+        <div id="mobile-register-page">Almost There</div>
+
+        <div>
+          <p class="login-content_text_mob">Welcome to Innovist!</p>
+          {% comment %}
+            <p class="login-content_text_mob"><span>Register now to get the best offers and discounts.</span></p>
+          {% endcomment %}
+          <p class="login_border"></p>
+          <p class="mobile-register-err-msg" style="display:none"></p>
+
+          <input
+            type="text"
+            style="width:100%;"
+            oninput="mobilecheckRegister()"
+            class="mobile-register-content-input"
+            name="customer[firstname]"
+            id="mobile-CustomerFirstName"
+            placeholder="Enter your first name"
+            autocapitalize="off"
+            required
+          >
+          <input
+            type="text"
+            style="width:100%;"
+            oninput="mobilecheckRegister()"
+            class="mobile-register-content-input"
+            name="customer[lastname]"
+            id="mobile-CustomerLastName"
+            placeholder="Enter your last name"
+            autocapitalize="off"
+            required
+          >
+          <input
+            type="text"
+            style="width:100%;"
+            oninput="mobilecheckRegister()"
+            class="mobile-register-content-input"
+            name="customer[emailaddress]"
+            id="mobile-CustomerEmailAddress"
+            placeholder="Enter your email address"
+            autocapitalize="off"
+            required
+          >
+          <input
+            type="number"
+            style="width:100%;"
+            oninput="mobilecheckRegister()"
+            class="mobile-register-content-input"
+            name="customer[phonenumber]"
+            id="mobile-CustomerPhoneNumber"
+            placeholder="Enter your phone number"
+            autocapitalize="off"
+            required
+          >
+          <input
+            type="password"
+            style="width:100%;"
+            oninput="mobilecheckRegister()"
+            class="mobile-register-content-input"
+            name="customer[password]"
+            id="mobile-CustomerPassword"
+            placeholder="Set a Password"
+            autocapitalize="off"
+            required
+          >
+
+          <button class="mobile-login-content-btn" id="mobile-registerBtn">
+            Continue
+            <span class="mobile-register-loading" style="display:none">
+              <i class="fa fa-circle-o-notch fa-spin"></i
+            ></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="mobile-register-screen-2" style="display:none">
+      <p id="mobile-sign-page">Almost There</p>
+      <p class="login-content_text_mob">Welcome to Innovist!</p>
+      <p class="login-content_text_mob"><span>Register now to get the best offers and discounts.</span></p>
+      <p class="mobile-register-err-otp-page"></p>
+
+      <div>
+        <label class="mobile-register-text-field-heading-screen-2">Enter the OTP sent to your number:</label>
+        <div class="mobile-input-btn-container-screen-2">
+          <form
+            class="mobile-register-otp-input-field-container"
+            id="register-mobile-digit-group"
+            data-group-name="digits"
+            data-autosubmit="false"
+            autocomplete="off"
+          >
+            <input
+              class="mobile-otp-input-field"
+              id="mobile-register-digit-1"
+              name="mobile-register-digit-1"
+              type="number"
+              maxlength="1"
+              oninput="checkField(1,'mobile-register-digit')"
+              onkeyup="onKeyUpEventReg(1, event,'mobile-register-digit')"
+              onselect="onFocusEvent(1,'mobile-register-digit')"
+            >
+            <input
+              class="mobile-otp-input-field"
+              id="mobile-register-digit-2"
+              name="mobile-register-digit-2"
+              type="number"
+              maxlength="1"
+              oninput="checkField(2,'mobile-register-digit')"
+              onkeyup="onKeyUpEventReg(2, event,'mobile-register-digit')"
+              onselect="onFocusEvent(2,'mobile-register-digit')"
+            >
+            <input
+              class="mobile-otp-input-field"
+              id="mobile-register-digit-3"
+              name="mobile-register-digit-3"
+              type="number"
+              maxlength="1"
+              oninput="checkField(3,'mobile-register-digit')"
+              onkeyup="onKeyUpEventReg(3, event,'mobile-register-digit')"
+              onselect="onFocusEvent(3,'mobile-register-digit')"
+            >
+            <input
+              class="mobile-otp-input-field"
+              id="mobile-register-digit-4"
+              name="mobile-register-digit-4"
+              type="number"
+              maxlength="1"
+              oninput="checkField(4,'mobile-register-digit')"
+              onkeyup="onKeyUpEventReg(4, event,'mobile-register-digit')"
+              onselect="onFocusEvent(4,'mobile-register-digit')"
+            >
+          </form>
+
+          <input type="hidden" class="mobile-otp-re-fname-hidden">
+          <input type="hidden" class="mobile-otp-re-lname-hidden">
+          <input type="hidden" class="mobile-otp-re-email-hidden">
+          <input type="hidden" class="mobile-otp-re-phone-hidden">
+          <input type="hidden" class="mobile-otp-re-pwd-hidden">
+          <input type="hidden" class="mobile-register-otp-hidden">
+        </div>
+      </div>
+
+      <div class="mobile-btn-container">
+        <button class="resend-otp-phn-btn-screen-2" id="mobile-register-resend-otp">
+          Resend OTP
+          <span class="mobile-register-resend-otp-loading" style="display:none">
+            <i class="fa fa-circle-o-notch fa-spin"></i
+          ></span>
+        </button>
+
+        <button class="resend-otp-phn-btn-screen-2" onclick="checkRegistermobileOtpField()">
+          Verify
+          <span class="mobile-otp-register-loading-screen-2" style="display:none">
+            <i class="fa fa fa-circle-o-notch fa-spin"></i
+          ></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="mobile-signin-page" style="display:none">
+      <div id="mobile-register-page">Sign In</div>
+      <div>
+        <p class="login-content_text_mob"><span>Find your favourite items, saved addresses and payments.</span></p>
+
+        <p class="mobile-sign-in-password-popup-err"></p>
+
+        <input
+          type="number"
+          style="width:100%;"
+          class="mobile-login-content-input"
+          oninput="mobilesigninpasswordcheck()"
+          name="customer[emailnumber]"
+          id="mobile_signin_CustomerEmailNumber"
+          placeholder="Enter Mobile Number"
+          autocapitalize="off"
+          required
+        >
+        <div class="signin-password-mob-btn-container">
+          <input
+            type="password"
+            style="width:100%;"
+            class="mobile-login-content-input"
+            oninput="mobilesigninpasswordcheck()"
+            name="customer[password]"
+            id="mobile_signin_CustomerPassword"
+            placeholder="Enter Password"
+            autocapitalize="off"
+            required
+          >
+
+          <button id="mobile-login-with-password">
+            <img class="mobile-login-pwd-content-img" src="{{ 'arrow-circle-login.png' | asset_url }}">
+            <span class="mobile-signin-loading" style="display:none">
+              <i class="fa-2x fa fa-circle-o-notch fa-spin"></i
+            ></span>
+          </button>
+        </div>
+
+        <div class="mobile-divider-container">
+          <div class="mobile-divider"></div>
+          <p>Or Sign In Using</p>
+          <div class="mobile-divider-2"></div>
+        </div>
+
+        <div class="mobile-btn-container">
+          <button class="google-mobile-login-btn" id="g-btn">
+            <img class="google-logo-desktop" src="{{ 'login-google-logo.png' | asset_url }}">
+            Google
+            <span class="google-mobile-pwd-loading" style="display:none">
+              <i class="fa fa-circle-o-notch fa-spin"></i
+            ></span>
+          </button>
+          <button class="mobile-email-signin-phn-btn">Email</button>
+        </div>
+
+        <br>
+
+        <button class="mobile-forgot-password">Forgot Password? Use OTP</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script>
+  
+  
+
+
+
+
+
+function getCodeBoxElement(index,id) {
+  return document.getElementById(`${id}-${index}`);
+}
+
+function checkField(index,id)
+{
+	let field=document.querySelector(`#${id}-${index}`)
+	if(field.value>1)
+		{
+			let val=field.value.split('')
+			field.value=val[val.length-1]
+			
+		}
+}
+
+
+
+function onKeyUpEvent(index, event,id) {
+  const eventCode = event.which || event.keyCode;
+  if (getCodeBoxElement(index,id).value.length === 1) {
+	 if (index !== 4) {
+		getCodeBoxElement(index+ 1,id).select();
+	 } else {
+		getCodeBoxElement(index,id).blur();
+
+    checkmobileOtpField()
+	 }
+  }
+  if (eventCode === 8 && index !== 1) {
+	 getCodeBoxElement(index - 1,id).select();
+  }
+}
+
+function onKeyUpEventReg(index, event,id) {
+  const eventCode = event.which || event.keyCode;
+  if (getCodeBoxElement(index,id).value.length === 1) {
+	 if (index !== 4) {
+		getCodeBoxElement(index+ 1,id).select();
+	 } else {
+		getCodeBoxElement(index,id).blur();
+
+    validatecheckRegistermobileOtpField()
+	 }
+  }
+  if (eventCode === 8 && index !== 1) {
+	 getCodeBoxElement(index - 1,id).select();
+  }
+}
+function onFocusEvent(index,id) {
+  for (item = 1; item < index; item++) {
+	 const currentElement = getCodeBoxElement(item,id);
+	 if (!currentElement.value) {
+		  currentElement.select();
+		  break;
+	 }
+  }
+}  
+
+
+let modal = document.getElementById("myModal");
+let btn = document.getElementById("myBtn");
+let span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function ()
+{
+    modal.style.display = "block";
+}
+
+span.onclick = function ()
+{
+    modal.style.display = "none";
+    
+}
+
+
+window.onclick = function (event)
+{
+  
+    if (event.target == modal)
+    {
+
+      document.querySelector('#CustomerFirstName').value=''
+      document.querySelector('#CustomerLastName').value=''
+      document.querySelector('#CustomerEmailAddress').value=''
+      document.querySelector('#CustomerPhoneNumber').value=''
+      document.querySelector('#CustomerPassword').value=''
+      document.querySelector('.popup-screen-1-hidden').value=''
+      document.querySelector('#digit-1').value=''
+      document.querySelector('#digit-2').value=''
+      document.querySelector('#digit-3').value=''
+      document.querySelector('#digit-4').value=''
+      document.querySelector('#digit-1').style.borderColor='white'
+      document.querySelector('#digit-2').style.borderColor='white'
+      document.querySelector('#digit-3').style.borderColor='white'
+      document.querySelector('#digit-4').style.borderColor='white' 
+
+      document.querySelector('#signin_CustomerEmailNumber').value=''
+      document.querySelector('#signin_CustomerPassword').value=''
+     
+      let msg=document.querySelector('.sign-in-password-popup-err');
+      msg.style.display='none'
+      msg.innerHTML=''
+
+      
+    const registerOtp=document.querySelector('.register-email-screen')
+    registerOtp.style.display='none'
+    
+    document.querySelector('#register-digit-1').value=''
+    document.querySelector('#register-digit-2').value=''
+    document.querySelector('#register-digit-3').value=''
+    document.querySelector('#register-digit-4').value=''
+  
+    const val_reg=document.querySelector('.email-phn-register');
+    val_reg.innerHTML='Enter the OTP'
+    val_reg.style.color='black'
+  
+    document.querySelector('#register-digit-1').style.borderColor='white'
+    document.querySelector('#register-digit-2').style.borderColor='white'
+    document.querySelector('#register-digit-3').style.borderColor='white'
+    document.querySelector('#register-digit-4').style.borderColor='white' 
+
+
+      const val_er=document.querySelector('.email-phn');
+      val_er.style.color='black'
+    
+        modal.style.display = "none";
+        
+        let val=document.querySelector('.signin-screen-1')
+        val.style.display = "block";
+
+        let webloading=document.querySelector('.google-web-loading');
+        webloading.style.display='none';
+
+        
+      let loading=document.querySelector('.loading-web');
+      loading.style.display='none'
+
+      let register_loading=document.querySelector('.register-loading');
+      register_loading.style.display='none'
+
+      let otp_loading=document.querySelector('.otp-loading')
+      otp_loading.style.display='none'
+
+      let resend_loading=document.querySelector('.resend-otp-loading');
+      resend_loading.style.display='none'
+
+        
+      let signin_loading=document.querySelector('.signin-loading');
+      signin_loading.style.display='none' 
+
+
+  
+        
+        let err_msg=document.querySelector('#screen1-err-msg')
+        err_msg.innerHTML='';
+        err_msg.style.display='none'
+
+            
+        let err=document.querySelector('.register-err-msg')
+        err.style.display='none'
+        err.innerHTML='';
+
+        let screen1=document.querySelector('.register-page')
+        screen1.style.display='none';
+
+        let screen2=document.querySelector('.signin-email-screen')
+        screen2.style.display='none';
+
+        let signin_page=document.querySelector('.signin-page');
+        signin_page.style.display='none'
+
+
+    }
+
+}
+
+
+
+
+
+
+
+
+function check()
+{
+  let userData=document.querySelector('#CustomerEmailNumber').value;
+
+  let msg=document.querySelector('#screen1-err-msg')
+  if(userData)
+  {
+    msg.innerHTML=''
+    msg.style.display='none'
+  }
+
+  
+
+}
+
+
+
+const googleWeb=document.querySelector('.google-btn')
+googleWeb.addEventListener('click',function showProgress()
+{
+  let loading=document.querySelector('.google-web-loading')
+
+  loading.style.display='block'
+ 
+})
+
+
+
+const googleMobile=document.querySelector('.google-mobile-btn')
+googleMobile.addEventListener('click',function showProgress()
+{
+  let loading=document.querySelector('.google-mobile-loading')
+
+  loading.style.display='block'
+ 
+})
+
+
+
+const googleSigninMobile=document.querySelector('.google-mobile-login-btn')
+googleSigninMobile.addEventListener('click',function showProgress()
+{
+  let loading=document.querySelector('.google-mobile-pwd-loading')
+
+  loading.style.display='block'
+ 
+})
+
+function checkEmail(value) { 
+  var email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+  return email.test(value);
+}
+
+function checkPhone(value) {
+  var phone = /^(\+91-|\+91|0)?\d{10}$/;
+  return phone.test(value);
+}
+
+
+
+
+const generateOtpForm=document.getElementById('customer_otp')
+
+generateOtpForm.addEventListener('submit',async function generateOtp(e) 
+
+{
+  e.preventDefault()
+
+  let userData=document.querySelector('#CustomerEmailNumber').value;
+  document.querySelector('.popup-screen-1-hidden').value=userData
+
+  
+
+  let err_msg=document.querySelector('#screen1-err-msg')
+
+
+
+
+
+  if(!userData)
+  {
+    err_msg.innerHTML='Email or Phone Number Required'
+    err_msg.style.display='block'
+  return;
+  }
+
+  if(!checkEmail(userData))
+  {
+      if(!checkPhone(userData))
+      {
+        err_msg.style.display='block'
+        err_msg.innerHTML='Enter valid email or phone number'
+        return
+      }
+  } 
+
+
+  var regex = new RegExp('^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})|(^[0-9]{10})+$');
+  
+
+if(userData && !regex.test(userData))
+{
+  err_msg.style.display='block'
+
+  let user=+userData;
+
+  if(user)
+  {
+    err_msg.innerHTML='Enter phone number without +91 & 0 as prefix'
+    return
+  }
+  
+  err_msg.innerHTML='Enter valid Email'
+
+  return;
+} 
+
+
+
+
+  
+
+  let loading=document.querySelector('.loading-web');
+
+  loading.style.display='block'
+
+ let data=await fetch("https://api-login.bareanatomy.in/otp/generate_otp", {
+  method: "post",
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ param:userData
+    
+  })
+})
+
+  let getdata=await data.json();
+
+
+
+  if(getdata.status===200)
+  {
+    let screen1=document.querySelector('.signin-screen-1')
+
+    screen1.style.display='none';
+
+    loading.style.display='none'
+
+    let screen2=document.querySelector('.signin-email-screen')
+    screen2.style.display='block';
+
+
+    document.querySelector('#customer_opt_id').value=getdata.data.customer_id
+
+
+    if(checkEmail(userData))
+    {
+      const backup=document.querySelector('.otp-content-hidden')
+
+      const val=document.querySelector('.email-phn');
+      val.innerHTML='Enter the OTP sent to your email'
+      backup.value='Enter the OTP sent to your email'
+    }
+    else if(checkPhone(userData))
+    {
+      const backup=document.querySelector('.otp-content-hidden')
+      const val=document.querySelector('.email-phn');
+      val.innerHTML='Enter the OTP sent to your phone number'
+      backup.value='Enter the OTP sent to your phone number'
+    }
+    document.querySelector('#CustomerEmailNumber').value=''
+
+  }
+
+  else if(getdata.status===201)
+  {
+    let screen1=document.querySelector('.signin-screen-1')
+
+    screen1.style.display='none';
+    loading.style.display='none'
+
+
+    if(!Object.keys(getdata.data).length)
+    {
+
+      let screen1=document.querySelector('.register-page')
+      screen1.style.display='block';
+      
+
+      let reg=document.querySelector('.email-phn-register')
+      if(checkEmail(userData))
+      {
+        let field=document.querySelector('#CustomerEmailAddress').value=userData;
+        reg.innerHTML='Enter the OTP sent to your email'
+        reg.style.color='black'
+        document.querySelector('.reg-otp-heading').value=reg.innerHTML
+        
+        
+      }
+      else if(checkPhone(userData))
+      {
+        let field=document.querySelector('#CustomerPhoneNumber').value=userData;
+        reg.innerHTML='Enter the OTP sent to your number'
+        reg.style.color='black'
+        document.querySelector('.reg-otp-heading').value=reg.innerHTML
+        
+      
+  
+      }
+      
+    
+
+    }
+
+    
+
+
+  }
+  else
+  {
+    err_msg.innerHTML='Error Occurred'
+    err_msg.style.display='block'
+
+  }
+
+  loading.style.display='none';
+
+
+ 
+}
+
+
+)
+
+
+function checkRegister()
+{
+
+  const first_name=document.querySelector('#CustomerFirstName').value
+  const last_name=document.querySelector('#CustomerLastName').value
+  const email=document.querySelector('#CustomerEmailAddress').value
+  const phone=document.querySelector('#CustomerPhoneNumber').value
+  const password=document.querySelector('#CustomerPassword').value
+
+  let err=document.querySelector('.register-err-msg')
+
+  if(first_name.length && last_name.length && email.length && phone.length && password.length)
+  {
+    err.style.display='none';
+
+    return
+  }
+
+}
+
+
+
+
+const register=document.querySelector('.registerBtn')
+
+register.addEventListener('click',async function saveData(e) 
+{
+  e.preventDefault()
+
+  const first_name=document.querySelector('#CustomerFirstName').value
+  const last_name=document.querySelector('#CustomerLastName').value
+  const email=document.querySelector('#CustomerEmailAddress').value
+  const phone=document.querySelector('#CustomerPhoneNumber').value
+  const password=document.querySelector('#CustomerPassword').value
+
+  document.querySelector('.otp-re-fname-hidden').value=first_name
+  document.querySelector('.otp-re-lname-hidden').value=last_name
+  document.querySelector('.otp-re-email-hidden').value=email
+  document.querySelector('.otp-re-phone-hidden').value=phone
+  document.querySelector('.otp-re-pwd-hidden').value=password
+
+  let err=document.querySelector('.register-err-msg')
+
+  err.style.display='none'
+  err.innerHTML='';
+
+
+
+  if(!first_name.length || !last_name.length || !email.length || !phone.length || !password.length)
+  {
+    err.style.display='block'
+    err.innerHTML='All Fields Required';
+    return
+  }
+
+  var regex = new RegExp('^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})|(^[0-9]{10})+$');
+  
+  
+  if(phone && !regex.test(phone))
+  {
+
+      err.style.display='block'
+      err.innerHTML='Enter phone number without +91 & 0 as prefix'
+      return
+    }
+
+
+
+
+  if(!checkEmail(email))
+  {
+    err.style.display='block'
+    err.innerHTML='Invalid email';
+    return
+  }
+  if(!checkPhone(phone))
+  {
+    err.style.display='block'
+    err.innerHTML='Invalid phone number';
+    return
+  }
+
+ 
+
+  let loading=document.querySelector('.register-loading');
+  loading.style.display='block'
+
+
+  
+  let data=await fetch("https://api-login.bareanatomy.in/otp/verify_user", {
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({phone, email})
+  })
+  
+  let getdata=await data.json();
+  
+
+
+  if(getdata.status===200)
+  {
+    loading.style.display='none';
+
+    document.querySelector('#CustomerFirstName').value=''
+    document.querySelector('#CustomerLastName').value=''
+    document.querySelector('#CustomerEmailAddress').value=''
+    document.querySelector('#CustomerPhoneNumber').value=''
+    document.querySelector('#CustomerPassword').value=''
+    
+
+    document.querySelector('.register-otp-hidden').value=getdata.data.current_otp
+
+    let screen1=document.querySelector('.register-page')
+    screen1.style.display='none';
+
+    const registerOtp=document.querySelector('.register-email-screen')
+    registerOtp.style.display='block'
+  }
+  else if(getdata.status===201)
+  {
+    err.style.display='block'
+    err.innerHTML=getdata.message;      
+
+  }
+
+  loading.style.display='none'
+
+
+
+})
+
+
+let register_resend_otp=document.querySelector('#register-resend-otp')
+
+register_resend_otp.addEventListener('click',async function saveData(e) 
+{
+  e.preventDefault()
+
+
+  let email=document.querySelector('.otp-re-email-hidden').value
+  let phone=document.querySelector('.otp-re-phone-hidden').value
+
+  let register_resend_loading=document.querySelector('.register-resend-otp-loading')
+
+  register_resend_loading.style.display='block'
+
+  const val=document.querySelector('.email-phn-register');
+  
+  let data=await fetch("https://api-login.bareanatomy.in/otp/verify_user", {
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({phone, email})
+  })
+  
+  let getdata=await data.json();
+  
+
+
+  if(getdata.status===200)
+  {
+    register_resend_loading.style.display='none';
+    
+
+    document.querySelector('.register-otp-hidden').value=getdata.data.current_otp
+
+  }
+  else if(getdata.status===201)
+  {
+    val.style.display='block'
+    val.innerHTML=getdata.message;      
+
+  }
+
+  register_resend_loading.style.display='none'
+
+})
+
+
+
+function validateregisterOtpField()
+{
+  
+  const val=document.querySelector('.email-phn-register');
+  val.innerHTML=document.querySelector('.reg-otp-heading').value
+  val.style.color='black'
+
+
+  document.querySelector('#register-digit-1').style.borderColor='white'
+  document.querySelector('#register-digit-2').style.borderColor='white'
+  document.querySelector('#register-digit-3').style.borderColor='white'
+  document.querySelector('#register-digit-4').style.borderColor='white' 
+}
+
+
+async function registercheckOtpField()
+{
+  let digit1=document.querySelector('#register-digit-1').value
+  let digit2=document.querySelector('#register-digit-2').value
+  let digit3=document.querySelector('#register-digit-3').value
+  let digit4=document.querySelector('#register-digit-4').value
+
+  const val=document.querySelector('.email-phn-register');
+
+
+  document.querySelector('#register-digit-1').style.borderColor='white'
+  document.querySelector('#register-digit-2').style.borderColor='white'
+  document.querySelector('#register-digit-3').style.borderColor='white'
+  document.querySelector('#register-digit-4').style.borderColor='white' 
+
+  if(digit1.length && digit2.length && digit3.length && digit4.length)
+  {
+    
+   
+    if(checkOTP(+digit1) && checkOTP(+digit2) && checkOTP(+digit3) && checkOTP(+digit4))
+    {
+
+      
+        val.innerHTML=document.querySelector('.reg-otp-heading').value
+        val.style.color='black'
+      
+     
+
+
+  var redirect_url = localStorage.getItem("redirect_url") || '';
+
+  let loading=document.querySelector('.otp-register-loading')
+  
+  
+  
+  
+  if(!digit1 || !digit2 || !digit3 || !digit4)
+  {
+    
+
+    const val=document.querySelector('.email-phn-register');
+
+    val.innerHTML='OTP Required'
+    val.style.color='red'
+
+  document.querySelector('#register-digit-1').style.borderColor='rgba(178, 29, 29, 0.4)'
+  document.querySelector('#register-digit-2').style.borderColor='rgba(178, 29, 29, 0.4)'
+  document.querySelector('#register-digit-3').style.borderColor='rgba(178, 29, 29, 0.4)'
+  document.querySelector('#register-digit-4').style.borderColor='rgba(178, 29, 29, 0.4)'
+
+    return;
+  }
+  if(!checkOTP(+digit1) || !checkOTP(+digit2) || !checkOTP(+digit3) || !checkOTP(+digit4))
+  {
+    const val=document.querySelector('.email-phn-register');
+
+    val.innerHTML='Invalid OTP'
+    val.style.color='red'
+
+    document.querySelector('#register-digit-1').style.borderColor='rgba(178, 29, 29, 0.4)'
+    document.querySelector('#register-digit-2').style.borderColor='rgba(178, 29, 29, 0.4)'
+    document.querySelector('#register-digit-3').style.borderColor='rgba(178, 29, 29, 0.4)'
+    document.querySelector('#register-digit-4').style.borderColor='rgba(178, 29, 29, 0.4)'
+    
+    return;
+
+
+  }
+
+  loading.style.display='block'  
+
+
+  let login_otp=+`${digit1}${digit2}${digit3}${digit4}`
+
+  
+  let otp=document.querySelector('.register-otp-hidden').value
+
+  if(+otp!==login_otp)
+  {
+    const val=document.querySelector('.email-phn-register');
+    val.innerHTML='Incorrect OTP'
+    val.style.color='red'
+    loading.style.display='none'
+    document.querySelector('#register-digit-1').style.borderColor='rgba(178, 29, 29, 0.4)'
+    document.querySelector('#register-digit-2').style.borderColor='rgba(178, 29, 29, 0.4)'
+    document.querySelector('#register-digit-3').style.borderColor='rgba(178, 29, 29, 0.4)'
+    document.querySelector('#register-digit-4').style.borderColor='rgba(178, 29, 29, 0.4)'
+    return
+
+  }
+
+
+  let first_name=document.querySelector('.otp-re-fname-hidden').value
+  let last_name=document.querySelector('.otp-re-lname-hidden').value
+  let email=document.querySelector('.otp-re-email-hidden').value
+  let phone=document.querySelector('.otp-re-phone-hidden').value
+  let password=document.querySelector('.otp-re-pwd-hidden').value
+   
+
+
+  let data=await fetch("https://api-automation.bareanatomy.in/api/v1/customers", {
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ first_name, last_name, phone, email, password})
+  })
+    
+  let getdata=await data.json();
+
+
+    if(getdata.success)
+    {
+      let loading=document.querySelector('.otp-register-loading')
+      loading.style.display='none'
+
+    document.querySelector('#register-digit-1').value=''
+    document.querySelector('#register-digit-2').value=''
+    document.querySelector('#register-digit-3').value=''
+    document.querySelector('#register-digit-4').value=''
+
+    let screen2=document.querySelector('.register-email-screen')
+    screen2.style.display='none';
+
+    let modal = document.getElementById("myModal");
+    modal.style.display = "none";
+      
+    sendEventToGA('Login Page', 'OTP Signup','Singup');
+    
+    window.location.href=getdata.data.url;
+    }
+    else
+    {
+      const val=document.querySelector('.email-phn-register');
+      val.innerHTML=getdata.message
+      val.style.color='red'
+      loading.style.display='none'
+      }
+
+    
+    
+    
+    }
+  }
+
+
+}
+
+
+
+
+
+function signinpasswordcheck()
+{
+    const data=document.querySelector('#signin_CustomerEmailNumber').value
+    const password=document.querySelector('#signin_CustomerPassword').value
+
+    if(data.length && password.length)
+    {
+      const msg=document.querySelector('.sign-in-password-popup-err')
+      msg.innerHTML=''
+      msg.style.display='none'
+    }
+
+}
+
+
+
+const usePassword=document.querySelector('#use-password-instead')
+
+usePassword.addEventListener('click',async function saveData(e) 
+{
+  e.preventDefault()
+
+  let otp_page=document.querySelector('.signin-email-screen');
+  otp_page.style.display='none'
+
+  let signInPage=document.querySelector('.signin-page');
+
+  signInPage.style.display='block';
+
+
+
+})
+
+
+
+
+const resendOtp=document.querySelector('#resend-otp')
+resendOtp.addEventListener('click',async function saveData(e) 
+{
+  e.preventDefault()
+
+  let userData=document.querySelector('.popup-screen-1-hidden').value;
+
+  let loading=document.querySelector('.resend-otp-loading');
+
+  loading.style.display='block'
+
+  let data=await fetch("https://api-login.bareanatomy.in/otp/generate_otp", {
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ param:userData
+      
+    })
+  })
+  
+    let getdata=await data.json();
+
+    loading.style.display='none'
+
+
+
+})
+
+
+
+
+
+
+
+
+function checkOTP(value) {
+  var otp = /^(\+91-|\+91|0)?\d{1}$/;
+  return otp.test(value);
+}
+
+
+
+
+
+async function checkOtpField()
+{
+  let digit1=document.querySelector('#digit-1').value
+  let digit2=document.querySelector('#digit-2').value
+  let digit3=document.querySelector('#digit-3').value
+  let digit4=document.querySelector('#digit-4').value
+
+  const val=document.querySelector('.email-phn');
+  const backup=document.querySelector('.otp-content-hidden').value
+
+  document.querySelector('#digit-1').style.borderColor='white'
+  document.querySelector('#digit-2').style.borderColor='white'
+  document.querySelector('#digit-3').style.borderColor='white'
+  document.querySelector('#digit-4').style.borderColor='white' 
+
+  if(digit1.length && digit2.length && digit3.length && digit4.length)
+  {
+    
+   
+    if(checkOTP(+digit1) && checkOTP(+digit2) && checkOTP(+digit3) && checkOTP(+digit4))
+    {
+
+   
+        val.innerHTML=backup
+        val.style.color='black'
+      
+     
+
+
+  var redirect_url = localStorage.getItem("redirect_url") || '';
+
+  let loading=document.querySelector('.otp-loading')
+  
+
+
+  let customer_id=+document.querySelector('#customer_opt_id').value;
+  
+  
+  
+  if(!digit1 || !digit2 || !digit3 || !digit4)
+  {
+    
+
+    const val=document.querySelector('.email-phn');
+
+    val.innerHTML='OTP Required'
+    val.style.color='red'
+
+  document.querySelector('#digit-1').style.borderColor='rgba(178, 29, 29, 0.4)'
+  document.querySelector('#digit-2').style.borderColor='rgba(178, 29, 29, 0.4)'
+  document.querySelector('#digit-3').style.borderColor='rgba(178, 29, 29, 0.4)'
+  document.querySelector('#digit-4').style.borderColor='rgba(178, 29, 29, 0.4)'
+
+    return;
+  }
+  if(!checkOTP(+digit1) || !checkOTP(+digit2) || !checkOTP(+digit3) || !checkOTP(+digit4))
+  {
+    const val=document.querySelector('.email-phn');
+
+    val.innerHTML='Invalid OTP'
+    val.style.color='red'
+
+    document.querySelector('#digit-1').style.borderColor='rgba(178, 29, 29, 0.4)'
+    document.querySelector('#digit-2').style.borderColor='rgba(178, 29, 29, 0.4)'
+    document.querySelector('#digit-3').style.borderColor='rgba(178, 29, 29, 0.4)'
+    document.querySelector('#digit-4').style.borderColor='rgba(178, 29, 29, 0.4)'
+    
+    return;
+
+
+  }
+
+  loading.style.display='block'  
+
+
+  let login_otp=+`${digit1}${digit2}${digit3}${digit4}`
+
+ 
+
+    let data={}
+
+    if(redirect_url.includes('skin-quiz'))
+    {
+      data={customer_id,login_otp:+login_otp,redirect_url:'/pages/skin-quiz-2?ps=login'}
+    }
+    else if(redirect_url.includes('hair-quiz'))
+    {
+      data={customer_id,login_otp:+login_otp,redirect_url:'/pages/quiz-3?ps=login'}
+    }
+    else if(redirect_url.includes('hair-analysis'))
+    {
+      data={customer_id,login_otp:+login_otp,redirect_url:'/pages/hair-analysis?ps=login'}
+    }
+    else if(redirect_url)
+    {
+      data={customer_id,login_otp:+login_otp,redirect_url:`${redirect_url}/?ps=login`}
+    }
+    else
+    {
+      data={customer_id,login_otp,redirect_url:'/?ps=login'}
+    }
+   
+
+
+    let verifyData=await fetch("https://api-login.bareanatomy.in/otp/verify_otp", {
+      method: "post",
+      body: JSON.stringify({...data     
+      }),
+ 
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
+    
+    let getResponse=await verifyData.json();
+
+
+    if(getResponse.status===200)
+    {
+      let loading=document.querySelector('.otp-loading')
+      loading.style.display='none'
+
+    document.querySelector('#digit-1').value=''
+    document.querySelector('#digit-2').value=''
+    document.querySelector('#digit-3').value=''
+    document.querySelector('#digit-4').value=''
+
+    let screen2=document.querySelector('.signin-email-screen')
+    screen2.style.display='none';
+
+    let modal = document.getElementById("myModal");
+    modal.style.display = "none";
+      
+      sendEventToGA('Login Page', 'OTP Login','Login');
+      window.location.href = getResponse.data.redirect_url;
+    }
+    else
+    {
+      const val=document.querySelector('.email-phn');
+      val.innerHTML='Incorrect OTP'
+      val.style.color='red'
+      loading.style.display='none'
+      document.querySelector('#digit-1').style.borderColor='rgba(178, 29, 29, 0.4)'
+      document.querySelector('#digit-2').style.borderColor='rgba(178, 29, 29, 0.4)'
+      document.querySelector('#digit-3').style.borderColor='rgba(178, 29, 29, 0.4)'
+      document.querySelector('#digit-4').style.borderColor='rgba(178, 29, 29, 0.4)'
+      }
+
+   
+    
+    }
+
+
+
+
+else
+{
+  val.innerHTML='Invalid OTP'
+  val.style.color='red'
+  document.querySelector('#digit-1').style.borderColor='rgba(178, 29, 29, 0.4)'
+  document.querySelector('#digit-2').style.borderColor='rgba(178, 29, 29, 0.4)'
+  document.querySelector('#digit-3').style.borderColor='rgba(178, 29, 29, 0.4)'
+  document.querySelector('#digit-4').style.borderColor='rgba(178, 29, 29, 0.4)'
+}
+
+
+}
+
+
+
+
+
+
+
+}
+
+
+
+
+
+
+ const loginWithPassword=document.querySelector('#login-with-password')
+
+loginWithPassword.addEventListener('click',async function sendData(e)
+{
+
+  e.preventDefault();
+
+
+  let userData=document.querySelector('#signin_CustomerEmailNumber').value;
+  let password=document.querySelector('#signin_CustomerPassword').value;
+  
+
+  let msg= document.querySelector('.sign-in-password-popup-err');
+
+  if(!userData.length || !password.length)
+  {
+      
+       msg.style.display='block'
+       msg.innerHTML='All Fields Required '
+      return
+  }
+
+  var regex = new RegExp('^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})|(^[0-9]{10})+$');
+  
+  
+  if(userData && !regex.test(userData))
+  {
+
+    let user=+userData;
+
+    if(user)
+    {
+      msg.style.display='block'
+      msg.innerHTML='Enter phone number without +91 & 0 as prefix'
+      return
+    }
+
+
+    msg.style.display='block'
+    msg.innerHTML='Enter valid email or phone number'
+
+    return;
+  }
+  
+
+  
+
+  
+  let loading=document.querySelector('.signin-loading');
+
+  loading.style.display='block' 
+
+  let data={
+    email:userData,password,param:userData
+  }
+
+
+   let postData=await fetch("https://api-login.bareanatomy.in/otp/verify_customer", {
+    method: "post",
+    body: JSON.stringify({...data     
+    }),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })  
+  
+  let getResponse=await postData.json(); 
+
+
+    
+  
+  if(getResponse.status==200)
+  {
+    if(getResponse.data && Object.keys(getResponse.data).length)
+    {
+      window.location.href=getResponse.data.multpassUrl
+      document.querySelector('#signin_CustomerEmailNumber').value=''
+      document.querySelector('#signin_CustomerPassword').value=''
+    }
+    
+  }
+  else if(getResponse.status==404)
+  {
+    msg.style.display='block'
+    msg.innerHTML='Invalid Login'
+    loading.style.display='none'
+  }
+  loading.style.display='none'
+
+
+
+
+}) 
+
+
+const forgotPassword=document.querySelector('.forgot-password')
+
+forgotPassword.addEventListener('click',async function saveData(e) 
+{
+  e.preventDefault()
+
+ document.querySelector('#signin_CustomerEmailNumber').value=''
+ document.querySelector('#signin_CustomerPassword').value=''
+
+ let msg=document.querySelector('.sign-in-password-popup-err');
+ msg.style.display='none'
+ msg.innerHTML=''
+
+
+
+  let signin_page=document.querySelector('.signin-page');
+  signin_page.style.display='none'
+
+  let val=document.querySelector('.signin-screen-1')
+  val.style.display = "block";
+
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$('#digit-group').find('input').each(function() {
+ 
+  $(this).attr('maxlength', 1);
+  
+  $(this).on('keyup', function(e) {
+    var parent = $($(this).parent());
+ 
+    
+    if(e.keyCode === 8 || e.keyCode === 37) {
+      var prev = parent.find('input#' + $(this).data('previous'));
+      
+      if(prev.length) {
+        $(prev).select();
+      }
+    } else if((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode === 39) {
+      var next = parent.find('input#' + $(this).data('next'));
+      
+      if(next.length) {
+        $(next).focus();
+        $(next).trigger('click');
+      } else {
+        if(parent.data('autosubmit')) {
+          parent.submit();
+        }
+      }
+    }
+  });
+});
+
+$('#register-digit-group').find('input').each(function() {
+ 
+  $(this).attr('maxlength', 1);
+  
+  $(this).on('keyup', function(e) {
+    var parent = $($(this).parent());
+ 
+    
+    if(e.keyCode === 8 || e.keyCode === 37) {
+      var prev = parent.find('input#' + $(this).data('previous'));
+      
+      if(prev.length) {
+        $(prev).select();
+      }
+    } else if((e.keyCode >= 48 && e.keyCode <= 57) || (e.keyCode >= 65 && e.keyCode <= 90) || (e.keyCode >= 96 && e.keyCode <= 105) || e.keyCode === 39) {
+      var next = parent.find('input#' + $(this).data('next'));
+      
+      if(next.length) {
+        $(next).focus();
+        $(next).trigger('click');
+      } else {
+        if(parent.data('autosubmit')) {
+          parent.submit();
+        }
+      }
+    }
+  });
+});
+
+
+
+
+</script>
+
+<script>
+  
+  
+
+
+  function checkEmail(value) { 
+    var email = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+    return email.test(value);
+}
+
+function checkPhone(value) {
+    var phone = /^(\+91-|\+91|0)?\d{10}$/;
+    return phone.test(value);
+}
+
+  const emailBtn=document.querySelector('.mobile-email-phn-btn')
+
+  emailBtn.addEventListener('click',async function switchInput(e) 
+{
+  e.preventDefault()
+
+  let swap=document.querySelector('.mobile-email-phn-btn-screen-2');
+
+
+  let field=document.querySelector('.mobile-email-phn-field')
+
+  let label=document.querySelector('.mobile-text-field-heading')
+
+
+  if(field.placeholder==='Enter your Email Address')
+  {
+    field.placeholder='Enter your Mobile Number'
+    field.type='number'
+  } 
+  else if(field.placeholder==='Enter your Mobile Number')
+  {
+    field.placeholder='Enter your Email Address'
+    field.type='text'
+
+  }
+
+  field.value='';
+
+  if(emailBtn.innerHTML==='Mobile') 
+  {
+    emailBtn.innerHTML='Email'
+  }
+  else if(emailBtn.innerHTML==='Email')
+  {
+    emailBtn.innerHTML='Mobile'
+
+  }
+
+
+  if(label.innerHTML==='Email Address:')
+  {
+
+    label.innerHTML='Mobile Number:'
+  }
+  else if(label.innerHTML==='Mobile Number:')
+  {
+    label.innerHTML='Email Address:'
+  }
+
+  let err1=document.querySelector('#mobile-screen1-err-msg')
+  err1.style.display='none'
+
+  let err=document.querySelector('.mobile-err-otp-page');
+  err.style.display='none'
+})
+
+
+
+
+
+let swap=document.querySelector('.mobile-email-phn-btn-screen-2');
+
+swap.addEventListener('click',async function swapInput(e) 
+{
+  e.preventDefault();
+
+  let type=document.querySelector('.mobile-text-field-heading-screen-2')
+
+
+  let screen2=document.querySelector('.mobile-screen-2')
+
+  screen2.style.display='none'
+
+
+  let screen1=document.querySelector('.mobile-screen-1')
+
+  screen1.style.display='block';
+
+  const emailBtn=document.querySelector('.mobile-email-phn-btn')
+  let field=document.querySelector('.mobile-email-phn-field')
+  let label=document.querySelector('.mobile-text-field-heading')
+
+  if(swap.innerHTML==='Use Mobile')
+  {
+    field.placeholder='Enter your Mobile Number'
+    field.type='number'
+    field.value=''
+    emailBtn.innerHTML='Email'
+    label.innerHTML='Mobile Number:'
+  }
+  else if(swap.innerHTML==='Use Email')
+  {
+
+    field.placeholder='Enter your Email Address'
+    field.value=''
+    emailBtn.innerHTML='Mobile'
+    field.type='text'
+    label.innerHTML='Email Address:'
+
+  }
+
+  document.querySelector('#mobile-digit-1').value=''
+  document.querySelector('#mobile-digit-2').value=''
+  document.querySelector('#mobile-digit-3').value=''
+  document.querySelector('#mobile-digit-4').value=''
+
+
+  let err1=document.querySelector('#mobile-screen1-err-msg')
+  err1.style.display='none'
+
+  let err=document.querySelector('.mobile-err-otp-page');
+  err.style.display='none'
+
+  document.querySelector('#mobile-digit-1').style.borderColor='white'
+  document.querySelector('#mobile-digit-2').style.borderColor='white'
+  document.querySelector('#mobile-digit-3').style.borderColor='white'
+  document.querySelector('#mobile-digit-4').style.borderColor='white'
+ 
+}
+)
+
+
+
+
+function checkMobileScreen1()
+{
+  let userData=document.querySelector('#mobile-CustomerEmailNumber').value;
+
+  let msg=document.querySelector('#mobile-screen1-err-msg')
+  if(userData)
+  {
+    msg.innerHTML=''
+    msg.style.display='none'
+  }
+
+
+  
+
+}
+
+ 
+
+
+
+
+  
+  
+async function submitInput() 
+{
+
+
+
+
+  let userData=document.querySelector('.mobile-email-phn-field').value;
+  document.querySelector('.mobile-screen-1-hidden').value=userData
+
+  let msg=document.querySelector('#mobile-screen1-err-msg')
+
+  let label=document.querySelector('.mobile-text-field-heading')
+
+   if(!userData)
+  {
+
+   
+
+    if(label.innerHTML==='Email Address:')
+    {
+      msg.innerHTML='Email Required'
+      msg.style.display='block'
+    }
+    else if(label.innerHTML==='Mobile Number:')
+    {
+      msg.innerHTML='Phone Number Required'
+      msg.style.display='block'
+    }
+
+  return;
+  } 
+
+  var regex = new RegExp('^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})|(^[0-9]{10})+$');
+  
+  let input=document.querySelector('.mobile-email-phn-field')
+ 
+  if(userData && !regex.test(userData))
+  {
+    msg.style.display='block'
+    if(input.placeholder==='Enter your Email Address')
+    {
+      msg.innerHTML='Invalid Email'
+    }
+    else  if(input.placeholder==='Enter your Mobile Number')
+    {
+      msg.innerHTML='Enter valid phone number without +91 & 0 as prefix'
+    }
+    return;
+  }
+  
+
+
+
+  if(!checkEmail(userData) && label.innerHTML==='Email Address:')
+  {
+    msg.innerHTML='Invalid email'
+    msg.style.display='block'
+    return
+  }
+
+
+  if(!checkPhone(userData) && label.innerHTML==='Mobile Number:')
+      {
+        msg.style.display='block'
+        msg.innerHTML='Enter valid phone number without +91 or 0 as prefix'
+        return
+    }
+
+  let hideButton=document.querySelector('.mobile-login-content-img')
+  
+  hideButton.style.display='none'
+  let loading=document.querySelector('.mobile-loading-screen-1')
+  loading.style.display='block'
+  
+
+ let data=await fetch("https://api-login.bareanatomy.in/otp/generate_otp", {
+  method: "post",
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ param:userData
+    
+  })
+})
+
+  let getdata=await data.json();
+
+
+
+  if(getdata.status===200)
+  {
+    let screen1=document.querySelector('.mobile-screen-1')
+
+    screen1.style.display='none';
+
+
+    loading.style.display='none'
+    hideButton.style.display='block'
+
+    document.querySelector('#mobile-customer_opt_id').value=getdata.data.customer_id
+
+
+    let screen2=document.querySelector('.mobile-screen-2')
+
+    screen2.style.display='block'; 
+
+    document.querySelector('.mobile-email-phn-field').value=''
+
+  }
+
+  else if(getdata.status===201)
+  {
+    let screen1=document.querySelector('.mobile-screen-1')
+
+    screen1.style.display='none';
+
+  loading.style.display='none'
+  hideButton.style.display='block'
+
+
+    let registerPage=document.querySelector('.mobile-register-page');
+    registerPage.style.display='block'
+
+    let register_mobile=document.querySelector('.mobile-register-text-field-heading-screen-2')
+
+
+    if(checkEmail(userData))
+    {
+      let field=document.querySelector('#mobile-CustomerEmailAddress').value=userData;
+        register_mobile.innerHTML='Enter the OTP sent to your email:'
+      
+    }
+    else if(checkPhone(userData))
+    {
+      let field=document.querySelector('#mobile-CustomerPhoneNumber').value=userData;
+        register_mobile.innerHTML='Enter the OTP sent to your number:'
+    }
+    
+    document.querySelector('.mobile-email-phn-field').value=''
+
+  }
+
+  let field=document.querySelector('.mobile-email-phn-field')
+
+  let swap=document.querySelector('.mobile-email-phn-btn-screen-2');
+  let type=document.querySelector('.mobile-text-field-heading-screen-2')
+
+  if(field.placeholder==='Enter your Email Address')
+  {
+      type.innerHTML='Enter the OTP sent to your email:'
+      swap.innerHTML='Use Mobile'
+  }
+  else if(field.placeholder==='Enter your Mobile Number')
+  {
+    type.innerHTML='Enter the OTP sent to your number:'
+    swap.innerHTML='Use Email'
+  }
+
+}
+
+
+
+let submit=document.querySelector('.mobile-go-btn-screen-1');
+
+submit.addEventListener('click',function(e)
+{
+  e.preventDefault()
+  submitInput() 
+})
+
+
+let mobileSubmit=document.querySelector('.mobile-email-phn-field')
+
+mobileSubmit.addEventListener('keyup',function(e)
+{
+  e.preventDefault();
+  if(e.key === 'Enter' || e.keyCode === 13)
+  {
+    submitInput()
+  }
+}
+
+)
+
+
+
+
+function mobilecheckRegister()
+{
+
+  const first_name=document.querySelector('#mobile-CustomerFirstName').value
+  const last_name=document.querySelector('#mobile-CustomerLastName').value
+  const email=document.querySelector('#mobile-CustomerEmailAddress').value
+  const phone=document.querySelector('#mobile-CustomerPhoneNumber').value
+  const password=document.querySelector('#mobile-CustomerPassword').value
+
+
+  let err=document.querySelector('.mobile-register-err-msg')
+
+  
+  if(first_name.length && last_name.length && email.length && phone.length && password.length)
+  {
+    
+    err.style.display='none';
+
+    return
+  }
+
+}
+
+
+
+
+
+const Mobileregister=document.querySelector('#mobile-registerBtn')
+
+Mobileregister.addEventListener('click',async function saveData(e) 
+{
+  e.preventDefault()
+
+  const first_name=document.querySelector('#mobile-CustomerFirstName').value
+  const last_name=document.querySelector('#mobile-CustomerLastName').value
+  const email=document.querySelector('#mobile-CustomerEmailAddress').value
+  const phone=document.querySelector('#mobile-CustomerPhoneNumber').value
+  const password=document.querySelector('#mobile-CustomerPassword').value
+
+  let err=document.querySelector('.mobile-register-err-msg')
+
+  err.style.display='none'
+  err.innerHTML='';
+
+
+  if(!first_name.length || !last_name.length || !email.length || !phone.length || !password.length)
+  {
+    err.style.display='block'
+    err.innerHTML='All Fields Required';
+    return
+  }
+
+  var regex = new RegExp('^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})|(^[0-9]{10})+$');
+  
+
+  if(phone && !regex.test(phone))
+  {
+    err.style.display='block'
+    err.innerHTML='Enter valid phone number without +91 & 0 as prefix'
+    return;
+  }
+  
+
+  if(!checkEmail(email))
+  {
+    err.style.display='block'
+    err.innerHTML='Invalid email';
+    return
+  }
+  if(!checkPhone(phone))
+  {
+    err.style.display='block'
+    err.innerHTML='Enter valid phone number without +91 & 0 as prefix';
+    return
+  }
+
+  document.querySelector('.mobile-otp-re-fname-hidden').value=first_name
+  document.querySelector('.mobile-otp-re-lname-hidden').value=last_name
+  document.querySelector('.mobile-otp-re-email-hidden').value=email
+  document.querySelector('.mobile-otp-re-phone-hidden').value=phone
+  document.querySelector('.mobile-otp-re-pwd-hidden').value=password
+
+
+
+  let loading=document.querySelector('.mobile-register-loading');
+  loading.style.display='block'
+
+
+
+
+
+  let data=await fetch("https://api-login.bareanatomy.in/otp/verify_user", {
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({phone, email})
+  })
+  
+  
+  let getdata=await data.json();
+  
+
+  if(getdata.status===200)
+  {
+    loading.style.display='none';
+
+    document.querySelector('#mobile-CustomerFirstName').value=''
+    document.querySelector('#mobile-CustomerLastName').value=''
+    document.querySelector('#mobile-CustomerEmailAddress').value=''
+    document.querySelector('#mobile-CustomerPhoneNumber').value=''
+    document.querySelector('#mobile-CustomerPassword').value=''
+    
+
+    document.querySelector('.mobile-register-otp-hidden').value=getdata.data.current_otp
+
+    let screen1=document.querySelector('.mobile-register-page')
+    screen1.style.display='none';
+
+    const registerOtp=document.querySelector('.mobile-register-screen-2')
+    registerOtp.style.display='block'
+
+   
+  }
+  else if(getdata.status===201)
+  {
+    err.style.display='block'
+    err.innerHTML=getdata.message;      
+
+  }
+
+  loading.style.display='none'
+
+
+
+})
+
+
+function validatecheckRegistermobileOtpField()
+{
+  const val=document.querySelector('.mobile-register-err-otp-page');
+
+
+  document.querySelector('#mobile-register-digit-1').style.borderColor='white'
+  document.querySelector('#mobile-register-digit-2').style.borderColor='white'
+  document.querySelector('#mobile-register-digit-3').style.borderColor='white'
+  document.querySelector('#mobile-register-digit-4').style.borderColor='white'
+
+  val.innerHTML=''
+  val.style.display='none'
+
+}
+
+
+
+async function checkRegistermobileOtpField()
+{
+  let digit1=document.querySelector('#mobile-register-digit-1').value
+  let digit2=document.querySelector('#mobile-register-digit-2').value
+  let digit3=document.querySelector('#mobile-register-digit-3').value
+  let digit4=document.querySelector('#mobile-register-digit-4').value
+
+  const val=document.querySelector('.mobile-register-err-otp-page');
+
+
+  document.querySelector('#mobile-register-digit-1').style.borderColor='white'
+  document.querySelector('#mobile-register-digit-2').style.borderColor='white'
+  document.querySelector('#mobile-register-digit-3').style.borderColor='white'
+  document.querySelector('#mobile-register-digit-4').style.borderColor='white'
+  
+  let loading=document.querySelector('.mobile-otp-register-loading-screen-2')
+
+  if(digit1.length && digit2.length && digit3.length && digit4.length)
+  {
+  
+
+  
+  let digit1=document.querySelector('#mobile-register-digit-1').value
+  let digit2=document.querySelector('#mobile-register-digit-2').value
+  let digit3=document.querySelector('#mobile-register-digit-3').value
+  let digit4=document.querySelector('#mobile-register-digit-4').value
+  
+  
+  val.innerHTML=''
+  val.style.display='none'
+
+  if(!digit1 || !digit2 || !digit3 || !digit4)
+  {
+
+    val.innerHTML='OTP Required'
+    val.style.display='block'
+
+
+    return;
+  }
+
+  if(!checkOTP(+digit1) || !checkOTP(+digit2) || !checkOTP(+digit3) || !checkOTP(+digit4))
+  { 
+
+    val.innerHTML='Invalid OTP'
+    val.style.display='block'
+
+    return;
+
+  }
+
+    
+
+
+  let login_otp=+`${digit1}${digit2}${digit3}${digit4}`
+
+  
+  let otp=document.querySelector('.mobile-register-otp-hidden').value
+
+
+    if(+otp!==login_otp)
+    {
+      val.innerHTML='Incorrect OTP'
+      val.style.display='block'
+      loading.style.display='none'
+
+      document.querySelector('#mobile-register-digit-1').style.borderColor='rgba(178, 29, 29, 0.4)'
+      document.querySelector('#mobile-register-digit-2').style.borderColor='rgba(178, 29, 29, 0.4)'
+      document.querySelector('#mobile-register-digit-3').style.borderColor='rgba(178, 29, 29, 0.4)'
+      document.querySelector('#mobile-register-digit-4').style.borderColor='rgba(178, 29, 29, 0.4)'
+
+      return
+    }
+
+
+    let first_name=document.querySelector('.mobile-otp-re-fname-hidden').value
+    let last_name=document.querySelector('.mobile-otp-re-lname-hidden').value
+    let email=document.querySelector('.mobile-otp-re-email-hidden').value
+    let phone=document.querySelector('.mobile-otp-re-phone-hidden').value
+    let password=document.querySelector('.mobile-otp-re-pwd-hidden').value
+
+
+    loading.style.display='block'
+
+    let data=await fetch("https://api-automation.bareanatomy.in/api/v1/customers", {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ first_name, last_name, phone, email, password})
+    })
+      
+    let getdata=await data.json();
+
+
+    if(getdata.success)
+    {
+
+      loading.style.display='none'
+
+    document.querySelector('#mobile-register-digit-1').value=''
+    document.querySelector('#mobile-register-digit-2').value=''
+    document.querySelector('#mobile-register-digit-3').value=''
+    document.querySelector('#mobile-register-digit-4').value=''
+
+
+      
+      sendEventToGA('Login Page', 'OTP Login','Login');
+      window.location.href = getdata.data.url;
+
+      let screen2=document.querySelector('.mobile-register-screen-2')
+      screen2.style.display='none';
+  
+      let modal = document.getElementById("mobile-myModal");
+      modal.style.display = "none";
+
+    }
+    else 
+    {
+      val.innerHTML=getdata.message
+      val.style.display='block'
+      loading.style.display='none'
+
+      }
+
+    
+    
+    }
+
+}
+
+
+
+
+let register_mobile_resend_otp=document.querySelector('#mobile-register-resend-otp')
+
+register_mobile_resend_otp.addEventListener('click',async function saveData(e) 
+{
+  e.preventDefault()
+
+
+  let email=document.querySelector('.mobile-otp-re-email-hidden').value
+  let phone=document.querySelector('.mobile-otp-re-phone-hidden').value
+
+  let register_resend_loading=document.querySelector('.mobile-register-resend-otp-loading')
+
+  register_resend_loading.style.display='block'
+
+  const val=document.querySelector('.mobile-register-err-otp-page');
+  
+  let data=await fetch("https://api-login.bareanatomy.in/otp/verify_user", {
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({phone, email})
+  })
+  
+  let getdata=await data.json();
+  
+
+
+  if(getdata.status===200)
+  {
+    register_resend_loading.style.display='none';
+    
+
+    document.querySelector('.mobile-register-otp-hidden').value=getdata.data.current_otp
+
+  }
+  else if(getdata.status===201)
+  {
+    val.style.display='block'
+    val.innerHTML=getdata.message;      
+
+  }
+
+  register_resend_loading.style.display='none'
+
+})
+
+
+
+async function checkmobileOtpField()
+{
+  let digit1=document.querySelector('#mobile-digit-1').value
+  let digit2=document.querySelector('#mobile-digit-2').value
+  let digit3=document.querySelector('#mobile-digit-3').value
+  let digit4=document.querySelector('#mobile-digit-4').value
+
+  const val=document.querySelector('.mobile-err-otp-page');
+
+
+  document.querySelector('#mobile-digit-1').style.borderColor='white'
+  document.querySelector('#mobile-digit-2').style.borderColor='white'
+  document.querySelector('#mobile-digit-3').style.borderColor='white'
+  document.querySelector('#mobile-digit-4').style.borderColor='white'
+ 
+
+  if(digit1.length && digit2.length && digit3.length && digit4.length)
+  {
+    
+  var redirect_url = localStorage.getItem("redirect_url") || '';
+
+  let loading=document.querySelector('.mobile-loading-screen-2')
+  
+
+
+  let customer_id=+document.querySelector('#mobile-customer_opt_id').value;
+  
+  let digit1=document.querySelector('#mobile-digit-1').value
+  let digit2=document.querySelector('#mobile-digit-2').value
+  let digit3=document.querySelector('#mobile-digit-3').value
+  let digit4=document.querySelector('#mobile-digit-4').value
+  
+  const val=document.querySelector('.mobile-err-otp-page');
+  val.innerHTML=''
+  val.style.display='none'
+
+  if(!digit1 || !digit2 || !digit3 || !digit4)
+  {
+
+    
+
+    val.innerHTML='OTP Required'
+    val.style.display='block'
+
+
+    return;
+  }
+
+  if(!checkOTP(+digit1) || !checkOTP(+digit2) || !checkOTP(+digit3) || !checkOTP(+digit4))
+  { 
+
+    val.innerHTML='Invalid OTP'
+    val.style.display='block'
+
+    return;
+
+  }
+
+  loading.style.display='block'  
+
+
+  let login_otp=+`${digit1}${digit2}${digit3}${digit4}`
+
+ 
+
+    let data={}
+
+    if(redirect_url.includes('skin-quiz'))
+    {
+      data={customer_id,login_otp:+login_otp,redirect_url:'/pages/skin-quiz-2?ps=login'}
+    }
+    else if(redirect_url.includes('hair-quiz'))
+    {
+      data={customer_id,login_otp:+login_otp,redirect_url:'/pages/quiz-3?ps=login'}
+    }
+    else if(redirect_url.includes('hair-analysis'))
+    {
+      data={customer_id,login_otp:+login_otp,redirect_url:'/pages/hair-analysis?ps=login'}
+    }
+    else if(redirect_url)
+    {
+      data={customer_id,login_otp:+login_otp,redirect_url:`${redirect_url}/?ps=login`}
+    }
+    else
+    {
+      data={customer_id,login_otp,redirect_url:'/?ps=login'}
+    }
+
+
+
+    let verifyData=await fetch("https://api-login.bareanatomy.in/otp/verify_otp", {
+      method: "post",
+      body: JSON.stringify({...data     
+      }),
+ 
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+    })
+    
+    let getResponse=await verifyData.json();
+
+
+    if(getResponse.status===200)
+    {
+
+     
+
+    document.querySelector('#mobile-digit-1').value=''
+    document.querySelector('#mobile-digit-2').value=''
+    document.querySelector('#mobile-digit-3').value=''
+    document.querySelector('#mobile-digit-4').value=''
+
+
+      
+      sendEventToGA('Login Page', 'OTP Login','Login');
+      window.location.href = getResponse.data.redirect_url;
+
+      let screen2=document.querySelector('.mobile-screen-2')
+      screen2.style.display='none';
+  
+      let modal = document.getElementById("mobile-myModal");
+      modal.style.display = "none";
+
+      let loading=document.querySelector('.mobile-loading-screen-2')
+      loading.style.display='none'
+
+
+
+
+
+    }
+    else if(getResponse.status===201)
+    {
+      const val=document.querySelector('.mobile-err-otp-page');
+      val.innerHTML='Incorrect OTP'
+      val.style.display='block'
+      loading.style.display='none'
+
+      document.querySelector('#mobile-digit-1').style.borderColor='rgba(178, 29, 29, 0.4)'
+      document.querySelector('#mobile-digit-2').style.borderColor='rgba(178, 29, 29, 0.4)'
+      document.querySelector('#mobile-digit-3').style.borderColor='rgba(178, 29, 29, 0.4)'
+      document.querySelector('#mobile-digit-4').style.borderColor='rgba(178, 29, 29, 0.4)'
+
+      }
+
+    
+    
+    }
+
+}
+
+
+
+const mobile_resendOtp=document.querySelector('#mobile-resend-otp')
+mobile_resendOtp.addEventListener('click',async function saveData(e) 
+{
+  e.preventDefault()
+
+  let userData=document.querySelector('.mobile-screen-1-hidden').value;
+
+  let loading=document.querySelector('.mobile-resend-otp-loading');
+
+  loading.style.display='block'
+
+  let data=await fetch("https://api-login.bareanatomy.in/otp/generate_otp", {
+    method: "post",
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ param:userData
+      
+    })
+  })
+  
+    let getdata=await data.json();
+
+    loading.style.display='none'
+
+   
+
+})
+
+
+
+let useMobilePassword=document.querySelector('.mobile-use-password-btn')
+
+useMobilePassword.addEventListener('click',async function signInPage(e) 
+{
+  e.preventDefault();
+
+  let screen2=document.querySelector('.mobile-screen-2')
+
+  screen2.style.display='none'; 
+
+  let screen4=document.querySelector('.mobile-signin-page')
+
+  screen4.style.display='block';
+
+
+
+
+})
+
+
+
+function mobilesigninpasswordcheck()
+{
+    const data=document.querySelector('#mobile_signin_CustomerEmailNumber').value
+    const password=document.querySelector('#mobile_signin_CustomerPassword').value
+
+    if(data.length && password.length)
+    {
+      const msg=document.querySelector('.mobile-sign-in-password-popup-err')
+      msg.innerHTML=''
+      msg.style.display='none'
+    }
+
+}
+
+
+async function loginInput() 
+{
+
+  let userData=document.querySelector('#mobile_signin_CustomerEmailNumber').value;
+  let password=document.querySelector('#mobile_signin_CustomerPassword').value;
+  let msg= document.querySelector('.mobile-sign-in-password-popup-err');
+
+  let imgButton=document.querySelector('.mobile-login-pwd-content-img')
+
+
+  if(!userData.length || !password.length)
+  {
+       
+       msg.style.display='block'
+       msg.innerHTML='All Fields Required '
+      return
+    }
+  
+
+
+
+  var regex = new RegExp('^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})|(^[0-9]{10})+$');
+  
+
+  let field=document.querySelector('#mobile_signin_CustomerEmailNumber')
+
+ 
+  if(userData && !regex.test(userData))
+  {
+    msg.style.display='block'
+    if(field.placeholder==='Enter Email Address')
+    {
+      msg.innerHTML='Invalid Email'
+    }
+    else  if(field.placeholder==='Enter Mobile Number')
+    {
+      msg.innerHTML='Enter valid phone number without +91 & 0 as prefix'
+    }
+    return;
+  }
+  
+
+  let loading=document.querySelector('.mobile-signin-loading');
+
+  imgButton.style.display='none' 
+
+  loading.style.display='block' 
+
+ let data={
+    email:userData,password,param:userData
+  }
+
+
+   let postData=await fetch("https://api-login.bareanatomy.in/otp/verify_customer", {
+    method: "post",
+    body: JSON.stringify({...data     
+    }),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  })  
+  
+  let getResponse=await postData.json(); 
+
+
+  if(getResponse.status==200)
+  {
+    if(getResponse.data && Object.keys(getResponse.data).length)
+    {
+      document.querySelector('#mobile_signin_CustomerEmailNumber').value=''
+      document.querySelector('#mobile_signin_CustomerPassword').value=''
+      window.location.href=getResponse.data.multpassUrl
+    }
+    
+  }
+  else if(getResponse.status==404)
+  {
+    msg.style.display='block'
+    msg.innerHTML='Invalid Login'
+    loading.style.display='none'
+    imgButton.style.display='block'
+  }
+
+    loading.style.display='none'
+    imgButton.style.display='block'  
+
+}
+
+
+
+
+let loginMobile_password=document.querySelector('#mobile-login-with-password');
+
+loginMobile_password.addEventListener('click',function(e)
+{
+  e.preventDefault()
+  loginInput() 
+})
+
+
+let loginMobile_password_key=document.querySelector('#mobile_signin_CustomerPassword')
+
+loginMobile_password_key.addEventListener('keyup',function(e)
+{
+  e.preventDefault();
+  if(e.key === 'Enter' || e.keyCode === 13)
+  {
+    loginInput()
+  }
+}
+
+)
+
+
+
+
+const emailsigninBtn=document.querySelector('.mobile-email-signin-phn-btn')
+
+emailsigninBtn.addEventListener('click',async function switchInput(e) 
+{
+  e.preventDefault()
+
+  let field=document.querySelector('#mobile_signin_CustomerEmailNumber')
+
+
+  if(field.placeholder==='Enter Email Address')
+  {
+    field.placeholder='Enter Mobile Number'
+    field.type='number'
+  } 
+  else if(field.placeholder==='Enter Mobile Number')
+  {
+    field.placeholder='Enter Email Address'
+    field.type='text'
+
+  }
+
+  field.value='';
+
+  if(emailsigninBtn.innerHTML==='Mobile') 
+  {
+    emailsigninBtn.innerHTML='Email'
+  }
+  else if(emailsigninBtn.innerHTML==='Email')
+  {
+    emailsigninBtn.innerHTML='Mobile'
+
+  }
+
+  let err=document.querySelector('.mobile-sign-in-password-popup-err');
+  err.style.display='none'
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+let mobile_forgotPassword=document.querySelector('.mobile-forgot-password')
+
+mobile_forgotPassword.addEventListener('click',async function forgotPage(e)
+{
+  e.preventDefault();
+
+  let screen4=document.querySelector('.mobile-signin-page')
+
+  screen4.style.display='none'
+
+  document.querySelector('#mobile_signin_CustomerEmailNumber').value=''
+  document.querySelector('#mobile_signin_CustomerPassword').value=''
+  document.querySelector('.mobile-sign-in-password-popup-err').style.display='none'
+
+  let screen5=document.querySelector('.mobile-screen-1')
+  screen5.style.display='block'
+
+}
+)
+
+
+
+
+
+
+</script>

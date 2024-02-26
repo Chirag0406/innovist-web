@@ -1,0 +1,268 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" media="print" onload="this.media='all'">
+
+<link rel="stylesheet preconnect" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="print" onload="this.media='all'" crossorigin>
+<link rel="stylesheet" href="{{ 'ambassador.css' | asset_url }}">
+
+{% include 'env' %}
+<div class="wrapper">
+        <div class="ambassador">
+            <div class="ambassador-bg">
+			{% if section.settings.amb_image %}
+                           <img src="{{ section.settings.amb_image | img_url: 'master' }}" class="d-none d-md-block w-100" />
+                             {% endif %}
+							 {% if section.settings.amb_mob_image %}
+                           <img src="{{ section.settings.amb_mob_image | img_url: 'master' }}" class="d-md-none w-100" />
+                             {% endif %}
+                </div>
+            <div class="ambassador-bg-overlay text-center">
+                {% if section.settings.amb_first_sec %}
+               		{{ section.settings.amb_first_sec }}
+              	{% endif %}
+            </div>
+       </div>
+
+       <section class="ambassador-sec-2">
+            <div class="container">
+                <div class="row">
+                        <div class="col-12 col-md-8 mx-auto">
+            <div class="ambassador-sec-content text-center">
+
+                </div>
+                            </div>
+                    </div>
+           </div>
+       </section>
+
+       <section class="apply-coupon">
+            <div class="coupon-code">
+                <ul class="coupon-content">
+                    <li>Use Code </li>
+                    <li class="coupon-box position-relative">
+                        <input type="text" id="to-copy" spellcheck="false" value="" readonly>
+                        <span id="copy-text" onclick="copyToClipboard('to-copy', '#alert_placeholder_1')">Copy</span>
+                    </li>
+                    <li>on your first purchase and get</li>
+                </ul>
+                <br>
+                <div id="alert_placeholder_1"></div>
+
+                <div class="flat-off">
+                    <div class="flat-badge">
+                        <p>flat <span class="off-price">₹350</span> off</p>
+                    </div>
+                    <p class="flat-p d-none d-sm-block">This will be auto applied if you follow the link below</p>
+                    <p class="flat-p d-sm-none">This will be auto applied if<br> you follow the link below</p>
+                    <div class="start-shopping">
+                        <a onclick="startShopping()" class="start-shop-btn" href="javascript:void(0)">START SHOPPING</a>
+                    </div>
+                    <p class="flat-p d-sm-block">* On a minimum purchase of Rs.1000/-</p>
+                </div>
+
+
+            </div>
+
+
+       </section>
+
+       <div class="ambassador-gallery">
+            <ul class="ambassador-gallery-img custom-d-md-block">
+			{% assign imagegal_blocks = section.blocks | where: 'type', 'glryimage' %}
+			{% for block in imagegal_blocks %}
+				{% if block.settings.ambgal_image %}
+				<li><img src="{{ block.settings.ambgal_image | img_url: 'master' }}"></li>
+				{% endif %}
+			{% endfor %}
+           </ul>
+           <ul class="ambassador-gallery-img custom-d-md-none">
+		   {% for block in imagegal_blocks %}
+			{% if block.settings.ambgal_mob_image %}
+			<li><img src="{{ block.settings.ambgal_mob_image | img_url: 'master' }}"></li>
+			{% endif %}
+			{% endfor %}
+           </ul>
+       </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+	{% schema %}
+   {
+    "name": "Sections",
+    "class": "content-section",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Ambesdor Second section"
+      },{
+            "type": "image_picker",
+            "id": "amb_image",
+            "label": "Banner Desktop Image"
+          },
+      {
+            "type": "image_picker",
+            "id": "amb_mob_image",
+            "label": "Banner Mobile Image"
+          } ,
+
+    {
+        "id": "amb_first_sec",
+        "type": "textarea",
+        "label": "Banner Content"
+      },
+      {
+        "id": "amb_second_sec",
+        "type": "textarea",
+        "label": "Section second Content"
+      },
+      {
+        "type": "header",
+        "content": "Ambesdor Third section"
+      },
+      {
+        "id": "amb_third_sec",
+        "type": "textarea",
+        "label": "Third Section Content"
+      },
+      {
+        "type": "header",
+        "content": "Banner Content"
+      }
+
+    ],
+"blocks": [
+      {
+        "type": "glryimage",
+        "name": "Gallery Images",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "ambgal_image",
+            "label": "Desktop Image"
+          },
+			{
+            "type": "image_picker",
+            "id": "ambgal_mob_image",
+            "label": "Mobile Image"
+          }
+        ]
+      }
+	]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+   {% endjavascript %}
+   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+   <script>
+       function showalert(message, alerttype , alertPlaceHolder) {
+
+           $(`${alertPlaceHolder}`).html('<div id="alertdiv" class="alert ' + alerttype + '"><span>' + message + '</span></div>')
+
+           setTimeout(function () { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+
+               $("#alertdiv").remove();
+
+           }, 5000);
+       }
+
+       function copyToClipboard(id, alertPlaceHolder) {
+           let text = $(`#${id}`).val();
+           console.log("text!!!====>", text);
+           var textArea = document.createElement("textarea");
+           textArea.value = text;
+           document.body.appendChild(textArea);
+           textArea.select();
+
+           try {
+               var successful = document.execCommand('copy');
+               var msg = successful ? 'successful' : 'unsuccessful';
+
+           } catch (err) {
+               console.log('Oops, unable to copy', err);
+           }
+           document.body.removeChild(textArea);
+           showalert('Code copied to Clipboard!', 'alert-primary', alertPlaceHolder)
+       }
+
+
+       removeURLParameter(window.location.href, 'cId');
+       getAmbassadorData();
+       function removeURLParameter(url, parameter) {
+           //prefer to use l.search if you have a location/link object
+           var urlparts = url.split('?');
+           if (urlparts.length >= 2) {
+
+               var prefix = encodeURIComponent(parameter) + '=';
+               var pars = urlparts[1].split(/[&;]/g);
+               const urlParams = new URLSearchParams(window.location.search);
+               const customerId = urlParams.get('cId');
+               localStorage.setItem('ambassador_cid', customerId);
+
+
+               //reverse iteration as may be destructive
+               for (var i = pars.length; i-- > 0;) {
+                   //idiom for string.startsWith
+                   if (pars[i].lastIndexOf(prefix, 0) !== -1) {
+                       pars.splice(i, 1);
+                   }
+               }
+
+               //window.location.href = urlparts[0] + (pars.length > 0 ? '?' + pars.join('&') : '');
+           }
+           return url;
+       }
+       function startShopping(){
+           localStorage.setItem("refer_code", $("#to-copy").val());
+           const discount_code = $("#to-copy").val();
+           window.location.href = window.location.origin + `/discount/${discount_code}?redirect=/collections/all`;
+       }
+       function getAmbassadorData(){
+           console.log("env========>", '{{ env }}');
+           const referralApi = '{{ referralApi }}'
+           let customerId = localStorage.getItem('ambassador_cid');
+           $.ajax({
+               type: 'GET',
+               url: `${referralApi}/api/referral_details`,
+               data:{'customer_id': customerId},
+               success:function(data) {
+                   var json_d =  data;
+                   console.log(data);
+                   var data = jQuery.parseJSON( json_d );
+                   var createdDate = new Date(data.data.created_at);
+                   var dd = String(createdDate.getDate()).padStart(2, '0');
+                   var mm = String(createdDate.getMonth() + 1).padStart(2, '0'); //January is 0!
+                   var yyyy = createdDate.getFullYear();
+                    $("#to-copy").val(data.data.referral_code.toUpperCase());
+                   createdDate= dd + '.' + mm + '.' + yyyy;
+                   $('.ambassador-sec-content').append(` <h4>${data.data.name} is using Bare Anatomy's products since ${createdDate}   </h4>
+                <p class="d-none d-sm-block">and has invited you to amp up your beauty game!  </p>
+                <p class="d-sm-none">and has invited you to <br>amp up your beauty game!  </p>`)
+
+               }
+           });
+
+
+       }
+
+
+   </script>
+<script type="text/javascript">
+
+    let referralApi = '{{ referralApi }}'
+    jQuery.ajax({
+        type: 'GET',
+        url: `${referralApi}/api/discount/customer_incentive`,
+        success:function(data) {
+            var json_d =  data;
+            var check_json = jQuery.parseJSON( json_d );
+            $(".off-price").html(`<i class="fa fa-inr" aria-hidden="true"></i>${Math.abs(check_json.data.customer_incentive)}`);
+        }
+    });
+
+</script>

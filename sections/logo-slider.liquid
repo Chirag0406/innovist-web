@@ -1,0 +1,108 @@
+{% if section.settings.home_hide == true and template.name == 'index' %}
+	{%- assign show_slider = true -%}
+{% elsif section.settings.page_hide == true and template.name != 'index' %}
+	{%- assign show_slider = true -%}
+{% else %}
+	{%- assign show_slider = false -%}
+{% endif %}
+
+{% if show_slider != true %}	
+<section class="logo-slider-main {% if template.name == 'index' %}front_page{%endif%}">
+	<div class="container">
+	<h6>{{ section.settings.logo_main_heading}}</h6>
+	{% if section.blocks.size > 0 %}
+		<div class="row">
+        <div class="col-sm-12">
+			<div id="logo-slider" class="owl-carousel">
+				{% for block in section.blocks %}
+					<!--/ ONLY print specific page data -->
+					<div class="item">	
+						<h2>{{ block.settings.logo_content}}</h2>
+						<!--{% if block.settings.logo_content != blank %}
+							<h2>{{ block.settings.logo_content}}</h2>
+						{% endif %}-->
+						{% if block.settings.logo_link != blank %}
+						<a href="{{block.settings.logo_link}}" style="width:70%">
+						{% endif %}
+							<div class="logo-img-container">
+								<img class="" src='{{block.settings.logo_image | img_url : "master"}}' alt="">
+							</div>
+						{% if block.settings.logo_link != blank %}
+						</a>
+						{% endif %}
+						
+					</div>
+				{% endfor %}
+			</div>
+			{% if template.name == 'index' %}
+           <div class="nutra-page-read text-center">
+            <a href="{{section.settings.home_read_link}}">{{section.settings.home_read_more}}</a>
+          </div>
+		  {% endif %}
+        </div>	
+    </div>	
+	{% endif %}
+	
+	</div>
+</section>
+{% endif %}
+{% schema %}
+  {
+    "name": "Logo Slider",
+    "class": "logo-slider-section",
+	 "settings": [
+        {
+          "type": "text",
+          "id": "logo_main_heading",
+          "label": "Heading"
+        },{
+          "type": "text",
+          "id": "home_read_more",
+          "label": "Read More"
+        },{
+          "type": "url",
+          "id": "home_read_link",
+          "label": "Read More Link"
+        },{
+          "type": "checkbox",
+          "id": "home_hide",
+          "label": "Hide on Homepage"
+        },{
+          "type": "checkbox",
+          "id": "page_hide",
+          "label": "Hide on Pages"
+        }
+    ],
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Logo Slider",
+        "settings": [
+		  {
+            "type": "text",
+            "id": "logo_content",
+            "label": "Title"
+          },
+		  {
+			  "type": "image_picker",
+			  "id": "logo_image",
+			  "label": {
+				"en": "Logo Image"
+			  }
+			},{
+            "type": "text",
+            "id": "logo_link",
+            "label": "Logo Link"
+          }
+		    
+        ]
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

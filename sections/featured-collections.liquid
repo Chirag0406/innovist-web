@@ -1,0 +1,186 @@
+<style>
+  @media(max-width:767px){
+    .collection_list_sec .new-grid{
+          overflow: scroll;
+          flex-wrap: nowrap;
+    }
+    .collection_list_sec .new-grid::-webkit-scrollbar {
+      height:0;
+    }
+    .collection_list_sec .grid-item{
+      flex: 0 0 23% !important;
+         
+    }
+    .collection_list_sec .slick-arrow{
+      top: 75%;
+    }
+  }
+</style>
+
+
+<div class="{{ section.settings.custom_class }}">
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+  {%- if section.settings.title != blank -%}
+    <div class="section-header{% if section.settings.view_all %} section-header--with-link{% endif %}">
+      <div class="page-width">
+      <h2 class="section-header__title">{% if section.settings.title_link != blank %}
+          <a href="{{ section.settings.title_link }}">
+    {% endif %}
+    {{ section.settings.title }}
+    {% if section.settings.title_link != blank %}
+          </a>
+          {% endif %}</h2>
+        {%- if section.settings.view_all -%}
+        <a onClick="sendEventToGA('Homepage','{{ 'collections.general.all_of_collection' | t }}', '{{ section.settings.title }}')" href="{{ section.settings.title_link }}" class="tab-featured-collection-view-all section-header__link">{{ 'collections.general.all_of_collection' | t }}</a>
+        {%- endif -%} 
+          </div>
+    </div>
+  {%- endif -%}
+  {%- if section.settings.sub_title != blank -%}
+<h3 class="sub_title">{{ section.settings.sub_title }}</h3>
+{%- endif -%}
+<div class="page-width">
+  <div class="new-grid brands-list" data-view="6-3">
+    {%- liquid
+      assign isEmpty = true
+      if section.blocks.size > 0
+        assign isEmpty = false
+      endif
+    -%}
+
+    {%- for block in section.blocks -%}
+      {%- liquid
+        assign collection = collections[block.settings.collection]
+        render 'collection-grid-item', collection: collection, block: block, image: block.settings.image
+      -%}
+    {%- endfor -%}
+
+    {%- if isEmpty -%}
+      <div class="page-width">
+        <div class="rte">
+          {{ 'home_page.onboarding.no_content' | t }}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</div>
+</div>
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+<script>
+ 
+
+   $(document).ready(function(){
+
+ var outerW = $(window).outerWidth();
+     
+     if (outerW < 767) {
+       $('.collection_list_sec .new-grid').slick({
+    dots: false,
+		arrows: true,
+		infinite: false,
+		speed: 300,
+		slidesToShow: 4,
+		slidesToScroll: 1,
+         rows:0,
+       });
+     }
+   });
+</script>
+
+{% schema %}
+  {
+    "name": "Collection list",
+    "class": "index-section",
+    "max_blocks": 18,
+    "settings": [
+      {
+        "type": "text",
+        "id": "custom_class",
+        "label": "Add Custom Class"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Popular categories"
+      },
+      {
+        "type": "url",
+        "id": "title_link",
+        "label": "Heading Link"
+      },
+      {
+        "type": "text",
+        "id": "sub_title",
+        "label": "Sub Heading"
+      },
+      {
+        "type": "checkbox",
+        "id": "view_all",
+        "label": "Show 'View all' link"
+      },
+      {
+        "type": "checkbox",
+        "id": "divider",
+        "label": "Show section divider",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "id": "collection",
+            "type": "collection",
+            "label": "Collection",
+            "info": "Image source can be adjusted under Theme Settings > Collection Tiles"
+          },
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Title",
+            "info": "Defaults to collection title"
+          },
+           {
+            "type": "url",
+            "id": "collection_link",
+            "label": "Collection Link"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Collection list",
+      "blocks": [
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        },
+        {
+          "type": "collection"
+        }
+      ]
+    }]
+  }
+{% endschema %}

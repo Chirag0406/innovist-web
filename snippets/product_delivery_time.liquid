@@ -1,0 +1,134 @@
+<style>
+    .delivery-box {
+        margin: auto;
+        width: 50%;
+        margin: 3% auto;
+        text-align: center;
+        border: 1px solid black;
+    padding: 10px;
+    background: #eaeaea;
+    }
+
+    .desktop_vis {
+      display: block !important;
+    }
+    .input-pin-code {
+      border: 1px solid black;
+      background-color: white;
+    }
+    .delivery-con {
+      padding-top: 180px;
+    }
+
+    .pin-code-button {
+        font-family: Helvetica Neue;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 33px;
+    text-align: center;
+    font-feature-settings: 'cpsp'on;
+    /* color: #FFFFFF; */
+    height: 40px;
+    min-width: 170px;
+    /* padding: 10px 20px; */
+    border: 1px solid #000000;
+    background-color: black;
+    color: white;
+    }
+    .pin-code-button:hover,  .pin-code-button:active {
+       color: black;
+        background-color: white;
+    }
+    .delivery-heading {
+      font-family: Helvetica Neue;
+    margin-bottom: 5px;
+      }
+      .delivery-msg {
+        font-family: Helvetica Neue;
+    font-style: normal;
+    /* font-weight: bold; */
+    font-size: 16px;
+      }
+      .display-delivery-msg {
+        font-family: Helvetica Neue;
+          margin:5px 0 0 0;
+      }
+    @media only screen and (max-width: 769px) {
+      .delivery-msg {
+        font-size: 12px;
+      }
+      .desktop_vis {
+      display: none !important;
+    }
+    .mob_vis {
+      display: block !important;
+    }
+      .display-delivery-msg {
+        font-size: 14px;
+      }
+      .delivery-heading {
+        font-size: 16px;
+      }
+      .delivery-box {
+        width: 100%;
+        text-align: left;
+      }
+      .pin-code-button {
+        min-width: 100px;
+      }
+    }
+</style>
+<div class="product-block delivery_estimate_box" {{ block.shopify_attributes }}>
+    {%- assign id = block.id | append: product.id -%}
+    <div class="pincode-container">
+        <div class="title-pincode">Check Delivery Date</div>
+        <div class="pincode-text-btn">
+            <input type="text" style="color:#000;border:1px solid #000;" class="pincode" placeholder="Enter Your Pincode">
+            <button class="get_estimate hm">Submit</button> </div> <div class="pincode-text-btn">
+            <div class="display-delivery-msg"></div>
+
+            <div style="display:none;" class="pincode_error">
+                <img nitro-lazy-src="https://res.cloudinary.com/mosaic-wellness/image/upload/f_auto,w_800,c_limit/v1599897210/Man%20Matters/icons/cross.png" class="pincode-icon nitro-lazy">Pincode should be 6 digits</div>
+            <div class="expected_date" style="display:none;"><img nitro-lazy-src="https://res.cloudinary.com/mosaic-wellness/image/upload/f_auto,w_800,c_limit/v1599897210/Man%20Matters/icons/truck.png" class="pincode-icon nitro-lazy">
+                <span class="expected_date_text"></span></div>
+            <div class="not_servicable" style="display:none;">
+                <img nitro-lazy-src="https://res.cloudinary.com/mosaic-wellness/image/upload/f_auto,w_800,c_limit/v1599897210/Man%20Matters/icons/cross.png" class="pincode-icon nitro-lazy">Item not servicable to <span class="pin_display"></span> at this moment.</div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+<script>
+      $('.pin-code-button').click(function() {
+        let value = $('.input-pin-code').val()
+        $.ajax({
+            url: `https://api-login.bareanatomy.in/delivery?pin_code=${value}`,
+            headers: {
+              shop: 'bareanatomy.myshopify.com'
+            },
+            dataType: 'json',
+            contentType: 'application/json',
+            type: "GET",
+            success: function (data) {
+                if (data.status == 200 && data.data && data.data.pin_code) {
+                  $('.display-delivery-msg').text('Estd. Delivery Date - ' +
+                  new Date(Date.now() + data.data.min_days*24*60*60*1000 + 5.5 * 3600*1000).toLocaleString('default', { month: 'short', day:'2-digit' }) + ' - ' +
+                  new Date(Date.now() + data.data.max_days*24*60*60*1000 + 5.5 * 3600*1000).toLocaleString('default', { month: 'short', day:'2-digit' }))
+
+                } else  {
+                  $('.display-delivery-msg').text('Not servicable here');
+                }
+            }, error: function(err) {
+              $('.display-delivery-msg').text('Not servicable here');
+
+            }
+        });
+
+
+      })
+</script>

@@ -1,0 +1,79 @@
+<head>
+    <link rel="stylesheet" href="{{ 'hair-care.css' | asset_url }}">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Script To Add HTML Includes And To Enable Font Awesome -->
+    <script src="https://kit.fontawesome.com/277952bc34.js"   crossorigin="anonymous" ></script>
+</head>
+
+<div id="hair-care">
+{% capture testimonials %}{% section 'hair-care-review' %}{% endcapture %}
+{% assign testimonial = testimonials | replace: 'class="shopify-section"', 'class="shopify-section-nested"' %}
+
+{% capture logo_slider %}{% section 'logo-slider' %}{% endcapture %}
+{% assign logo_slider = logo_slider | replace: 'class="shopify-section-slider"', 'class="shopify-section-nested-slider"' %}
+
+{% capture hair_section %}{% section 'hair-collection' %}{% endcapture %}
+{% assign hair_section = hair_section | replace: "%%insert-review-section%%", testimonial | replace: "%%insert-logo-section%%", logo_slider %}
+
+{{ hair_section }}
+</div>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.css">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
+<script>
+    jQuery(document).ready(function($) {
+        "use strict";
+        //  TESTIMONIALS CAROUSEL HOOK
+        $('#customers-testimonials').owlCarousel({
+            loop: true,
+            center: true,
+            items: 3,
+            margin: 0,
+            autoplay: false,
+            dots:true,
+            nav:true,
+            autoplayTimeout: 8500,
+            smartSpeed: 450,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 1
+                },
+                1170: {
+                    items: 1
+                }
+            }
+        });
+    });
+
+    jQuery(document).ready(function($) {
+        "use strict";
+        //  TESTIMONIALS CAROUSEL HOOK
+        $('#logo-slider').owlCarousel({
+            loop: true,
+            center: true,
+            items: 3,
+            margin: 0,
+            autoplay: false,
+            dots:true,
+            nav:true,
+            autoplayTimeout: 8500,
+            smartSpeed: 450,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                768: {
+                    items: 1
+                },
+                1170: {
+                    items: 1
+                }
+            }
+        });
+    });
+</script>

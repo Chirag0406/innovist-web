@@ -1,0 +1,105 @@
+<style>
+.custom-details-container{
+  width:95%;
+  margin:0 auto;
+}
+.custom-details-main-title h3 {
+    font-size: 28px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-align: left;
+}
+  .custom-detail-title h3 {
+    font-size: 20px;
+}
+  .custom-details-content {
+    margin-bottom: 36px;
+}
+.custom-detail-details p {
+    font-size: 14px;
+    font-weight: lighter;
+}
+@media only screen and (max-width: 767px) {
+
+.custom-details-main-title h3 {
+    font-size: 18px;
+    padding-top: 16px;
+    padding-bottom: 15px;
+}
+.custom-detail-title h3 {
+    line-height: 1.6;
+    font-size: 14px !important;
+}
+  .custom-detail-details p {
+    font-size: 12px;
+}
+  .custom-details-container {
+    width: 90%;
+    margin: 0 auto;
+}
+}
+]
+  </style>
+<div class="custom-detail-section-wrapper">
+  <div class="custom-details-container">
+    {% if  section.settings.main_title != blank%}
+    <div class="custom-details-main-title">
+      <h3>{{ section.settings.main_title }}</h3>
+    </div>
+      {% endif %}
+    {% for block in section.blocks %}
+    <div class="custom-details-content">
+      {% if block.settings.detail_title  != blank %}
+      <div class="custom-detail-title">
+        <h3>{{ block.settings.detail_title }}</h3>
+      </div>
+        {% endif %}
+{% if block.settings.deatials_content  != blank %}
+      <div class="custom-detail-details">
+        <p>{{ block.settings.deatials_content }}</p>
+      </div>
+  {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Custom Details",
+    "settings": [
+    {
+      "type":"text",
+      "id":"main_title",
+      "label":"Main Title"
+    }
+    ],
+    "blocks":[
+      {
+        "type":"block",
+        "name":"Block",
+        "settings":[
+            {
+      "type":"text",
+      "id":"detail_title",
+      "label":"Title"
+    },   {
+      "type":"richtext",
+      "id":"deatials_content",
+      "label":"Content"
+    }
+        ]
+      }
+    ],
+    "presets":[
+      {
+        "name":"Custom Details"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

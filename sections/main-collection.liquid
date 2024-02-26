@@ -1,0 +1,217 @@
+<style>
+  .contentsec_main {
+    padding-left: 20px;
+}
+@media(max-width:767px){
+
+.contentsec_main {
+    padding-left: 13px;
+}  
+  
+}  
+</style>
+{% if collection.metafields.custom.h1_tag != blank %}
+<h1 style="font-size: 2px; visibility: hidden; margin-bottom:0px;">{{ collection.metafields.custom.h1_tag }}</h1>
+{% endif %}
+{% if collection.metafields.custom.countdown_date != blank %}
+  {% if section.settings.content_sec != blank %}
+        <div class='contentsec_main' style='font-size:{{ section.settings.content_font }}px'>
+            {{ section.settings.content_sec }}
+          </div>
+{% endif %}
+  <div class="custom-content">
+    
+     
+    <div class="rte">
+  <div class="countdown-part" data-date="{{ collection.metafields.custom.countdown_date }}" id="countdown-part">
+  <div id="countdown">
+    <ul>
+      <li><span class="days"></span><strong>Days</strong></li>
+      <li><span class="hours"></span><strong>Hours</strong></li>
+      <li><span class="minutes"></span><strong>Min</strong></li>
+      <li><span class="seconds"></span><strong>Sec</strong></li>
+    </ul>
+  </div>
+      </div> 
+    </div>
+  </div>
+  {% endif %}
+<div
+  id="CollectionAjaxResult"
+  class="collection-content"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-template"
+  data-collection-template="true"
+>
+  <div id="CollectionAjaxContent">
+    <div class="page-width">
+      <div class="grid">
+        <div class="grid__item medium-up--one-fifth grid__item--sidebar">
+          {% render 'collection-sidebar', section: section %}
+        </div>
+        <div class="grid__item medium-up--four-fifths grid__item--content">
+          <div class="collection-grid__wrapper">
+            {% render 'collection-template', section: section %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "CollectionPage",
+  {% if collection.description != blank %}
+    "description": {{ collection.description | strip_html | json }},
+  {% endif %}
+  {% if page_image %}
+    {% assign image_size = page_image.width | append: 'x' %}
+    "image": {
+      "@type": "ImageObject",
+      "height": {{ page_image.height | json }},
+      "url": {{ page_image | img_url: image_size | prepend: "https:" | json }},
+      "width": {{ page_image.width | json }}
+    },
+  {% endif %}
+  "name": {{ collection.title | json }}
+}
+</script>
+<script type="application/ld+json"> 
+{ 
+  "@context": "https://schema.org", 
+  "@type": "ItemList", 
+  "itemListElement": [ 
+{%- paginate collection.products by 9999 -%}
+  {% for product in collection.products %}
+    { 
+      "@type": "ListItem", 
+      "position": {{ forloop.index }},
+      "name": "{{ product.title }}", 
+      "url": "{{ product.url }}"        
+    }{% unless forloop.last %},{% endunless%}
+    {% endfor %}
+  {% endpaginate %}
+  ] 
+} 
+</script> 
+
+{% schema %}
+  {
+    "name": "Product grid",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Filtering and sorting"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sidebar",
+        "label": "Enable filter",
+        "default": true,
+        "info": "Allow your customers to filter collections and search results by product availability, price, color, and more. [Customize filters](/admin/menus)"
+      },
+      {
+        "type": "richtext",
+        "id": "content_sec",
+        "label": "Content"
+      },
+      {
+        "type": "range",
+        "id": "content_font",
+        "label": "Font Size Content",
+        "default": 12,
+        "min": 12,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "type": "checkbox",
+        "id": "collapse_filters",
+        "label": "Collapse filters",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_color_swatches",
+        "label": "Enable color swatches",
+        "info": "[View setup instructions](https://archetypethemes.co/blogs/expanse/how-do-i-set-up-color-swatches)"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_sort",
+        "label": "Show sort options",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection_description",
+        "name": "Collection description",
+        "limit": 1
+      },
+      {
+        "type": "product_grid",
+        "name": "Products",
+        "settings": [
+          {
+            "type": "select",
+            "id": "grid_style",
+            "label": "Default product layout",
+            "default": "small",
+            "options": [
+              {
+                "value": "large",
+                "label": "Large grid"
+              },
+              {
+                "value": "small",
+                "label": "Small grid"
+              },
+              {
+                "value": "list",
+                "label": "List"
+              }
+            ]
+          }
+        ],
+        "limit": 1
+      },
+      {
+        "type": "subcollections",
+        "name": "Subcollections",
+        "settings": [
+          {
+            "type": "paragraph",
+            "content": "Links to collections from your menu will appear here. [Learn more](https://archetypethemes.co/blogs/expanse/how-do-i-create-subcollections)"
+          }
+        ],
+        "limit": 1
+      }
+    ]
+  }
+{% endschema %}
+
+{% if collection.name contains "all" %}
+  @media only screen and (max-width: 767px) {
+  .new-grid{
+  display:flex;
+  flex-wrap:wrap;
+  word-break:break-word;
+justify-content:space-between;
+}
+    [data-grid-style*=gridlines] .product-grid{
+<!--       margin-left:-40px;
+      margin-left:calc(var(--pageWidthPadding)*-1);
+      margin-right:-40px;
+      margin-right:calc(var(--pageWidthPadding)*-1); -->
+      padding:var(--gridThickness) calc(40px + var(--gridThickness));
+      padding:var(--gridThickness) calc(var(--pageWidthPadding) + var(--gridThickness));
+    }
+    [data-grid-style*=gridlines] .grid-product{
+  width:48%;
+    
+    }
+}
+{% endif %}

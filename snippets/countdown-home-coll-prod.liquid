@@ -1,0 +1,59 @@
+{% comment %} <div class="countdown-part" data-date="02/30/2024" id="countdown-part">
+  <div id="countdown">
+    <ul>
+      <li><span class="days"></span><strong>Days</strong></li>
+      <li><span class="hours"></span><strong>Hours</strong></li>
+      <li><span class="minutes"></span><strong>Min</strong></li>
+      <li><span class="seconds"></span><strong>Sec</strong></li>
+    </ul>
+  </div>
+      </div> 
+
+      <div class="countdown-part countdown-part-left" data-date="03/30/2024" id="countdown-part">
+  <div id="countdown">
+    <ul>
+      <li><span class="days"></span><strong>Days</strong></li>
+      <li><span class="hours"></span><strong>Hours</strong></li>
+      <li><span class="minutes"></span><strong>Min</strong></li>
+      <li><span class="seconds"></span><strong>Sec</strong></li>
+    </ul>
+  </div>
+      </div> 
+
+      <div class="countdown-part countdown-part-right" data-date="04/30/2024" id="countdown-part">
+  <div id="countdown">
+    <ul>
+      <li><span class="days"></span><strong>Days</strong></li>
+      <li><span class="hours"></span><strong>Hours</strong></li>
+      <li><span class="minutes"></span><strong>Min</strong></li>
+      <li><span class="seconds"></span><strong>Sec</strong></li>
+    </ul>
+  </div>
+      </div>  {% endcomment %}
+
+
+<style>
+  .countdown-part{max-width:290px;width:100%;margin:0 auto;padding:10px 0 10px;}
+  .countdown-part.countdown-part-left{margin:0;}
+  .countdown-part.countdown-part-right{margin:0 0 0 auto;}
+  .countdown-part ul{width:100%;display:flex;text-align:center;margin:0;}
+  .template-index .countdown-part ul { justify-content:center; }
+  .countdown-part ul li{width:50px;display:block;margin:0;}
+  .countdown-part ul li span{
+    width: 30px;
+    height: 30px;
+    display: flex;
+    border-radius: 5px;
+    margin: 0 auto 5px;
+    font-size: 15px;
+    font-weight: bold;
+    background: #000;
+    color: #fff;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+  }
+  .countdown-part ul li strong{width:100%;display:block;font-size:12px;}
+</style>
+
+      

@@ -1,0 +1,368 @@
+asdfff
+<style>
+    .hair-new-look.modal.fade .modal-dialog {
+        transition: -webkit-transform .3s ease-out;
+        transition: transform .3s ease-out;
+        transition: transform .3s ease-out,-webkit-transform .3s ease-out;
+        position: absolute;
+        width: 100%;
+        left: 50%;
+        transform: translate(-50%, 100%)!important;
+    }
+
+    .hair-new-look.modal.show .modal-dialog {
+        position: absolute;
+        width: 100%;
+        left: 50%;
+        transform: translate(-50%, 2px) !important;
+    }
+
+    .hair-new-look .modal-content {
+        border: none;
+    }
+
+    .hair-new-look .modal-dialog{
+        margin-bottom: 0;
+    }
+
+    .hair-new-look .modal-content {
+        border-radius: 28px 28px 0 0;
+        padding: 63px 20px 25px;
+        text-align: center;
+    }
+
+    .hair-new-look button.close {
+        position: absolute;
+        right: 20px;
+        width: auto;
+        height: auto;
+        color: #B1B1B1;
+        border: none;
+        top: 15px;
+        font-size: 35px;
+        background-color: transparent;
+    }
+
+    .hair-new-look .modal-content .modal-body {
+        padding: 0;
+    }
+
+    .hair-new-look .modal-content .modal-body h2 {
+        font-size: 29px;
+        font-family: 'Playfair Display', serif;
+        font-weight: bold;
+        color: #01385E;
+        margin-bottom: 32px;
+    }
+
+    .hair-new-look .modal-content .modal-body h2 span:after {
+        content: '';
+        height: 28px;
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 100%;
+        background: #E6F7FF;
+        z-index: -1;
+        bottom: -6px;
+        z-index: -1;
+    }
+
+    .hair-new-look .modal-content .modal-body h2 span {
+        position: relative;
+        padding: 0 8px;
+        z-index: 0;
+    }
+
+
+
+
+    .hair-new-look .modal-content .modal-body ul {
+        padding: 0;
+        margin: 0 0 36px;
+        list-style: none;
+        display: flex;
+        text-align: center;
+        justify-content: center;
+    }
+
+    .hair-new-look .modal-content .modal-body ul li h5 {border-right: 2px solid #01385E;color: #01385E;font-size: 14px;text-transform: uppercase;font-family: 'Helvetica-Bold';font-weight: bold;padding: 0 8px;margin: 0 0 2px;}
+
+    .hair-new-look .modal-content .modal-body ul li:first-child h5 {
+        padding-left: 0;
+    }
+
+    .hair-new-look .modal-content .modal-body ul li:last-child h5 {
+        border: none;
+        padding-right: 0;
+    }
+
+    .hair-new-look .modal-content .modal-body ul li span {
+        font-size: 14px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        color: #01385E;
+    }
+
+    .hair-new-look .modal-content .modal-body button.btn {
+        width: 239px;
+        margin: 38px auto 0;
+        display: block;
+        color: #fff;
+        height: 60px;
+        border-radius: 0;
+        background: #01385E;
+        font-size: 14px;
+        font-weight: 500;
+        text-transform: uppercase;
+        border: none;
+        font-family: 'HelveticaNeue';
+        font-weight: 500;
+    }
+
+    .hair-new-look .color {
+        flex-direction: column;
+    }
+
+    .hair-new-look .color li {
+        width: 48%;
+        height: 35px;
+        margin: auto auto 13px auto;
+        position: relative;
+        border-radius: 50px;
+        /* margin-right: 2%; */
+        font-size: 18px;
+        font-family: 'Helvetica';
+        font-weight: 500;
+        display: inline-block;
+        /* margin: auto; */
+    }
+
+    .hair-new-look .color li input {
+        position: absolute;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+        z-index: 2;
+        opacity: 0;
+    }
+
+    .hair-new-look  ul.color li input[type="radio"]:checked + .check {
+        background: #E5F7FF;
+        border-color:#B5B5B5;
+        font-weight: 600;
+        box-shadow: 2px 2px 6px 0px rgb(228 226 228);
+    }
+
+    .hair-new-look ul.color li span.check {
+        border: 1px solid #B5B5B5;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        border-radius: 50px;
+        z-index: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-family: 'Helvetica';
+        font-size: 13px;
+    }
+
+
+
+
+    .add-new-address .modal-content .modal-body h2 span:after {background: #FFCBC0;height: 25px;}
+
+    .add-new-address .modal-content .modal-body h2 {
+        position: relative;
+        z-index: 0;
+    }
+
+    .add-new-address .modal-content .modal-body h2 {
+        margin: 0 0 49px;
+    }
+
+    .add-new-address .modal-content .modal-body {
+        width: 393px;
+        margin: 0 auto;
+    }
+
+    .add-new-address .modal-content .modal-body .form-group .form-control {
+        height: 65px;
+        background: #E6F7FF;
+        font-size: 16px;
+        border-radius: 0;
+        border: none;
+        font-family: 'HelveticaNeue';
+        font-weight: 500;
+        color: #01385E;
+    }
+
+    .add-new-address .modal-content .modal-body .form-group .form-control::-webkit-input-placeholder { /* Edge */
+        color: #A19FA4;
+    }
+
+    .add-new-address .modal-content .modal-body .form-group .form-control:-ms-input-placeholder { /* Internet Explorer 10-11 */
+        color: #A19FA4;
+    }
+
+    .add-new-address .modal-content .modal-body .form-group .form-control::placeholder {
+        color: #A19FA4;
+    }
+
+
+    .add-new-address .modal-content .modal-body button.btn {
+        width: 100%;
+    }
+
+
+
+    .update-email .modal-content {
+        border-radius: 28px;
+    }
+
+    .update-email .modal-content {
+        padding-bottom: 50px;
+    }
+
+    .update-email .modal-content .form-group.number,.update-email .modal-content .form-group.eye {
+        position: relative;
+    }
+
+    .update-email .modal-content .form-group.number input {
+        padding-left: 64px;
+    }
+
+    .update-email .modal-content .form-group.eye input{
+        padding-right: 40px;
+    }
+
+    .update-email .modal-content .form-group.eye span {
+        position: absolute;
+        right: 12px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 22px;
+    }
+
+    .update-email .modal-content .form-group.eye span i{
+        color: #01385E;
+    }
+
+    .update-email .modal-content .form-group.number span {
+        position: absolute;
+        left: 12px;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 22px;
+        font-size: 15px;
+        font-family: 'HelveticaNeue';
+        font-weight: 500;
+        color: #01385E;
+        border-right: 2px solid #A19FA4;
+        padding-right: 10px;
+    }
+
+    .add-new-address .modal-content .modal-body .row .col:first-child {
+        padding-right: 6px;
+    }
+
+    .add-new-address .modal-content .modal-body .row .col:last-child {
+        padding-left: 6px;
+    }
+
+
+
+    @media only screen and (max-width: 1024px){
+
+
+        .hair-new-look.modal.fade#updateColorFragrance .modal-dialog {bottom: 0;}
+
+    }
+
+
+
+    /* @media only screen and (max-width: 991px){
+
+        .head h2 {font-size: 46px;}
+
+    } */
+
+
+    @media only screen and (max-width: 560px){
+
+        .hair-new-look .modal-content .modal-body h2 {font-size: 20px;margin: 0 0 25px;}
+        .hair-new-look .inner .img {width: 205px;height: 205px;}
+        .hair-new-look .inner span b {font-size: 15px;}
+        .hair-new-look .inner span small {font-size: 8px;}
+        .hair-new-look .inner span {width: 60px;height: 60px;right: 18%;}
+        .hair-new-look .modal-content .modal-body ul li h5 {font-size: 11px;}
+        .hair-new-look .modal-content .modal-body ul li span {font-size: 11px;}
+        .hair-new-look.modal.show .modal-dialog {margin: 0;}
+        .hair-new-look .modal-content {padding: 50px 20px 25px;}
+        .hair-new-look button.close {top: -10px;font-size: 28px;}
+        .hair-new-look .modal-content .modal-body button.btn {height: 45px;font-size: 12px;width: 181px;}
+        .hair-new-look.modal.show .modal-dialog {width: 90%;}
+
+        .add-new-address .modal-content .modal-body {width: 294px;}
+        .add-new-address .modal-content .modal-body .form-group .form-control {height: 45px;font-size: 12px;}
+
+        .hair-new-look .modal-content .modal-body h2 span {padding: 0 6px;}
+
+    }
+
+
+
+    @media only screen and (max-width: 320px){
+
+        .hair-new-look .modal-content .modal-body ul li h5 {font-size: 9px;}
+        .hair-new-look .modal-content .modal-body ul li span {font-size: 9px;}
+
+
+        .add-new-address .modal-content .modal-body {width: 100%;}
+
+        .hair-new-look .modal-content .modal-body h2 {font-size: 19px;}
+
+
+    }
+</style>
+<div class="modal fade hair-new-look update-color-fragrance" id="updateColorFragrance" tabindex="-1" role="dialog" aria-labelledby="updateColorFragranceLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
+            <div class="modal-body">
+                <div class="skin_goals color_fragrance">
+                    <h3>What color and fragrance do you prefer in your products?</h3>
+                    <ul class="color">
+                    </ul>
+                </div>
+
+
+                <!-- <form action="" id="settings_update_password" novalidate="novalidate">
+                    <div class="form-group eye" id="togglePassword">
+                        <span><i class="fa fa-eye"></i></span>
+                        <input type="password" name="password" placeholder="New Password" minlength="6" maxlength="10" class="form-control" required="">
+                    </div>
+                    <div class="form-group" id="toggleConfirmPassword">
+                        <input type="password" name="confirm_password" placeholder="Confirm Password" minlength="6" maxlength="10" class="form-control" required="">
+                    </div>
+                </form>
+                <div class="alert alert-danger hide" role="alert">
+                </div> -->
+                <button type="button" class="btn save chngeColor">save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+</script>

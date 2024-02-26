@@ -1,0 +1,843 @@
+{% schema %}
+{
+"name": "login-men-quiz",
+"settings": []
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+<link href="{{'custom_hair_quiz.css' | asset_url }}" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<div class="wrapper shopping_cart membership_update final hair-quiz quiz-loader" id="main">
+    <section class="width-box Hair-scalp">
+        <div class="container">
+            <div class="box">
+                <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/hair-logo.svg?v=1613712513" class="hair-logo" alt="">
+                <p>3 Minutes to your best haircare, let's go!</p>
+                <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Loading-page-GIF_Hair-care_PNG.gif?v=1607581953" class="load-img" alt="">
+            </div>
+        </div>
+    </section>
+</div>
+
+{% if customer %}
+    <div class="wrapper shopping_cart membership_update hair-quiz skin-quiz-wrapper og-quiz" id="main" style="display:none;">
+        <section class="width-box Hair-scalp cart_products">
+            <h4 id="section-name">Skin</h4>
+            <div class="row" id="question-box">
+                <div class="col-lg-8 col-xs-12">
+                    <div class="right_content">
+                        {% comment %} <h5 class="preference-head4">Where should we send<br />
+                             <span>your results?</span></h5>{% endcomment %}
+                        <h5 class="preference-head4"></h5>
+                        <p class="description"></p>
+                        <div class="option-box">
+                            {% comment %}<ul>
+                                <li><input type="radio" name="radio" value="radio1" id="radio1">
+                                    <span class="check">Dry</span></li>
+                                <li><input type="radio" name="radio" value="radio2" id="radio2">
+                                    <span class="check">Normal</span></li>
+                                <li><input type="radio" name="radio" value="radio3" id="radio3">
+                                    <span class="check">Oily</span></li>
+                                <li><input type="radio" name="radio" value="radio4" id="radio4">
+                                    <span class="check">Combination</span></li>
+                                <li><input type="radio" name="radio" value="radio5" id="radio5">
+                                    <span class="check">I don't know</span></li>
+                            </ul>{% endcomment %}
+                        </div>
+                        <button class="btn" id="next-btn" type="button" style="display:none;">next</button>
+                        <button class="btn" id="save-btn" type="button" style="display:none;">Save</button>
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-12">
+                    <div class="left_content" style="position: sticky !important;position: -webkit-sticky;">
+                        <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_1888_2x_ec2fcb12-9d02-4dd3-86dd-abc47a4a80e0.png?v=1613719665" alt="Skin Product">
+                        <div class="box">
+                            <h5 class="personalized-name">Personalizing for you...</h5>
+                            <div class="progress-bar">
+                                <span style="width: 20%;" id="progress-bar-width"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+{% else %}
+    <div class="wrapper shopping_cart membership_update hair-quiz skin-quiz-wrapper personal" id="main" style="display:none;">
+        <section class="width-box Hair-scalp cart_products">
+            <h4>Personal</h4>
+
+            <div class="row">
+                <div class="col-lg-8 col-xs-12">
+                    <div class="right_content">
+                        <h5 class="preference-head4">Where should we send<br />
+                            <span>your results?</span></h5>
+
+                        <form id="email-div" action="">
+                            <div class="form-group" id="input-box">
+                                <input type="text" class="form-control" id="email-value" placeholder="Your Email">
+                            </div>
+                            <p class="input-type">By providing your email, you agree to our<br />
+                                <a href="/pages/terms-and-conditions" target="_blank">Terms & Conditions</a> and <a href="/pages/privacy" target="_blank">Privacy Policy</a></p>
+                        </form>
+                        <button class="btn" id="email-next-btn" type="button">next</button>
+
+
+                    </div>
+                </div>
+                <div class="col-lg-4 col-xs-12">
+                    <div class="left_content">
+                        <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_1888_2x_ec2fcb12-9d02-4dd3-86dd-abc47a4a80e0.png?v=1613719665" alt="">
+                        <div class="box">
+                            <h5>Personalizing for you...</h5>
+                            <div class="progress-bar">
+                                <span style="width: 20%;"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+{% endif %}
+
+
+<script>
+    const totalQuestions = 10;
+    let currentQuestion = 1;
+    let quizId = 3;
+    let baseUrl= 'https://api-quiz.bareanatomy.in';
+    let quizMode = 'personal';
+    const urlParams = new URLSearchParams(window.location.search);
+    let restartedMode = urlParams.get('mode') === 'retake';
+    let gift_id = Number(urlParams.get('gift_id'));
+
+    function slideProgressBar(currentQuestionIndex){
+        console.log("progress bar==========>",$(`#${currentQuizQuestion.questionKey} #progress-bar-width`), totalQuestions, ((currentQuestionIndex/ totalQuestions) * 100).toString()+'%');
+        //$('#progress-bar-width').css('width', '40%');
+        $(`#${currentQuizQuestion.questionKey} #progress-bar-width`).css({'width': ((currentQuestionIndex/ totalQuestions) * 100).toString()+'%'});
+    }
+
+    {%  if customer  %}
+    let page = false, gender_asked = false;
+    {% for tag in customer.tags %}
+    if('{{tag}}'.includes('gender-male')) {
+        page = true;
+    }
+    if('{{tag}}'.includes('gender')) {
+        gender_asked = true;
+    }
+    {% endfor %}
+
+    if(!gender_asked) {
+        window.location.href = '/pages/gender-page'+ `${gift_id ? '?gift_id='+gift_id : ''}`;
+    } else if(!page) {
+        window.location.href = '/pages/hair-quiz?mode=retake'+ `${gift_id ? '&gift_id='+gift_id : ''}`;
+    }
+    let currentQuiz;
+    let currentQuestionIndex = 0;
+    let currentQuizQuestion;
+    let submitData;
+    let bottleColorId;
+    let clonedElement = $('.og-quiz .Hair-scalp');
+    console.log("clonedElem------>", clonedElement);
+    class QuizModel{
+        constructor(quiz) {
+            this.id = (quiz.quizzes) ? quiz.quizzes[0].quiz_id : currentQuiz.id,
+                this.name = (quiz.quizzes) ? quiz.quizzes[0].name : currentQuiz.name,
+                this.description = (quiz.quizzes) ? quiz.quizzes[0].description: currentQuiz.description,
+                this.isQuizCompleted = !!(quiz.is_quiz_completed),
+                this.question = (quiz.quizzes) ? new QuestionModel(quiz.quizzes[0].questions[0]): (quiz.next_quiz_question && Object.keys(quiz.next_quiz_question).length) ? new QuestionModel(quiz.next_quiz_question): "",
+                this.quizStateId = (quiz.hasOwnProperty('quiz_state_id')) ? quiz.quiz_state_id : currentQuiz.quizStateId,
+                this.disclaimer = quiz.disclaimer,
+                this.sectionId = (quiz.section) ? quiz.section.section_id: currentQuiz.sectionId,
+                this.sectionName = (quiz.section) ? quiz.section.section_name: currentQuiz.sectionName
+
+        }
+    }
+    class QuestionModel{
+        constructor(question) {
+            this.id = question.question_id,
+                this.name = question.name,
+                this.description = question.description,
+                this.priority = question.priority,
+                this.inputType = (question.type === 1) ? 'text' :
+                    (question.type === 2 && question.maximum_selection === 1) ? 'radio' :
+                        (question.type === 2 && question.maximum_selection > 1) ? 'checkbox' : 'select',
+                this.isRequired = !!(question.is_required),
+                this.minSelection = question.minimum_selection,
+                this.maxSelection = question.maximum_selection,
+                this.options = question.options.map((option) => new OptionModel(option)),
+                this.isMarked = question.options.some((opt) => opt.is_answered === 1),
+                this.quizQuestionId = question.quiz_question_id,
+                this.markedInput = '',
+                this.highlightedText = question.highlighted_text,
+                this.questionKey = question.question_key
+
+        }
+    }
+    class OptionModel{
+        constructor(option) {
+            this.id = option.option_id,
+                this.name = option.name,
+                this.defaultText = option.default_text,
+                this.priority = option.priority,
+                this.isSelected = !!(option.is_answered),
+                this.imageUrl = option.image_url,
+                this.disclaimer = option.disclaimer,
+                this.answerText = option.answer_text,
+                this.isLimitedEdition = !!option.limited_edition
+
+
+        }
+    }
+    class SubmitModel{
+        constructor(quiz) {
+            console.log("quiz in submit moddel====>",quiz);
+            this.quiz_id = quiz.id,
+                this.quiz_question_id = (quiz.question && quiz.question.quizQuestionId)? quiz.question.quizQuestionId: '',
+                this.option_ids = [],
+                this.text_array = [] ,
+                this.customer_id = '{{ customer.id }}',
+                this.profile_id = 1,
+                this.quiz_state_id = quiz.quizStateId
+
+
+        }
+    }
+    $(document).on('change', 'input', function() {
+        const markedId = Number($(this).attr('id'));
+        const markedValue = $(this).val();
+        if ($(this).attr('data-questionid') == 53 || $(this).attr('data-questionid') == 69){
+            bottleColorId = $(this).attr("id");
+            console.log("bottleColorId===>", bottleColorId);
+        }
+        if($(this).attr('data-questionid') != currentQuizQuestion.id){  //User is going back
+            submitData.quiz_question_id = $(this).attr('data-questionid');
+            console.log("currentDiv=======>",$(`[data-id="${$(this).attr('data-questionid')}"]`));
+            $(`[data-id="${$(this).attr('data-questionid')}"]`).nextAll('section').remove();
+
+        }
+        switch( $(this).attr('type')) {
+            case 'radio':
+                (markedId) ? submitData.option_ids.push(markedId) :"";
+                (markedValue) ? submitData.text_array.push(markedValue): "";
+                let inputSiblings = $(this).parent().parent().children("li").find("input");
+                console.log("inputSiblings-----====>", inputSiblings);
+                $(inputSiblings).each(function() {
+                    $(this).attr('data-selected', "false");
+                    $(this).prop('checked', false);
+
+                });
+                $(this).attr('data-selected', "true");
+                $(this).prop('checked', true);
+                postQuestionDataAndGetNewQuestion();
+                break;
+            case 'checkbox':
+                let siblings = $(this).parent().parent().children("li").find("input");
+                if ($(this).parent().parent().children("li").find("input:checked").length == Number($(this).attr("data-max-selection"))) {
+                    $(this).parent().parent().children("li").find("input:checkbox:not(:checked)").siblings('span').addClass('greyed-out');
+                    $(this).parent().parent().children("li").find("input:checkbox:not(:checked)").prop('disabled', true);
+                }
+                else if($(this).parent().parent().children("li").find("input:checked").length < Number($(this).attr("data-max-selection"))){
+                    $(this).parent().parent().children("li").find("input:checkbox:not(:checked)").siblings('span').removeClass('greyed-out');
+                    $(this).parent().parent().children("li").find("input:checkbox:not(:checked)").prop('disabled', false);
+                }
+
+                if ($(this).parent().parent().children("li").find("input:checked").length > Number($(this).attr("data-max-selection"))) {
+                    $(this).prop('checked', false);
+                    let maxSelection = ($(this).attr("data-max-selection"));
+                    $(this).parent().parent().parent().after(`<p class="incorrect bounce">*Allowed only ${maxSelection}</p>`);
+                    $('.incorrect').fadeOut(2000);
+
+
+                }
+                $(siblings).each(function() {
+                    const indexOfId = submitData.option_ids.indexOf(Number($(this).attr('id')));
+                    const indexOfValue = submitData.text_array.indexOf($(this).val());
+                    if($(this).is(':checked')){
+                        (indexOfId === -1) ? submitData.option_ids.push(Number($(this).attr('id'))): "";
+                        (indexOfValue === -1) ? submitData.text_array.push($(this).val()) : "";
+                    } else {
+                        if(indexOfId !== -1 && indexOfValue !== -1) {
+                            submitData.option_ids.splice(indexOfId, 1);
+                            submitData.text_array.splice(indexOfValue, 1);
+                        }
+
+                    }
+
+
+                });
+                console.log("submitData======================>", submitData);
+
+                break;
+            case 'text':
+                (markedId) ? submitData.option_ids.push(markedId) :"";
+                (markedValue) ? submitData.text_array.push(markedValue): "";
+                break;
+
+
+
+        }
+
+    });
+    /*For rendered questions next button*/
+    $(document).on("click", '#next-btn', function() {
+        let closestInput = $(this).parent().find('input');
+        console.log("closestInput---->", $(closestInput).attr('type'));
+        if($(closestInput).attr('type') == 'text'){
+            const markedId = Number($(closestInput).attr('id'));
+            const markedValue = $(closestInput).val();
+            const questionId = Number($(closestInput).attr('data-questionId'));
+            (markedId) ? submitData.option_ids.push(markedId) :"";
+            (markedValue) ? submitData.text_array.push(markedValue): "";
+            (questionId) ? submitData.quiz_question_id = questionId : "";
+
+        }
+        postQuestionDataAndGetNewQuestion();
+    });
+    /*Ends here*/
+
+    /*Last Question save */
+    $(document).on("click", '#save-btn', function() {
+        if(gift_id){
+            window.location.href = `/pages/gift-address?gift_id=${gift_id}`;
+        }else{
+            window.location.href = "/pages/hair-analysis?previous_step=hair-quiz";
+        }
+    });
+    /*Ends here */
+    getFirstQuestion();
+    window.onpopstate = function() {
+      if(window.location.hash != "#!")
+      {
+        $(`.og-quiz .Hair-scalp`).hide().filter(location.hash).show();
+        $(location.hash).find('.option-box ul li input').each(function( index ) {
+            if ($(this).attr("data-selected") == 'true'){
+                $(this).prop('checked', true);
+
+            }
+        });
+      }
+    }
+    {% else %}
+    slideToMobile();
+    {% endif %}
+    let emailAddress,phoneNo,firstName;
+
+
+    function slideToMobile(){
+        $('.quiz-loader').fadeOut(2000, function(){
+            $('.skin-quiz-wrapper').show();
+        });
+        if(quizMode === 'personal'){
+            currentQuestion++;
+        }
+        else{
+            //getFirstQuestion();
+            currentQuestion++;
+            //slideProgressBar(currentQuestion);
+            $('.preference-head4').html('What is your <br /> <span>fist name?</span></h5>')
+            $('#input-box').html('<input type="text" class="form-control name-fill" placeholder="Your Name">')
+            $('.personalized-name').html(`Personalizing for you...`);
+        }
+    }
+    $(document).on("keypress", '.name-fill', async function(){
+        $('#first-name').html($('.name-fill').val());
+    });
+    function loadLoader(self){
+        $(self).html('<i class="fa fa-circle-o-notch fa-spin"></i>');
+    }
+    function unloadLoader(html,self){
+        $(self).html(html);
+    }
+    $(document).on("click", '#email-next-btn', async function(){
+        emailAddress = $("#email-value").val();
+        var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var mailformat1 = emailAddress.replace(/^\s+|\s+$/g, '');
+        if(!mailformat1.match(mailformat) || emailAddress == "") {
+            $("#email-value").after('<p class="incorrect bounce">Please enter a valid email address</p>');
+            unloadLoader(emailHtml, this);
+            $('.incorrect').fadeOut(2000);
+            return false;
+        }
+        else{
+            postEmail(this, emailAddress);
+
+        }
+    });
+    $(document).on("submit", '#email-div', function(e) {
+        console.log("ee------------->", this);
+        e.preventDefault();
+        emailAddress = $("#email-value").val();
+        var key = e.which;
+        if(key == 13)  // the enter key code
+            var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        var mailformat1 = emailAddress.replace(/^\s+|\s+$/g, '');
+        if(!mailformat1.match(mailformat) || emailAddress == "") {
+            $("#email-value").after('<p class="incorrect bounce">Please enter a valid email address</p>');
+            $('.incorrect').fadeOut(2000);
+            return false;
+        }
+        else{
+            postEmail($('#email-next-btn'), emailAddress);
+
+        }
+    });
+
+    $(document).on("click", "#mobile-next-btn", async function() {
+        checkNumberAndDisplayQuestion($(this));
+    });
+    $(document).on("submit", '#mobile-div', function(e) {
+        e.preventDefault();
+        checkNumberAndDisplayQuestion($("#mobile-next-btn"));
+
+    });
+
+    function checkNumberAndDisplayQuestion(self){
+        phoneNo = $("#mobile-value").val();
+        if(phoneNo != "" && phoneNo.length === 10)
+        {
+            let data = {phone: '+91'+phoneNo};
+            verifyNumber(data, self);
+
+        }
+        else
+        {
+            $("#mobile-value").after('<p class="incorrect bounce">Please enter a valid mobile number</p>');
+            $('.incorrect').fadeOut(2000);
+        }
+
+    }
+    function verifyNumber(data, self){
+        let html = $(self).html();
+        loadLoader(self);
+        $.ajax({
+            url: "https://api-automation.bareanatomy.in/api/v1/customers/check",
+            cache: false,
+            dataType: 'json',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            type: "POST",
+            success: function (data) {
+                if (data.status == 200) {
+                    $('.preference-head4').html('<span>Whose</span> hair are we talking about?');
+                    $('#input-box').html('<input type="text" class="form-control" id="name-value" placeholder="Your first Name">');
+                    $('.input-type').hide();
+                    unloadLoader(html, self);
+                    $("#mobile-div").attr('id','name-div');
+                    $(self).attr("id","name-next-btn");
+
+                } else if (data.status == 201) {
+                    $("#mobile-value").after('<p class="incorrect bounce">Mobile Number is already registered</p>');
+                    $('.incorrect').fadeOut(2000);
+                    $("#mobile-div").attr('id', 'name-div');
+                    unloadLoader(html, self);
+
+                    return false;
+                }
+            }
+        });
+
+    }
+    function postEmail(self, email){
+        let emailHtml = $(self).html();
+        loadLoader(self);
+        let data = {'email': email}
+        $.ajax({
+            url: "https://api-automation.bareanatomy.in/api/v1/customers/check",
+            cache: false,
+            dataType: 'json',
+            contentType: 'application/json',
+            data:JSON.stringify(data),
+            type: "POST",
+            success: function(data) {
+                if(data['status'] == 201)
+                {
+                    //$(".log_mod").fadeIn('slow');
+                    $('#email-div').prop('id', 'mobile-div');
+                    localStorage.setItem("redirect_url", "/pages/hair-quiz");
+                    let width=window.screen.availWidth;
+                    let modal = document.getElementById("myModal");
+                    let mobile_modal = document.getElementById("mobile-myModal");
+    
+                    if(width<601)
+                    {
+                        modal.style.display='none'
+                        mobile_modal.style.display='block'       
+                    }
+                    else if(width>601)
+                    {
+                        modal.style.display='block'
+                        mobile_modal.style.display='none'   
+                    } 
+                    {% comment %} window.location = location.origin + '/account/login?email='+email; {% endcomment %}
+
+                }
+                else if(data['status'] == 200){
+                    $('#input-box').html('<input type="number" class="form-control" id="mobile-value" placeholder="Your Mobile Number" maxlength="10">');
+                    $('#email-div').prop('id', 'mobile-div');
+                    $('.input-type').html('By providing your mobile number, you agree to our<br /><a href="/pages/terms-and-conditions" target="_blank">Terms & Conditions</a> and <a href="/pages/privacy" target="_blank">Privacy Policy</a>')
+                    unloadLoader(emailHtml, self);
+                    $(self).attr("id","mobile-next-btn");
+
+
+                }
+            }
+        });
+
+    }
+
+    function getData(ajaxurl) {
+        return $.ajax({
+            url: ajaxurl,
+            type: 'GET',
+        });
+    }
+    async function getFirstQuestion(){
+        let profileId = 1;
+        let customerId = '{{ customer.id }}';
+        try {
+            let res = await getData(`${baseUrl}/quiz/customer/get?flow=2&quiz_id=3&customer_id=${customerId}&profile_id=${profileId}${gift_id ? `&gift_id=${gift_id}` : ''}`);
+            currentQuiz = new QuizModel(res.data);
+            currentQuizQuestion = currentQuiz['question'];
+            if(currentQuiz.isQuizCompleted) {
+                if(restartedMode) {
+                    let data = {
+                        "customer_id": '{{ customer.id }}',
+                        "profile_id": 1,
+                        "quiz_id": quizId,
+                        "flow":2,
+                        "need_answer": 0
+                    };
+                    if(gift_id){
+                        data.gift_id = gift_id;
+                    }
+                    res = await postData(`${baseUrl}/quiz/getQuizState`, data);
+                    $('.quiz-loader').fadeOut(2000, function () {
+                        $('.skin-quiz-wrapper').show();
+                    });
+                    currentQuiz = new QuizModel(res.data);
+                    currentQuizQuestion = currentQuiz['question'];
+                    $(clonedElement).attr('id', currentQuizQuestion.questionKey);
+                    $(clonedElement).attr('data-id', currentQuizQuestion.quizQuestionId);
+                    renderQuestion(currentQuizQuestion, currentQuiz);
+                    submitData = new SubmitModel(currentQuiz);
+                }
+                else{
+                    window.location.href = '/pages/hair-analysis';
+                }
+
+            }
+            else
+            {
+                $('.quiz-loader').fadeOut(2000, function(){
+                    $('.skin-quiz-wrapper').show();
+                });
+                submitData = new SubmitModel(currentQuiz);
+                console.log("currentQuestion========>", currentQuizQuestion);
+                $(clonedElement).attr('id', currentQuizQuestion.questionKey);
+                $(clonedElement).attr('data-id', currentQuizQuestion.quizQuestionId);
+                renderQuestion(currentQuizQuestion, currentQuiz);
+            }
+        }
+
+        catch(err){
+        }
+    }
+    function renderQuestion(question, quiz){
+        if(!quiz.isQuizCompleted) {
+
+            if (question.highlightedText.length) {
+                let displayName = question.name.split(question.highlightedText[0]).join(`<span>${question.highlightedText}</span>`);
+                $(clonedElement).find('.preference-head4').html(displayName + `${question.isRequired ? '' : '<br><small style="font-size:55%">*Optional</small>'}`);
+            } else {
+                $(clonedElement).find('.preference-head4').html(question.name + `${question.isRequired ? '' : '<br><small style="font-size:55%">*Optional</small>'}`);
+
+            }
+            $(clonedElement).find('.preference-head4')
+            $(clonedElement).find('#section-name').html(`<span class="back-arrow" onclick="history.back()">
+<img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/left-arrow.png?v=1652778802"/></span>${quiz.sectionName}`);
+            $(clonedElement).find('.description').html(question.description);
+            slideProgressBar(currentQuestionIndex + 3);
+            renderOptions(question, question.options, question.inputType);
+            window.location.hash = question.questionKey;
+            $(`.og-quiz .Hair-scalp`).hide().filter('#' + question.questionKey).show();
+
+        }
+        else{
+            //Write code here once the next question is getting rendered but the quiz is already finished
+            localStorage.setItem("hairQuizStateId", quiz.quizStateId);
+            localStorage.setItem("menHairQuizStateId", quiz.quizStateId);
+            $(clonedElement).find('#save-btn').show();
+            $(clonedElement).find('#next-btn').hide();
+        }
+
+
+
+
+    }
+    function postData(ajaxurl, data) {
+        return $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json'
+        });
+    }
+    async function postQuestionDataAndGetNewQuestion() {
+        try {
+            if(currentQuizQuestion.isRequired) {
+                if (submitData.text_array.length) {
+                    const res = await postData(`${baseUrl}/quiz/getNextQuestion`, submitData);
+                    currentQuiz = new QuizModel(res.data);
+                    currentQuizQuestion = new QuizModel(res.data)['question'];
+                    submitData = new SubmitModel(currentQuiz);
+                    currentQuestionIndex++;
+                    if (!currentQuiz.isQuizCompleted) {
+                        clonedElement = clonedElement.clone();
+                        $(clonedElement).attr('id', currentQuizQuestion.questionKey);
+                        $(clonedElement).attr('data-id', currentQuizQuestion.quizQuestionId);
+                        $('.og-quiz').append(clonedElement);
+                        renderQuestion(currentQuizQuestion, currentQuiz);
+                    } else {
+                        renderQuestion(currentQuizQuestion, currentQuiz);
+                    }
+
+                }
+                else{
+                    alert("Please answer before proceeding!");
+                }
+            }
+            else{
+                const res = await postData(`${baseUrl}/quiz/getNextQuestion`, submitData);
+                currentQuiz = new QuizModel(res.data);
+                currentQuizQuestion = new QuizModel(res.data)['question'];
+                submitData = new SubmitModel(currentQuiz);
+                currentQuestionIndex++;
+                if (!currentQuiz.isQuizCompleted) {
+                    clonedElement = clonedElement.clone();
+                    $(clonedElement).attr('id', currentQuizQuestion.questionKey);
+                    $(clonedElement).attr('data-id', currentQuizQuestion.quizQuestionId);
+                    $('.og-quiz').append(clonedElement);
+                    renderQuestion(currentQuizQuestion, currentQuiz);
+                } else {
+                    renderQuestion(currentQuizQuestion, currentQuiz);
+                }
+            }
+        } catch(err) {
+            console.log(err);
+        }
+    }
+
+    function renderOptions(question,options, type){
+        $(clonedElement).find('.option-box').empty();
+        switch(type){
+            case 'radio':
+                $(clonedElement).find('#next-btn').hide();
+                $(clonedElement).find('.option-box').append('<ul></ul>');
+                console.log("Eleme========>", $(clonedElement).find('.option-box'));
+                options.forEach((option) => {
+                    $(clonedElement).find('.option-box ul').append(`<li>${option.isLimitedEdition ?'<div class="limited-edition-div"><img src="{{ 'limited_edition.svg' | asset_url }}"/></div>' : '' }<input type="${type}" name="${option.id}" value="${option.name}" id="${option.id}" data-questionId="${question.quizQuestionId}" data-selected="false">
+                       <span class="check">${option.name}</span>
+                      </li>`);
+                });
+                break;
+            case 'checkbox':
+                $(clonedElement).find('.option-box').append('<ul class="preference"></ul>');
+                options.forEach((option) => {
+                    $(clonedElement).find('.option-box ul').append(`<li><input type="${type}" name="${type}${option.id}" value="${option.name}" data-questionId="${question.quizQuestionId}" id="${option.id}" data-max-selection="${question.maxSelection}">
+                       <span class="check">${option.name}</span></li>`);
+                });
+                $(clonedElement).find('#next-btn').show();
+                break;
+            case 'text':
+                $(clonedElement).find('#next-btn').show();
+                $('#next-btn').addClass('shift-left');
+                if(question.quizQuestionId == 43 || question.quizQuestionId == 70) {
+                    $(clonedElement).find('.option-box').append('<div class="box"> </div>');
+                    let bottleImage = getBottleImage();
+                    console.log("side bottle img ----->", $(clonedElement).find('.left_content img'));
+                    $(clonedElement).find('.left_content img').attr("src", getSideBottleImages());
+                    $(clonedElement).find('.option-box .box').append(`<span class="prod-img"><label style="font-size:8px;width:50px;color:#000;z-index:5;text-transform:uppercase;" class="bot_male"></label><img src="${bottleImage}" alt=""></span>`);
+                    $(clonedElement).find('.option-box .box ').append('<ul class="preference3"></ul>');
+                    $(clonedElement).find('.option-box ul').append(`<li><input type="text" class="name bottle_name" maxlength="12" id="${options[0].id}" data-questionId="${question.quizQuestionId}"></li>`);
+                }
+                else{
+                    $(clonedElement).find('.option-box').append('<ul class="preference3" style="margin: 12% 0; !important;"></ul>');
+                    $(clonedElement).find('.option-box ul').append(`<li><input type="text" class="name" id="${options[0].id}" data-questionId="${question.quizQuestionId}"></li>`);
+                }
+                break;
+        }
+    }
+
+    $(document).on("input", '.bottle_name', function(){
+        console.log("bottle name----->", $(".bottle_name").val());
+        $('.bot_male').text($(".bottle_name").val());
+
+    });
+    $(document).on("keypress keydown keyup",'.bottle_name', function(e){
+        if($(this).val().length > $(this)[0].maxLength) {
+            $(this).val($(this).val().slice(0, $(this)[0].maxLength));
+        }
+        if ($(this).val().search(/[^a-zA-Z]+$/)) {
+            $(this).val($(this).val().replace(/[^a-z]/gi, ''));
+        }
+        // var key = e.keyCode;
+        // if((key >= 65 && key <= 90 ) || ( key >= 97 && key <= 122 ) || ( key == 8 ) || ( key == 32 )){
+        //     return true;
+        // }
+        // else{
+        //     return false;
+
+        // }
+
+
+    });
+
+
+    $(document).on("input", '#name-value', function(){
+        $('.personalized-text').text('for ' + $("#name-value").val());
+        firstName = $("#name-value").val()
+
+    });
+
+    $(document).on("click", '#name-next-btn', function(){
+        loginAndRedirect(this);
+
+    });
+    $(document).on("submit", '#name-div', function(e){
+        e.preventDefault();
+        loginAndRedirect($('#name-next-btn'));
+
+    });
+    async function loginAndRedirect(self){
+        let html = $(self).html();
+        loadLoader(self);
+        let data = {email: emailAddress, phone: phoneNo, first_name: firstName};
+        try{
+            const res = await postData(`https://api-automation.bareanatomy.in/api/v1/customers?redirect_url=/pages/hair-quiz?ps=login`, data);
+            window.location = res['data']['url'];
+            mode = 'quiz';
+            unloadLoader(html, self);
+
+
+        } catch(err) {
+            alert(err.responseJSON.message);
+            unloadLoader(html, self);
+
+
+        }
+
+    }
+
+
+    function getBottleImage(){
+        switch (parseInt(bottleColorId)) {
+            case 183:
+            case 210:
+            case 'pink':
+            case 'Pink':
+                return 'https://bare-images.s3.ap-south-1.amazonaws.com/bare/SNIs1606908689125-Pink220400.png'
+            case 'green':
+            case 'Green':
+            case 212:
+            case 214:
+            case 213:
+                return 'https://bare-images.s3.ap-south-1.amazonaws.com/bare/XScy1606908697952-Green220400.png'
+            case 215:
+            case 216:
+            case 220:
+            case 221:
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/HAir_Quiz_Name_Input.png?v=1637638839';
+            case 181:
+            case 207:
+            case 'blue':
+            case 'Blue':
+                return 'https://bare-images.s3.ap-south-1.amazonaws.com/bare/zhRi1606908705276-Blue220400.png'
+            case 182:
+            case 209:
+            case 'purple':
+            case 'Purple':
+                return 'https://bare-images.s3.ap-south-1.amazonaws.com/bare/FO3I1606908711456-Purple220400.png'
+            case 184:
+            case 'peach':
+            case 'Peach':
+                return 'https://bare-images.s3.ap-south-1.amazonaws.com/bare/kcTd1606908716359-Peach220400.png'
+            case 185:
+            case 208:
+            case 'free':
+            case 'Free':
+                return 'https://bare-images.s3.ap-south-1.amazonaws.com/bare/WCwT1606908719114-White220400.png'
+            case 190:
+            case 'free':
+            case 'Free':
+                return 'https://bare-images.s3.ap-south-1.amazonaws.com/bare/WCwT1606908719114-White220400.png'
+            case 'red':
+            case 'Red':
+                return 'https://bare-images.s3.ap-south-1.amazonaws.com/bare/HiGO1606908722244-Red220400.png'
+
+        }
+
+    }
+
+    function getSideBottleImages(){
+        switch (parseInt(bottleColorId)) {
+            case 183:
+            case 210:
+            case 'pink':
+            case 'Pink':
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_Pink_Final_175_200.png?v=1607015011';
+            case 'green':
+            case 'Green':
+            case 212:
+            case 214:
+            case 213:
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_Quiz__step_Haircare_Regime.png?v=1632988387';
+            case 215:
+            case 216:
+            case 220:
+            case 221:
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_Quiz__step_Haircare_Regime_d226cf61-2a5c-455c-8a2d-416db2415a34.png?v=1637638839';
+            case 181:
+            case 207:
+            case 'blue':
+            case 'Blue':
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_Blue_Final_175_200.png?v=1607015012';
+            case 182:
+            case 209:
+            case 'purple':
+            case 'Purple':
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_Purple_Final_175_200.png?v=1607015011';
+            case 184:
+            case 'peach':
+            case 'Peach':
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_Peach_Final_175_200.png?v=1607015012';
+            case 185:
+            case 'free':
+            case 'Free':
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_White_Final_175_200.png?v=1607015011';
+            case 190:
+            case 208:
+            case 'free':
+            case 'Free':
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_White_Final_175_200.png?v=1607015011';
+            case 'red':
+            case 'Red':
+                return 'https://cdn.shopify.com/s/files/1/0039/6073/3763/files/M_S_C_Red_Final_175_200.png?v=1607015011';
+
+        }
+
+    }
+
+
+</script>

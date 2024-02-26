@@ -1,0 +1,409 @@
+<style>
+  @media (min-width: 768px) {
+    #main-section-{{ section.id }} .image-with-text__image-wrapper {
+      height: {{ section.settings.img-height }}vw;
+    }
+  }
+  #buyDot-section-{{ section.id }} {
+    left: {{ section.settings.plus-range-left-1 }}%;
+    top: {{ section.settings.plus-range-top-1 }}%;
+  }
+  #quickShop-section-{{ section.id }} {
+    left: min({{ section.settings.quick-range-left-1 }}%, calc(100% - 150px));
+    top: {{ section.settings.quick-range-top-1 }}%;
+  }
+  #buyDot-section-{{ section.id }}-1 {
+    left: {{ section.settings.plus-range-left-2 }}%;
+    top: {{ section.settings.plus-range-top-2 }}%;
+  }
+  #quickShop-section-{{ section.id }}-1 {
+    left: min({{ section.settings.quick-range-left-2 }}%, calc(100% - 150px));
+    top: {{ section.settings.quick-range-top-2 }}%;
+  }
+  #buyDot-section-{{ section.id }}-2 {
+    left: {{ section.settings.plus-range-left-3 }}%;
+    top: {{ section.settings.plus-range-top-3 }}%;
+  }
+  #quickShop-section-{{ section.id }}-2 {
+    left: min({{ section.settings.quick-range-left-3 }}%, calc(100% - 150px));
+    top: {{ section.settings.quick-range-top-3 }}%;
+  }
+</style>
+
+<div class="image-with-text" data-section-id="section-{{ section.id }}" id="main-section-{{ section.id }}">
+  <div class="container--large  container--vertical-space">
+    <div class="image-with-text__inner">
+
+      {% unless section.settings.img-full-width == 'w-0' %}
+        <div class="{% if section.settings.img-full-width == 'w-50' %}image-with-text__text-wrapper image-with-text-flex justify-content-md-center align-items-md-center{% else %}w-100 min-height-section{% endif %}" style="background-color: {{ section.settings.bg-color }}">
+    
+          <div class="image-with-text-maxsize">
+            {% if section.settings.title %}
+              <h2 class="image-with-text__headline col-md-12 col-lg-10">{{ section.settings.title }}</h2>
+            {% endif %}
+    
+            {% if section.settings.sub-title %}
+              <p class="image-with-text__content font--large col-md-12 col-lg-10">{{ section.settings.sub-title }}</p>
+            {% endif %}
+    
+            {% if section.settings.btn-text != '' %}
+              <div class="image-with-text__button-wrapper col-md-12 col-lg-10">
+                <a href="{{ section.settings.btn-link }}" class="button button--white ">{{ section.settings.btn-text }}</a>
+              </div>
+            {% endif %}
+          </div>
+          
+        </div>
+      {% endunless %}
+        
+      <div class="image-with-text__image-wrapper{% if section.settings.img-full-width == 'w-50' %} image-with-text__text-wrapper{% else %} w-100{% endif %}" style="background-image: url({{ section.settings.bg_img | img_url: 'master' }});">
+        
+        <div class="quick-model">
+          {% assign product = all_products[section.settings.img-text-pdp-1] %}
+          <!-- 1 -->
+          {% if section.settings.img-text-pdp-1 != '' %}
+            <div class="quick-shop d-flex flex-column text-center quick-shop--subscription hide" id="quickShop-section-{{ section.id }}">
+              <a class="quick-shop__close" href="javascript:void(0)">
+                <svg width="29.999999999999996" height="29.999999999999996" xmlns="http://www.w3.org/2000/svg">
+                 <g>
+                  <title>background</title>
+                  <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"></rect>
+                 </g>
+                 <g>
+                  <title>Layer 1</title>
+                  <path id="svg_1" fill="#221E1E" d="m2.33503,14.625c0,-6.84363 5.54787,-12.3915 12.3915,-12.3915c6.84367,0 12.3915,5.54787 12.3915,12.3915c0,6.84367 -5.54783,12.3915 -12.3915,12.3915c-6.84363,0 -12.3915,-5.54783 -12.3915,-12.3915z"></path>
+                  <path id="svg_2" fill="white" d="m14.625,0c-8.11695,0 -14.625,6.50805 -14.625,14.625c0,8.1166 6.50805,14.625 14.625,14.625c8.1165,0 14.625,-6.5084 14.625,-14.625c0,-8.11695 -6.5084,-14.625 -14.625,-14.625zm7.3126,19.8901l-2.0475,2.0473l-5.2651,-5.2651l-5.26507,5.2651l-2.04757,-2.0473l5.26524,-5.2651l-5.26524,-5.26507l2.04757,-2.04722l5.26507,5.26489l5.2651,-5.26489l2.0475,2.04722l-5.2652,5.26507l5.2652,5.2651z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                 </g>
+                </svg>
+              </a>
+              <div class="quick-shop__product-type-wrapper">{{ product.vendor }}</div>
+              <div class="quick-shop__title-wrapper">{{ product.title }}</div>
+              <div class="quick-shop__prices-wrapper d-flex justify-content-center align-items-center">
+                <p class="price price-discount">{{ product.selected_or_first_available_variant.price | money }}</p>
+              </div>
+              <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+                <input type="submit" class="button button--primary" value="Add to cart" />          
+              </form>
+            </div>
+          {% endif %}
+          {% if section.settings.img-text-pdp-1 != '' %}
+            <div class="image-with-text__buy-dot-wrapper" id="buyDot-section-{{ section.id }}">
+              <a href="javascript:void(0)" class="image-with-text__buy-dot" data-quick-shop="quickShop-section-{{ section.id }}" aria-label="quick buy Lemonade">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="0.47168" y1="8.25" x2="16.4717" y2="8.25" stroke="#141414" stroke-width="3.5"></line>
+                  <line x1="8.62158" y1="6.95408e-08" x2="8.62158" y2="16" stroke="#141414" stroke-width="3.5"></line>
+                </svg>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="quick-model">
+          <!-- 2 -->
+          {% assign product_2 = all_products[section.settings.img-text-pdp-2] %}
+          {% if section.settings.img-text-pdp-2 != '' %}
+            <div class="quick-shop d-flex flex-column text-center quick-shop--subscription hide" id="quickShop-section-{{ section.id }}-1">
+              <a class="quick-shop__close" href="javascript:void(0)">
+                <svg width="29.999999999999996" height="29.999999999999996" xmlns="http://www.w3.org/2000/svg">
+                 <g>
+                  <title>background</title>
+                  <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"></rect>
+                 </g>
+                 <g>
+                  <title>Layer 1</title>
+                  <path id="svg_1" fill="#221E1E" d="m2.33503,14.625c0,-6.84363 5.54787,-12.3915 12.3915,-12.3915c6.84367,0 12.3915,5.54787 12.3915,12.3915c0,6.84367 -5.54783,12.3915 -12.3915,12.3915c-6.84363,0 -12.3915,-5.54783 -12.3915,-12.3915z"></path>
+                  <path id="svg_2" fill="white" d="m14.625,0c-8.11695,0 -14.625,6.50805 -14.625,14.625c0,8.1166 6.50805,14.625 14.625,14.625c8.1165,0 14.625,-6.5084 14.625,-14.625c0,-8.11695 -6.5084,-14.625 -14.625,-14.625zm7.3126,19.8901l-2.0475,2.0473l-5.2651,-5.2651l-5.26507,5.2651l-2.04757,-2.0473l5.26524,-5.2651l-5.26524,-5.26507l2.04757,-2.04722l5.26507,5.26489l5.2651,-5.26489l2.0475,2.04722l-5.2652,5.26507l5.2652,5.2651z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                 </g>
+                </svg>
+              </a>
+              <div class="quick-shop__product-type-wrapper">{{ product_2.vendor }}</div>
+              <div class="quick-shop__title-wrapper">{{ product_2.title }}</div>
+              <div class="quick-shop__prices-wrapper d-flex justify-content-center align-items-center">
+                <p class="price price-discount">{{ product_2.selected_or_first_available_variant.price | money }}</p>
+              </div>
+              <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ product_2.variants.first.id }}" />
+                <input type="submit" class="button button--primary" value="Add to cart" />          
+              </form>
+            </div>
+          {% endif %}
+          {% if section.settings.img-text-pdp-2 != '' %}
+            <div class="image-with-text__buy-dot-wrapper" id="buyDot-section-{{ section.id }}-1">
+              <a href="javascript:void(0)" class="image-with-text__buy-dot">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="0.47168" y1="8.25" x2="16.4717" y2="8.25" stroke="#141414" stroke-width="3.5"></line>
+                  <line x1="8.62158" y1="6.95408e-08" x2="8.62158" y2="16" stroke="#141414" stroke-width="3.5"></line>
+                </svg>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+
+        <div class="quick-model">
+          <!-- 3 -->
+          {% assign product_3 = all_products[section.settings.img-text-pdp-3] %}
+          {% if section.settings.img-text-pdp-3 != '' %}
+            <div class="quick-shop d-flex flex-column text-center quick-shop--subscription hide" id="quickShop-section-{{ section.id }}-2">
+              <a class="quick-shop__close" href="javascript:void(0)">
+                <svg width="29.999999999999996" height="29.999999999999996" xmlns="http://www.w3.org/2000/svg">
+                 <g>
+                  <title>background</title>
+                  <rect fill="none" id="canvas_background" height="602" width="802" y="-1" x="-1"></rect>
+                 </g>
+                 <g>
+                  <title>Layer 1</title>
+                  <path id="svg_1" fill="#221E1E" d="m2.33503,14.625c0,-6.84363 5.54787,-12.3915 12.3915,-12.3915c6.84367,0 12.3915,5.54787 12.3915,12.3915c0,6.84367 -5.54783,12.3915 -12.3915,12.3915c-6.84363,0 -12.3915,-5.54783 -12.3915,-12.3915z"></path>
+                  <path id="svg_2" fill="white" d="m14.625,0c-8.11695,0 -14.625,6.50805 -14.625,14.625c0,8.1166 6.50805,14.625 14.625,14.625c8.1165,0 14.625,-6.5084 14.625,-14.625c0,-8.11695 -6.5084,-14.625 -14.625,-14.625zm7.3126,19.8901l-2.0475,2.0473l-5.2651,-5.2651l-5.26507,5.2651l-2.04757,-2.0473l5.26524,-5.2651l-5.26524,-5.26507l2.04757,-2.04722l5.26507,5.26489l5.2651,-5.26489l2.0475,2.04722l-5.2652,5.26507l5.2652,5.2651z" clip-rule="evenodd" fill-rule="evenodd"></path>
+                 </g>
+                </svg>
+              </a>
+              <div class="quick-shop__product-type-wrapper">{{ product_3.vendor }}</div>
+              <div class="quick-shop__title-wrapper">{{ product_3.title }}</div>
+              <div class="quick-shop__prices-wrapper d-flex justify-content-center align-items-center">
+                <p class="price price-discount">{{ product_3.selected_or_first_available_variant.price | money }}</p>
+              </div>
+              <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ product_3.variants.first.id }}" />
+                <input type="submit" class="button button--primary" value="Add to cart" />          
+              </form>
+            </div>
+          {% endif %}
+          {% if section.settings.img-text-pdp-3 != '' %}
+            <div class="image-with-text__buy-dot-wrapper" id="buyDot-section-{{ section.id }}-2">
+              <a href="javascript:void(0)" class="image-with-text__buy-dot">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <line x1="0.47168" y1="8.25" x2="16.4717" y2="8.25" stroke="#141414" stroke-width="3.5"></line>
+                  <line x1="8.62158" y1="6.95408e-08" x2="8.62158" y2="16" stroke="#141414" stroke-width="3.5"></line>
+                </svg>
+              </a>
+            </div>
+          {% endif %}
+        </div>
+          
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Banner Image with Product",
+    "settings": [
+      {
+        "type": "select",
+        "id": "img-full-width",
+        "label": "Section Type",
+        "options": [
+          {
+            "label": "Full Size Image with Content",
+            "value": "w-100"
+          },
+          {
+            "label": "Image with Content Side by side",
+            "value": "w-50"
+          },
+          {
+            "label": "Hide Content",
+            "value": "w-0"
+          }
+        ]
+      },
+      {
+        "type": "color",
+        "id": "bg-color",
+        "label": "Background Color"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title"
+      },
+      {
+        "type": "text",
+        "id": "sub-title",
+        "label": "Sub Title"
+      },
+      {
+        "type": "text",
+        "id": "btn-text",
+        "label": "Button Label"
+      },
+      {
+        "type": "url",
+        "id": "btn-link",
+        "label": "Button Link"
+      },
+      {
+        "type": "image_picker",
+        "id": "bg_img",
+        "label": "Background Image"
+      },
+      {
+        "type": "range",
+        "id": "img-height",
+        "label": "Image Height",
+        "min": 10,
+        "max": 100,
+        "step": 10,
+        "default": 50
+      },
+      {
+        "type": "header",
+        "content": "plus symbol place 1"
+      },
+      {
+        "type": "product",
+        "id": "img-text-pdp-1",
+        "label": "Products"
+      },
+      {
+        "type": "range",
+        "id": "plus-range-left-1",
+        "label": "Position Left",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "plus-range-top-1",
+        "label": "Position Top",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      {
+        "type": "header",
+        "content": "Quickview Popup place"
+      },
+      {
+        "type": "range",
+        "id": "quick-range-left-1",
+        "label": "Position Left",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "quick-range-top-1",
+        "label": "Position Top",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      
+      {
+        "type": "header",
+        "content": "plus symbol place 2"
+      },
+      {
+        "type": "product",
+        "id": "img-text-pdp-2",
+        "label": "Products"
+      },
+      {
+        "type": "range",
+        "id": "plus-range-left-2",
+        "label": "Position Left",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "plus-range-top-2",
+        "label": "Position Top",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      {
+        "type": "header",
+        "content": "Quickview Popup place"
+      },
+      {
+        "type": "range",
+        "id": "quick-range-left-2",
+        "label": "Position Left",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "quick-range-top-2",
+        "label": "Position Top",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      
+      {
+        "type": "header",
+        "content": "plus symbol place 3"
+      },
+      {
+        "type": "product",
+        "id": "img-text-pdp-3",
+        "label": "Products"
+      },
+      {
+        "type": "range",
+        "id": "plus-range-left-3",
+        "label": "Position Left",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "plus-range-top-3",
+        "label": "Position Top",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      {
+        "type": "header",
+        "content": "Quickview Popup place"
+      },
+      {
+        "type": "range",
+        "id": "quick-range-left-3",
+        "label": "Position Left",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      },
+      {
+        "type": "range",
+        "id": "quick-range-top-3",
+        "label": "Position Top",
+        "min": 0,
+        "max": 100,
+        "default": 50
+      }
+    ],
+    "presets":[
+      {
+        "name": "Banner Image with Product"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+    $(document).on('click', '.image-with-text__buy-dot-wrapper', function (e){
+      $(this).parents('.quick-model').find('.quick-shop--subscription.hide').removeClass('hide');
+    });
+  
+    $('.quick-shop__close').click(function (e){
+      $(this).parents('.quick-model').find('.quick-shop--subscription').addClass('hide'); 
+    });
+{% endjavascript %}

@@ -1,0 +1,62 @@
+<div class="home-icon-text-section">
+  <div class="page-width">
+    <div class="home-icon-text">
+      {% if section.settings.title != blank %}
+      <h2>{{ section.settings.title }}</h2>
+      {% endif %}
+      <div class="home-icon-text-part">
+        {% for block in section.blocks %}
+        {% if block.settings.image != blank and block.settings.title != blank %}
+        <div class="home-icon-text-wrap">
+          <figure><img src="{{ block.settings.image | img_url: 'master' }}" /></figure>
+          <h5>{{ block.settings.title }}</h5>
+        </div>
+        {% endif %}
+          {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Home Icon Text",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "Icon",
+        "name": "Icon",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Home Icon Text",
+        "category": "Home Icon Text"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

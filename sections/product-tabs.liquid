@@ -1,0 +1,423 @@
+<style>
+    .tabs {
+        display: none;
+    }
+
+    @media only screen and (max-width: 769px){
+        .w3-black button h2 {
+            font-size: 14px !important;
+            line-height: 17px !important;
+            margin-bottom:0 !important;
+        }
+    }
+
+
+    .tabs .content_decs {
+        font-family: Helvetica Neue;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 20px;
+        line-height: 126.3%;
+
+        font-feature-settings: 'cpsp'on;
+        color: #4B4B4B;
+    }
+
+    .tabs img {
+        margin-right: 5%;
+        height: 193px;
+        width: 193px;
+        max-width: unset !important;
+        /* height: 82px;
+        width: 82px; */
+    }
+
+    .w3-black {
+        margin-bottom: 40px;
+    }
+
+    .w3-black button {
+        font-family: Helvetica Neue;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 33px;
+        /* identical to box height */
+
+        text-align: center;
+        font-feature-settings: 'cpsp'on;
+
+        /* color: #FFFFFF; */
+        height: 60px;
+        min-width: 170px;
+        padding: 10px 20px;
+        border: 1px solid #000000;
+    }
+    .w3-black button h2{
+        font-family: Helvetica Neue;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 28px;
+        line-height: 33px;
+        /* identical to box height */
+
+        text-align: center;
+        font-feature-settings: 'cpsp'on;
+
+    }
+
+
+    .tabs-heading .tab-heading-button-1 {
+        color: white;
+        background-color: black;
+    }
+
+    .tabs-heading button {
+        margin-right: 15px;
+
+    }
+
+    .tab-heading-button:hover {
+        color: white;
+        background-color: black;
+    }
+
+    #tabs-content-1 {
+        display: block;
+    }
+
+    .tabs-content {
+        display: flex;
+        /* grid-template-columns: auto auto; */
+        gap: 5%;
+    }
+
+    .tabs-content h1 {
+        font-family: Playfair Display;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 32px;
+        line-height: 43px;
+        font-feature-settings: 'cpsp'on;
+        color: #4B4B4B;
+        /* min-height: 49px; */
+    }
+
+    @media only screen and (min-width: 769px) {
+        .tabs-heading {
+            text-align: center;
+
+        }
+
+        .tabs {
+            width: 55%;
+            margin: auto;
+        }
+    }
+    .tabs-heading {
+        overflow-x: auto;
+    }
+
+    .tabs-content {
+        margin-bottom: 30px;
+    }
+
+    .tabs-heading::-webkit-scrollbar {
+        width: 10px;
+        /* Remove scrollbar space */
+        background: transparent;
+    }
+    /*
+      .image_content {
+        margin: auto;
+      }
+      */
+    .tab_content_des {
+        display: inline-grid;
+        align-items: center;
+    }
+    .slide-arrow{
+        position: absolute;
+        top: 50%;
+        margin-top: -15px;
+    }
+    .prev-arrow{
+        left: -40px;
+        width: 0;
+        height: 0;
+        border-left: 0 solid transparent;
+        border-right: 15px solid #113463;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+    }
+    .next-arrow{
+        right: -40px;
+        width: 0;
+        height: 0;
+        border-right: 0 solid transparent;
+        border-left: 15px solid #113463;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+    }
+    @media only screen and (max-width: 769px) {
+        .tabs-heading {
+            display: flex;
+
+        }
+
+        .tabs .content_decs {
+            font-size: 13px;
+            line-height: 14px;
+        }
+        .w3-black {
+            margin-bottom: 20px;
+        }
+        .tabs img {
+            height: 82px;
+            width: 82px;
+        }
+        .w3-black button {
+            font-size: 14px;
+            line-height: 17px;
+            height: 43px;
+            min-width: 130px;
+            padding: 0px 0px;
+        }
+
+        .tabs-content h1 {
+            font-size: 16px;
+            line-height: 21px;
+            /* min-height: 21px; */
+        }
+
+    }
+</style>
+
+
+
+{%- if section.blocks.size > 0 -%}
+    <div class="page-width-tabs page-width{% if section.settings.max_width %} page-width--narrow{% endif %}">
+        <div class="w3-bar w3-black tabs-heading">
+            {%- for block in section.blocks -%}
+
+                {% assign heading = "tabs-content-" | append: forloop.index %}
+
+
+                <button class="w3-bar-item w3-button tab-heading-button-{{ forloop.index }} tab-name-{{block.settings.tab_heading | downcase |  replace: ' ', '_'}}" onclick="openCity('{{heading}}',$(this))"><h2>{{block.settings.tab_heading}}</h2></button>
+            {%- endfor -%}
+        </div>
+        {%- for block in section.blocks -%}
+            {% assign description = block.settings.tab_content | split: '|' %}
+            {% assign tab_content_heading = block.settings.content_heading | split: '|' %}
+            <div id="tabs-content-{{ forloop.index }}" class="tabs" >
+                {% if block.settings.tab_image or tab_content_heading[0] or description[0] %}
+
+                    <div class="tabs-content">
+                        {% if block.settings.tab_image  %}
+                            <div class="image_content">
+
+                                <img src="{{ block.settings.tab_image | img_url: '540x' }}" class="usps-description-image lazyloaded" >
+
+                            </div>
+                        {% endif %}
+                        <div class="tab_content_des">
+                            {% if tab_content_heading[0]  %}
+                                <h1>{{tab_content_heading[0] }}</h1>
+                            {% endif %}
+                            {% if description[0] %}
+                                <div class="content_decs">
+                                    {{ description[0] }}
+                                    {{ block.settings.page.content }}
+                                </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
+                {% endif %}
+                {% if block.settings.tab_image1 or tab_content_heading[1] or description[1] %}
+                    <div class="tabs-content">
+                        {% if block.settings.tab_image1  %}
+                            <div class="image_content">
+                                <img src="{{ block.settings.tab_image1 | img_url: '540x' }}" class="usps-description-image lazyloaded" >
+                            </div>
+                        {% endif %}
+                        <div class="tab_content_des">
+                            {% if tab_content_heading[1]  %}
+                                <h1>{{tab_content_heading[1] }}</h1>
+                            {% endif %}
+                            {% if description[1] %}
+                                <div class="content_decs">
+                                    {{ description[1] }}
+                                    {{ block.settings.page.content }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if block.settings.tab_image2 or tab_content_heading[2] or description[2] %}
+                    <div class="tabs-content">
+                        {% if block.settings.tab_image2  %}
+                            <div class="image_content">
+                                <img src="{{ block.settings.tab_image2 | img_url: '540x' }}" class="usps-description-image lazyloaded" >
+                            </div>
+                        {% endif %}
+                        <div class="tab_content_des">
+                            {% if tab_content_heading[2]  %}
+                                <h1>{{tab_content_heading[2] }}</h1>
+                            {% endif %}
+                            {% if description[2] %}
+                                <div class="content_decs">
+                                    {{ description[2] }}
+                                    {{ block.settings.page.content }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if block.settings.tab_image3 or tab_content_heading[3] or description[3] %}
+                    <div class="tabs-content">
+                        {% if block.settings.tab_image3  %}
+                            <div class="image_content">
+                                <img src="{{ block.settings.tab_image3 | img_url: '540x' }}" class="usps-description-image lazyloaded" >
+                            </div>
+                        {% endif %}
+                        <div class="tab_content_des">
+                            {% if tab_content_heading[3]  %}
+                                <h1>{{tab_content_heading[3] }}</h1>
+                            {% endif %}
+                            {% if description[3] %}
+                                <div class="content_decs">
+                                    {{ description[3] }}
+                                    {{ block.settings.page.content }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if block.settings.tab_image4 or tab_content_heading[4] or description[4] %}
+                    <div class="tabs-content">
+                        {% if block.settings.tab_image4  %}
+                            <div class="image_content">
+                                <img src="{{ block.settings.tab_image4 | img_url: '540x' }}" class="usps-description-image lazyloaded" >
+                            </div>
+                        {% endif %}
+                        <div class="tab_content_des">
+                            {% if tab_content_heading[4]  %}
+                                <h1>{{tab_content_heading[4] }}</h1>
+                            {% endif %}
+                            {% if description[4] %}
+                                <div class="content_decs">
+                                    {{ description[4] }}
+                                    {{ block.settings.page.content }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        {%- endfor -%}
+    </div>
+{%- endif -%}
+
+{% schema %}
+{
+"name": "Product Tabs Details",
+"class": "product-tabs-details",
+"blocks": [{
+"type": "product-tabs-description",
+"name": "Product Tabs",
+"settings":
+[
+{
+"type": "image_picker",
+"id": "tab_image",
+"label": "Tab Image"
+},
+{
+"type": "image_picker",
+"id": "tab_image1",
+"label": "Tab Image"
+},
+{
+"type": "image_picker",
+"id": "tab_image2",
+"label": "Tab Image"
+},
+{
+"type": "image_picker",
+"id": "tab_image3",
+"label": "Tab Image"
+},
+{
+"type": "image_picker",
+"id": "tab_image4",
+"label": "Tab Image"
+},
+{
+"type": "richtext",
+"id": "tab_content",
+"label": "Tab Description",
+"default": "<p>Use collapsible tabs for more detailed information that will help customers make a purchasing decision.</p><p>Ex: Shipping and return policies, size guides, and other common questions.</p>"
+},
+{
+"type": "text",
+"id": "tab_heading",
+"label": "Tab Heading",
+"default": "Heading"
+},
+{
+"type": "text",
+"id": "content_heading",
+"label": "Content Heading",
+"default": "Heading"
+}
+]
+
+}]
+}
+{% endschema %}
+
+<script>
+    function openCity(cityName, element) {
+        var i;
+        var x = document.getElementsByClassName("tabs");
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        x = $('.tabs-heading button');
+
+        for (i = 0; i < x.length; i++) {
+            x[i].style.background = "white";
+            x[i].style.color = "black";
+        }
+        document.getElementById(cityName).style.display = "block";
+        $(element)[0].style.background = "black";
+        $(element)[0].style.color = "white";
+
+    }
+
+    document.addEventListener("DOMContentLoaded", function(event) {
+        var source =Array.from(document.getElementsByClassName("content_decs"));
+        for(let i=0;i<source.length;i++){
+            source[i].innerHTML=source[i].textContent ;
+        }
+    });
+
+    // $(document).ready(function(){
+    //     $('.tabs-heading').slick({
+    //   infinite: false,
+    //   slidesToShow: ,
+    //   slidesToScroll: 2,
+    //   prevArrow: '<button class="slide-arrow prev-arrow"></button>',
+    //     nextArrow: '<button class="slide-arrow next-arrow"></button>',
+    //   mobileFirst: true,
+    //   responsive: [
+    //         {
+    //            breakpoint: 767,
+    //            settings: "unslick"
+    //         }
+    //      ]
+    // });
+    //     });
+
+</script>

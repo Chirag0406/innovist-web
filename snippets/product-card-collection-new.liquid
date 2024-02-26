@@ -1,0 +1,42 @@
+<div class="grid-view-item product-card" data-price="{{ product.price }}">
+  <a href="{{ product.url }}" target="_blank">
+    <img src="{{ product.featured_image | img_url: 'master' }}" alt="{{ product.featured_media.preview_image.alt }}">
+  </a>
+  {% if template contains 'product' %}
+    <div class="h4 grid-view-item__title product-card__title" aria-hidden="true">
+      {{ product.title | replace: '®', '<sup>®</sup>' }}
+    </div>
+  {% else %}
+    <div class="h4 grid-view-item__title product-card__title cut-text" aria-hidden="true">
+      {{ product.title | replace: '®', '<sup>®</sup>' }}
+    </div>
+  {% endif %}
+  {% if product.available %}
+    <a href="javascript:void(0);" class="btn select_product">Add to cart</a>
+  {% endif %}
+</div>
+
+<style>
+    #spinning-circle {
+    animation-name: rotate;
+    animation-duration: 13s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+    position: absolute;
+    z-index: 10;
+    width: 70px;
+    height: 70px;
+  }
+
+  @keyframes rotate{
+      from{ transform: rotate(-360deg); }
+      to{ transform: rotate(360deg); }
+  }
+
+    @media only screen and (max-width: 767px) {
+      #spinning-circle{
+      width: 35px;
+      height: 35px;
+      }
+  }
+</style>

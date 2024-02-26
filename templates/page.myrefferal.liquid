@@ -1,0 +1,188 @@
+<link rel="stylesheet" href="{{ 'referral.css' | asset_url }}">
+
+{% section 'myrefferal' %}
+{% section 'refferal-faq' %}
+{% include 'env' %}
+<script>
+	let referralIncentive;
+</script>
+{% if customer  %}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			console.log("Ready!!");
+			$(".my-referrals").css("display", "none");
+			var custm_order = {{customer.orders_count}};
+			var custm_id = '{{customer.id}}';
+			const env = '{{ env }}'
+			console.log("env====>", env);
+			const referralApi = '{{ referralApi }}'
+			const loginApi = '{{ loginApi }}';
+			//var custm_id = '2448139190339';
+			var custm_order = 1;
+			var chk_attr = jQuery('#referral-code-copy').length;
+			var chk_attr_id = jQuery('#to-copy').length;
+			let unlock_image = "https://cdn.shopify.com/s/files/1/0255/3302/2244/files/referral-unlock_1c0039cd-9d40-4629-83a3-7d3c838c6399.png?v=1605704409";
+			// var myArray = {id0:'1%',id1: '10%', id2: '20%', id3: '30%', id4: '40%', id5: '50%', id6: '60%', id7: '70%', id8: '80%', id9: '90%', id10: '100%'};
+			if(custm_order >= 0 ){
+				jQuery.ajax({
+					type: 'GET',
+					url: `${referralApi}/api/referral_details`,
+					data:{'customer_id':custm_id},
+					success:function(data) {
+						var json_d =  data;
+						var check_json = jQuery.parseJSON( json_d );
+						referralIncentive = check_json.data.incentive_ambassador;
+						$(".incentive").html('<i class="fa fa-inr" aria-hidden="true"></i>' + check_json.data.incentive_ambassador);
+						$(".incentive-without-inr").html(check_json.data.incentive_ambassador);
+						$(".inecentive-5").text(check_json.data.incentive_ambassador * 5);
+						$(".incentive-10").text(check_json.data.incentive_ambassador * 10);
+						if(chk_attr_id > 0){
+							jQuery("#to-copy").val(check_json.data.referral_code.toLocaleUpperCase());
+						}else{
+							jQuery("#referral-code-copy").val(check_json.data.referral_code.toLocaleUpperCase());
+						}
+						if(check_json && check_json.data && check_json.data.referral_code) {
+							let date = new Date(check_json.data.created_at);
+							$('#lock-line1 .lock-content span').text('on ' + date.getDate() + '.' + (date.getMonth() + 1) + '.' + date.getFullYear());
+						}
+
+						if(check_json && check_json.data && check_json.data.customers_referred > 1 ) {
+							let customers_referred = check_json.data.customers_referred;
+							if(customers_referred >= 1 ) {
+								$('#lock-line1').addClass('referral-overwrite');
+								$('#lock-line2 .lock-content').removeClass('unactive');
+								$('#lock-line2 .locked img').attr('src', unlock_image);
+							}
+							if(customers_referred >=5) {
+								$('#lock-line2').addClass('referral-overwrite');
+								$('#lock-line3 .lock-content').removeClass('unactive');
+								$('#lock-line3 .locked img').attr('src', unlock_image);
+
+							}
+							if(customers_referred >=10) {
+								$('#lock-line3').addClass('referral-overwrite');
+								$('#lock-line4 .lock-content').removeClass('unactive');
+								$('#lock-line4 .locked img').attr('src', unlock_image);
+							}
+							// if(customers_referred < 5 && customers_referred > 1) {
+							// 	$('#lock-line2').addClass('referral-overwrite');
+							// 	let width = (referral_width/4 * (customers_referred - 1)).toFixed(0);
+							// 	$('#lock-line2.referral-overwrite').css('width', width + 'px');
+							// }
+							// if(customers_referred < 10 && customers_referred > 5) {
+							// 	$('#lock-line3').addClass('referral-overwrite');
+							// 	let width = (referral_width/5 * (customers_referred - 5)).toFixed(0);
+							// 	$('#lock-line3.referral-overwrite').css('width', width + 'px');
+							// }
+						}
+
+						// var refe = 6;
+						//if(check_json.data.customers_referred == 1 || check_json.data.customers_referred > 1){
+						// var arr_index = 'id'+check_json.data.customers_referred;
+						// jQuery(".range_value").append("<span class='range_text'>Referred</span><span class='range-slider-holder'>"+check_json.data.customers_referred+"</span><div class='range_info'><span class='holder_info'><p><b>Earned Rs. "+check_json.data.sales_volume+"</b><br>so far</p></span></div>");
+						// jQuery(".range_value").css({"left":myArray[arr_index], "unset":"right"});
+
+						//}
+
+					}
+				});
+			}
+			jQuery.ajax({
+				type: 'GET',
+				url: `${referralApi}/api/total_transactions`,
+				data:{'customer_id':custm_id},
+				success:function(data) {
+					//console.log(data);
+					var transt = jQuery.parseJSON( data );
+					if(!transt.data.length){
+						$(".my-referrals").css("display", "none");
+					}
+					//console.log(transt.data);
+					$.each(transt.data, function(key, item) {
+						$(".my-referrals").css("display", "block");
+						var formattedDate = new Date(item.created_at);
+						var d = formattedDate.getDate();
+						var m =  formattedDate.getMonth();
+						m += 1;  // JavaScript months are 0-11
+						var y = formattedDate.getFullYear();
+						if(item.name){
+							var nameInchars = item.name.split(" ")[0].split("");
+							console.log("nameInchars====>", nameInchars);
+							var starsName = "" + nameInchars[0];
+							for(let i =1; i < nameInchars.length; i++) {
+								starsName += "*";
+							}
+							starsName += "*";
+							var lastNameInchars = item.name.split(" ")[1].split("");
+							for(let i =0; i < lastNameInchars.length; i++) {
+								starsName += "*";
+							}
+							starsName += lastNameInchars[lastNameInchars.length - 1];
+							console.log("stars In name====>", starsName);
+							$("#referrals-record").append('<div class="referral-detail"><div class="referral-name"><h2 class="refername">'+starsName+'</h2><span class="refername">'+d+'.'+m+'.'+y+'</span></div><div class="earned_cash"><h4 class="cashearned">BareCash Earned<span class="refermoney">'+item.incentive+'</span></h4></div></div>');
+						}
+					});
+					$("#referrals-record").show();
+				}
+			});
+			jQuery.ajax({
+				url        : `https://wallet.d2c.tools/api/v1/credits?customerId=${custm_id}`,
+				data       : { },
+				type       : "GET",
+				headers    : { 'shopname': 'bareanatomy.myshopify.com' },
+				contentType: 'application/json; charset=utf-8',
+				success    : function (result) {
+					var mybalance = typeof result == 'string' ? JSON.parse(result) : result;
+               jQuery.ajax({
+				url        : `https://wallet.d2c.tools/api/v1/settings/widget?version=1.00`,
+				data       : { },
+				type       : "GET",
+				headers    : { 'shopname': 'bareanatomy.myshopify.com' },
+				contentType: 'application/json; charset=utf-8',
+				success    : function (result) {
+                    $(".currency").html(result.data.points_name);
+
+					
+					},
+			
+				error: function (error) {
+					console.log(error);
+                   
+
+				}
+			});
+					if(mybalance && mybalance.data && mybalance.data.total_credits){
+						$("#refbalance").html("Rs."+ mybalance.data.total_credits);
+						$(".wallet_barecash").html("Rs."+ mybalance.data.total_credits || 0)
+					}else{
+						$("#refbalance").html("Rs."+0)
+					}
+				},
+				error: function (error) {
+					console.log(error);
+                    $("#refbalance").html("Rs."+ 0);
+
+				}
+			});
+		});
+	</script>
+{% else %}
+	<script type="text/javascript">
+		let referralApi = '{{ referralApi }}'
+		jQuery.ajax({
+			type: 'GET',
+			url: `${referralApi}/api/discount/customer_incentive`,
+			success:function(data) {
+				var json_d =  data;
+				var check_json = jQuery.parseJSON( json_d );
+				$(".incentive").html('<i class="fa fa-inr" aria-hidden="true"></i>' +Math.abs(check_json.data.customer_incentive));
+				$(".incentive-without-inr").html(Math.abs(check_json.data.customer_incentive));
+				$(".inecentive-5").text(check_json.data.customer_incentive * 5);
+				$(".incentive-10").text(check_json.data.customer_incentive * 10);
+			}
+		});
+
+	</script>
+
+
+{% endif %}

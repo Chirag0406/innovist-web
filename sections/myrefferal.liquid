@@ -1,0 +1,569 @@
+{% include 'env' %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" media="print" onload="this.media='all'">
+
+<link rel="stylesheet preconnect" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="print" onload="this.media='all'" crossorigin>
+<!-- {% unless customer %}
+    <script type="text/javascript">
+
+        window.location.href = "/account/login";
+    </script>
+{% endunless %} -->
+<div class="wrapper">
+    <div class="referral">
+        <div class="referral-bg">
+<!--             <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Banner_1_Desktop.jpg?v=1615455923" class="d-none d-md-block w-100" />
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Banner_1_Mobile.jpg?v=1615455923" class="d-md-none w-100" /> -->
+          <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/desk-referral-banner.jpg?v=1643955035" class="d-none d-md-block w-100" />
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/mob-referral-banner.jpg?v=1643955035" class="d-md-none w-100" style="margin-top: 14%;"/>
+        </div>
+<!--         <div class="container relative-md">
+            <div class="referral-bg-overlay">
+                <h2 class="referral-heading d-none d-md-block">Refer and get Rewarded!</h2>
+                <h2 class="referral-heading d-md-none">Refer and <br />Get Rewarded!</h2>
+                <p class="referral-sub-heading">You and your friend both earn
+                </p>
+                <h1 class="referral-heading-amount">INR <span class="incentive-without-inr">0</span>*</h1>
+                <p class="referral-amount-con d-none d-md-block">*On a first successful order by your friend of minimum Rs 1000/-</p>
+                <p class="referral-amount-con d-md-none">*On a first successful order by your friend of <br />minimum Rs 1000/-</p>
+            </div>
+        </div> -->
+        <div class="referral-whsapp">
+            <button class="referral-whsapp-btn d-md-none" onclick="sendMessageCus()"><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Whatsapp_sticky_button_Mobile.svg?v=1615659840"></button>
+            <button class="referral-whsapp-btn d-none d-md-block" onclick="sendMessageCus()"><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Whatsapp_sticky_button_Desktop.svg?v=1615659840"></button>
+        </div>
+    </div>
+    <section class="referral-sec-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-9 col-md-8 mx-auto">
+                    <div class="referral-sec-content text-center">
+                        <p class="d-flex align-items-center justify-content-center">Earn<span class="incentive referral-price">0</span> Each</p>
+                        <p class="follow-link-p">for you and every friend you refer</p>
+
+                        <!-- <div class="referral-whatsapp">
+                            <a onclick="sendMessage()"  class="referral-whatsapp-btn">
+                                <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/referral-whatspp_40d95e09-2be6-4606-a8eb-281a4a8bcfaa.png?v=1605704020" />Share via whatsapp
+                            </a>
+                        </div> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- condotion start here -->
+    <section class="login-signup ">
+            <div class="login-container">
+                    <div class="login-signup-text">
+                        <p>Login / Sign Up To Access Your Referral Code</p>
+                    </div>
+                </div>
+                <div class="login-button">
+                    <button class="login-btn" onclick="openLoginPage()">Login</button>
+                </div>
+                <div class="signup-button">
+                    <span class="account  d-none d-md-block">Don't have an account? <a href="/account/register">Sign Up</a></span>
+                    <span class="account d-md-none">Don't have an account? <br /> <a href="/account/register">Sign Up</a></span>
+
+                </div>
+    </section>
+
+    <section class="referral-works">
+        <div class="container">
+            <div class="referral-work-content">
+                <div class="how_it_works_text"><h5><span>How Does it work?</span></h5></div>
+                <div class="row justify-content-center position-relative referral-custom-line">
+                    <div class="col-9 col-md-4 col-lg-3">
+                        <div class="referral-1 text-center line-mob-none">
+                            <span class="referral-circle-1 position-relative"><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/1._REFER_YOUR_FRIENDS.svg?v=1615652427" /></span>
+                            <h6><span>1.</span><br /> Refer your friends</h6>
+                            <p>Share your referral code with
+                                your friends. They get FLAT Rs. <span class="incentive-without-inr">0</span> off on
+                                minimum order of Rs. 1000 on their first purchase.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-9 col-md-4 col-lg-3">
+                        <div class="referral-1 text-center">
+                            <span class="referral-circle-1 position-relative"><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/2._EARN_BARECASH.svg?v=1615652427" /></span>
+                          <h6><span>2.</span><br /> Earn <span class="currency">BareCash</span></h6>
+                          <p>Your <span class="currency">BareCash</span> wallet gets credited
+                                with Rs.<span class="incentive-without-inr">0</span> when they make
+                                their first purchase
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-9 col-md-4 col-lg-3">
+                        <div class="referral-1 text-center mb-0">
+                            <span class="referral-circle-1 position-relative"><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/3._SHOP_AWAY.svg?v=1615652427" /></span>
+                            <h6><span>3.</span><br /> Shop Away</h6>
+                            <p>Use your credits anytime you shop next with us. No usage limit or minimum purchase value</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="current-balance overflow-hidden position-relative">
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Banner_2_Desktop_1.jpg?v=1615557153" class="d-none d-md-block w-100" />
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Banner_2_1.jpg?v=1615557151" class="d-md-none w-100" />
+            <div class="balance-content-overlay">
+              <h5>Your current #<span class="currency">BareCash</span> balance is <br /><span id="refbalance">
+                     </span>
+                </h5>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="referral-unlocked">
+       <div class="container">
+          <h5 class="refheadmsg"><span class="" style="font-weight:normal;">Congratulations!</span> You've unlocked your referral code</h5>
+          <div class="row justify-content-center">
+             <div class="col-9 col-md-3 md-justify-center">
+                <div id="lock-line1" class="lock text-center">
+                <div class="locked">
+                   <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/referral-unlock_1c0039cd-9d40-4629-83a3-7d3c838c6399.png?v=1605704409" />
+                </div>
+                   <div class="lock-content">
+                      <h6>Unlocked</h6>
+                      <span>on 31.03.2020</span>
+                   </div>
+                </div>
+             </div>
+             <div class="col-9 col-md-3 md-justify-center">
+                <div id="lock-line2" class="lock text-center">
+                    <div class="locked">
+                        <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/referral-lock_86f3c33e-de64-4edd-8678-7fe328bf9e21.png?v=1605704468" />
+                    </div>
+                   <div class="lock-content unactive">
+                       <h6>Earn Rs. <span class="incentive-without-inr" style="font-size:27px;">0</span></h6>
+                      <span>Refer 1 friend</span>
+                   </div>
+                </div>
+             </div>
+             <div class="col-9 col-md-3 md-justify-center">
+                <div id="lock-line3" class="lock text-center">
+                    <div class="locked">
+                        <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/referral-lock_86f3c33e-de64-4edd-8678-7fe328bf9e21.png?v=1605704468" />
+                    </div>
+                   <div class="lock-content unactive">
+                      <h6>Earn Rs. <span class="inecentive-5" style="font-size:27px;">0</span></h6>
+                      <span>Refer 5 friends</span>
+                   </div>
+                </div>
+             </div>
+             <div class="col-9 col-md-3 md-justify-center">
+                <div id="lock-line4" class="lock text-center line-none mb-0">
+                    <div class="locked">
+                        <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/referral-lock_86f3c33e-de64-4edd-8678-7fe328bf9e21.png?v=1605704468" />
+                    </div>
+                   <div class="lock-content unactive">
+                       <h6>Earn Rs. <span class="incentive-10" style="font-size:27px;">0</span></h6>
+                      <span>Refer 10 friends</span>
+                   </div>
+                </div>
+             </div>
+          </div>
+       </div>
+    </section>
+    <!-- <section class="referral-unlocked">
+        <div class="container">
+            <h5 class="referral-unlocked-title"><span class="d-sm-block">YOUR PROGRESS SO FAR</span> </h5>
+            <div class="justify-content-center">
+                <div class="range_slider">
+                    <div class="range_slider_inner">
+                        <ul class="range_labels">
+                            <li>|</li>
+                            <li>|</li>
+                            <li>|</li>
+                            <li>|</li>
+                            <li>|</li>
+                            <li>|</li>
+                            <li>|</li>
+                            <li>|</li>
+                            <li>|</li>
+                            <li>|</li>
+                        </ul>
+                        <div class="range_value" style="right: unset;">
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="refer_more">
+                    <h3>Refer More to Earn More</h3>
+                    <p class="flat-badge">1 Referral = Rs. 500</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <section class="spread-love">
+        <div class="container">
+            <h5 class="spread-heading"><span>Spread the love</span></h5>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-8 col-md-4 col-lg-3 d-flex justify-content-center">
+                    <div class="referral-code">
+                        <div class="referral-edit">
+                            <h6>Referral Code</h6>
+                            <span id="edit-text"><a onclick="editCode()" href="#">Edit</a></span>
+                        </div>
+                        <p class="referral-code-box position-relative"><input type="text" id="referral-code-copy"
+                                                                              spellcheck="false" value=""
+                                                                              readonly="">
+                            <span id="cpy-text" onclick="copyToClipboard(`referral-code-copy`, '#alert_placeholder')">Copy</span>
+                            <span id="input-loader" style="display: none"><i class="fa fa-circle-o-notch fa-spin"></i></span>
+                        </p>
+                        <p id="edit-msg" class="text-center"><i class="fa fa-circle-o-notch fa-spin"></i> Checking
+                            availability...</p>
+                        <p class="referral-edit-p"><em>Your friend has to apply the code at checkout for their first purchase.</em></p>
+                        <div id="alert_placeholder"></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="col-8 col-md-4 col-lg-3 text-center">
+                    <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Group_2511.png?v=1615807920" class="d-none d-lg-inline-block" />
+                    <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Group_2510.png?v=1615807920" class="d-lg-none"/>
+                </div>
+                <div class="col-8 col-md-4 col-lg-3 d-flex justify-content-center">
+                    <div class="referral-code">
+                        <div class="referral-edit text-center">
+                            <h6 class="w-100">Referral Link</h6>
+                        </div>
+                        <p class="referral-link-box2 position-relative"><input type="text" id="referral-link-copy"
+                                                                               spellcheck="false" data-link="https://ref.barea"
+                                                                               value=`https://ref.barea.....`
+                                                                               readonly="" onclick="copyToClipboard(`referral-link-copy`, '#alert_link_placeholder')">
+                            <span onclick="copyToClipboard(`referral-link-copy`, '#alert_link_placeholder')">Copy</span>
+                        </p>
+                        <p class="referral-edit-p"><em>Code will be auto applied when your friend uses this link to shop</em></p>
+                        <div id="alert_link_placeholder"></div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- <div class="referral-whatsapp text-center">
+                <a onclick="sendMessage()" class="referral-whatsapp-btn whatsapp-blue-btn">
+                    <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/referral-whatspp_40d95e09-2be6-4606-a8eb-281a4a8bcfaa.png?v=1605704020"/>Share
+                    via whatsapp
+                </a>
+            </div> -->
+
+        </div>
+    </section>
+
+    <!--------------------my refferals-------------------------->
+
+    <section class="my-referrals margin-top">
+        <div class="container">
+            <h5 class="my-referrals-heading">My Referrals</h5>
+            <div class="row justify-content-center align-items-center">
+                <div class="col-md-10 col-lg-10 justify-content-center" id="referrals-record" style="display: none;">
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--end here-->
+
+</div>
+<style>
+    .ques_listing .accordion .card-header::after {
+        content: "";
+    }
+    .card-title {
+        padding-top: 0px;
+    }
+
+    #accordionExample .btn.focus, #accordionExample .btn:focus {
+        box-shadow: none;
+    }
+
+    .ques_listing .collapse:not(.show) {
+        display: none;
+    }
+    .opacity-add {
+        opacity: 0.1;
+    }
+    .hidden {
+        display: none;
+    }
+    .login-signup {
+        position: absolute;
+        color: #01385E;
+        /* transform: translate(76%, 30%); */
+        transform: translateY(30%);
+        /* margin-left: 30%;
+        margin-right: 40%; */
+        z-index: 1;
+        width: 100%;
+    }
+    .login-container {
+        background: #FFF6F4;
+        box-shadow: 2px 5px 20px rgba(0, 0, 0, 0.08);
+        border-radius: 5px;
+        width: 513px;
+        height: 458px;
+        margin: 0 auto;
+    }
+    .login-signup-text {
+        height: 100%;
+        font-family: 'Playfair Display', serif;
+        font-weight: bold;
+        font-size: 49px;
+        line-height: 65px;
+    }
+    .login-signup-text p {
+        text-align: center;
+        text-transform: capitalize;
+        /* top: 25%; */
+        margin: 0 auto;
+        width: 70%;
+        padding: 25% 0;
+    }
+    .login-button {
+        width: 100%;
+        text-align: center;
+    }
+    .login-btn {
+        background: #01385E;
+        width: 319px;
+        height: 53px;
+        font-family: 'HelveticaNeue';
+        align-items: center;
+        text-transform: uppercase;
+        color: #FFFFFF;
+        /* position: relative; */
+        transform: translateY(-50%);
+        /* left: 20%; */
+    }
+    .signup-button {
+        margin-top: 50px;
+        font-family: Helvetica;
+        font-size: 28px;
+        text-align: center;
+        color: #01385E;
+    }
+    .signup-button .account a{
+        font-weight: 600;
+        color: #01385E;
+    }
+    .referral-whsapp {
+        position: fixed;
+        z-index: 1;
+        bottom: 15%;
+    }
+
+    @media only screen and (max-width: 1200px){
+        .login-container {
+            width: 292px;
+            height: 261px;
+        }
+        .login-signup-text p {
+            font-size: 29px;
+            line-height: 39px;
+        }
+        .login-btn {
+            width: 249px;
+            height: 53px;
+            /* left: 5%; */
+        }
+        .signup-button {
+            font-size: 24px;
+            line-height: 28px;
+            margin-top: 10px;
+        }
+        .referral-bg-overlay {
+            padding-top: 50px;
+        }
+        .referral-bg {
+            padding-top: 50px;
+        }
+    }
+    @media only screen and (max-width: 991px) {
+    }
+    @media only screen and (max-width: 767px) {
+        .referral-whsapp {
+            bottom: 3%;
+            right: 10%;
+        }
+        .referral-bg-overlay {
+            padding-top: 0px;
+        }
+        .referral-bg {
+            padding-top: 0px;
+        }
+    }
+    @media only screen and (max-width: 480px) {
+    }
+    @media only screen and (max-width: 357px) {
+    }
+    .referral-overwrite::before {
+        background: #EEADA9;
+    }
+</style>
+<script>
+    {% if customer == null %}
+        $('.referral-works,.current-balance').addClass('opacity-add');
+        $('.referral-unlocked,.spread-love,.my-referrals').addClass('hidden');
+        $('.referral-whsapp').css('visibility', 'hidden');
+    {% else %}
+    $('.login-signup').css('visibility', 'hidden');
+
+    let c_Id = '{{ customer.id }}';
+    const referralApi = '{{ referralApi }}'
+    const loginApi = '{{ loginApi }}'
+    $('#referral-link-copy').attr('data-link',`${location.origin}/pages/ambassador?cId=${c_Id}`);
+  $('#referral-link-copy').val(`https://${location.host}...`);
+
+    $("#referral-code-copy").keyup(function () {
+        this.value = this.value.toLocaleUpperCase();
+        const re = $("#referral-code-copy").prop('readonly');
+        if (!re) {
+            $("#edit-msg").css("display", "block");
+            const editMsgLength = $("#referral-code-copy").val().length;
+            $("#edit-text a").text("Save");
+            $("#edit-text").removeClass("disabled");
+            $("#edit-msg").text("");
+            if(editMsgLength < 6){
+                $("#edit-msg").html("Code can't be shorter <br> than 6 characters");
+                $("#edit-text").addClass("disabled")
+
+            } if(editMsgLength > 10){
+                $("#edit-msg").html("Code can't be longer <br> than 10 characters");
+                $("#edit-text").addClass("disabled")
+
+
+            }
+            console.log("text========>",$("#edit-text a").text());
+
+        } else {
+            $("#edit-msg").css("display", "none");
+
+        }
+    });
+    $('#edit-text a').on('click', function(){
+        const editText = $("#edit-text a").text();
+        if (editText === 'Save') {
+            $("#cpy-text").css("display", "none");
+            $("#input-loader").css("display", "block");
+            jQuery.ajax({
+                type: 'PUT',
+                url: `${referralApi}/api/referral_details?customer_id=${c_Id}`,
+                data:{
+                    "referral_code": $("#referral-code-copy").val(),
+                    "customer_id": c_Id
+                },
+                success:function(data) {
+                    var json_d = data;
+                    var check_json = jQuery.parseJSON(json_d);
+                    $("#referral-code-copy").attr("readonly", true);
+                    if(check_json && Object.keys(check_json.data).length){
+                        $("#cpy-text").css("display", "block");
+                        $("#input-loader").css("display", "none");
+                        $("#edit-text a").text('Edit');
+                    }
+                    else{
+
+                        $("#edit-msg").text("Code already exists");
+                        $("#cpy-text").css("display", "block");
+                        $("#input-loader").css("display", "none");
+                        $("#referral-code-copy").attr("readonly", false);
+
+
+                    }
+
+                }
+            });
+        }
+    });
+    {% endif %}
+
+    function openLoginPage() {
+        localStorage.setItem("redirect_url", '/pages/my-referral');
+        
+        let width=window.screen.availWidth;
+        let modal = document.getElementById("myModal");
+        let mobile_modal = document.getElementById("mobile-myModal");
+    
+        if(width<601)
+        {
+            modal.style.display='none'
+            mobile_modal.style.display='block'       
+        }
+        else if(width>601)
+        {
+            modal.style.display='block'
+            mobile_modal.style.display='none'   
+        } 
+
+        {% comment %} window.location = '/account/login'; {% endcomment %}
+    }
+    function sendMessageCus() {
+        let referralLink = $('#referral-link-copy').attr('data-link');
+        const message = encodeURIComponent(`Hey! I've been loving personalized beauty care from Innovist.
+They're clean, vegan and custom made for me!
+Try them out here ${referralLink} and get flat INR ${referralIncentive} off your first order on a minimum purchase of INR 1000.`);
+        var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+        if (isMobile) {
+            window.open(`https://api.whatsapp.com/send?text=${message}`,'_blank');
+        } else {
+            window.open(`https://web.whatsapp.com/send?text=${message}`,'_blank');
+        }
+    }
+
+    function editCode() {
+        var re = $("#referral-code-copy").prop('readonly');
+        $("#referral-code-copy").prop('readonly', !re);
+        $("#referral-code-copy").focus();
+
+
+    }
+
+    function showalert(message, alerttype , alertPlaceHolder) {
+
+        $(`${alertPlaceHolder}`).html('<div id="alertdiv" class="alert ' + alerttype + '"><span>' + message + '</span></div>');
+
+        setTimeout(function () { // this will automatically close the alert and remove this if the users doesnt close it in 5 secs
+
+
+            $("#alertdiv").remove();
+
+        }, 5000);
+    }
+
+    function copyToClipboard(id, alertPlaceHolder) {
+        let text = "";
+        if(id.includes("code")){
+            text = $(`#${id}`).val();
+        }
+        else{
+            text = $(`#${id}`).attr('data-link');
+
+        }
+        console.log("text!!!------====>", text);
+        var textArea = document.createElement("textarea");
+        textArea.value = text;
+        document.body.appendChild(textArea);
+        textArea.select();
+
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successful' : 'unsuccessful';
+
+        } catch (err) {
+            console.log('Oops, unable to copy', err);
+        }
+        document.body.removeChild(textArea);
+        showalert('Code copied to Clipboard!', 'alert-primary', alertPlaceHolder)
+    }
+</script>
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+

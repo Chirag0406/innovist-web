@@ -1,0 +1,37 @@
+<div class="footer__mobile-section">
+  <div class="footer__blocks--mobile">
+    <div class="footer__block--mobile">
+      <div class="footer__title">
+        {{ 'layout.footer.contact_title' | t }}
+      </div>
+
+      <ul class="footer__menu footer__menu--underline">
+        {%- if block.settings.phone != blank -%}
+          <li><a onclick="sendEventToGA('Homepage','Contact Us', 'Footer')" href="tel:{{ block.settings.phone }}">
+            <span class="icon-and-text">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-phone" viewBox="0 0 64 64"><defs><style>.cls-1{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="cls-1" d="M16.57 5l12.32 12.33L21.26 25c2.53 8.5 8.32 15 18.78 18.78l7.63-7.63L60 48.43 49.43 59C25.4 54.11 11.05 39.5 6 15.57z"/></svg>
+              <span>{{ block.settings.phone }}</span>
+            </span>
+          </a></li>
+        {%- endif -%}
+        {%- if block.settings.contact != blank -%}
+          <li><a href="mailto:chat@innovist.com" {{ pages[block.settings.contact].url }}">
+            <span class="icon-and-text">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-email" viewBox="0 0 64 64"><defs><style>.cls-1{fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:2px}</style></defs><path class="cls-1" d="M63 52H1V12h62zM1 12l25.68 24h9.72L63 12M21.82 31.68L1.56 51.16m60.78.78L41.27 31.68"/></svg>
+              <span>{{ 'layout.footer.email_link' | t }}</span>
+            </span>
+          </a></li>
+        {%- endif -%}
+        {%- if block.settings.chat != blank -%}
+          <li><a href="{{ pages[block.settings.chat].url }}">
+            <span class="icon-and-text">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chat" viewBox="0 0 64 64"><defs><style>.cls-1{fill:none;stroke:#000;stroke-width:2px}</style></defs><path class="cls-1" d="M13.94 46.62a9 9 0 0 1-9-9V14a9 9 0 0 1 9-9h37.12a9 9 0 0 1 9 9v23.62a9 9 0 0 1-9 9h-1.68V59L36.44 46.62z"/></svg>
+              <span>{{ 'layout.footer.chat_link' | t }}</span>
+            </span>
+          </a></li>
+        {%- endif -%}
+      </ul>
+    </div>
+  
+  </div>
+</div>

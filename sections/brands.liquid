@@ -1,0 +1,130 @@
+
+<style>
+    .brands{
+        display       : flex;
+        flex-direction: row;
+    }
+
+    .brand-item{
+        display        : flex;
+        align-items    : center;
+        justify-content: center;
+        flex-basis     : 100%;
+    }
+</style>
+
+{%if section.settings.show_brands%}
+<div data-section-id="{{ section.id }}">
+    <div class="brands" style="height: {{section.settings.block_height}}px;">
+        {% for block in section.blocks %}
+            <a onClick="sendEventToGA('Homepage', '{{block.settings.brand_name}}','Brand_Click')" href="{{block.settings.brand_url}}" target= "_self"  class="brand-item" style="
+            background-color: {{block.settings.bg_color}};
+            border          : 1px solid {{block.settings.border_color}};
+            border-radius   : {{section.settings.border_radius}}px;
+            color           : {{block.settings.font_color}};
+            ">
+                {% if block.settings.brand_logo %}
+                    <img data-name="{{ block.settings.brand_name }}" src="{{block.settings.brand_logo | image_url }}" style="
+                    height:{{block.settings.logo_height}}px;
+                    ">
+                {% endif %}
+                {% if block.settings.brand_text %}
+                    <span>{{block.settings.brand_text}}</span>
+                {% endif %}
+            </a>
+        {% endfor %}
+    </div>
+</div>
+{%endif%}
+
+{% schema %}
+  {
+    "name": "Brands",
+    "class":"brand",
+    "settings":[
+        {
+            "type"   : "range",
+            "id"     : "block_height",
+            "min"    : 20,
+            "max"    : 60,
+            "step"   : 1,
+            "unit"   : "px",
+            "label"  : "Block Height",
+            "default": 32
+        },
+        {
+            "type"   : "range",
+            "id"     : "border_radius",
+            "min"    : 1,
+            "max"    : 5,
+            "step"   : 1,
+            "unit"   : "px",
+            "label"  : "Border Radius",
+            "default": 2
+        },
+        {
+            "type"   : "checkbox",
+            "id"     : "show_brands",
+            "label"  : "Show Brands",
+            "default": false
+        }
+    ],
+    "blocks": [
+      {
+        "type": "richtext",
+        "name": "brand",
+        "limit": 3,
+        "settings": [
+         {
+         "type"   : "text",
+         "id"     : "brand_name",
+         "label"  : "Brand Name"
+         },
+          {
+            "type" : "image_picker",
+            "id"   : "brand_logo",
+            "label": "Brand Logo"
+          },
+          {
+              "type" : "url",
+              "id"   : "brand_url",
+              "label": "Brand Url"
+          },
+          {
+            "type"   : "text",
+            "id"     : "brand_text",
+            "label"  : "Text"
+          },
+          {
+              "type"   : "color",
+              "id"     : "bg_color",
+              "label"  : "Background Color",
+              "default": "#FFFFFF"
+          },
+          {
+              "type"   : "color",
+              "id"     : "font_color",
+              "label"  : "Text Color",
+              "default": "#000000"
+          },
+          {
+            "type"   : "color",
+            "id"     : "border_color",
+            "label"  : "Border Color",
+            "default": "#000000"
+          },
+          {
+            "type"   : "range",
+            "id"     : "logo_height",
+            "min"    : 1,
+            "max"    : 100,
+            "step"   : 1,
+            "unit"   : "px",
+            "label"  : "Logo height",
+            "default": 14
+            }
+        ]
+      }
+    ]
+  }
+{% endschema %}

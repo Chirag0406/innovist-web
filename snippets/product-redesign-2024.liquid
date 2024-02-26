@@ -1,0 +1,1708 @@
+<script>
+var head_h_f = $('#shopify-section-header').innerHeight() + $('.product-variant-list-section').innerHeight() + 350;
+    // $('.wc-pdp-main-menu-sticky-section').css({"top":head_h_f});
+    $(window).scroll(function(){
+      console.log('head_h_f',head_h_f)
+      var scrollTop = $(window).scrollTop();
+  if ( scrollTop > 600 ) {
+   $('#shopify-section-header').addClass('fixed')
+        $('.wc-pdp-main-menu-sticky-section').addClass('fixed')
+      }else{
+        $('.wc-pdp-main-menu-sticky-section').removeClass('fixed')
+    $('#shopify-section-header').removeClass('fixed')
+      }
+    });
+
+$(window).on('load', function(){
+{% comment %} setTimeout(function(){
+  $('.variant-input:nth-child(5) label').trigger('click');
+  }, 100);
+  setTimeout(function(){
+  var price_c_m = $('.product-block.product-block--price .product__price.product__price--compare span[aria-hidden="true"]').text();
+        var price_m = $('.product-block.product-block--price .product__price.on-sale span[aria-hidden="true"]').text();
+        var price_save = $('.product-block.product-block--price .product__price-savings').text();
+        $('.bottom-footer-cart-price span').text(price_m)
+        $('.bottom-footer-cart-price s').text(price_c_m)
+        $('.bottom-footer-cart-price em').text(price_save)
+  }, 200); {% endcomment %}
+    setTimeout(function(){
+      $('.product__thumb-item:nth-child(1) img').trigger('click');
+    }, 300)
+  })
+  window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+  $(document).ready(function(){
+  {% comment %} $('.variant-input:nth-child(5) label').trigger('click');
+  setTimeout(function(){
+  var price_c_m = $('.product-block.product-block--price .product__price.product__price--compare span[aria-hidden="true"]').text();
+        var price_m = $('.product-block.product-block--price .product__price.on-sale span[aria-hidden="true"]').text();
+        var price_save = $('.product-block.product-block--price .product__price-savings').text();
+        $('.bottom-footer-cart-price span').text(price_m)
+        $('.bottom-footer-cart-price s').text(price_c_m)
+        $('.bottom-footer-cart-price em').text(price_save)
+  }, 100);
+    var price_c_m = $('.product-block.product-block--price .product__price.product__price--compare span[aria-hidden="true"]').text();
+        var price_m = $('.product-block.product-block--price .product__price.on-sale span[aria-hidden="true"]').text();
+        var price_save = $('.product-block.product-block--price .product__price-savings').text();
+        $('.bottom-footer-cart-price span').text(price_m)
+        $('.bottom-footer-cart-price s').text(price_c_m)
+        $('.bottom-footer-cart-price em').text(price_save) {% endcomment %}
+    $(document).on('click', '.wc-pdp-main-menu-sticky-section a[href^="#"]', function (event) {
+    event.preventDefault();
+      console.log('iff')
+       $('.wc-pdp-main-menu-sticky li').removeClass('active');
+$(this).parents('li').addClass('active');
+    $('html, body').animate({
+        scrollTop: $($.attr(this, 'href')).offset().top
+    }, 1000);
+     
+});
+    $('.bottom-footer-cart-btn').on('click', function(e){
+    e.preventDefault();
+    $('.btn.add-to-cart-main').trigger('click');
+    })
+  })
+</script>
+
+<div class="wc-pdp-main-menu-sticky-section">
+  <div class="page-width">
+<ul class="wc-pdp-main-menu-sticky">
+  <li><a href="#wc-benefits">Benefits</a></li>
+  <li><a href="#wc-consumer-study">Consumer Study</a></li>
+  <li><a href="#wc-ingredients">Ingredients</a></li>
+  <li><a href="#wc-variant-sec">Savings</a></li>
+  <li><a href="#wc-reviews">Reviews</a></li>
+  <li><a href="#wc-faqs">FAQs</a></li>
+  <li><a href="#HeaderWrapper"><svg xmlns="http://www.w3.org/2000/svg" width="25" height="16" viewBox="0 0 25 16" fill="none">
+<path d="M2.29883 14.2414L11.9929 2.86208L22.6102 14.2414" stroke="white" stroke-width="2.89855" stroke-linecap="round"/>
+</svg></a></li>
+</ul>
+</div>
+  </div>
+
+  <div class="bottom-footer-cart-section">
+    <div class="page-width">
+      <div class="bottom-footer-cart">
+        <div class="bottom-footer-cart-price">
+          <span>{{ product.price | money }}</span>
+          {% if product.price < product.compare_at_price %}
+          <s>{{ product.compare_at_price | money }}</s> | 
+          <em>Save {{ product.compare_at_price | minus: product.price | money }}</em>
+            {% endif %}
+        </div>
+        <div class="bottom-footer-cart-btn">
+          <!-- <a href="#">Buy Now</a> -->
+          <a href="#">{% render 'cart-icon' %} Buy Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<style>
+  .countdown-part {
+    padding-top: 10px !important;
+}
+.countdown-part {
+    position: relative;
+    right: 10px;
+}
+@media(max-width:767px){
+  
+.contentsec_main {
+    margin-top: 10px;
+}
+
+  
+}  
+  </style>
+{{ 'product-new.css' | asset_url | stylesheet_tag }}
+{{ 'pdp-redesign-2024.css' | asset_url | stylesheet_tag }}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+
+  unless thumbnail_position
+    assign thumbnail_position = 'beside'
+  endunless
+
+  assign product_zoom_size = '1800x1800'
+
+  assign enableHistory = true
+  if isModal or isAjax
+    assign enableHistory = false
+  endif
+
+  case image_container_width
+    when 'small'
+      assign product_image_width = 'medium-up--two-fifths'
+      assign product_description_width = 'medium-up--three-fifths'
+    when 'medium'
+      assign product_image_width = 'medium-up--one-half'
+      assign product_description_width = 'medium-up--one-half'
+    when 'large'
+      assign product_image_width = 'medium-up--three-fifths'
+      assign product_description_width = 'medium-up--two-fifths'
+  endcase
+-%}
+
+<div
+  id="ProductSection-{{ section_id }}-{{ product.id }}"
+  class="product-section"
+  data-section-id="{{ section_id }}"
+  data-section-type="product"
+  data-product-id="{{ product.id }}"
+  data-product-handle="{{ product.handle }}"
+  data-product-title="{{ product.title | escape }}"
+  data-history="{{ enableHistory }}"
+  data-modal="{{ isModal }}"
+>
+  <div class="page-content page-content--product">
+    <div class="page-width">
+      <div class="breadcrumb-wrapper">
+          {%- render 'breadcrumb' -%}
+      </div>
+      <div class="product-grid__container grid{% unless image_position == 'left' %} grid--product-images-right{% endunless %}{% if mobile_layout == 'partial' %} grid--product-images--partial{% endif %}">
+        {%- if image_position == 'left' -%}
+          <div class="grid__item {{ product_image_width }} product-single__sticky">
+            {%- render 'product-images',
+              section_id: section_id,
+              product: product,
+              isModal: isModal,
+              image_position: image_position,
+              image_size: image_size,
+              product_zoom_enable: product_zoom_enable,
+              product_zoom_size: product_zoom_size,
+              thumbnail_arrows: thumbnail_arrows,
+              thumbnail_position: thumbnail_position,
+              video_looping: video_looping,
+              video_style: video_style
+            -%}
+          </div>
+        {%- endif -%}
+
+        <div class="product-grid__content product-single__sticky grid__item {{ product_description_width }}">
+          <div class="product-single__meta">
+            <div data-product-blocks>
+              <div class="title-container">
+                <div class="title-name">
+                  <h1 class="h2 product-single__title">
+                    {%- unless product.empty? -%}
+                      {{ product.title }}
+                    {%- else -%}
+                      {{ 'home_page.onboarding.product_title' | t }}
+                    {%- endunless -%}
+                  </h1>
+                </div>
+              </div>
+              {% if product.metafields.custom.short_description != blank %}
+                <div class="product-short-desc">{{ product.metafields.custom.short_description }}</div>
+              {% endif %}
+              <div class="reviews-block">
+                <div class="review-block-shipping">
+                  {% render 'judgeme_widgets',
+                    widget_type: 'judgeme_preview_badge',
+                    jm_style: '',
+                    concierge_install: false,
+                    product: product
+                  %}
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="17" viewBox="0 0 16 17" fill="none">
+                    <g clip-path="url(#clip0_1_86)">
+                      <path d="M4.11355 1.27623C4.27621 1.26445 4.45309 1.30645 4.6242 1.36845C5.41018 1.65266 6.16127 1.41623 6.63325 0.726913C6.84614 0.41581 7.12724 0.200483 7.48479 0.0829306C8.18521 -0.147063 8.95141 0.113374 9.36607 0.723357C9.83228 1.40912 10.5747 1.65 11.362 1.37089C12.384 1.0089 13.4482 1.68733 13.5662 2.76974C13.5824 2.91841 13.5608 3.06418 13.5751 3.21218C13.6411 3.90349 14.0577 4.43814 14.723 4.64725C15.0779 4.7588 15.3908 4.92413 15.6274 5.21968C16.113 5.82655 16.127 6.6463 15.6514 7.26562C15.4037 7.58828 15.2621 7.94493 15.2708 8.35426C15.2786 8.71736 15.3923 9.04535 15.6186 9.33045C16.1745 10.0311 16.1157 10.9815 15.4723 11.5946C15.2701 11.7873 15.0266 11.9093 14.7581 11.9853C14.0926 12.1735 13.6368 12.737 13.5753 13.4286C13.5615 13.5839 13.5811 13.7372 13.5648 13.8932C13.4557 14.9563 12.3593 15.6438 11.3569 15.2707C10.6018 14.9898 9.82539 15.2396 9.37607 15.908C8.71697 16.8889 7.29657 16.8938 6.63148 15.914C6.29304 15.4158 5.82461 15.1645 5.22729 15.1563C5.0113 15.1532 4.80508 15.2181 4.59887 15.2832C3.94399 15.4896 3.36712 15.3403 2.88558 14.8587C2.55826 14.5314 2.41226 14.1188 2.42648 13.6577C2.43759 13.2943 2.36271 12.9586 2.16116 12.655C1.93716 12.3175 1.62739 12.095 1.23874 11.9835C0.48698 11.7677 -0.0110059 11.1186 0.00299371 10.3586C0.0101046 9.98088 0.133657 9.64178 0.372317 9.34445C0.617866 9.03868 0.738973 8.6858 0.730973 8.29404C0.723196 7.92382 0.598977 7.59383 0.372095 7.29829C-0.125892 6.64986 -0.123225 5.85455 0.377872 5.21545C0.587422 4.94813 0.864303 4.77391 1.18963 4.6788C1.43806 4.60614 1.66739 4.49903 1.86316 4.32681C2.21138 4.02038 2.40648 3.63817 2.42337 3.17284C2.43093 2.96218 2.42137 2.7513 2.47248 2.54353C2.6587 1.78688 3.31246 1.27401 4.11377 1.27623H4.11355ZM11.8473 6.61164C11.8409 6.56053 11.8069 6.54031 11.7813 6.51497C11.4807 6.21343 11.1793 5.91232 10.8782 5.61122C10.8045 5.53759 10.7309 5.53737 10.6576 5.61055C9.39273 6.87519 8.1281 8.14004 6.86325 9.40467C6.79229 9.47563 6.72066 9.47497 6.64836 9.40267C6.21104 8.96535 5.77394 8.52803 5.33662 8.09071C5.26937 8.02345 5.20092 8.02434 5.1313 8.09337C4.82997 8.39425 4.53109 8.6978 4.22621 8.99513C4.15399 9.06557 4.15088 9.10557 4.22465 9.1789C5.03641 9.98554 5.84439 10.7957 6.65348 11.6048C6.72177 11.6731 6.79029 11.6731 6.85903 11.6048C7.61056 10.8533 8.36209 10.1018 9.11363 9.35023C9.99872 8.46514 10.8838 7.58028 11.7689 6.69497C11.7973 6.66653 11.824 6.63675 11.8476 6.61186L11.8473 6.61164Z" fill="#01B7FA"/>
+                    </g>
+                    <defs>
+                      <clipPath id="clip0_1_86">
+                        <rect width="16" height="16.6462" fill="white"/>
+                      </clipPath>
+                    </defs>
+                  </svg>
+                  <div class="review-shipping">
+                    <span>{{ shop.metafields.judgeme.shop_reviews_count }}</span> Verified Reviews | Free Shipping<em style="font-weight:400;color:#5A5A5A;font-style:normal"> > ₹499.00</em>
+                    {% comment %} {%- if product.price > 49900 %} | Free Shipping{% else %} | Free Shipping > ₹499.00{% endif %} {% endcomment %}
+                  </div>
+                </div>
+              </div>
+              {%- capture form_id -%}AddToCartForm-{{ section_id }}-{{ product.id }}{%- endcapture -%}
+              {%- for block in blocks -%}
+                {%- case block.type -%}
+                  {%- when '@app' -%}
+                    {% render block %}
+                  {%- when 'reviews' -%}
+                    <div class="product-block product-block--small">
+                      <a href="#shopify-product-reviews-{{ product.id }}">
+                        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                      </a>
+                    </div>
+                  {%- when 'product-type' -%}
+                    <div class="product-block product-block--small">
+                      <a href="#shopify-product-reviews-{{ product.id }}">
+                        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+                      </a>
+                    </div>
+                  {%- when 'buy_buttons' -%}
+                  {% if product.metafields.custom.countdown_date != blank %}
+
+                  {% if section.settings.content_sec != blank %}
+        <div class='contentsec_main' style='font-size:{{ section.settings.content_font }}px'>
+            {{ section.settings.content_sec }}
+          </div>
+{% endif %}  
+  <div class="countdown-part countdown-part-left" data-date="{{ product.metafields.custom.countdown_date }}" id="countdown-part">
+  <div id="countdown">
+    <ul>
+      <li><span class="days"></span><strong>Days</strong></li>
+      <li><span class="hours"></span><strong>Hours</strong></li>
+      <li><span class="minutes"></span><strong>Min</strong></li>
+      <li><span class="seconds"></span><strong>Sec</strong></li>
+    </ul>
+  </div>
+      </div> 
+  {% endif %}
+                    <div class="product-block" {{ block.shopify_attributes }}>
+                      {%- render 'product-form-2024',
+                        form_id: form_id,
+                        product: product,
+                        show_dynamic_checkout: block.settings.show_dynamic_checkout,
+                        current_variant: current_variant
+                      -%}
+                    </div>
+                  {%- when 'text' -%}
+                    <div class="product-block" {{ block.shopify_attributes }}>
+                      {{ block.settings.text }}
+                    </div>
+                  {%- when 'description' -%}
+                    <div
+                      class="product-block description {% if block.settings.is_tab %} product-block--tab{% endif %}"
+                      {{ block.shopify_attributes }}
+                    >
+                      {%- assign id = block.id | append: product.id -%}
+
+                      {%- render 'product-description', id: id, product: product, is_tab: block.settings.is_tab -%}
+                    </div>
+                  {%- when 'description_cus' -%}
+                    <div class="product-block description_cus" {{ block.shopify_attributes }}>
+                      {%- assign id = block.id | append: product.id -%}
+
+                      {{ block.settings.content }}
+                    </div>
+                  {%- when 'price' -%}
+                    <div class="row">
+                      <div class="product-block product-block--price column" {{ block.shopify_attributes }}>
+                        {%- assign hide_sale_price = true -%}
+                        
+
+                        <span
+                          data-product-price
+                          class="product__price{% if current_variant.compare_at_price > current_variant.price %} on-sale{% endif %}"
+                        >
+                          {%- unless product.empty? -%}
+                            {%- render 'price' with current_variant.price -%}
+                          {%- else -%}
+                            {%- render 'price' with 1999 -%}
+                          {%- endunless -%}
+
+                  
+                        </span>
+
+
+                        {%- if product.compare_at_price_max > product.price -%}
+                          {%- if current_variant.compare_at_price > current_variant.price -%}
+                            {%- assign hide_sale_price = false -%}
+                          {%- endif -%}
+                          <span
+                            data-a11y-price
+                            class="visually-hidden"
+                            aria-hidden="{{ hide_sale_price }}"
+                          >
+                            {{ 'products.general.regular_price' | t }}
+                          </span>
+                          <span data-product-price-wrap class="{% if hide_sale_price %} hide{% endif %}">
+                            <span data-compare-price class="product__price product__price--compare">
+                              {%- if current_variant.compare_at_price > current_variant.price -%}
+                                {%- render 'price' with current_variant.compare_at_price -%}
+                              {%- endif -%}
+                            </span>
+                          </span>
+                          <span data-compare-price-a11y class="visually-hidden">
+                            {{- 'products.general.sale_price' | t -}}
+                          </span>
+                        {%- else -%}
+                          <span id="PriceA11y-{{ section_id }}" class="visually-hidden">
+                            {{- 'products.general.regular_price' | t -}}
+                          </span>
+                        {%- endif -%}
+                  {%- if settings.product_save_amount -%}
+                          {%- if settings.product_save_type == 'dollar' -%}
+                            {%- capture saved_amount -%}{{ current_variant.compare_at_price | minus: current_variant.price | money_without_trailing_zeros }}{%- endcapture -%}
+                          {%- else -%}
+                            {%- capture saved_amount -%}{{ current_variant.compare_at_price | minus: current_variant.price | times: 100.0 | divided_by: current_variant.compare_at_price | round }}%{%- endcapture -%}
+                          {%- endif -%}
+                          <span data-save-price class="product__price-savings{% if hide_sale_price %} hide{% endif %}">
+                            {%- unless hide_sale_price -%}
+                              {{ 'products.general.save_html' | t: saved_amount: saved_amount }}
+                            {%- endunless -%}
+                          </span>
+                        {%- endif -%}
+
+                          <span class="price-text-include">incl. of all taxes</span>
+
+                        
+                        <div
+                          data-unit-price-wrapper
+                          class="product__unit-price{% unless current_variant.unit_price_measurement %} hide{% endunless %}"
+                        >
+                          {%- capture unit_price_base_unit -%}
+                          <span data-unit-base>
+                            {%- if current_variant.unit_price_measurement -%}
+                              {%- if current_variant.unit_price_measurement.reference_value != 1 -%}
+                                {{ current_variant.unit_price_measurement.reference_value }}
+                              {%- endif -%}
+                              {{ current_variant.unit_price_measurement.reference_unit }}
+                            {%- endif -%}
+                          </span>
+                        {%- endcapture -%}
+
+                          <span data-unit-price>
+                            {%- render 'price' with current_variant.unit_price -%}</span
+                          >/{{ unit_price_base_unit }}
+                        </div>
+                      </div>
+                    </div>
+                  <div class="claim-img-text-part">
+                    <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/97_Claim.png?v=1707988972" />
+                      
+                  </div>
+                  {%- when 'quantity_selector' -%}
+                    <div class="product-block" {{ block.shopify_attributes }}>
+                      <div class="product__quantity">
+                        <label for="Quantity-{{ section_id }}-{{ product.id }}">
+                          {{- 'products.product.quantity' | t -}}
+                        </label>
+                        <div class="js-qty__wrapper">
+                          <input
+                            type="text"
+                            id="Quantity-{{ section_id }}-{{ product.id }}"
+                            class="js-qty__num"
+                            value="1"
+                            min="1"
+                            aria-label="quantity"
+                            pattern="[0-9]*"
+                            form="{{ form_id }}"
+                            name="quantity"
+                          >
+                          <button
+                            type="button"
+                            class="js-qty__adjust js-qty__adjust--minus"
+                            aria-label="{{ 'cart.general.reduce_quantity' | t }}"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              focusable="false"
+                              role="presentation"
+                              class="icon icon-minus"
+                              viewBox="0 0 64 64"
+                            >
+                              <path class="cls-1" d="M55 32H9"/>
+                            </svg>
+                            <span class="icon__fallback-text" aria-hidden="true">&minus;</span>
+                          </button>
+                          <button
+                            type="button"
+                            class="js-qty__adjust js-qty__adjust--plus"
+                            aria-label="{{ 'cart.general.increase_quantity' | t }}"
+                          >
+                            <svg
+                              aria-hidden="true"
+                              focusable="false"
+                              role="presentation"
+                              class="icon icon-plus"
+                              viewBox="0 0 64 64"
+                            >
+                              <path class="cls-1" d="M32 9v46m23-23H9"/>
+                            </svg>
+                            <span class="icon__fallback-text" aria-hidden="true">+</span>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  {%- when 'variant_picker' -%}
+                    <div class="product-block 454545" {{ block.shopify_attributes }}>
+                      {%- unless product.has_only_default_variant -%}
+                        {%- for option in product.options_with_values -%}
+                          {%- liquid
+                            if block.settings.color_swatches
+                              assign is_color = false
+                              assign color_option_index = 0
+                              assign swatch_trigger = 'products.general.color_swatch_trigger' | t | downcase
+                              assign color_option_index = forloop.index0
+                              assign downcased_option = option.name | downcase
+                              if downcased_option contains swatch_trigger
+                                assign is_color = true
+                              elsif swatch_trigger == 'color' and downcased_option contains 'colour'
+                                assign is_color = true
+                              endif
+                            endif
+                          -%}
+
+                          {%- if block.settings.picker_type == 'button' -%}
+                            {%- render 'variant-button',
+                              product: product,
+                              form_id: form_id,
+                              section_id: section_id,
+                              option: option,
+                              forloop: forloop,
+                              variant_labels: block.settings.variant_labels,
+                              is_color: is_color,
+                              color_option_index: color_option_index
+                            -%}
+                          {%- else -%}
+                            {%-
+                              render 'variant-dropdown',
+                              product: product,
+                              form_id: form_id,
+                              section_id: section_id,
+                              option: option,
+                              forloop: forloop,
+                              variant_labels: block.settings.variant_labels,
+                            -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      {%- endunless -%}
+                    </div>
+                  {%- when 'quantity_selector_cart' -%}
+                    <div class="quan_with_cart">
+                      <div class="product-block quan_cus" {{ block.shopify_attributes }}>
+                        <div class="product__quantity">
+                          <label for="Quantity-{{ section_id }}-{{ product.id }}">
+                            {{- 'products.product.quantity' | t -}}
+                          </label>
+                          <div class="js-qty__wrapper">
+                            <input
+                              type="text"
+                              id="Quantity-{{ section_id }}-{{ product.id }}"
+                              class="js-qty__num"
+                              value="1"
+                              min="1"
+                              aria-label="quantity"
+                              pattern="[0-9]*"
+                              form="{{ form_id }}"
+                              name="quantity"
+                            >
+                            <button
+                              type="button"
+                              class="js-qty__adjust js-qty__adjust--minus"
+                              aria-label="{{ 'cart.general.reduce_quantity' | t }}"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                focusable="false"
+                                role="presentation"
+                                class="icon icon-minus"
+                                viewBox="0 0 64 64"
+                              >
+                                <path class="cls-1" d="M55 32H9"></path>
+                              </svg>
+                              <span class="icon__fallback-text" aria-hidden="true">&minus;</span>
+                            </button>
+                            <button
+                              type="button"
+                              class="js-qty__adjust js-qty__adjust--plus"
+                              aria-label="{{ 'cart.general.increase_quantity' | t }}"
+                            >
+                              <svg
+                                aria-hidden="true"
+                                focusable="false"
+                                role="presentation"
+                                class="icon icon-plus"
+                                viewBox="0 0 64 64"
+                              >
+                                <path class="cls-1" d="M32 9v46m23-23H9"></path>
+                              </svg>
+                              <span class="icon__fallback-text" aria-hidden="true">+</span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="product-block cart_cus" {{ block.shopify_attributes }}>
+                        {%- unless product.empty? -%}
+                          <div class="product-block">
+                            {%- render 'product-form-2024',
+                              form_id: form_id,
+                              product: product,
+                              show_dynamic_checkout: block.settings.show_dynamic_checkout,
+                              current_variant: current_variant
+                            -%}
+                          </div>
+                        {%- endunless -%}
+                      </div>
+                    </div>
+                {%- endcase -%}
+              {%- endfor -%}
+<style>
+.product-active-offer-part {
+    justify-content: space-evenly;
+}
+.product-active-offer-wrap {
+    background: white !important;
+    border-radius: 10px;
+    border: 2px solid black;
+    padding: 0;
+margin-right: 0px;
+    max-width: 30%;
+    min-width: 30%;
+}
+.product-active-offer-wrap .cpnCode {
+    padding: 7px 8px;
+    background:black;
+    margin-top: 0px;
+    border-top-right-radius: 7px;
+    border-top-left-radius: 7px;
+}
+.product-active-offer-wrap p {
+    font-size: 13.801px;
+    line-height: 1.4;
+    max-width: 95%;
+    margin: 0 auto;
+    text-align: left;
+    padding: 10px 5px;
+    font-weight: bold;
+}
+.product-active-offer-wrap a {
+    background: black;
+    padding: 6px 8px;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+
+}
+.product-active-offer-section .page-width {
+    padding-right: 0;
+    padding-left: 0;
+}
+.product-active-offer h4 {
+font-family: var(--typeBasePrimary),var(--typeBaseFallback);
+}
+@media only screen and (min-width: 1025px) and (max-width: 1365px){
+.product-active-offer-wrap p {
+    font-size: 11px;
+ }
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+.product-active-offer-wrap p {
+    font-size: 8px;
+ }
+.product-active-offer-wrap .cpnCode {
+    font-size: 8.098px;
+}
+.product-active-offer-wrap a {
+    padding: 3px 8px;
+}
+.product-active-offer-wrap a {
+    font-size: 8.446px;
+}
+}
+@media only screen and (max-width: 767px) {
+.product-active-offer-wrap {
+    max-width: 50%;
+    min-width: 50%;
+    margin: 0px 5px;
+}
+.product-active-offer-wrap:first-child {
+    margin-left: 12px;
+}
+.product-active-offer-wrap:last-child {
+    margin-right: 12px;
+}
+.product-active-offer-part {
+    justify-content: flex-start;
+}
+.product-active-offer-part {
+    padding-bottom: 0px;
+}
+}
+</style>
+              {% if settings.offer_code_01 != blank
+                or settings.offer_code_02 != blank
+                or settings.offer_code_03 != blank
+                or settings.offer_code_04 != blank
+              %}
+                <div class="product-active-offer-section">
+                  <div class="page-width">
+                    <div class="product-active-offer">
+                      <h2 class="new-prod-title">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          width="14"
+                          height="14"
+                          viewBox="0 0 14 14"
+                          fill="none"
+                        >
+                          <g clip-path="url(#clip0_1_90)">
+                            <path d="M11.6965 2.58698C11.9813 2.58698 12.2485 2.58555 12.5156 2.58738C12.8906 2.58982 13.1954 2.73366 13.3772 3.06907C13.4447 3.1934 13.4869 3.34597 13.4916 3.48717C13.506 3.93025 13.5026 4.37395 13.4952 4.81745C13.4904 5.10999 13.2913 5.3099 12.9778 5.3099C11.8403 5.3097 10.7028 5.3099 9.56535 5.3099C6.55923 5.3099 3.5531 5.30909 0.546973 5.31173C0.32289 5.31193 0.157316 5.23148 0.0530962 5.03361C0.0325773 4.9948 0.0132773 4.9495 0.012871 4.90704C0.00921415 4.39589 -0.0159774 3.88333 0.0169342 3.37442C0.0380626 3.04692 0.251988 2.80618 0.555506 2.66336C0.694059 2.59815 0.842974 2.58677 0.993717 2.58698C1.25985 2.58738 1.52599 2.58698 1.79172 2.58698C1.74337 2.45228 1.69238 2.32795 1.65398 2.19996C1.54285 1.82859 1.58816 1.46554 1.72976 1.11164C1.93007 0.611062 2.2986 0.27768 2.79532 0.0926033C3.05943 -0.00572512 3.33897 -0.0150704 3.62441 0.0168254C4.07948 0.0676149 4.42729 0.301043 4.74787 0.602326C5.02254 0.860337 5.30513 1.10961 5.58427 1.36275C5.6438 1.41679 5.70332 1.47123 5.76549 1.52791C5.87519 1.45274 5.97718 1.3727 6.08851 1.3083C6.41966 1.11713 6.76909 1.09316 7.13498 1.19717C7.33956 1.25548 7.52037 1.34771 7.66989 1.49866C7.7158 1.54498 7.74465 1.51877 7.7796 1.48688C7.90312 1.37351 8.02765 1.26137 8.15198 1.14882C8.38602 0.936724 8.62331 0.727878 8.85308 0.511312C9.01845 0.355286 9.20129 0.229532 9.40872 0.137704C9.70899 0.0048391 10.0204 -0.0250251 10.3449 0.0182475C10.5854 0.0503464 10.8083 0.124702 11.0171 0.245378C11.3722 0.450771 11.626 0.742302 11.771 1.12749C11.8537 1.3469 11.9 1.5722 11.8925 1.80786C11.885 2.04617 11.8438 2.27635 11.7351 2.49129C11.7219 2.51729 11.7131 2.54553 11.6969 2.58677L11.6965 2.58698ZM10.1277 2.59043C10.1342 2.5884 10.1405 2.58555 10.147 2.58474C10.7045 2.52359 11.0575 2.0419 10.8656 1.49155C10.6959 1.00539 10.0694 0.805078 9.64804 1.12708C9.37682 1.3343 9.13425 1.57891 8.87969 1.80786C8.64241 2.02138 8.40654 2.23653 8.16986 2.45066C8.12598 2.49027 8.08007 2.52867 8.1337 2.59287C8.13797 2.59876 8.14223 2.60465 8.1465 2.61054C8.14853 2.60506 8.15077 2.59957 8.1528 2.59409C8.41893 2.59185 8.68487 2.58779 8.951 2.58779C9.26773 2.58779 9.58425 2.59165 9.90097 2.59388C9.97715 2.63939 10.0527 2.64203 10.1275 2.59063L10.1277 2.59043ZM5.36974 2.59266C5.36446 2.55244 5.37319 2.50084 5.35125 2.47443C5.3027 2.41571 5.2385 2.3698 5.18141 2.31799C4.98516 2.13962 4.78932 1.96064 4.59286 1.78206C4.42708 1.63132 4.26537 1.4759 4.0935 1.33248C3.9586 1.21993 3.82452 1.08584 3.66585 1.02672C3.3341 0.903 3.02205 0.975527 2.78029 1.24837C2.53792 1.52202 2.49871 1.87613 2.69415 2.19326C2.84672 2.4407 3.06837 2.57418 3.35929 2.59185C3.39951 2.59246 3.43994 2.59307 3.48017 2.59368C3.51694 2.59144 3.55371 2.58758 3.59068 2.58738C4.03255 2.58698 4.47442 2.58657 4.91629 2.58738C5.06094 2.58758 5.20579 2.59144 5.35044 2.59368C5.35247 2.59916 5.3547 2.60465 5.35674 2.61014C5.361 2.60424 5.36527 2.59835 5.36974 2.59246V2.59266Z" fill="#1A191A"/>
+                            <path d="M5.89789 13.4546C5.86437 13.4569 5.83085 13.4607 5.79712 13.4607C4.48086 13.4611 3.1646 13.4589 1.84834 13.4625C1.52634 13.4634 1.2667 13.3467 1.06862 13.0967C0.962982 12.963 0.885376 12.812 0.884157 12.6371C0.880094 12.0484 0.879891 11.4596 0.879891 10.8709C0.879484 9.30756 0.879484 7.74426 0.881516 6.18096C0.881516 6.14439 0.840478 6.06495 0.941651 6.08446C0.980047 6.09543 1.01865 6.11574 1.05704 6.11595C2.67073 6.11757 4.28461 6.11737 5.8983 6.11737C5.90683 6.11737 5.91536 6.11716 5.92389 6.11696L5.92349 6.15881C5.91496 6.18888 5.89911 6.21895 5.89911 6.24922C5.89789 8.57212 5.89789 10.8952 5.89911 13.2181C5.89911 13.2482 5.91496 13.2785 5.92349 13.3085C5.92349 13.3226 5.92349 13.3368 5.92349 13.3508C5.91475 13.3853 5.90622 13.4201 5.89748 13.4546H5.89789Z" fill="#1A191A"/>
+                            <path d="M7.57941 13.3505V13.3082C7.58794 13.2781 7.60379 13.2481 7.60379 13.218C7.60501 10.8951 7.60501 8.57198 7.60379 6.24908C7.60379 6.21901 7.58794 6.18874 7.57941 6.15867C7.57941 6.14425 7.57941 6.13002 7.57921 6.1156C7.58774 6.11621 7.59627 6.11662 7.60481 6.11723C9.27659 6.11723 10.9482 6.11723 12.62 6.11723C12.6212 6.13734 12.6236 6.15765 12.6236 6.17777C12.6236 8.29345 12.6265 10.4091 12.6212 12.5248C12.6202 12.9151 12.4383 13.2156 12.0743 13.3771C11.9558 13.4295 11.8165 13.4571 11.6867 13.4575C10.3462 13.4632 9.00578 13.4612 7.66535 13.4608C7.64523 13.4608 7.62533 13.4567 7.60521 13.4545C7.59648 13.4199 7.58794 13.3852 7.57921 13.3507L7.57941 13.3505Z" fill="#1A191A"/>
+                            <path d="M7.57965 6.15833C7.58818 6.18839 7.60382 6.21866 7.60403 6.24873C7.60525 8.57164 7.60525 10.8947 7.60403 13.2177C7.60403 13.2477 7.58818 13.2778 7.57965 13.3079C7.57762 13.2743 7.57396 13.2406 7.57396 13.2071C7.57376 10.8911 7.57376 8.57509 7.57396 6.25909C7.57396 6.22557 7.57782 6.19185 7.57985 6.15833H7.57965Z" fill="#090207"/>
+                            <path d="M5.9239 13.3081C5.91537 13.278 5.89952 13.2477 5.89952 13.2177C5.8983 10.8947 5.8983 8.57164 5.89952 6.24873C5.89952 6.21866 5.91537 6.1886 5.9239 6.15833C5.92593 6.1886 5.92979 6.21887 5.92979 6.24893C5.92999 8.57164 5.92999 10.8945 5.92979 13.2172C5.92979 13.2475 5.92613 13.2778 5.9241 13.3079L5.9239 13.3081Z" fill="#090207"/>
+                            <path d="M12.62 6.11702C10.9482 6.11702 9.27661 6.11702 7.60482 6.11702C7.60482 6.10625 7.60482 6.09548 7.60482 6.08472C7.642 6.08329 7.67897 6.08045 7.71615 6.08045C9.31643 6.08025 10.9167 6.08004 12.5172 6.08187C12.5515 6.08187 12.5858 6.10483 12.6202 6.11702H12.62Z" fill="#0F0D0E"/>
+                            <path d="M5.89829 6.11709C4.28461 6.11709 2.67073 6.1173 1.05704 6.11567C1.01865 6.11567 0.980047 6.09515 0.94165 6.08418C0.961763 6.08276 0.981876 6.08032 1.00219 6.08032C2.6108 6.08032 4.2194 6.08032 5.828 6.08032C5.85157 6.08032 5.87513 6.08317 5.8985 6.08459C5.8985 6.09536 5.8985 6.10612 5.8985 6.11689L5.89829 6.11709Z" fill="#0F0D0E"/>
+                            <path d="M5.89828 6.11714C5.89828 6.10637 5.89828 6.09561 5.89828 6.08484C5.906 6.08768 5.91351 6.09032 5.92123 6.09317L5.9188 6.0887C5.92103 6.09479 5.92408 6.10048 5.9255 6.10678C5.92631 6.10983 5.92448 6.11328 5.92388 6.11673C5.91534 6.11673 5.90681 6.11694 5.89828 6.11714Z" fill="#090207"/>
+                            <path d="M7.60461 6.08484C7.60461 6.09561 7.60461 6.10637 7.60461 6.11714C7.59608 6.11653 7.58754 6.11613 7.57901 6.11552C7.58754 6.10536 7.59608 6.095 7.6044 6.08484H7.60461Z" fill="#090207"/>
+                            <path d="M5.91882 6.08875L5.92096 6.09266C5.92114 6.09141 5.92042 6.08999 5.91882 6.08875Z" fill="#1A191A"/>
+                            <path d="M9.9011 2.59383C9.97667 2.59281 10.052 2.59159 10.1276 2.59058C10.0529 2.64177 9.97728 2.63933 9.9011 2.59383Z" fill="#0B090A"/>
+                            <path d="M5.35038 2.59411C5.35688 2.59371 5.36318 2.5933 5.36968 2.5929C5.36541 2.59879 5.36115 2.60468 5.35668 2.61057C5.35465 2.60509 5.35241 2.5996 5.35038 2.59411Z" fill="#0B090A"/>
+                            <path d="M8.13364 2.5929C8.14014 2.5933 8.14644 2.59371 8.15294 2.59411C8.15091 2.5996 8.14867 2.60509 8.14664 2.61057C8.14237 2.60468 8.13811 2.59879 8.13384 2.5929H8.13364Z" fill="#0B090A"/>
+                          </g>
+                          <defs>
+                            <clipPath id="clip0_1_90">
+                              <rect width="13.5015" height="13.4623" fill="white"/>
+                            </clipPath>
+                          </defs>
+                        </svg>
+                        Active Offers
+                      </h2>
+
+                      <div class="product-active-offer-part">
+                        {% if settings.offer_code_01 != blank and settings.title_01 != blank %}
+                          <div
+                            class="product-active-offer-wrap"
+                            style="background:url('https://cdn.shopify.com/s/files/1/0039/6073/3763/files/offer_bg.svg?v=1694427078') no-repeat center center;"
+                          >
+                            <h3 class="cpnCode">{{ settings.offer_code_01 }}</h3>
+                            <p>{{ settings.title_01 }}</p>
+                            <a href="javascript:void(0)"><span class="cpncopy" style="display:block;">copy</span></a>
+                          </div>
+                        {% endif %}
+
+                        {% if settings.offer_code_02 != blank and settings.title_02 != blank %}
+                          <div
+                            class="product-active-offer-wrap"
+                            style="background:url('https://cdn.shopify.com/s/files/1/0039/6073/3763/files/offer_bg.svg?v=1694427078') no-repeat center center;"
+                          >
+                            <h3 class="cpnCode">{{ settings.offer_code_02 }}</h3>
+                            <p>{{ settings.title_02 }}</p>
+                            <a href="javascript:void(0)"><span class="cpncopy" style="display:block;">copy</span></a>
+                          </div>
+                        {% endif %}
+
+                        {% if settings.offer_code_03 != blank and settings.title_03 != blank %}
+                          <div
+                            class="product-active-offer-wrap"
+                            style="background:url('https://cdn.shopify.com/s/files/1/0039/6073/3763/files/offer_bg.svg?v=1694427078') no-repeat center center;"
+                          >
+                            <h3 class="cpnCode">{{ settings.offer_code_03 }}</h3>
+                            <p>{{ settings.title_03 }}</p>
+                            <a href="javascript:void(0)"><span class="cpncopy" style="display:block;">copy</span></a>
+                          </div>
+                        {% endif %}
+
+                        {% if settings.offer_code_04 != blank and settings.title_04 != blank %}
+                          <div
+                            class="product-active-offer-wrap"
+                            style="background:url('https://cdn.shopify.com/s/files/1/0039/6073/3763/files/offer_bg.svg?v=1694427078') no-repeat center center;"
+                          >
+                            <h3 class="cpnCode">{{ settings.offer_code_04 }}</h3>
+                            <p>{{ settings.title_04 }}</p>
+                            <a href="javascript:void(0)"><span class="cpncopy" style="display:block;">copy</span></a>
+                          </div>
+                        {% endif %}
+
+                        {% comment %}
+                          {% assign gotoffer_descsteps = gotoffer_desc.steps %}
+                          {% for gotoffer_descstep in gotoffer_descsteps %}
+                            <div
+                              class="product-active-offer-wrap"
+                              style="background:url('https://cdn.shopify.com/s/files/1/0039/6073/3763/files/offer_bg.svg?v=1694427078') no-repeat center center;"
+                            >
+                              <h4 class="cpnCode">{{ gotoffer_descstep.title }}</h4>
+                              <p>{{ gotoffer_descstep.description }}</p>
+                              <a href="javascript:void(0)"><span class="cpncopy" style="display:block;">copy</span></a>
+                            </div>
+                          {% endfor %}
+                        {% endcomment %}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+
+        {%- unless image_position == 'left' -%}
+          <div class="grid__item {{ product_image_width }} product-single__sticky">
+            {%- render 'product-images',
+              section_id: section_id,
+              product: product,
+              isModal: isModal,
+              image_position: image_position,
+              image_size: image_size,
+              product_zoom_size: product_zoom_size,
+              thumbnail_arrows: thumbnail_arrows,
+              thumbnail_position: thumbnail_position,
+              video_looping: video_looping,
+              video_style: video_style
+            -%}
+          </div>
+        {%- endunless -%}
+      </div>
+    </div>
+  </div>
+
+  {% assign gotrelated_products = product.metafields.custom.related_product.value %}
+  {% if gotrelated_products != blank %}
+    <div class="pdp-related-product-section">
+      <div class="page-width">
+        <div class="pdp-related-product">
+          <h2 class="new-prod-title">Related Products</h2>
+          <div class="pdp-related-product-part">
+            {% for gotrelated_product in gotrelated_products %}
+              {% if gotrelated_product != blank %}
+                <div class="pdp-related-product-wrap">
+                  <figure><img src="{{ gotrelated_product.featured_image | img_url: 'master' }}"></figure>
+                  <div class="pdp-related-product-desc">
+                    <div class="pdp-rel-pro-des">
+                      <a href="{{ gotrelated_product.url }}">{{ gotrelated_product.title }}</a>
+                    </div>
+                    <p>{{ gotrelated_product.vendor }}</p>
+                    <div class="pdp-rel-price">
+                {% if gotrelated_product.compare_at_price > gotrelated_product.price %}
+                      <s>{{ gotrelated_product.compare_at_price | money }}</s>
+                  {% endif %}
+                      <span>{{ gotrelated_product.price | money }}</span>
+                    </div>
+                    <a
+                      href="javascript:void(0)"
+                      class="pdp-rel-cart-btn"
+                      onclick="addProductToMiniCart(event,'{{ gotrelated_product.selected_or_first_available_variant.id }}', this)"
+                      data-id="{{ gotrelated_product.selected_or_first_available_variant.id }}"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="15" viewBox="0 0 18 15" fill="none">
+                        <g clip-path="url(#clip0_1_272)">
+                          <path d="M0.453833 0.256714H2.88757C3.10202 0.256714 3.28655 0.407721 3.33143 0.61913L3.56583 1.73658H15.944C16.0787 1.73658 16.2083 1.79698 16.2981 1.90772C16.3829 2.01343 16.4178 2.15436 16.3879 2.29027L14.7022 10.2836C14.6573 10.495 14.4728 10.646 14.2583 10.646H5.45098L5.74024 12.0252H14.0987C14.3481 12.0252 14.5526 12.2315 14.5526 12.4832C14.5526 12.7349 14.3481 12.9413 14.0987 12.9413H14.014C14.1037 13.1275 14.1536 13.3339 14.1536 13.5554C14.1536 14.3507 13.5103 15 12.7223 15C11.9343 15 11.291 14.3507 11.291 13.5554C11.291 13.3339 11.3458 13.1275 11.4306 12.9413H7.17655C7.26632 13.1275 7.31619 13.3339 7.31619 13.5554C7.31619 14.3507 6.67284 15 5.88487 15C5.09689 15 4.45355 14.3507 4.45355 13.5554C4.45355 13.1426 4.6281 12.7701 4.90738 12.5084L4.43859 10.2886L4.07452 8.57215L2.51852 1.17282H0.453833C0.204474 1.17282 0 0.966445 0 0.714768C0 0.46309 0.204474 0.256714 0.453833 0.256714ZM12.7273 14.0839C13.0165 14.0839 13.2509 13.8473 13.2509 13.5554C13.2509 13.2634 13.0165 13.0268 12.7273 13.0268C12.438 13.0268 12.2036 13.2634 12.2036 13.5554C12.2036 13.8473 12.438 14.0839 12.7273 14.0839ZM5.88985 14.0839C6.17911 14.0839 6.41351 13.8473 6.41351 13.5554C6.41351 13.2634 6.17911 13.0268 5.88985 13.0268C5.6006 13.0268 5.3662 13.2634 5.3662 13.5554C5.3662 13.8473 5.6006 14.0839 5.88985 14.0839ZM4.96723 8.37584L5.2515 9.7349H13.8843L15.3805 2.65772H3.76033L4.96723 8.37584Z" fill="white"/>
+                          <path d="M15.0712 4.90268C16.4126 4.90268 17.5 3.80518 17.5 2.45134C17.5 1.0975 16.4126 0 15.0712 0C13.7299 0 12.6425 1.0975 12.6425 2.45134C12.6425 3.80518 13.7299 4.90268 15.0712 4.90268Z" fill="white"/>
+                          <path d="M15.2358 1.08228V2.29536H16.3928V2.60744H15.2358V3.8306H14.9067V2.60744H13.7496V2.29536H14.9067V1.08228H15.2358Z" fill="black" stroke="black" stroke-width="0.725" stroke-miterlimit="10"/>
+                        </g>
+                        <defs>
+                          <clipPath id="clip0_1_272">
+                            <rect width="17.5" height="15" fill="white"/>
+                          </clipPath>
+                        </defs>
+                      </svg>
+                    </a>
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  
+
+<div class="product-variant-list-section" id="wc-variant-sec">
+   <h2 class="main-new-title-center">Buy Smart, Save Big!</h2>
+  <div class="page-width">
+ 
+    <div class="product-variant-list">
+      <ul class="product-variant-list-slider" >
+      {% assign prod_rev = product.variants | reverse %}
+        {% for variant in prod_rev %}
+        <li>
+          <div class="product-variant-list-part" data-title="{{ variant.title }}">
+          <figure>
+            {% if variant.title contains '6' %}
+          <div class="pdp-var-list-tag">
+            <svg xmlns="http://www.w3.org/2000/svg" width="243" height="25" viewBox="0 0 243 25" fill="none">
+<rect y="0.79071" width="242.87" height="23.2889" fill="#FEC90F"/>
+<path d="M79.1863 6.35616H81.4016L85.2531 15.7606H85.3949L89.2464 6.35616H91.4617V18.4543H89.7249V9.69968H89.6127L86.0447 18.4366H84.6033L81.0353 9.69378H80.9231V18.4543H79.1863V6.35616ZM96.6143 18.6551C96.0393 18.6551 95.5195 18.5488 95.0548 18.3361C94.5901 18.1195 94.2218 17.8065 93.9501 17.3969C93.6823 16.9873 93.5484 16.4852 93.5484 15.8905C93.5484 15.3786 93.6469 14.9572 93.8438 14.6264C94.0407 14.2956 94.3065 14.0337 94.6413 13.8407C94.976 13.6477 95.3501 13.502 95.7636 13.4036C96.1772 13.3051 96.5985 13.2303 97.0278 13.1791C97.5713 13.1161 98.0123 13.0649 98.351 13.0255C98.6897 12.9822 98.9359 12.9132 99.0894 12.8187C99.243 12.7242 99.3198 12.5706 99.3198 12.358V12.3166C99.3198 11.8007 99.1741 11.401 98.8827 11.1174C98.5952 10.8339 98.1659 10.6921 97.5949 10.6921C97.0002 10.6921 96.5316 10.824 96.189 11.0879C95.8503 11.3478 95.616 11.6373 95.486 11.9563L93.8261 11.5782C94.023 11.0269 94.3104 10.5818 94.6885 10.2432C95.0705 9.90053 95.5096 9.65243 96.0058 9.49884C96.5021 9.34131 97.0239 9.26255 97.5713 9.26255C97.9336 9.26255 98.3176 9.30587 98.7232 9.39251C99.1328 9.47521 99.5148 9.6288 99.8692 9.85327C100.228 10.0778 100.521 10.3987 100.749 10.8162C100.978 11.2297 101.092 11.7672 101.092 12.4289V18.4543H99.3671V17.2138H99.2962C99.182 17.4422 99.0107 17.6666 98.7823 17.8872C98.5538 18.1077 98.2605 18.2908 97.9021 18.4366C97.5437 18.5823 97.1144 18.6551 96.6143 18.6551ZM96.9983 17.2374C97.4866 17.2374 97.904 17.1409 98.2506 16.9479C98.6011 16.755 98.8669 16.5029 99.0481 16.1918C99.2332 15.8767 99.3257 15.54 99.3257 15.1816V14.012C99.2627 14.075 99.1406 14.1341 98.9595 14.1892C98.7823 14.2404 98.5794 14.2857 98.351 14.3251C98.1226 14.3605 97.9001 14.394 97.6835 14.4255C97.4669 14.4531 97.2858 14.4767 97.14 14.4964C96.7974 14.5397 96.4843 14.6126 96.2008 14.715C95.9212 14.8174 95.6967 14.965 95.5273 15.158C95.3619 15.3471 95.2792 15.5991 95.2792 15.9142C95.2792 16.3513 95.4407 16.6821 95.7636 16.9066C96.0866 17.1271 96.4981 17.2374 96.9983 17.2374ZM103.445 9.38069H105.211V19.045C105.211 19.6515 105.101 20.1635 104.88 20.5809C104.663 20.9984 104.341 21.3154 103.911 21.532C103.486 21.7486 102.96 21.8569 102.334 21.8569C102.271 21.8569 102.212 21.8569 102.157 21.8569C102.098 21.8569 102.037 21.8549 101.974 21.851V20.3328C102.029 20.3328 102.078 20.3328 102.121 20.3328C102.161 20.3328 102.206 20.3328 102.257 20.3328C102.675 20.3328 102.976 20.2206 103.161 19.9961C103.35 19.7755 103.445 19.4546 103.445 19.0332V9.38069ZM104.319 7.98066C104.012 7.98066 103.748 7.87827 103.527 7.67349C103.311 7.46476 103.202 7.21666 103.202 6.92917C103.202 6.63774 103.311 6.38964 103.527 6.18485C103.748 5.97613 104.012 5.87176 104.319 5.87176C104.626 5.87176 104.888 5.97613 105.105 6.18485C105.325 6.38964 105.435 6.63774 105.435 6.92917C105.435 7.21666 105.325 7.46476 105.105 7.67349C104.888 7.87827 104.626 7.98066 104.319 7.98066ZM111.409 18.6374C110.558 18.6374 109.816 18.4425 109.182 18.0526C108.548 17.6627 108.056 17.1173 107.705 16.4163C107.355 15.7153 107.179 14.8961 107.179 13.9588C107.179 13.0176 107.355 12.1945 107.705 11.4896C108.056 10.7847 108.548 10.2372 109.182 9.84737C109.816 9.45749 110.558 9.26255 111.409 9.26255C112.26 9.26255 113.002 9.45749 113.636 9.84737C114.27 10.2372 114.762 10.7847 115.113 11.4896C115.463 12.1945 115.639 13.0176 115.639 13.9588C115.639 14.8961 115.463 15.7153 115.113 16.4163C114.762 17.1173 114.27 17.6627 113.636 18.0526C113.002 18.4425 112.26 18.6374 111.409 18.6374ZM111.415 17.1547C111.966 17.1547 112.423 17.009 112.785 16.7175C113.148 16.4261 113.416 16.0382 113.589 15.5538C113.766 15.0694 113.855 14.5358 113.855 13.9529C113.855 13.374 113.766 12.8424 113.589 12.358C113.416 11.8696 113.148 11.4778 112.785 11.1824C112.423 10.887 111.966 10.7394 111.415 10.7394C110.86 10.7394 110.399 10.887 110.033 11.1824C109.67 11.4778 109.401 11.8696 109.223 12.358C109.05 12.8424 108.963 13.374 108.963 13.9529C108.963 14.5358 109.05 15.0694 109.223 15.5538C109.401 16.0382 109.67 16.4261 110.033 16.7175C110.399 17.009 110.86 17.1547 111.415 17.1547ZM117.61 18.4543V9.38069H119.317V10.8221H119.412C119.577 10.3337 119.869 9.94976 120.286 9.67015C120.708 9.3866 121.184 9.24482 121.716 9.24482C121.826 9.24482 121.956 9.24876 122.106 9.25664C122.259 9.26451 122.379 9.27436 122.466 9.28618V10.9757C122.395 10.956 122.269 10.9343 122.088 10.9107C121.907 10.8831 121.726 10.8693 121.545 10.8693C121.127 10.8693 120.755 10.9579 120.428 11.1352C120.105 11.3084 119.849 11.5506 119.66 11.8618C119.471 12.1689 119.377 12.5194 119.377 12.9132V18.4543H117.61ZM135.137 9.53428C135.074 8.97506 134.814 8.54186 134.357 8.23468C133.901 7.92356 133.326 7.768 132.632 7.768C132.136 7.768 131.707 7.84677 131.345 8.00429C130.982 8.15788 130.701 8.37055 130.5 8.64228C130.303 8.91008 130.205 9.21529 130.205 9.55791C130.205 9.8454 130.272 10.0935 130.405 10.3022C130.543 10.511 130.722 10.6862 130.943 10.828C131.167 10.9658 131.408 11.082 131.664 11.1765C131.92 11.2671 132.166 11.3419 132.402 11.401L133.584 11.7082C133.97 11.8027 134.365 11.9307 134.771 12.0921C135.177 12.2536 135.553 12.4663 135.899 12.7301C136.246 12.994 136.525 13.3209 136.738 13.7107C136.955 14.1006 137.063 14.5673 137.063 15.1108C137.063 15.796 136.886 16.4045 136.531 16.9361C136.181 17.4678 135.671 17.8872 135.001 18.1944C134.336 18.5015 133.53 18.6551 132.585 18.6551C131.679 18.6551 130.896 18.5114 130.234 18.2239C129.573 17.9364 129.055 17.5288 128.681 17.0011C128.306 16.4694 128.1 15.8393 128.06 15.1108H129.892C129.927 15.5479 130.069 15.9122 130.317 16.2036C130.569 16.4911 130.89 16.7057 131.28 16.8475C131.674 16.9853 132.105 17.0543 132.573 17.0543C133.089 17.0543 133.548 16.9735 133.95 16.8121C134.355 16.6467 134.674 16.4182 134.907 16.1268C135.139 15.8314 135.255 15.4869 135.255 15.093C135.255 14.7347 135.153 14.4413 134.948 14.2129C134.747 13.9844 134.474 13.7954 134.127 13.6458C133.784 13.4961 133.397 13.3642 132.963 13.25L131.534 12.8601C130.565 12.5962 129.797 12.2083 129.23 11.6963C128.667 11.1844 128.385 10.507 128.385 9.66424C128.385 8.96718 128.574 8.35873 128.952 7.83889C129.33 7.31905 129.842 6.91538 130.488 6.6279C131.134 6.33647 131.863 6.19076 132.674 6.19076C133.493 6.19076 134.216 6.3345 134.842 6.62199C135.472 6.90948 135.968 7.30526 136.33 7.80935C136.693 8.3095 136.882 8.88448 136.898 9.53428H135.137ZM141.743 18.6551C141.168 18.6551 140.648 18.5488 140.183 18.3361C139.719 18.1195 139.351 17.8065 139.079 17.3969C138.811 16.9873 138.677 16.4852 138.677 15.8905C138.677 15.3786 138.776 14.9572 138.972 14.6264C139.169 14.2956 139.435 14.0337 139.77 13.8407C140.105 13.6477 140.479 13.502 140.892 13.4036C141.306 13.3051 141.727 13.2303 142.157 13.1791C142.7 13.1161 143.141 13.0649 143.48 13.0255C143.818 12.9822 144.065 12.9132 144.218 12.8187C144.372 12.7242 144.449 12.5706 144.449 12.358V12.3166C144.449 11.8007 144.303 11.401 144.011 11.1174C143.724 10.8339 143.295 10.6921 142.724 10.6921C142.129 10.6921 141.66 10.824 141.318 11.0879C140.979 11.3478 140.745 11.6373 140.615 11.9563L138.955 11.5782C139.152 11.0269 139.439 10.5818 139.817 10.2432C140.199 9.90053 140.638 9.65243 141.135 9.49884C141.631 9.34131 142.153 9.26255 142.7 9.26255C143.062 9.26255 143.446 9.30587 143.852 9.39251C144.261 9.47521 144.643 9.6288 144.998 9.85327C145.356 10.0778 145.65 10.3987 145.878 10.8162C146.107 11.2297 146.221 11.7672 146.221 12.4289V18.4543H144.496V17.2138H144.425C144.311 17.4422 144.139 17.6666 143.911 17.8872C143.683 18.1077 143.389 18.2908 143.031 18.4366C142.672 18.5823 142.243 18.6551 141.743 18.6551ZM142.127 17.2374C142.615 17.2374 143.033 17.1409 143.379 16.9479C143.73 16.755 143.996 16.5029 144.177 16.1918C144.362 15.8767 144.454 15.54 144.454 15.1816V14.012C144.391 14.075 144.269 14.1341 144.088 14.1892C143.911 14.2404 143.708 14.2857 143.48 14.3251C143.251 14.3605 143.029 14.394 142.812 14.4255C142.596 14.4531 142.414 14.4767 142.269 14.4964C141.926 14.5397 141.613 14.6126 141.33 14.715C141.05 14.8174 140.825 14.965 140.656 15.158C140.491 15.3471 140.408 15.5991 140.408 15.9142C140.408 16.3513 140.569 16.6821 140.892 16.9066C141.215 17.1271 141.627 17.2374 142.127 17.2374ZM156.011 9.38069L152.72 18.4543H150.83L147.534 9.38069H149.43L151.728 16.3631H151.822L154.114 9.38069H156.011ZM157.671 18.4543V9.38069H159.437V18.4543H157.671ZM158.563 7.98066C158.255 7.98066 157.991 7.87827 157.771 7.67349C157.554 7.46476 157.446 7.21666 157.446 6.92917C157.446 6.63774 157.554 6.38964 157.771 6.18485C157.991 5.97613 158.255 5.87176 158.563 5.87176C158.87 5.87176 159.132 5.97613 159.348 6.18485C159.569 6.38964 159.679 6.63774 159.679 6.92917C159.679 7.21666 159.569 7.46476 159.348 7.67349C159.132 7.87827 158.87 7.98066 158.563 7.98066ZM163.579 13.0668V18.4543H161.813V9.38069H163.508V10.8575H163.621C163.829 10.3771 164.156 9.99111 164.601 9.69968C165.05 9.40826 165.615 9.26255 166.297 9.26255C166.915 9.26255 167.456 9.39251 167.921 9.65243C168.386 9.90841 168.746 10.2904 169.002 10.7984C169.258 11.3065 169.386 11.9346 169.386 12.6829V18.4543H167.62V12.8955C167.62 12.2378 167.449 11.7239 167.106 11.3537C166.763 10.9796 166.293 10.7925 165.694 10.7925C165.285 10.7925 164.92 10.8811 164.601 11.0584C164.286 11.2356 164.036 11.4955 163.851 11.8381C163.67 12.1768 163.579 12.5864 163.579 13.0668ZM175.559 22.0459C174.839 22.0459 174.218 21.9514 173.698 21.7624C173.183 21.5733 172.761 21.3233 172.434 21.0121C172.107 20.701 171.863 20.3604 171.702 19.9902L173.22 19.364C173.326 19.5373 173.468 19.7204 173.645 19.9134C173.826 20.1103 174.071 20.2777 174.378 20.4155C174.689 20.5533 175.089 20.6223 175.577 20.6223C176.246 20.6223 176.8 20.4588 177.237 20.132C177.674 19.809 177.893 19.2931 177.893 18.5842V16.8002H177.78C177.674 16.9932 177.52 17.2078 177.32 17.4441C177.123 17.6804 176.851 17.8852 176.504 18.0585C176.158 18.2318 175.707 18.3184 175.152 18.3184C174.435 18.3184 173.789 18.151 173.214 17.8163C172.643 17.4776 172.19 16.9794 171.855 16.3218C171.525 15.6601 171.359 14.8469 171.359 13.882C171.359 12.9172 171.523 12.0902 171.85 11.401C172.18 10.7118 172.633 10.1841 173.208 9.81783C173.783 9.44764 174.435 9.26255 175.163 9.26255C175.727 9.26255 176.182 9.35706 176.528 9.5461C176.875 9.73119 177.144 9.94779 177.337 10.1959C177.534 10.444 177.686 10.6626 177.792 10.8516H177.922V9.38069H179.653V18.6551C179.653 19.4349 179.472 20.0749 179.11 20.575C178.747 21.0752 178.257 21.4453 177.639 21.6856C177.024 21.9258 176.331 22.0459 175.559 22.0459ZM175.542 16.8534C176.05 16.8534 176.479 16.7353 176.829 16.499C177.184 16.2587 177.452 15.9161 177.633 15.4711C177.818 15.0222 177.91 14.4846 177.91 13.8584C177.91 13.248 177.82 12.7104 177.639 12.2457C177.457 11.781 177.192 11.4187 176.841 11.1588C176.491 10.8949 176.057 10.763 175.542 10.763C175.01 10.763 174.567 10.9008 174.212 11.1765C173.858 11.4482 173.59 11.8184 173.409 12.2871C173.232 12.7557 173.143 13.2795 173.143 13.8584C173.143 14.4531 173.234 14.9749 173.415 15.4238C173.596 15.8728 173.864 16.2233 174.218 16.4753C174.577 16.7274 175.018 16.8534 175.542 16.8534ZM188.821 11.5959L187.22 11.8795C187.153 11.6747 187.047 11.4797 186.901 11.2947C186.759 11.1096 186.567 10.9579 186.322 10.8398C186.078 10.7216 185.773 10.6626 185.407 10.6626C184.907 10.6626 184.489 10.7748 184.154 10.9993C183.82 11.2198 183.652 11.5053 183.652 11.8558C183.652 12.1591 183.764 12.4033 183.989 12.5883C184.213 12.7734 184.576 12.9251 185.076 13.0432L186.517 13.374C187.352 13.567 187.974 13.8643 188.384 14.266C188.794 14.6677 188.998 15.1895 188.998 15.8314C188.998 16.3749 188.841 16.8593 188.526 17.2846C188.215 17.706 187.779 18.0368 187.22 18.2771C186.665 18.5173 186.021 18.6374 185.289 18.6374C184.273 18.6374 183.444 18.4208 182.802 17.9876C182.16 17.5505 181.766 16.9302 181.62 16.1268L183.327 15.8669C183.434 16.3119 183.652 16.6486 183.983 16.877C184.314 17.1015 184.745 17.2138 185.277 17.2138C185.856 17.2138 186.318 17.0936 186.665 16.8534C187.012 16.6092 187.185 16.3119 187.185 15.9614C187.185 15.6779 187.078 15.4396 186.866 15.2466C186.657 15.0537 186.336 14.9079 185.903 14.8095L184.367 14.4728C183.52 14.2798 182.894 13.9726 182.489 13.5512C182.087 13.1298 181.886 12.5962 181.886 11.9504C181.886 11.4148 182.036 10.9461 182.335 10.5444C182.634 10.1427 183.048 9.82965 183.575 9.60517C184.103 9.37675 184.708 9.26255 185.389 9.26255C186.37 9.26255 187.141 9.47521 187.705 9.90053C188.268 10.3219 188.64 10.887 188.821 11.5959Z" fill="black"/>
+<path d="M64.7081 5.23225C65.9725 5.96226 67.0225 7.01225 67.7525 8.27667C68.4825 9.5411 68.8669 10.9754 68.8669 12.4354C68.8668 13.8955 68.4825 15.3298 67.7525 16.5942C67.0225 17.8586 65.9725 18.9086 64.708 19.6386C63.4436 20.3686 62.0093 20.7529 60.5493 20.7528C59.0892 20.7528 57.6549 20.3685 56.3905 19.6384C55.1261 18.9084 54.0762 17.8584 53.3462 16.5939C52.6162 15.3295 52.2319 13.8952 52.2319 12.4352L52.2361 12.1657C52.2827 10.7292 52.7007 9.3294 53.4493 8.1026C54.198 6.8758 55.2517 5.86392 56.5078 5.16561C57.764 4.4673 59.1796 4.10639 60.6168 4.11807C62.0539 4.12975 63.4635 4.51362 64.7081 5.23225ZM63.0446 8.27644H58.0542C56.9837 8.27644 56.9463 9.82681 57.9435 9.93411L58.0542 9.93993H58.8859C59.1779 9.93994 59.4647 10.0168 59.7176 10.1628C59.9705 10.3088 60.1805 10.5188 60.3265 10.7717H58.0542C57.8336 10.7717 57.622 10.8593 57.466 11.0153C57.31 11.1713 57.2224 11.3828 57.2224 11.6034C57.2224 11.824 57.31 12.0356 57.466 12.1916C57.622 12.3475 57.8336 12.4352 58.0542 12.4352L60.3265 12.436C60.1804 12.6887 59.9703 12.8985 59.7175 13.0444C59.4646 13.1902 59.1778 13.267 58.8859 13.2669H58.0542C57.3139 13.2669 56.9421 14.1627 57.4661 14.6867L59.9613 17.1819C60.1173 17.3379 60.3288 17.4255 60.5494 17.4255C60.7699 17.4255 60.9815 17.3379 61.1374 17.1819L61.2065 17.1038C61.3306 16.9437 61.3921 16.7439 61.3794 16.5418C61.3667 16.3396 61.2806 16.1491 61.1374 16.0059L59.9031 14.7707L59.9971 14.7399C60.5104 14.5575 60.9712 14.2522 61.3392 13.8506C61.7072 13.4489 61.9712 12.9632 62.1081 12.436L63.0446 12.4352C63.2652 12.4352 63.4768 12.3475 63.6328 12.1916C63.7887 12.0356 63.8764 11.824 63.8764 11.6034C63.8764 11.3828 63.7887 11.1713 63.6328 11.0153C63.4768 10.8593 63.2652 10.7717 63.0446 10.7717H62.1081C62.0443 10.5248 61.9522 10.2862 61.8336 10.0605L61.7679 9.93993H63.0446C63.2652 9.93993 63.4768 9.8523 63.6328 9.69632C63.7887 9.54034 63.8764 9.32878 63.8764 9.10818L63.8706 9.01087C63.8467 8.80855 63.7495 8.62201 63.5972 8.48663C63.445 8.35126 63.2484 8.27647 63.0446 8.27644Z" fill="black"/>
+</svg>
+</div>
+  {% endif %}
+          {% if variant.title contains '3' %}
+  <div class="pdp-var-list-tag">
+            <svg xmlns="http://www.w3.org/2000/svg" width="244" height="25" viewBox="0 0 244 25" fill="none">
+<rect x="0.158691" y="0.79071" width="242.87" height="23.2889" fill="#FEC90F"/>
+<path d="M46.4021 18.4543V6.35616H53.9871V7.9275H48.2275V11.6136H53.5913V13.1791H48.2275V16.8829H54.058V18.4543H46.4021ZM57.6777 9.38069L59.6802 12.9132L61.7005 9.38069H63.6322L60.8026 13.9175L63.6558 18.4543H61.7242L59.6802 15.0635L57.6422 18.4543H55.7046L58.5283 13.9175L55.7401 9.38069H57.6777ZM65.4458 21.8569V9.38069H67.1707V10.8516H67.3184C67.4208 10.6626 67.5684 10.444 67.7614 10.1959C67.9544 9.94779 68.2222 9.73119 68.5648 9.5461C68.9074 9.35706 69.3603 9.26255 69.9235 9.26255C70.656 9.26255 71.3097 9.44764 71.8847 9.81783C72.4597 10.188 72.9106 10.7216 73.2375 11.4187C73.5683 12.1158 73.7337 12.9546 73.7337 13.9352C73.7337 14.9158 73.5702 15.7566 73.2434 16.4576C72.9165 17.1547 72.4675 17.6922 71.8965 18.0703C71.3255 18.4444 70.6737 18.6315 69.9412 18.6315C69.3899 18.6315 68.9389 18.539 68.5884 18.3539C68.2419 18.1688 67.9701 17.9522 67.7732 17.7041C67.5763 17.456 67.4247 17.2354 67.3184 17.0424H67.212V21.8569H65.4458ZM67.1766 13.9175C67.1766 14.5555 67.2691 15.1147 67.4542 15.5952C67.6393 16.0756 67.9071 16.4517 68.2576 16.7234C68.6081 16.9912 69.0374 17.1251 69.5454 17.1251C70.0731 17.1251 70.5142 16.9853 70.8686 16.7057C71.2231 16.4222 71.4909 16.0382 71.672 15.5538C71.8571 15.0694 71.9497 14.524 71.9497 13.9175C71.9497 13.3189 71.8591 12.7813 71.6779 12.3048C71.5007 11.8283 71.2329 11.4522 70.8746 11.1765C70.5201 10.9008 70.0771 10.763 69.5454 10.763C69.0334 10.763 68.6002 10.8949 68.2458 11.1588C67.8953 11.4226 67.6295 11.7909 67.4483 12.2634C67.2672 12.736 67.1766 13.2874 67.1766 13.9175ZM79.6232 18.6374C78.7293 18.6374 77.9594 18.4464 77.3135 18.0644C76.6716 17.6785 76.1754 17.137 75.8249 16.4399C75.4783 15.7389 75.305 14.9178 75.305 13.9766C75.305 13.0471 75.4783 12.228 75.8249 11.5191C76.1754 10.8103 76.6637 10.2569 77.2899 9.85918C77.92 9.46142 78.6564 9.26255 79.4992 9.26255C80.0112 9.26255 80.5074 9.34722 80.9878 9.51656C81.4683 9.6859 81.8995 9.95173 82.2815 10.314C82.6635 10.6764 82.9648 11.147 83.1853 11.7259C83.4059 12.3009 83.5161 12.9999 83.5161 13.823V14.4491H76.3033V13.1259H81.7853C81.7853 12.6612 81.6908 12.2497 81.5018 11.8913C81.3127 11.529 81.0469 11.2435 80.7043 11.0347C80.3656 10.826 79.9678 10.7216 79.511 10.7216C79.0148 10.7216 78.5816 10.8437 78.2114 11.0879C77.8451 11.3281 77.5616 11.6432 77.3608 12.0331C77.1638 12.419 77.0654 12.8384 77.0654 13.2913V14.3251C77.0654 14.9316 77.1717 15.4475 77.3844 15.8728C77.601 16.2981 77.9023 16.623 78.2882 16.8475C78.6741 17.068 79.1251 17.1783 79.641 17.1783C79.9757 17.1783 80.2809 17.1311 80.5566 17.0365C80.8323 16.9381 81.0705 16.7924 81.2714 16.5994C81.4722 16.4064 81.6258 16.1682 81.7321 15.8846L83.4039 16.1859C83.27 16.6782 83.0298 17.1094 82.6832 17.4796C82.3406 17.8458 81.9094 18.1314 81.3895 18.3361C80.8736 18.537 80.2849 18.6374 79.6232 18.6374ZM85.4759 18.4543V9.38069H87.1831V10.8221H87.2776C87.443 10.3337 87.7344 9.94976 88.1519 9.67015C88.5733 9.3866 89.0498 9.24482 89.5814 9.24482C89.6917 9.24482 89.8217 9.24876 89.9713 9.25664C90.1249 9.26451 90.245 9.27436 90.3317 9.28618V10.9757C90.2608 10.956 90.1348 10.9343 89.9536 10.9107C89.7725 10.8831 89.5913 10.8693 89.4101 10.8693C88.9927 10.8693 88.6205 10.9579 88.2937 11.1352C87.9707 11.3084 87.7147 11.5506 87.5257 11.8618C87.3367 12.1689 87.2422 12.5194 87.2422 12.9132V18.4543H85.4759ZM96.6318 9.38069V10.7984H91.6756V9.38069H96.6318ZM93.0047 7.20681H94.771V15.7901C94.771 16.1327 94.8222 16.3907 94.9246 16.564C95.027 16.7333 95.1589 16.8495 95.3204 16.9125C95.4858 16.9716 95.665 17.0011 95.8579 17.0011C95.9997 17.0011 96.1238 16.9912 96.2301 16.9716C96.3364 16.9519 96.4191 16.9361 96.4782 16.9243L96.7972 18.3834C96.6948 18.4228 96.5491 18.4622 96.3601 18.5015C96.171 18.5449 95.9347 18.5685 95.6512 18.5724C95.1865 18.5803 94.7533 18.4976 94.3516 18.3243C93.9499 18.151 93.625 17.8832 93.3769 17.5209C93.1288 17.1586 93.0047 16.7038 93.0047 16.1564V7.20681ZM103.13 18.4543V6.35616H107.442C108.379 6.35616 109.157 6.51763 109.776 6.84056C110.398 7.16349 110.862 7.61047 111.17 8.18151C111.477 8.74861 111.63 9.40432 111.63 10.1486C111.63 10.889 111.475 11.5408 111.164 12.104C110.857 12.6632 110.392 13.0983 109.77 13.4095C109.151 13.7206 108.374 13.8761 107.436 13.8761H104.169V12.3048H107.271C107.862 12.3048 108.342 12.2201 108.712 12.0508C109.086 11.8814 109.36 11.6353 109.533 11.3124C109.707 10.9894 109.793 10.6015 109.793 10.1486C109.793 9.69181 109.705 9.29602 109.527 8.96127C109.354 8.62653 109.08 8.37055 108.706 8.19333C108.336 8.01217 107.85 7.92159 107.247 7.92159H104.955V18.4543H103.13ZM109.102 12.996L112.091 18.4543H110.012L107.082 12.996H109.102ZM117.507 18.6374C116.613 18.6374 115.843 18.4464 115.197 18.0644C114.555 17.6785 114.059 17.137 113.708 16.4399C113.362 15.7389 113.188 14.9178 113.188 13.9766C113.188 13.0471 113.362 12.228 113.708 11.5191C114.059 10.8103 114.547 10.2569 115.173 9.85918C115.803 9.46142 116.54 9.26255 117.383 9.26255C117.895 9.26255 118.391 9.34722 118.871 9.51656C119.352 9.6859 119.783 9.95173 120.165 10.314C120.547 10.6764 120.848 11.147 121.069 11.7259C121.289 12.3009 121.4 12.9999 121.4 13.823V14.4491H114.187V13.1259H119.669C119.669 12.6612 119.574 12.2497 119.385 11.8913C119.196 11.529 118.93 11.2435 118.588 11.0347C118.249 10.826 117.851 10.7216 117.394 10.7216C116.898 10.7216 116.465 10.8437 116.095 11.0879C115.729 11.3281 115.445 11.6432 115.244 12.0331C115.047 12.419 114.949 12.8384 114.949 13.2913V14.3251C114.949 14.9316 115.055 15.4475 115.268 15.8728C115.484 16.2981 115.786 16.623 116.172 16.8475C116.558 17.068 117.008 17.1783 117.524 17.1783C117.859 17.1783 118.164 17.1311 118.44 17.0365C118.716 16.9381 118.954 16.7924 119.155 16.5994C119.356 16.4064 119.509 16.1682 119.616 15.8846L121.287 16.1859C121.153 16.6782 120.913 17.1094 120.567 17.4796C120.224 17.8458 119.793 18.1314 119.273 18.3361C118.757 18.537 118.168 18.6374 117.507 18.6374ZM127.181 18.6374C126.303 18.6374 125.547 18.4385 124.913 18.0408C124.283 17.6391 123.798 17.0858 123.46 16.3808C123.121 15.6759 122.952 14.8686 122.952 13.9588C122.952 13.0373 123.125 12.2241 123.472 11.5191C123.818 10.8103 124.306 10.2569 124.937 9.85918C125.567 9.46142 126.309 9.26255 127.164 9.26255C127.853 9.26255 128.467 9.39054 129.007 9.64652C129.546 9.89856 129.981 10.253 130.312 10.7098C130.647 11.1667 130.846 11.7003 130.909 12.3107H129.19C129.095 11.8854 128.879 11.5191 128.54 11.212C128.205 10.9048 127.756 10.7512 127.193 10.7512C126.701 10.7512 126.27 10.8811 125.899 11.1411C125.533 11.397 125.248 11.7633 125.043 12.2398C124.838 12.7124 124.736 13.2716 124.736 13.9175C124.736 14.5791 124.836 15.1501 125.037 15.6306C125.238 16.1111 125.521 16.4832 125.888 16.7471C126.258 17.0109 126.693 17.1429 127.193 17.1429C127.528 17.1429 127.831 17.0818 128.103 16.9597C128.379 16.8337 128.609 16.6545 128.794 16.4222C128.983 16.1898 129.115 15.9102 129.19 15.5833H130.909C130.846 16.1701 130.655 16.6939 130.336 17.1547C130.017 17.6154 129.59 17.9778 129.054 18.2416C128.522 18.5055 127.898 18.6374 127.181 18.6374ZM136.62 18.6374C135.769 18.6374 135.027 18.4425 134.393 18.0526C133.759 17.6627 133.266 17.1173 132.916 16.4163C132.565 15.7153 132.39 14.8961 132.39 13.9588C132.39 13.0176 132.565 12.1945 132.916 11.4896C133.266 10.7847 133.759 10.2372 134.393 9.84737C135.027 9.45749 135.769 9.26255 136.62 9.26255C137.47 9.26255 138.213 9.45749 138.847 9.84737C139.481 10.2372 139.973 10.7847 140.324 11.4896C140.674 12.1945 140.849 13.0176 140.849 13.9588C140.849 14.8961 140.674 15.7153 140.324 16.4163C139.973 17.1173 139.481 17.6627 138.847 18.0526C138.213 18.4425 137.47 18.6374 136.62 18.6374ZM136.626 17.1547C137.177 17.1547 137.634 17.009 137.996 16.7175C138.358 16.4261 138.626 16.0382 138.799 15.5538C138.977 15.0694 139.065 14.5358 139.065 13.9529C139.065 13.374 138.977 12.8424 138.799 12.358C138.626 11.8696 138.358 11.4778 137.996 11.1824C137.634 10.887 137.177 10.7394 136.626 10.7394C136.07 10.7394 135.61 10.887 135.243 11.1824C134.881 11.4778 134.611 11.8696 134.434 12.358C134.261 12.8424 134.174 13.374 134.174 13.9529C134.174 14.5358 134.261 15.0694 134.434 15.5538C134.611 16.0382 134.881 16.4261 135.243 16.7175C135.61 17.009 136.07 17.1547 136.626 17.1547ZM142.821 18.4543V9.38069H144.516V10.8575H144.629C144.818 10.3574 145.127 9.96748 145.556 9.68787C145.985 9.40432 146.499 9.26255 147.098 9.26255C147.704 9.26255 148.212 9.40432 148.622 9.68787C149.035 9.97142 149.341 10.3613 149.537 10.8575H149.632C149.849 10.3731 150.193 9.98717 150.666 9.69968C151.138 9.40826 151.702 9.26255 152.355 9.26255C153.178 9.26255 153.85 9.5205 154.37 10.0364C154.893 10.5523 155.155 11.3301 155.155 12.3698V18.4543H153.389V12.5352C153.389 11.9208 153.222 11.4758 152.887 11.2001C152.552 10.9245 152.152 10.7866 151.688 10.7866C151.113 10.7866 150.666 10.9638 150.347 11.3183C150.028 11.6688 149.868 12.1197 149.868 12.6711V18.4543H148.108V12.4229C148.108 11.9307 147.954 11.5349 147.647 11.2356C147.34 10.9363 146.94 10.7866 146.448 10.7866C146.113 10.7866 145.804 10.8752 145.521 11.0525C145.241 11.2257 145.014 11.4679 144.841 11.7791C144.672 12.0902 144.587 12.4505 144.587 12.8601V18.4543H142.821ZM157.523 18.4543V9.38069H159.218V10.8575H159.33C159.519 10.3574 159.828 9.96748 160.258 9.68787C160.687 9.40432 161.201 9.26255 161.8 9.26255C162.406 9.26255 162.914 9.40432 163.324 9.68787C163.737 9.97142 164.042 10.3613 164.239 10.8575H164.334C164.55 10.3731 164.895 9.98717 165.368 9.69968C165.84 9.40826 166.403 9.26255 167.057 9.26255C167.88 9.26255 168.552 9.5205 169.071 10.0364C169.595 10.5523 169.857 11.3301 169.857 12.3698V18.4543H168.091V12.5352C168.091 11.9208 167.923 11.4758 167.589 11.2001C167.254 10.9245 166.854 10.7866 166.389 10.7866C165.815 10.7866 165.368 10.9638 165.049 11.3183C164.73 11.6688 164.57 12.1197 164.57 12.6711V18.4543H162.81V12.4229C162.81 11.9307 162.656 11.5349 162.349 11.2356C162.042 10.9363 161.642 10.7866 161.15 10.7866C160.815 10.7866 160.506 10.8752 160.222 11.0525C159.943 11.2257 159.716 11.4679 159.543 11.7791C159.374 12.0902 159.289 12.4505 159.289 12.8601V18.4543H157.523ZM176.135 18.6374C175.241 18.6374 174.471 18.4464 173.825 18.0644C173.183 17.6785 172.687 17.137 172.337 16.4399C171.99 15.7389 171.817 14.9178 171.817 13.9766C171.817 13.0471 171.99 12.228 172.337 11.5191C172.687 10.8103 173.175 10.2569 173.802 9.85918C174.432 9.46142 175.168 9.26255 176.011 9.26255C176.523 9.26255 177.019 9.34722 177.5 9.51656C177.98 9.6859 178.411 9.95173 178.793 10.314C179.175 10.6764 179.477 11.147 179.697 11.7259C179.918 12.3009 180.028 12.9999 180.028 13.823V14.4491H172.815V13.1259H178.297C178.297 12.6612 178.203 12.2497 178.014 11.8913C177.825 11.529 177.559 11.2435 177.216 11.0347C176.877 10.826 176.48 10.7216 176.023 10.7216C175.527 10.7216 175.093 10.8437 174.723 11.0879C174.357 11.3281 174.073 11.6432 173.873 12.0331C173.676 12.419 173.577 12.8384 173.577 13.2913V14.3251C173.577 14.9316 173.683 15.4475 173.896 15.8728C174.113 16.2981 174.414 16.623 174.8 16.8475C175.186 17.068 175.637 17.1783 176.153 17.1783C176.487 17.1783 176.793 17.1311 177.068 17.0365C177.344 16.9381 177.582 16.7924 177.783 16.5994C177.984 16.4064 178.138 16.1682 178.244 15.8846L179.916 16.1859C179.782 16.6782 179.542 17.1094 179.195 17.4796C178.852 17.8458 178.421 18.1314 177.901 18.3361C177.385 18.537 176.797 18.6374 176.135 18.6374ZM183.754 13.0668V18.4543H181.988V9.38069H183.683V10.8575H183.795C184.004 10.3771 184.331 9.99111 184.776 9.69968C185.225 9.40826 185.79 9.26255 186.471 9.26255C187.09 9.26255 187.631 9.39251 188.096 9.65243C188.56 9.90841 188.921 10.2904 189.177 10.7984C189.433 11.3065 189.561 11.9346 189.561 12.6829V18.4543H187.795V12.8955C187.795 12.2378 187.623 11.7239 187.281 11.3537C186.938 10.9796 186.467 10.7925 185.869 10.7925C185.459 10.7925 185.095 10.8811 184.776 11.0584C184.461 11.2356 184.211 11.4955 184.026 11.8381C183.845 12.1768 183.754 12.5864 183.754 13.0668ZM195.326 18.6315C194.594 18.6315 193.94 18.4444 193.365 18.0703C192.794 17.6922 192.345 17.1547 192.018 16.4576C191.695 15.7566 191.534 14.9158 191.534 13.9352C191.534 12.9546 191.697 12.1158 192.024 11.4187C192.355 10.7216 192.808 10.188 193.383 9.81783C193.958 9.44764 194.61 9.26255 195.338 9.26255C195.901 9.26255 196.354 9.35706 196.697 9.5461C197.043 9.73119 197.311 9.94779 197.5 10.1959C197.693 10.444 197.843 10.6626 197.949 10.8516H198.055V6.35616H199.822V18.4543H198.097V17.0424H197.949C197.843 17.2354 197.689 17.456 197.488 17.7041C197.291 17.9522 197.02 18.1688 196.673 18.3539C196.327 18.539 195.878 18.6315 195.326 18.6315ZM195.716 17.1251C196.224 17.1251 196.653 16.9912 197.004 16.7234C197.358 16.4517 197.626 16.0756 197.807 15.5952C197.992 15.1147 198.085 14.5555 198.085 13.9175C198.085 13.2874 197.994 12.736 197.813 12.2634C197.632 11.7909 197.366 11.4226 197.016 11.1588C196.665 10.8949 196.232 10.763 195.716 10.763C195.185 10.763 194.741 10.9008 194.387 11.1765C194.033 11.4522 193.765 11.8283 193.584 12.3048C193.406 12.7813 193.318 13.3189 193.318 13.9175C193.318 14.524 193.408 15.0694 193.59 15.5538C193.771 16.0382 194.039 16.4222 194.393 16.7057C194.751 16.9853 195.192 17.1251 195.716 17.1251ZM206.253 18.6374C205.359 18.6374 204.589 18.4464 203.944 18.0644C203.302 17.6785 202.805 17.137 202.455 16.4399C202.108 15.7389 201.935 14.9178 201.935 13.9766C201.935 13.0471 202.108 12.228 202.455 11.5191C202.805 10.8103 203.294 10.2569 203.92 9.85918C204.55 9.46142 205.286 9.26255 206.129 9.26255C206.641 9.26255 207.137 9.34722 207.618 9.51656C208.098 9.6859 208.53 9.95173 208.912 10.314C209.294 10.6764 209.595 11.147 209.815 11.7259C210.036 12.3009 210.146 12.9999 210.146 13.823V14.4491H202.933V13.1259H208.415C208.415 12.6612 208.321 12.2497 208.132 11.8913C207.943 11.529 207.677 11.2435 207.334 11.0347C206.996 10.826 206.598 10.7216 206.141 10.7216C205.645 10.7216 205.212 10.8437 204.841 11.0879C204.475 11.3281 204.192 11.6432 203.991 12.0331C203.794 12.419 203.695 12.8384 203.695 13.2913V14.3251C203.695 14.9316 203.802 15.4475 204.014 15.8728C204.231 16.2981 204.532 16.623 204.918 16.8475C205.304 17.068 205.755 17.1783 206.271 17.1783C206.606 17.1783 206.911 17.1311 207.187 17.0365C207.462 16.9381 207.701 16.7924 207.901 16.5994C208.102 16.4064 208.256 16.1682 208.362 15.8846L210.034 16.1859C209.9 16.6782 209.66 17.1094 209.313 17.4796C208.971 17.8458 208.539 18.1314 208.02 18.3361C207.504 18.537 206.915 18.6374 206.253 18.6374ZM215.503 18.6315C214.77 18.6315 214.116 18.4444 213.541 18.0703C212.97 17.6922 212.521 17.1547 212.195 16.4576C211.872 15.7566 211.71 14.9158 211.71 13.9352C211.71 12.9546 211.874 12.1158 212.2 11.4187C212.531 10.7216 212.984 10.188 213.559 9.81783C214.134 9.44764 214.786 9.26255 215.514 9.26255C216.078 9.26255 216.531 9.35706 216.873 9.5461C217.22 9.73119 217.488 9.94779 217.677 10.1959C217.87 10.444 218.019 10.6626 218.126 10.8516H218.232V6.35616H219.998V18.4543H218.273V17.0424H218.126C218.019 17.2354 217.866 17.456 217.665 17.7041C217.468 17.9522 217.196 18.1688 216.85 18.3539C216.503 18.539 216.054 18.6315 215.503 18.6315ZM215.893 17.1251C216.401 17.1251 216.83 16.9912 217.18 16.7234C217.535 16.4517 217.803 16.0756 217.984 15.5952C218.169 15.1147 218.261 14.5555 218.261 13.9175C218.261 13.2874 218.171 12.736 217.99 12.2634C217.808 11.7909 217.543 11.4226 217.192 11.1588C216.842 10.8949 216.408 10.763 215.893 10.763C215.361 10.763 214.918 10.9008 214.563 11.1765C214.209 11.4522 213.941 11.8283 213.76 12.3048C213.583 12.7813 213.494 13.3189 213.494 13.9175C213.494 14.524 213.585 15.0694 213.766 15.5538C213.947 16.0382 214.215 16.4222 214.569 16.7057C214.928 16.9853 215.369 17.1251 215.893 17.1251Z" fill="black"/>
+<path d="M30.1016 4.11774L31.969 9.86496L38.012 9.86496L33.1231 13.4169L34.9905 19.1642L30.1016 15.6122L25.2128 19.1642L27.0801 13.4169L22.1913 9.86496L28.2343 9.86496L30.1016 4.11774Z" fill="black"/>
+</svg>
+</div>
+          {% endif %}
+          <img src="{{ variant.image | img_url: 'master' }}" /></figure>
+          <div class="product-variant-list-wrap">
+          <h5>{{ variant.title }}</h5>
+          {% if variant.title contains 'month' or variant.title contains 'Month' %}
+          <p>({{ variant.title | split: ' ' | first }} Bottles)</p>
+          {% endif %}
+          <div class="product-variant-list-price">
+            <span>{{ variant.price | money_without_trailing_zeros }}</span>
+          {% if variant.price < variant.compare_at_price %}
+            <s>{{ variant.compare_at_price | money_without_trailing_zeros }}</s>
+          <em>Save {{ variant.compare_at_price | minus:variant.price | money_without_trailing_zeros }}</em>
+            {% endif %}
+          </div>
+            </div>
+          <a href="#" data-title="{{ variant.title }}" class="product-variant-list-btn">{% render 'cart-icon' %} Add to Cart</a>
+          </div>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{{ 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js' | script_tag }}
+<script>
+  $(document).ready(function(){
+    $('.product-variant-list-slider').slick({
+     slidesToShow: 4,
+     slidesToScroll: 1,
+     focusOnSelect: true,
+     arrows: false,
+      infinite: true,
+     slide: 'li',
+     dots: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        }
+      }
+    ]
+    });
+    $('.after-before-latest-slider').slick({
+     slidesToShow: 2,
+     slidesToScroll: 1,
+     focusOnSelect: true,
+     centerMode: true,
+     arrows: true,
+     slide: 'li',
+     dots: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
+    });
+    $('.product-variant-list-slider .product-variant-list-part').on('click', function(e){
+      e.preventDefault();
+      var data_t = $(this).attr('data-title');
+      console.log('data_t',data_t)
+      $('.product-variant-list-slider .product-variant-list-part').removeClass('wc-active');
+      $(this).addClass('wc-active');
+      $('.variant-input-wrap .variant-input[data-value="'+data_t+'"] label').trigger('click');
+      setTimeout(function(){
+        var price_c_m = $('.product-block.product-block--price .product__price.product__price--compare').text();
+        var price_m = $('.product-block.product-block--price .product__price.on-sale').text();
+        var price_save = $('.product-block.product-block--price .product__price-savings').text();
+        $('.bottom-footer-cart-price span').text(price_m)
+        $('.bottom-footer-cart-price s').text(price_c_m)
+        $('.bottom-footer-cart-price em').text(price_save)
+      }, 100);
+    })
+    $('.product-variant-list-btn').on('click', function(e){
+      e.preventDefault();
+      var data_t = $(this).attr('data-title');
+      console.log('data_t',data_t)
+      if($(this).parents('.product-variant-list-part').hasClass('wc-active')){
+        $('.btn.add-to-cart-main').trigger('click');
+      }else{
+      $('.variant-input-wrap .variant-input[data-value="'+data_t+'"] label').trigger('click');
+        setTimeout(function(){
+          $('.btn.add-to-cart-main').trigger('click');
+        },300)
+      }
+      
+    })
+  })
+</script>
+
+
+  <!-- <div class="icon-text-latest-section">
+    <div class="page-width">
+      <ul class="icon-text-latest-slider">
+      <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/story-icon-1.png?v=1708091278" /><h4>How to Use</h4></li>
+        <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/story-icon-2.png?v=1708091278" /><h4>9400+ Hair Growth</h4></li>
+        <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/story-icon-3.png?v=1708091278" /><h4>Consumer Trial Results</h4></li>
+        <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/story-icon-4.png?v=1708091278" /><h4>Doctor Review</h4></li>
+        <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/story-icon-5.png?v=1708091278" /><h4>Before & After</h4></li>
+        <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/story-icon-6.png?v=1708091278" /><h4>Myth vs Facts</h4></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+  $(document).ready(function(){
+    $('.icon-text-latest-slider').slick({
+     slidesToShow: 6,
+     slidesToScroll: 1,
+     focusOnSelect: true,
+     arrows: false,
+     slide: 'li',
+     dots: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+          centerMode: true,
+        }
+      }
+    ]
+    });
+  });
+  </script>
+ -->
+<div class="after-before-latest" id="wc-consumer-study">
+  <h2 class="main-new-title-center">Real People, Real Transformation</h2>
+ </div>
+        <div class="after-before-latest-section">
+          <div class="page-width">
+            
+              <ul class="after-before-latest-slider">
+                <li><figure>
+                  <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/after-1.png?v=1708169439" class="pdp-after-before-desktop" />
+                  <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/mobile-after-1.png?v=1708169792" class="pdp-after-before-mobile" />
+                </figure></li>
+                <li><figure>
+                  <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/after-2.png?v=1708169439" class="pdp-after-before-desktop" />
+                  <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/mobile-after-2.png?v=1708169792" class="pdp-after-before-mobile" />
+                </figure></li>
+                <li><figure>
+                  <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/after-3.png?v=1708169439" class="pdp-after-before-desktop" />
+                  <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/mobile-after-3.png?v=1708169792" class="pdp-after-before-mobile" />
+                </figure></li>
+                <!-- <li><figure>
+                  <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/after-4.png?v=1708169439" class="pdp-after-before-desktop" />
+                  <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/mobile-after-4.png?v=1708169792" class="pdp-after-before-mobile" />
+                </figure></li> -->
+              </ul>
+          </div>
+           <div class="after-before-latest-img">
+             <div class="page-width">
+              <img src="{{ product.metafields.custom.new_after_before_second_desktop_image | img_url: 'master' }}" {% if product.metafields.custom.new_after_before_second_mobile_image != blank %}class="pdp-after-before-desktop" {% endif %} />
+              <img src="{{ product.metafields.custom.new_after_before_second_mobile_image | img_url: 'master' }}" {% if product.metafields.custom.new_after_before_second_desktop_image != blank %}class="pdp-after-before-mobile"{% endif %} />
+            </div>
+           </div>
+        </div>
+
+
+{% render 'award-popup-list' %}
+<div class="award-winning-section" id="wc-ingredients">
+  <h2 class="main-new-title-center">Award Winning Ingredients</h2>
+  <div class="page-width">
+    <div class="award-winning">
+      <ul class="award-winning-slider">
+        <li>
+        <div class="award-winning-part">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/award-1.png?v=1708001210" /></figure>
+          <h4>Redensyl</h4>
+          <p>Activates stem cells to initiate hair growth cycle</p>
+          <a class="award-winning-btn" href="#" data-id="award-winning-popup-1"> Learn More{% render 'btn-arrow-icon' %}</a>
+        </div>
+        </li>
+
+        <li>
+          <div class="award-winning-part">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/award-2.png?v=1708001210" /></figure>
+          <h4>Anagain</h4>
+          <p>Stimulates follicles, and regenerates baby hair</p>
+          <a class="award-winning-btn" href="#" data-id="award-winning-popup-2"> Learn More{% render 'btn-arrow-icon' %}</a>
+          </div>
+        </li>
+
+        <li>
+        <div class="award-winning-part">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/award-3.png?v=1708001210" /></figure>
+          <h4>Capilia Longa</h4>
+          <p>Recreates the ideal conditions for hair growth</p>
+          <a class="award-winning-btn" href="#" data-id="award-winning-popup-3"> Learn More{% render 'btn-arrow-icon' %}</a>
+        </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.award-winning-slider').slick({
+     slidesToShow: 3,
+     slidesToScroll: 1,
+     focusOnSelect: true,
+     arrows: true,
+     slide: 'li',
+     dots: false,
+    });
+    $('.award-winning-btn').on('click', function(e){
+      e.preventDefault();
+      var data_title = $(this).attr('data-id');
+      $('.award-winning-popup-section').removeClass('active');
+      $('#'+data_title).addClass('active');
+      $('body').addClass('award-winning-popup-body');
+    });
+    $('.award-winning-btn-1').on('click', function(e){
+      e.preventDefault();
+      var data_title = $(this).attr('data-id');
+      $('.award-winning-popup-section').removeClass('active');
+      $('#'+data_title).addClass('active');
+      $('body').addClass('award-winning-popup-body');
+    });
+    $('.award-winning-popup-close').on('click', function(e){
+      e.preventDefault();
+      $('.award-winning-popup-section').removeClass('active');
+      $('body').removeClass('award-winning-popup-body');
+    });
+
+    $('.view-full-ingrediants-part').on('click', function(e){
+      e.preventDefault();
+      var data_title = $(this).attr('id');
+      $('#'+data_title).addClass('active');
+      $('body').addClass('ingrediants-popup-body');
+    });
+    $('.ingrediants-popup-close').on('click', function(e){
+      e.preventDefault();
+      $('.ingrediants-popup-section').removeClass('active');
+      $('body').removeClass('.ingrediants-popup-body');
+    });
+
+
+  })
+</script>
+
+
+                              
+
+
+
+
+<div class="award-winning-section">
+  <h2 class="main-new-title-center">Other Hero Ingredients</h2>
+  <div class="page-width">
+    <div class="award-winning">
+      <ul class="award-winning-slider-1">
+        <li>
+        <div class="award-winning-part">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-ingre-01.png?v=1708427525" /></figure>
+          <h4>Rosemary</h4>
+          <p>Reduces inflammation and inhibits hormones related to hair loss</p>
+          <a class="award-winning-btn" href="#" data-id="ingredients-1"> Learn More{% render 'btn-arrow-icon' %}</a>
+        </div>
+        </li>
+
+        <li>
+          <div class="award-winning-part">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-ingre-02_2.png?v=1708427864" /></figure>
+          <h4>Rice Water</h4>
+          <p>Prevents dryness and improves hair strength and elasticity</p>
+          <a class="award-winning-btn" href="#" data-id="ingredients-2"> Learn More{% render 'btn-arrow-icon' %}</a>
+          </div>
+        </li>
+
+        <li>
+        <div class="award-winning-part">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-ingre-03.png?v=1708427525" /></figure>
+          <h4>Baicapil</h4>
+          <p>Nourishes hair follicles, promoting robust and vibrant hair growth</p>
+          <a class="award-winning-btn" href="#" data-id="ingredients-3"> Learn More{% render 'btn-arrow-icon' %}</a>
+        </div>
+        </li>
+
+        <li>
+        <div class="award-winning-part">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-ingre-04.png?v=1708427525" /></figure>
+          <h4>Biotin</h4>
+          <p>Enhances keratin composition in hair</p>
+          <a class="award-winning-btn" href="#" data-id="ingredients-4"> Learn More{% render 'btn-arrow-icon' %}</a>
+        </div>
+        </li>
+      </ul>
+    </div>
+    <div class="view-full-ingrediants-part" id="ingredients-popup-id">
+      <a href="#">View Full Ingredients List</a>
+    </div>
+  </div>
+</div>
+
+<script>
+  $(document).ready(function(){
+    $('.award-winning-slider-1').slick({
+     slidesToShow: 4,
+     slidesToScroll: 1,
+     focusOnSelect: true,
+     arrows: true,
+     slide: 'li',
+     dots: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+        }
+      }
+    ]
+    });
+    $('.award-winning-btn').on('click', function(e){
+      e.preventDefault();
+      var data_title = $(this).attr('data-id');
+      $('.award-winning-popup-section').removeClass('active');
+      $('#'+data_title).addClass('active');
+      $('body').addClass('award-winning-popup-body');
+    });
+    $('.award-winning-popup-close').on('click', function(e){
+      e.preventDefault();
+      $('.award-winning-popup-section').removeClass('active');
+      $('body').removeClass('award-winning-popup-body');
+    });
+  })
+</script>
+
+{% if product.description != blank %}
+    <div class="pdp-description-section">
+      <h2 class="main-new-title-center">Product description</h2>
+      <div class="page-width">
+        
+        <div class="pdp-description">
+          <!-- <div class="pdp-description-short active">
+            <p>
+              {{ product.description | strip_html | truncatewords: 30 -}}
+              <a href="javascript:void(0)" class="read-more-less">Read More</a>
+            </p>
+          </div> -->
+          <div class="pdp-description-long active">
+            {{ product.description }}
+            <!-- <a href="javascript:void(0)" class="read-more-less">Read Less</a> -->
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+<div class="pdp-benefit-section" id="wc-benefits">
+  <h2 class="main-new-title-center">Benefits</h2>
+  <div class="page-width">
+  <div class="pdp-benefit">
+    <ul class="pdp-benefit-slider">
+      <li>
+        <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/benefit-1.png?v=1708057969" class="pdp-after-before-desktop" />
+        <img data-id="benefits-popup-1" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-beni-01.png?v=1708409962" class="pdp-after-before-mobile award-winning-btn-1" />
+      </li>
+      <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/benefit-2.png?v=1708057969" class="pdp-after-before-desktop" />
+      <img data-id="benefits-popup-2" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/benefit-002_1_4cace57f-077d-408f-aa39-b0786a44546d.png?v=1708423887" class="pdp-after-before-mobile award-winning-btn-1" /></li>
+      <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/benefit-3.png?v=1708057969" class="pdp-after-before-desktop" />
+      <img data-id="benefits-popup-3" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-benifit-03.png?v=1708413105" class="pdp-after-before-mobile award-winning-btn-1" /></li>
+      <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/benefit-4.png?v=1708057969" class="pdp-after-before-desktop" />
+      <img data-id="benefits-popup-4" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-beni-04.jpg?v=1708409962" class="pdp-after-before-mobile award-winning-btn-1" /></li>
+      <li><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/benefit-5.png?v=1708057969" class="pdp-after-before-desktop" />
+      <img data-id="benefits-popup-5" src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-beni-05.png?v=1708409962" class="pdp-after-before-mobile award-winning-btn-1" /></li>
+    </ul>
+  </div>
+  </div>
+</div>
+
+  <script>
+  $(document).ready(function(){
+    $('.pdp-benefit-slider').slick({
+     slidesToShow: 4,
+     slidesToScroll: 1,
+     focusOnSelect: true,
+     arrows: true,
+      infinite: true,
+     slide: 'li',
+     dots: false,
+      responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        }
+      }
+    ]
+    });
+    // $('.pdp-benefit-slider').slick({
+    //  slidesToShow: 4,
+    //  slidesToScroll: 1,
+    //  focusOnSelect: true,
+    //  arrows: true,
+    //  centerMode: true,
+    //   infinite: true,
+    //  slide: 'li',
+    //  dots: false,
+    //   responsive: [
+    //   {
+    //     breakpoint: 768,
+    //     settings: {
+    //       slidesToShow: 2,
+    //     }
+    //   }
+    // ]
+    // });
+  })
+</script>
+
+
+
+ 
+  
+  {% assign gottab = product.metafields.custom.tab_01.value %}
+  {% if gottab != blank %}
+    <div class="pdp-tab-list-section">
+      <ul class="pdp-tab-list-ul">
+        {% assign gottabtitles = gottab.title %}
+        {% for gottabtitle in gottabtitles %}
+          {% if gottabtitle.title != blank %}
+            <li data-id="pdp-tab-{{ forloop.index }}" class="{% if forloop.index == 1 %}active{% endif %}">
+              {{ gottabtitle.title }}
+            </li>
+          {% endif %}
+        {% endfor %}
+      </ul>
+      {% assign gottabsteps = gottab.steps %}
+      {% for gottabstep in gottabsteps %}
+        {% if gottabstep.desktop_image != blank
+          or gottabstep.mobile_image != blank
+          or gottabstep.description != blank
+        %}
+          <div class="pdp-tab-list {% if forloop.index == 1 %}active{% endif %}" id="pdp-tab-{{ forloop.index }}">
+            {% if gottabstep.desktop_image != blank %}
+              <figure
+                {% if gottabstep.mobile_image != blank %}
+                  class="pdp-after-before-desktop"
+                {% endif %}
+              >
+                <img src="{{ gottabstep.desktop_image }}">
+              </figure>
+            {% endif %}
+            {% if gottabstep.mobile_image != blank %}
+              <figure
+                {% if gottabstep.desktop_image != blank %}
+                  class="pdp-after-before-mobile"
+                {% endif %}
+              >
+                <img src="{{ gottabstep.mobile_image }}">
+              </figure>
+            {% endif %}
+            {% if gottabstep.description != blank %}
+              <div class="pdp-tab-list-desc">
+                <div class="page-width">
+                  {{ gottabstep.description }}
+                </div>
+              </div>
+            {% endif %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  
+
+  
+
+ 
+  {% if product.metafields.custom.video_link != blank and product.metafields.custom.video_heading != blank %}
+    <div class="pdp-video-text-section">
+      {% if product.metafields.custom.video_heading != blank %}
+        <h2 class="main-new-title-center">{{ product.metafields.custom.video_heading }}</h2>
+      {% endif %}
+    <div class="page-width">
+    <div class="pdp-dr-list-section">
+      <ul class="pdp-dr-list-slider">
+        <li>
+          <div class="pdp-dr-list">
+            <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-dr-03.png?v=1708417338" /></figure>
+            <div class="pdp-dr-list-desc">
+            <h4>Dr. Atul Giri</h4>
+            <h5>MD, MBBS Dermatologist, Mumbai</h5>
+            <p>As a dermatologist, Bare Anatomy Hair Growth Serum stands out among hair growth products. Its scientifically-backed formulation improves blood circulation, bringing oxygen and nutrients to the hair follicle designed to create an optimal micro-environment to aid in hair growth. I've seen significant improvements in my patients' hair thinning with regular use, and its lightweight texture suits all hair types without any greasiness.</p>
+          </div>
+          </div>
+        </li>
+        
+        <li>
+          <div class="pdp-dr-list">
+            <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-dr-02.png?v=1708417338" /></figure>
+            <div class="pdp-dr-list-desc">
+            <h4>Dr. Somshukla Ray</h4>
+            <h5>MD, MBBS, Dermatologist, Cosmologist KOLKATA </h5>
+            <p>After years of researching hair growth solutions, I've found Bare Anatomy Hair Growth Serum to be highly effective. Its advanced formula, including redensyl, rosemary, and biotin, not only promotes hair growth but also strengthens follicles & enhances scalp health. My patients have seen noticeable results within weeks, making it a trusted recommendation in my practice.</p>
+          </div>
+          </div>
+        </li>
+        <li>
+          <div class="pdp-dr-list">
+            <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/new-dr-01.png?v=1708417338" /></figure>
+            <div class="pdp-dr-list-desc">
+            <h4>Dr. Joy Das</h4>
+            <h5>MD, MBBS Dermatologist, Palghar</h5>
+            <p>As a dermatologist, I value products that deliver results while promoting scalp and hair health. This hair growth serum addresses follicle inflammation and oxidative stress for better hair growth. I’ve observed significant improvements in my patients' hair density, along with reductions in hair loss, making it a staple recommendation in my professional setting.</p>
+          </div>
+          </div>
+        </li>
+    
+      </ul>
+    </div>
+    </div>
+      <!-- <div class="pdp-video-text">
+        <div class="pdp-video-text-part">
+          <video width="100%" height="500" controls>
+            <source src="{{ product.metafields.custom.video_link }}" type="video/mp4">
+            <source src="{{ product.metafields.custom.video_link }}" type="video/ogg">
+          </video>
+        </div>
+      </div> -->
+    </div>
+  {% endif %}
+    <script>
+    $(document).ready(function(){
+      $('.pdp-dr-list-slider').slick({
+     slidesToShow: 3,
+     slidesToScroll: 1,
+     focusOnSelect: true,
+     arrows: true,
+     slide: 'li',
+     dots: false,
+        responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+          ]
+    });
+      
+     
+    })
+  </script>
+
+                              {% if product.metafields.custom.new_comparison_mobile_product != blank
+    or product.metafields.custom.new_comparison_desktop_product != blank
+  %}
+    <div class="pdp-comparison-section" id="wc-savings">
+      <!--
+        {% if product.metafields.custom.comparison_heading != blank %}
+          <h2 class="new-prod-title">{{ product.metafields.custom.comparison_heading }}</h2>
+        {% endif %}
+      -->
+      <div class="pdp-comparison">
+        <div class="pdp-comparison-part">
+          <figure>
+            <img
+              src="{{ product.metafields.custom.new_comparison_desktop_product | img_url: 'master' }}"
+              {% if product.metafields.custom.new_comparison_mobile_product != blank %}
+                class="desktop_img_com"
+              {% endif %}
+            >
+            <img
+              src="{{ product.metafields.custom.new_comparison_mobile_product | img_url: 'master' }}"
+              {% if product.metafields.custom.new_comparison_desktop_product != blank %}
+                class="mobile_img_com"
+              {% endif %}
+            >
+          </figure>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+<div class="pdp-judge-me-review-section" id="wc-reviews">
+  <div class="page-width">
+   <div style='clear:both'></div>
+      <div id='judgeme_product_reviews' class='jdgm-widget jdgm-review-widget' data-product-title='{{ product.title | escape }}' data-id='{{ product.id }}' data-auto-install='false'>
+        {{ product.metafields.judgeme.widget }}
+      </div>
+  </div>
+</div>
+
+              
+   <div class="pdp-nolist-section">
+  {% if product.metafields.custom.no_list_heading != blank %}
+        <h2 class="main-new-title-center white">{{ product.metafields.custom.no_list_heading }}</h2>
+      {% endif %}
+    <div class="page-width">
+      
+      <div class="pdp-nolist">
+        <div class="pdp-nolist-wrap">
+          <figure>
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/icon-1_90a13508-ac4d-478d-ad52-282c87e60baf.png?v=1708171282">
+          </figure>
+          <div class="pdp-nolist-title">Cruelty Free</div>
+        </div>
+
+        <div class="pdp-nolist-wrap">
+          <figure>
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/icon-2_e9fb90ab-83e1-4c3e-80c1-d9b184330818.png?v=1708171282">
+          </figure>
+          <div class="pdp-nolist-title">Paraben Free</div>
+        </div>
+
+        <div class="pdp-nolist-wrap">
+          <figure>
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/icon-3_b92370d1-b46f-44da-985f-40621e9fc9ec.png?v=1708171282">
+          </figure>
+          <div class="pdp-nolist-title">Vegan</div>
+        </div>
+
+        <div class="pdp-nolist-wrap">
+          <figure>
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/icon-4_e88378c4-2561-46db-8178-c4a0091907fd.png?v=1708171283">
+          </figure>
+          <div class="pdp-nolist-title">Dermat Tested</div>
+        </div>
+
+        <div class="pdp-nolist-wrap">
+          <figure>
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/icon-5_de6234aa-d3d3-4150-a153-c9d28abaf37b.png?v=1708171283">
+          </figure>
+          <div class="pdp-nolist-title">Sulphate Free</div>
+        </div>
+
+        <div class="pdp-nolist-wrap">
+          <figure>
+            <img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/icon-6_7b0f3189-9879-4f38-a71f-a72511f12d39.png?v=1708171283">
+          </figure>
+          <div class="pdp-nolist-title">Pthalates Free</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  {% assign faq_list = product.metafields.custom.faq_list.value %}
+  {% if faq_list != blank %}
+    <div id="wc-faqs">
+      <h2 class="main-new-title-center">Frequently Asked Questions (FAQs)</h2>
+    <div class="page-width">
+      
+      <div class="product-block product-block--tab faq-pdp-list">
+        
+        {% assign faq_liststeps = faq_list.steps %}
+        {% for faq_liststep in faq_liststeps %}
+          {% if faq_liststep.ans != blank and faq_liststep.que != blank %}
+            <div class="collapsibles-wrapper">
+              <button
+                type="button"
+                class="label collapsible-trigger collapsible-trigger-btn collapsible-trigger-btn--borders collapsible--auto-height"
+                aria-controls="Product-content-{{ forloop.index }}"
+                aria-expanded="true"
+              >
+                <h3 style="margin:0;">{{ faq_liststep.que }}</h3>
+                <span class="collapsible-trigger__icon collapsible-trigger__icon--open" role="presentation">
+                  <svg
+                    aria-hidden="true"
+                    focusable="false"
+                    role="presentation"
+                    class="icon icon--wide icon-chevron-down"
+                    viewBox="0 0 28 16"
+                  >
+                    <path d="M1.57 1.59l12.76 12.77L27.1 1.59" stroke-width="2" stroke="#000" fill="none" fill-rule="evenodd"></path>
+                  </svg>
+                </span>
+              </button>
+              <div id="Product-content-{{ forloop.index }}" class="collapsible-content collapsible-content--all">
+                <div class="collapsible-content__inner rte">
+                  {{ faq_liststep.ans }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+    </div>
+  {% endif %}
+
+<div class="pdp-addition-accordion-section">
+  <div class="page-width">
+    <div class="pdp-addition-accordion">
+      <h4>Additional Information <svg xmlns="http://www.w3.org/2000/svg" width="27" height="15" viewBox="0 0 27 15" fill="none">
+<path d="M2 1.54395L13.2364 12.5306L25.5429 1.54395" stroke="black" stroke-width="3.296"/>
+</svg></h4>
+      <div class="pdp-addition-accordion-desc">
+        <p><b>Net Quantity:</b>  30 ml</p>
+<p><b>Texture & Fragrance:</b>  Very light pale liquid, No added fragrance</p>
+
+<p><b>Suitable for: </b> All Hair and Scalp Type</p>
+
+<p><b>Country Origin:</b>  India</p>
+
+<p><b>Best Before:</b>  24 months from mfg. date</p>
+
+<p><b>Powered By: </b> Innovist</p>
+
+<p><b>Marketed By:</b> Onesto Labs Private Limited, Manesar, Gurugram Haryana - 122052</p>
+      </div>
+    </div>
+  </div>
+</div>
+  <script>
+    $(document).ready(function(){
+    $('.pdp-addition-accordion-section h4').on('click', function(e){
+      e.preventDefault();
+      $(this).parents('.pdp-addition-accordion-section').toggleClass('active');
+    })
+    })
+  </script>
+
+  <!-- <div class="pdp-blog-list-section">
+    <div class="page-width">
+      <h2 class="main-new-title-center">Blogs</h2>
+      <div class="pdp-blog-list">
+        <ul class="pdp-blog-list-slider">
+        <li class="pdp-blog-list-wrap">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/blog-1.jpg?v=1708068361" /></figure>
+          <h4>Why Does Hair Fall?</h4>
+          <p>An in depth explanation...</p>
+        </li>
+
+        <li class="pdp-blog-list-wrap">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/blog-2.jpg?v=1708068361" /></figure>
+          <h4>Is hair care important?</h4>
+          <p>An in depth explanation...</p>
+        </li>
+
+        <li class="pdp-blog-list-wrap">
+          <figure><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/blog-3.jpg?v=1708068361" /></figure>
+          <h4>Why Does Hair Fall?</h4>
+          <p>An in depth explanation...</p>
+        </li>
+        </ul>
+      </div>
+  </div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      $('.pdp-blog-list-slider').slick({
+     slidesToShow: 3,
+     slidesToScroll: 1,
+     focusOnSelect: true,
+     arrows: true,
+     slide: 'li',
+     dots: false,
+        responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+          centerMode: true,
+        }
+      }
+          ]
+    });
+      
+     
+    })
+  </script>
+                               -->
+</div>
+<script>
+  function readMore(){
+     event.preventDefault();
+  var descriptionFull = document.querySelector('.product-description-full');
+  descriptionFull.style.display = 'block';
+  var descriptionShort = document.querySelector('.product-description-short');
+  descriptionShort.style.display = 'none';
+  }
+  function readLess(){
+     event.preventDefault();
+  var descriptionFull = document.querySelector('.product-description-full');
+  descriptionFull.style.display = 'none';
+  var descriptionShort = document.querySelector('.product-description-short');
+  descriptionShort.style.display = 'block';
+  }
+  function shareOnWhatsapp(){
+      let url = window.location.href;
+      const message = encodeURIComponent(url);
+      var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+          window.open(`https://api.whatsapp.com/send?text=${message}`,'_blank');
+      } else {
+          window.open(`https://web.whatsapp.com/send?text=${message}`,'_blank');
+      }
+  }
+</script>
+<script>
+      $(document).ready(function() {
+        if ($(window).width() <=800 ) {
+        if($('.product-block.description').length) {
+      $('.product-block.description').insertBefore( ".page-width .heading-div" );
+    }
+        }
+      })
+      $('.jdgm-paginate a').each( (obj,x) => x.setAttribute('href', '#'));
+
+    $(document).ready(function() {
+    $('.pdp-our-promise-part').on('click', function(e){
+      e.preventDefault();
+      if($(this).hasClass('active')){
+        $(this).removeClass('active');
+      }else{
+        $('.pdp-our-promise-part').removeClass('active');
+        $(this).addClass('active');
+      }
+    });
+      $('.pdp-tab-list-ul li').on('click', function(e){
+      e.preventDefault();
+        var data_id = $(this).attr('data-id');
+        $('.pdp-tab-list').removeClass('active');
+        $('#'+data_id).addClass('active');
+        $('.pdp-tab-list-ul li').removeClass('active');
+        $(this).addClass('active');
+    });
+
+
+
+
+    });
+
+    $(window).on('load', function(){
+      const btn = document.querySelectorAll(".product-active-offer-wrap");
+      console.log('btn.length',btn.length)
+      for (let i = 0; i < btn.length; i++) {
+    document.querySelectorAll(".cpncopy")[i].onclick = (e) => {
+                e.preventDefault();
+          console.log(e.currentTarget);
+                $(e.currentTarget).text('Copied')
+                setTimeout(function(){
+                  $(".cpncopy").text('Copy')
+                },800)
+          var copy_t = $(e.currentTarget).parents('.product-active-offer-wrap').find('.cpnCode').text().trim();
+        navigator.clipboard.writeText(copy_t);
+      }
+      }
+
+      $('.pdp-description-short .read-more-less').on('click', function(e){
+        e.preventDefault();
+        $('.pdp-description-short').removeClass('active');
+        $('.pdp-description-long').addClass('active');
+      });
+      $('.pdp-description-long .read-more-less').on('click', function(e){
+        e.preventDefault();
+        $('.pdp-description-short').addClass('active');
+        $('.pdp-description-long').removeClass('active');
+      })
+
+      var data_rev = $('.jdgm-prev-badge').attr('data-number-of-reviews');
+      $('.review-shipping span').text(data_rev);
+
+  })
+  $(document).ready(function(){
+    var data_rev = $('.jdgm-prev-badge').attr('data-number-of-reviews');
+      $('.review-shipping span').text(data_rev);
+  })
+</script>
+
+
+
+
+
+
+
+
+
+

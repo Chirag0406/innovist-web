@@ -1,0 +1,136 @@
+<style>
+    marquee {
+        padding: {{ section.settings.mpadding }}px 36px;
+        background: {{ section.settings.bg }} !important;
+        display: block;
+    } 
+    .marquee_text {
+        margin: 0;
+        align-content: start;
+        word-spacing: 20px;
+
+    }
+    .marquee_text img {
+      object-fit: cover;
+      vertical-align: middle;
+    }
+    .marquee_text h5 {
+      text-align: center;
+      display:inline;
+      word-spacing: normal;
+      font-size: 13px;
+      color: {{section.settings.text_color}};
+      font-family: helvetica;
+      font-weight: 500
+
+    }
+    
+    {% comment %} .marquee_text li {
+        display: inline-block;
+        margin: 0 30px;
+        position: relative;
+        font-size: 16px;
+        color: #413f3f;
+        font-family: helvetica;
+        font-weight: 500
+    }
+     {% endcomment %}
+    {% comment %} .marquee_text li:after {
+        position: absolute;
+        content: "";
+        height: 1px;
+        width: 4px;
+        background: #000;
+        top: 0;
+        left: -27px;
+        bottom: 0;
+        margin: auto
+    } {% endcomment %}
+
+    .marquee_bg {
+      background: yellow;
+    }
+    .marquee_text li.first:after {
+      display: none;
+    } 
+    </style> 
+
+                  <marquee id="m" width="100%" direction="left" height="10%">     
+                    <ul class="marquee_text">
+                      {% for block in section.blocks %}
+                        {% if block.settings.marquee_image%}
+                            <img src= "{{block.settings.marquee_image | image_url: width: 50, height: 30}}"/>
+                        {% endif %}
+                        {% if block.settings.marquee_text%}  
+                            <h5>{{ block.settings.marquee_text }}</h5>
+                        {% endif %}
+                      {% endfor %}
+                    </ul>
+                  </marquee>
+ 
+              
+  
+  {% schema %}
+    
+        {
+          "name": "Marquee Content",
+          "class": "marquee_bg",
+            "settings": [
+              {
+                "type": "url",
+                "id": "mlink",
+                "label": "Marquee Link",
+                "default": "/collections"
+              },
+              {
+                "type": "color",
+                "id": "bg",
+                "label": "Marquee BG",
+                "default": "#F0F8FF"
+              },
+              {
+                "type": "range",
+                "id": "mpadding",
+                "min": 2,
+                "max": 20,
+                "step": 1,
+                "unit": "px",
+                "label": "Marquee Padding",
+                "default": 5
+              },
+                {
+                 "type": "color",
+                  "id": "text_color",
+                "label": "Marquee Text Color",
+                "default": "#000"
+                  }
+                            
+            ] ,
+            "blocks": [
+              {
+                "type": "content",
+                "name": "Content",
+                "settings": [
+                  {
+                    "type": "image_picker",
+                    "id": "marquee_image",
+                    "label": "Marquee Image"
+                  },
+                  {
+                    "type": "text",
+                    "id": "marquee_text",
+                    "label": "Marquee Text"
+                  }
+                ]
+              }
+            ]
+        }
+     
+  {% endschema %}
+
+<script type="text/javascript">
+  document.getElementById("m").onclick = function () {
+        location.href = "{{ section.settings.mlink }}";
+    };
+</script>
+    

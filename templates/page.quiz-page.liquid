@@ -1,0 +1,803 @@
+<link rel="stylesheet" href="{{ 'quiz.css' | asset_url }}">
+<script defer src="{{ 'quiz.js' | asset_url }}"></script>
+<div class="page-width quiz-container">
+    <!-- <h2></h2> -->
+   <!-- <progress id="progressBar" value="0" max="100" style="display:none;">0%</progress> -->
+<ol class="ProgressBar" id="progressBar" style="display:none;">
+  <li class="ProgressBar-step is-current">
+    <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+    <!--<span class="ProgressBar-stepLabel">Question 1</span>-->
+  </li>
+  <li class="ProgressBar-step">
+    <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+  </li>
+  <li class="ProgressBar-step">
+    <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+  </li>
+  <li class="ProgressBar-step">
+    <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+  </li>
+  <li class="ProgressBar-step">
+    <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+  </li>
+  <li class="ProgressBar-step">
+    <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+  </li>
+  <li class="ProgressBar-step">
+    <svg class="ProgressBar-icon"><use xlink:href="#checkmark-bold"/></svg>
+  </li>
+</ol>
+
+
+  
+    <div class="quiz-start-container" id="start">
+        <h1 class="quiz-title">Hey, I'm your<br/>Personal Analyst</h1>
+        <p class="quiz-para">
+            Discover Your Unique Hair and Skin Care Needs <br><b>in Just 2 Minutes!</b><br><br>
+        </p>
+        <button class="btn start-quiz">START ANALYSIS</button>
+      <p style="margin-top:15px;color: #828282;font-size: 12px;line-height:1.2">
+        Welcome to the list of <span style="color:#000"><b>1 million+ satisfied users</b></span><br/>
+        who have relied on our expertise for precise diagnosis.
+      </p>
+        <p class="disclaimer-text">
+          Disclaimer:<br/><br/>
+          By submitting this form, you provide consent to Innovist Brands
+          for the use of your personal data in order to send you promotional
+          offers and communications via email or text messages.
+        </p>
+    </div>
+
+    <div class="gender-container" id="screen1" style="display:none;" data-progress="20" data-next="screen2" data-input="gender" 
+        data-previous="start" data-selection="1">
+        <h2 class="question-title">How do you describe yourself?</h2>
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <input type="radio" id="Male" class="input-hidden" name="gender" value="Male">
+                <label for="Male">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/MALE.png?v=1694156386">
+                    Male </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="Female" class="input-hidden" name="gender" value="Female">
+                <label for="Female">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Female.png?v=1694156386">
+                    Female </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="NonBinary" class="input-hidden" name="gender" value="NonBinary">
+                <label for="NonBinary">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/non_binary_gender.png?v=1694670045">
+                    Non Binary </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="NA" class="input-hidden" name="gender" value="NA">
+                <label for="NA">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Don_t_wish_to_define_-_Gender.png?v=1694670045">
+                    Dont wish to define myself </label><br>
+            </div>
+        </div>
+    </div>
+
+    <div class="type-container" id="screen2" style="display:none;" data-progress="40" data-next="hair-skin" data-input="quizType" 
+        data-previous="screen1" data-selection="1">
+        <h2 class="question-title">What are you concerned about?</h2>
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <input type="radio" id="HAIRCARE" class="input-hidden" name="quizType" value="HAIRCARE">
+                <label for="HAIRCARE">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Haircare_25593d63-31c0-4c2b-985e-3da1fc725343.png?v=1694156386">
+                    Hair Care </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="SKINCARE" class="input-hidden" name="quizType" value="SKINCARE">
+                <label for="SKINCARE">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Skincare_eb39c4ba-5f19-448f-a620-8866e4fc2f76.png?v=1694156386">
+                    Skin Care </label><br>
+            </div>
+        </div>
+    </div>
+
+    <div class="hair-1-container" id="hair1" style="display:none;" data-progress="55" data-next="hair2" data-input="texture" 
+        data-previous="screen2" data-selection="1">
+        <h2 class="question-title">Which best describes your hair texture?</h2>
+        <p class="question-tip">
+            Tip: Take a single strand of your hair and roll it between your thumb and finger. If you can barely feel
+                it,
+                your hair is fine / thin. If you can just feel it a little, your hair is medium. Coarse/thick hair can
+                be felt
+                easily.
+        </p>
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <input type="radio" id="Fine" class="input-hidden" name="texture" value="Fine">
+                <label for="Fine">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Fine_thin_hair.png?v=1694156385">
+                    Fine/Thin 
+                </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="Medium" class="input-hidden" name="texture" value="Medium">
+                <label for="Medium">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Medium_hair.png?v=1694156386">
+                    Medium 
+                </label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <input type="radio" id="Coarse" class="input-hidden" name="texture" value="Coarse">
+                <label for="Coarse">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Thick_hair.png?v=1694156386">
+                    Coarse/Thick
+                </label><br>
+            </div>
+        </div>
+    </div>
+
+    <div class="hair-2-container" id="hair2" style="display:none;" data-progress="70" data-next="hair3" data-input="hairType" 
+        data-previous="hair1" data-selection="1">
+        <h2 class="question-title">Which best describes your hair types?</h2>
+        <p class="question-tip">
+            Tip: The state of your hair without any heat styling or product styling.
+            
+        </p>
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <input type="radio" id="Straight" class="input-hidden" name="hairType" value="Straight">
+                <label for="Straight">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Straight_hair.png?v=1694156385">
+                    Straight </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="Wavy" class="input-hidden" name="hairType" value="Wavy">
+                <label for="Wavy">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Wavy_Hair.png?v=1694156385">
+                    Wavy </label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <input type="radio" id="Curly" class="input-hidden" name="hairType" value="Curly">
+                <label for="Curly">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Curly_Hair.png?v=1694156385">
+                    Curly </label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <input type="radio" id="Coily" class="input-hidden" name="hairType" value="Coily">
+                <label for="Coily">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Coily_Hair.png?v=1694156386">
+                    Coily </label><br>
+            </div>
+        </div>
+    </div>
+
+  {% comment %}
+    <div class="hair-3-container" id="hair3" style="display:none;" data-progress="80" data-next="hair4" data-input="treatment" 
+        data-previous="hair2" data-selection="1">
+        <h2 class="question-title">Any chemical treatment done to your hair?</h2>
+        <h2 class="question-select">(Select Multiple)</h2>
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <button class="ranking-btn treatment-btn" data-value="Bleach"></button>
+                <input type="checkbox" id="bleach" class="input-hidden" name="treatment" value="Bleach">
+                <label for="bleach">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hair_with_light_Highlight.png?v=1694156386">
+                    Bleach/Highlight</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn treatment-btn" data-value="Straightened"></button>
+                <input type="checkbox" id="straightened" class="input-hidden" name="treatment" value="Straightened">
+                <label for="straightened">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Straightened_hair.png?v=1694156386">
+                    Straightened</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn treatment-btn" data-value="Color"></button>
+                <input type="checkbox" id="color" class="input-hidden" name="treatment" value="Color">
+                <label for="color">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Colored_Hair.png?v=1694156386">
+                    Color</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn treatment-btn" data-value="Normal"></button>
+                <input type="checkbox" id="normal" class="input-hidden" name="treatment" value="Normal">
+                <label for="normal"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Fine_thin_hair.png?v=1694156385">
+                    Normal</label><br>
+            </div>
+        </div>
+    </div>
+  {% endcomment %}
+    <div class="hair-3-container" id="hair3" style="display:none;" data-progress="90" data-next="hair5"  data-input="scalpType" 
+        data-previous="hair2" data-selection="1">
+        <h2 class="question-title">What about your scalp condition?</h2>
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <input type="radio" id="NormalScalp" class="input-hidden" name="scalpType" value="NormalScalp">
+                <label for="NormalScalp">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/normal_scalp.jpg?v=1694670045">
+                    Normal </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="OilyScalp" class="input-hidden" name="scalpType" value="OilyScalp">
+                <label for="OilyScalp">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/oily_scalp.png?v=1694670045">
+                    Oily </label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <input type="radio" id="DryScalp" class="input-hidden" name="scalpType" value="DryScalp">
+                <label for="DryScalp">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/dry_scalp.png?v=1694670045">
+                    Dry </label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <input type="radio" id="FlakeyScalp" class="input-hidden" name="scalpType" value="FlakeyScalp">
+                <label for="FlakeyScalp">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/flaky_scalp.png?v=1694670045">
+                    Flakey, Itchy, Scalp Buildup </label><br>
+            </div>
+        </div>
+    </div>
+
+    <div class="hair-5-container" id="hair5" style="display:none;" data-progress="100" data-next="resultContainer" data-input="hairMainGoal" 
+        data-previous="hair4" data-selection="2">
+        <h2 class="question-title">What are you most concerned about when it comes to your hair/scalp?</h2>
+        <!-- <h2 class="question-select">(Select Top Two Priorities in Order)</h2> -->
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="HairfallControl"></button>
+                <input type="checkbox" id="HairfallControl" class="input-hidden" name="hairMainGoal"
+                    value="HairfallControl">
+                <label for="HairfallControl"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/hairfall_control.jpg?v=1694670045">
+                    Hairfall control</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="DandruffControl"></button>
+                <input type="checkbox" id="DandruffControl" class="input-hidden" name="hairMainGoal"
+                    value="DandruffControl">
+                <label for="DandruffControl"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/dandruff_control.png?v=1694670045">
+                    Dandruff control</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="Strength"></button>
+                <input type="checkbox" id="Strength" class="input-hidden" name="hairMainGoal" value="Strength">
+                <label for="Strength">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/strength.jpg?v=1694670045">
+                    Strength</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="Hydration"></button>
+                <input type="checkbox" id="Hydration" class="input-hidden" name="hairMainGoal" value="Hydration">
+                <label for="Hydration">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hydration.jpg?v=1694670045">
+                    Hydration</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="LessFrizz"></button>
+                <input type="checkbox" id="LessFrizz" class="input-hidden" name="hairMainGoal" value="LessFrizz">
+                <label for="LessFrizz">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Less_Frizy.png?v=1694670045">
+                    Less Frizz</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="Softness"></button>
+                <input type="checkbox" id="Softness" class="input-hidden" name="hairMainGoal" value="Softness">
+                <label for="Softness"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Softness_Manageability.png?v=1694670045">
+                    Softness & Manageability</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="Volume"></button>
+                <input type="checkbox" id="Volume" class="input-hidden" name="hairMainGoal" value="Volume">
+                <label for="Volume"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Full_volume_hair.png?v=1694156386">
+                    Volume & Fullness</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="Curls"></button>
+                <input type="checkbox" id="Curls" class="input-hidden" name="hairMainGoal" value="Curls">
+                <label for="Curls"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Defined_curls_waves.jpg?v=1694670044">
+                    Defined curls & waves</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="Dull"></button>
+                <input type="checkbox" id="Dull" class="input-hidden" name="hairMainGoal" value="Dull">
+                <label for="Dull"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/less_dull.jpg?v=1694670044">
+                    Less Dull</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="Longevity"></button>
+                <input type="checkbox" id="Longevity" class="input-hidden" name="hairMainGoal" value="Longevity">
+                <label for="Longevity"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Style_Longevity.png?v=1694670045">
+                    Style Longevity</label><br>
+            </div>
+          
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="ColorProtection"></button>
+                <input type="checkbox" id="ColorProtection" class="input-hidden" name="hairMainGoal"
+                    value="ColorProtection">
+                <label for="ColorProtection"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/color_protection.png?v=1694670045">
+                    Color Protection</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="ThermalProtect"></button>
+                <input type="checkbox" id="ThermalProtect" class="input-hidden" name="hairMainGoal"
+                    value="ThermalProtect">
+                <label for="ThermalProtect"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Thermal_Protect_Styling.jpg?v=1694670045">
+                    Thermal Protect/Styling</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="HairGrowth"></button>
+                <input type="checkbox" id="HairGrowth" class="input-hidden" name="hairMainGoal" value="HairGrowth">
+                <label for="HairGrowth"><img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/hair_growth.jpg?v=1694670044">
+                    Hair Growth/Length</label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn hairMainGoal-btn" data-value="NoConcernHair"></button>
+                <input type="checkbox" id="NoConcernHair" class="input-hidden" name="hairMainGoal" value="NoConcernHair">
+                <label for="NoConcernHair">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/I_don_t_have_any_particular_concern.png?v=1694670045">
+                    I don’t have any particular concern</label><br>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="skin-1-container" id="skin1" style="display:none;" data-progress="55" data-next="skin2" data-input="skinType" 
+        data-previous="screen2" data-selection="1">
+        <h2 class="question-title">What is your skin type?</h2>
+        <p class="question-tip">Tip: The natural state of your skin after washing and before applying any products</p>
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <input type="radio" id="oily" class="input-hidden" name="skinType" value="Oily">
+                <label for="oily">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Oily_skin_type.png?v=1694156386">
+                    Oily </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="dry" class="input-hidden" name="skinType" value="Dry">
+
+
+                <label for="dry">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Dry_skin_type.png?v=1694156386">
+                    Dry </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="combination" class="input-hidden" name="skinType" value="Combination">
+
+
+                <label for="combination">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Combination_skin_type.png?v=1694156386">
+                    Combination </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <input type="radio" id="normalSkin" class="input-hidden" name="skinType" value="Normal">
+
+
+                <label for="normalSkin">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Normal_skin_type.png?v=1694156386">
+                    Normal </label><br>
+            </div>
+        </div>
+    </div>
+
+{% comment %}
+    <div class="skin-2-container" id="skin2" style="display:none;" data-progress="70" data-next="skin3"  data-input="skinCondition" 
+        data-previous="skin1" data-selection="1">
+        <h2 class="question-title">Any Skin Conditions We Should Be Aware of?</h2>
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <button class="ranking-btn skinCondition-btn" data-value="Scarring"></button>
+                <input type="checkbox" id="scarring" class="input-hidden" name="skinCondition" value="Scarring">
+                <label for="scarring">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Scars_on_skin.png?v=1694156386">
+                    Scarring</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn skinCondition-btn" data-value="Sunspots"></button>
+                <input type="checkbox" id="sunspots" class="input-hidden" name="skinCondition" value="Sunspots">
+
+
+                <label for="sunspots">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Sunspots_on_skin.png?v=1694156386">
+                    Sunspots</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn skinCondition-btn" data-value="Inflamed"></button>
+                <input type="checkbox" id="Inflamed" class="input-hidden" name="skinCondition" value="Inflamed">
+
+
+                <label for="Inflamed">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Acne_on_skin_3743d70a-0dfa-4a5b-982c-80ba012a86d1.png?v=1694156386">
+                    Inflamed Acne</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn skinCondition-btn" data-value="None"></button>
+                <input type="checkbox" id="None" class="input-hidden" name="skinCondition" value="None">
+
+
+                <label for="None">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/none_of_the_above.png?v=1694670045">
+                    None of the above</label><br>
+            </div>
+        </div>
+    </div>
+{% endcomment %}
+
+
+    <div class="skin-2-container" id="skin2" style="display:none;" data-progress="80" data-next="skin3"   data-input="skinFeel" 
+        data-previous="skin1" data-selection="1">
+        <h2 class="question-title">How does your skin feel to be touched?</h2>
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <button class="ranking-btn skinFeel-btn" data-value="Lose"></button>
+                <input type="checkbox" id="lose" class="input-hidden" name="skinFeel" value="Lose">
+                <label for="lose">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Wrinkled_skin.png?v=1694156386">
+                    Lose or Wrinkled</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn skinFeel-btn" data-value="Oily"></button>
+                <input type="checkbox" id="oilySkinFeel" class="input-hidden" name="skinFeel" value="Oily">
+
+
+                <label for="oilySkinFeel">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Oily_skin_type.png?v=1694156386">
+                    Oily</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn skinFeel-btn" data-value="Irritated"></button>
+                <input type="checkbox" id="Irritated" class="input-hidden" name="skinFeel" value="Irritated">
+
+
+                <label for="Irritated">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Irritaed_Skin.png?v=1694670045">
+                    Irritated</label><br>
+            </div>
+            <div class="input-label label-with-image">
+                <button class="ranking-btn skinFeel-btn" data-value="Flaky"></button>
+                <input type="checkbox" id="flaky" class="input-hidden" name="skinFeel" value="Flaky">
+
+
+                <label for="flaky">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Flaky_skin.png?v=1694156386">
+                    Flaky skin</label><br>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="skin-3-container" id="skin3" style="display:none;" data-progress="90" data-next="skin4"  data-input="facePrimary" 
+        data-previous="skin2" data-selection="2">
+        <h2 class="question-title">What are you most bothered about the skin concerning your face?</h2>
+        <!-- <h2 class="question-select">(Select Top Two Priorities in Order)</h2> -->
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="Sensitivity"></button>
+                <input type="checkbox" id="Sensitivity" class="input-hidden" name="facePrimary" value="Sensitivity">
+                <label for="Sensitivity">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Skin_senstivity.png?v=1694670045">
+                    Sensitivity </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="Redness"></button>
+                <input type="checkbox" id="Redness" class="input-hidden" name="facePrimary" value="Redness">
+
+
+                <label for="Redness">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Reddened_skin.png?v=1694156385">
+                    Redness </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="FineLines"></button>
+                <input type="checkbox" id="FineLines" class="input-hidden" name="facePrimary" value="FineLines">
+                <label for="FineLines">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Wrinkled_skin.png?v=1694156386">
+                    Fine lines and wrinkles </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="LossFirmness"></button>
+                <input type="checkbox" id="LossFirmness" class="input-hidden" name="facePrimary" value="LossFirmness">
+                <label for="LossFirmness">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Loss_of_firmness_or_elasticity.png?v=1694670045">
+                    Loss of firmness or elasticity </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="Hyperpigmentation"></button>
+                <input type="checkbox" id="Hyperpigmentation" class="input-hidden" name="facePrimary" value="Hyperpigmentation">
+                <label for="Hyperpigmentation">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Hyperpigmentation.png?v=1694670045">
+                    Hyperpigmentation </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="Acne"></button>
+                <input type="checkbox" id="Acne" class="input-hidden" name="facePrimary" value="Acne">
+                <label for="Acne">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Acne_on_skin_3743d70a-0dfa-4a5b-982c-80ba012a86d1.png?v=1694156386">
+                    Acne</label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="Dryness"></button>
+                <input type="checkbox" id="Dryness" class="input-hidden" name="facePrimary" value="Dryness">
+                <label for="Dryness">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Dry_skin_type.png?v=1694156386">
+                    Dryness </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="SunDamage"></button>
+                <input type="checkbox" id="SunDamage" class="input-hidden" name="facePrimary" value="SunDamage">
+                <label for="SunDamage">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Skin_suffering_from_sun_damage.png?v=1694156386">
+                    Sun Damage/Sun Protection </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="Dullness"></button>
+                <input type="checkbox" id="Dullness" class="input-hidden" name="facePrimary" value="Dullness">
+                <label for="Dullness">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Dullness.png?v=1694670045">
+                    Dullness</label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn facePrimary-btn" data-value="NoConcernFace"></button>
+                <input type="checkbox" id="NoConcernFace" class="input-hidden" name="facePrimary" value="NoConcernFace">
+                <label for="NoConcernFace">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/I_don_t_have_any_particular_concern.png?v=1694670045">
+                    I don’t have any particular concern</label><br>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="skin-4-container" id="skin4" style="display:none;" data-progress="100" data-next="resultContainer"  data-input="bodyPrimary" 
+        data-previous="skin3" data-selection="2">
+        <h2 class="question-title">What are you most bothered about the skin concerning your body?</h2>
+        <!-- <h2 class="question-select">(Select Top Two Priorities in Order)</h2> -->
+        <div class="input-label-container">
+            <div class="input-label label-with-image">
+                <button class="ranking-btn bodyPrimary-btn" data-value="Ageing"></button>
+                <input type="checkbox" id="Ageing" class="input-hidden" name="bodyPrimary" value="Ageing">
+                <label for="Ageing">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Ageing.png?v=1694670045">
+                    Ageing </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn bodyPrimary-btn" data-value="AcneBody"></button>
+                <input type="checkbox" id="AcneBody" class="input-hidden" name="bodyPrimary" value="AcneBody">
+                <label for="AcneBody">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Acne_on_skin_3743d70a-0dfa-4a5b-982c-80ba012a86d1.png?v=1694156386">
+                    Acne</label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn bodyPrimary-btn" data-value="DrynessBody"></button>
+                <input type="checkbox" id="DrynessBody" class="input-hidden" name="bodyPrimary" value="DrynessBody">
+                <label for="DrynessBody">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Dry_skin_type.png?v=1694156386">
+                    Dryness </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn bodyPrimary-btn" data-value="Bumpy"></button>
+                <input type="checkbox" id="Bumpy" class="input-hidden" name="bodyPrimary" value="Bumpy">
+                <label for="Bumpy">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/bumpy_skin.png?v=1694670045">
+                    Bumpy/strawberry skin </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn bodyPrimary-btn" data-value="Stretchmarks"></button>
+                <input type="checkbox" id="Stretchmarks" class="input-hidden" name="bodyPrimary" value="Stretchmarks">
+                <label for="Stretchmarks">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Skin_with_stretchmarks.png?v=1694156385">
+                    Stretchmarks/Scars </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn bodyPrimary-btn" data-value="SunDamageBody"></button>
+                <input type="checkbox" id="SunDamageBody" class="input-hidden" name="bodyPrimary" value="SunDamageBody">
+                <label for="SunDamageBody">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Sunspots_on_skin.png?v=1694156386">
+                    Sun Damage/Sun Protection </label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn bodyPrimary-btn" data-value="DullnessBody"></button>
+                <input type="checkbox" id="DullnessBody" class="input-hidden" name="bodyPrimary" value="DullnessBody">
+                <label for="DullnessBody">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Dullness.png?v=1694670045">
+                    Dullness</label><br>
+            </div>
+            <div class="input-label  label-with-image">
+                <button class="ranking-btn bodyPrimary-btn" data-value="NoConcernBody"></button>
+                <input type="checkbox" id="NoConcernBody" class="input-hidden" name="bodyPrimary" value="NoConcernBody">
+                <label for="NoConcernBody">
+                    <img loading="lazy"
+                        src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/I_don_t_have_any_particular_concern.png?v=1694670045">
+                    I don’t have any particular concern</label><br>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="controls-container" style="display:none;">
+      <p id='errorLine' style="color:red;display:none;">PLEASE SELECT AN ANSWER</p>
+        <div>
+            <button class="quiz-button btn btn-prev" id="prev">PREVIOUS</button>
+            <button class="quiz-button btn btn-next" id="next">NEXT</button>
+        </div>
+    </div>
+
+
+    <div class="number-container" id="numberContainer" style="display:none;">
+        <h2>To keep a record of your diagnosis, please provide your email :</h2>
+        <p>You’ll receive a copy of your diagnosis shortly.</p>
+        <input type="email" id="userEmail" class="input-number" name="email" placeholder="Enter your email">
+        <p id='errorEmail' style="color:red;display:none;">PLEASE ENTER YOUR EMAIL</p>
+        <button class="quiz-button submit-btn" id="submit">SUBMIT</button>
+    </div>
+
+
+    <div class="result-container" id="resultContainer" style="display:none;">
+      <h2 class="result-h1">Completed!<br/>The results are in.</h2>
+      <div class="result-wrapper">
+        <h4 class="result-title">ABOUT YOUR <span class="concern text-uppercase"></span></h4>
+        <p class="result-text">BASED ON YOUR ANSWERS, YOUR <span class="concern text-uppercase"></span> TYPE IS <span class="concernType text-uppercase"></span> 
+          AND YOUR <span class="concern text-uppercase"></span> CONCERNS ARE: <span class="text-uppercase selectedParameter"></span></p>
+       <div class="accordion">
+  <!-- <div class="at-item">
+    <div class="at-title">
+      <h2 id="concernTitle1"></h2><span></span>
+    </div>
+    <div class="at-tab" id="concernText1">
+      
+    </div>
+  </div> -->
+  <div class="at-item">
+    <div class="at-title">
+      <h2 id="concernTitle2">Accordion title 2</h2><span></span>
+    </div>
+    <div class="at-tab" id="concernText2">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, reprehenderit.
+    </div>
+  </div>
+         
+  <!-- <div class="at-item" id="accordian3" style="display:none;">
+    <div class="at-title">
+      <h2 id="concernTitle3"></h2><span></span>
+    </div>
+    <div class="at-tab" id="concernText3"></div>
+  </div> -->
+         
+  <!-- <div class="at-item" id="accordian4" style="display:none;">
+    <div class="at-title">
+      <h2 id="concernTitle4"></h2><span></span>
+    </div>
+    <div class="at-tab" id="concernText4"></div>
+  </div> -->
+</div>
+      </div>
+      <p class="recoText" id="recoText">Through the analysis of your current skin condition, the following products are best suited to solve for your <b><span class="concern"></span><span> concerns:</span></b></p>
+      {% comment %}
+      <h3>Your Best Match</h3>
+      {% endcomment %}
+      <div class="quiz-product-list-get">
+          <div class="new-grid product-grid collection-grid" id="recom1" data-view="small" data-scroll-to=""></div>
+      </div>
+      {% comment %}
+      <h3 id='titleTwo' style='display:none;'>Just For You</h3>
+      <div class="quiz-product-list-get">
+          <div class="new-grid product-grid collection-grid" id="recom2" data-view="small" data-scroll-to=""></div>
+      </div>
+      {% endcomment %}
+      {% comment %}
+      <div class="expert-container">
+        <h3>Our Expert Take</h3>
+        <p id="expert1"></p>
+        <p id="expert2"></p>
+      </div>
+      {% endcomment %}
+      
+    </div>
+</div>
+
+      <script>
+        /*$(window).on('load', function(){
+          if($(window).width() <= 767){
+          
+            $('.quiz-button.submit-btn').on('click', function(){
+              setTimeout(function(){
+                console.log('iff')
+                $('.collection-grid').slick({
+		rows: 2,
+		dots: false,
+		arrows: true,
+		infinite: true,
+		speed: 300,
+		slidesToShow: 2,
+		slidesToScroll: 2
+       });
+              }, 3000);
+            })
+          }
+        })*/
+      </script>
+
+      <style>
+.slick-prev.slick-arrow,.slick-next.slick-arrow{display:block !important;font-size:0 !important;z-index:1;top:50%;}
+.slick-next{width:34px;height:40px;z-index:9;right:0 !important;font-size:0 !important;}
+.slick-prev{width:34px;height:40px;z-index:9;left:0 !important;font-size:0 !important;}
+.slick-next:after{content:'';width:16px;height:16px;background:url('https://cdn.shopify.com/s/files/1/0039/6073/3763/files/arrow.svg?v=1696922292') no-repeat center center;position:absolute;top:14px;left:10px;right:0;}
+.slick-prev:after{content:'';width:16px;height:16px;background:url('https://cdn.shopify.com/s/files/1/0039/6073/3763/files/arrow.svg?v=1696922292') no-repeat center center;position:absolute;top:10px;left:0;right:0;transform:rotate(180deg);-webkit-transform:rotate(180deg);-o-transform:rotate(180deg);-moz-transform:rotate(180deg);-ms-transform:rotate(180deg);}
+.new-grid{padding-left:20px !important;padding-right:20px !important;}
+      </style>
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

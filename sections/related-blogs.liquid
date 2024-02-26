@@ -1,0 +1,44 @@
+{% schema %}
+{
+"name": "related-blogs",
+"settings": []
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+{% assign related_posts = "" %}
+{% assign current_blog_tag = article.tags.first  %}
+{% assign currentHandle = article.handle %}
+<h2 style="text-align:center;margin-top:1em;margin-bottom:1px solid color: var(--colorNavText) !important;">Related Blogs</h2>
+
+{% for article in blog.articles %}
+    {% unless article.handle == currentHandle %}
+        {% if article.tags contains current_blog_tag %}
+            {% capture post %}
+                <div class="grid-item">
+                    <img width="100%" src="{{article.image | img_url: 'master'}}"/>
+                    <p>
+                        <a href="{{ article.url }}">
+                    <h3>{{article.title}}</h3>
+                    </a>
+                    </p>
+                </div>
+            {% endcapture %}
+            {% assign related_posts = related_posts | append:post %}
+        {% endif %}
+    {% endunless %}
+{% endfor %}
+
+{% if related_posts.size > 0 %}
+    <div class="grid-container">
+        {{ related_posts }}
+    </div>
+{% else %}
+    {{current_blog_tag}}
+    No related posts!
+{% endif %}
+

@@ -1,0 +1,213 @@
+<style>
+  .contentsec_main {
+    text-align: center; 
+} 
+.contentsec_main p {
+    margin: 0;
+}
+  @media only screen and (max-width:768px){
+  .mobile-view-all{
+   position: static;
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding-bottom: 10px;
+    margin-top:0px
+  }
+    .mobile_none{
+      display:none;
+    }
+.new-grid.product-grid.scrollable-grid--small{
+  display:none !important;
+}
+.new-grid.product-grid.scrollable-grid--small.slick-initialized.slick-slider{
+  display:block !important;
+}
+  }
+
+</style>
+
+{%- liquid
+  assign collection = collections[section.settings.home_featured_products]
+  assign product_limit = section.settings.count | plus: 1
+  if section.settings.mobile_scrollable
+    assign product_limit = section.settings.count
+  endif
+-%}
+
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+<div
+  id="CollectionSection-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-template">
+  {%- if section.settings.title != blank -%}
+      <div class="section-header{% if section.settings.view_all %} section-header--with-link{% endif %}" style="display:block;">
+        <div class="page-width">
+        <h2 class="section-header__title"> 
+      {{ section.settings.title }}
+      {% if section.settings.title_link != blank %} 
+          {% endif %}
+        </h2>
+          {% if section.settings.title_link != blank %}
+          <a href="{{ section.settings.title_link }}" class='section-header__link mobile_none'>View all</a>
+        {% endif %}
+          {% comment %}
+        {%- if section.settings.view_all -%}
+          <a onClick="sendEventToGA('Homepage','{{ 'collections.general.all_of_collection' | t }}', '{{ section.settings.title }}')" href="{{ collections[section.settings.home_featured_products].url }}" class="section-header__link">{{ 'collections.general.all_of_collection' | t }}</a>
+        {%- endif -%}
+          {% endcomment %}
+        </div>
+
+        {% if section.settings.content_sec != blank %}
+        <div class='contentsec_main' style='font-size:{{ section.settings.content_font }}px'>
+            {{ section.settings.content_sec }}
+          </div>
+{% endif %}
+        {% if section.settings.countdown_date != blank %}
+    <div class="countdown-part" data-date="{{ section.settings.countdown_date }}" id="countdown-part">
+  <div id="countdown">
+    <ul>
+      <li><span class="days"></span><strong>Days</strong></li>
+      <li><span class="hours"></span><strong>Hours</strong></li>
+      <li><span class="minutes"></span><strong>Min</strong></li>
+      <li><span class="seconds"></span><strong>Sec</strong></li>
+    </ul>
+  </div>
+      </div> 
+          {% endif %}
+    
+      </div>
+  {%- endif -%}
+
+  <div class="page-width{% if section.settings.mobile_scrollable %} page-width--flush-small{% endif %}">
+    <div
+      class="new-grid {% if template == 'index' %}home-collection{% endif %} product-grid{% if section.settings.mobile_scrollable %} scrollable-grid--small{% endif %}"
+      data-view="{% if section.settings.mobile_scrollable %}scrollable-5{% else %}xsmall{% endif %}">
+      {%- if section.settings.home_featured_products == blank or collections[section.settings.home_featured_products].empty? or collections[section.settings.home_featured_products].products_count == 0 -%}
+
+        {%- liquid
+          for i in (1..product_limit)
+            unless section.settings.mobile_scrollable
+              assign item_classes = ''
+              if forloop.index > section.settings.count
+                assign item_classes = 'hide'
+                assign mod = forloop.index | modulo: 2
+                if mod == 0
+                  assign item_classes = 'medium-up--hide'
+                endif
+              endif
+            endunless
+            render 'onboarding-product-grid-item', i: i, classes: item_classes
+          endfor
+        -%}
+
+      {%- else -%}
+
+        {%- liquid
+          for product in collections[section.settings.home_featured_products].products limit: product_limit
+            assign item_classes = ''
+            unless section.settings.mobile_scrollable
+              if forloop.index > section.settings.count
+                assign item_classes = 'hide'
+                assign mod = forloop.index | modulo: 2
+                if mod == 0
+                  assign item_classes = 'medium-up--hide'
+                endif
+              endif
+            endunless
+
+            render 'product-grid-item', product: product, collection: collection, classes: item_classes
+
+            if settings.quick_shop_enable
+              render 'quick-shop-modal', product: product
+            endif
+          endfor
+        -%}
+
+      {%- endif -%}
+    </div>
+  </div>
+
+   {%- if section.settings.view_all -%}
+          <a onClick="sendEventToGA('Homepage','{{ 'collections.general.all_of_collection' | t }}', '{{ section.settings.title }}')" 
+            href="{{ collections[section.settings.home_featured_products].url }}" 
+            class="mobile-view-all medium-up--hide section-header__link">{{ 'collections.general.all_of_collection' | t }}</a>
+        {%- endif -%}
+</div>
+
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "content_sec",
+        "label": "Content"
+      },
+      {
+        "type": "range",
+        "id": "content_font",
+        "label": "Font Size Content",
+        "default": 12,
+        "min": 12,
+        "max": 40,
+        "step": 1
+      },
+      {
+        "type": "url",
+        "id": "title_link",
+        "label": "Heading Link"
+      },
+      {
+        "type": "collection",
+        "id": "home_featured_products",
+        "label": "Collection"
+      },
+      {
+        "type": "range",
+        "id": "count",
+        "label": "Products",
+        "default": 5,
+        "min": 5,
+        "max": 15,
+        "step": 5
+      },
+      {
+        "type": "checkbox",
+        "id": "mobile_scrollable",
+        "label": "Enable swipe on mobile",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "view_all",
+        "label": "Show 'View all' link",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "divider",
+        "label": "Show section divider",
+        "default": false
+      },
+      {
+        "type": "text",
+        "id": "countdown_date",
+        "label": "Count Down Date"
+      }
+    ],
+    "presets": [{
+      "name": "Featured collection"
+    }],
+    "blocks" : []
+  }
+{% endschema %}

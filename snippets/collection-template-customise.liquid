@@ -1,0 +1,783 @@
+<style>
+  .quiz_selection {
+    background: #fafafa;
+    padding: 37px 0;
+    text-align: center;
+    margin-bottom: 60px;
+    margin-top: 60px;
+  }
+
+  .tab-pane {
+    margin-top: 101px;
+  }
+
+  .selection_title {
+    color: #413f3f;
+    font-size: 14px;
+    font-family: Helvetica;
+    font-weight: 500;
+  }
+
+  .quiz_selection ul li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 30px;
+    padding: 4px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #413f3f;
+    margin-top: 5px;
+  }
+
+  .quiz_selection .hair li {
+    background: #E6F7FF;
+  }
+
+  .quiz_selection .skin li {
+    background: #fee8d8;
+  }
+
+  .quiz_selection ul li a {
+    text-align: center;
+  }
+
+  .prefrence {
+    margin-top: 25px;
+    display: block;
+  }
+
+  .prefrence a:first-child {
+    background: linear-gradient(3.79deg, #247ECB -24.81%, #ABD3FE 66.6%);
+    border: #247ecb 1px solid;
+    color: #000;
+    font-size: 14px;
+    padding: 10px 14px;
+    margin-right: 28px;
+    text-decoration: none;
+    font-weight: 500;
+    cursor: pointer;
+  }
+
+  .nav-link {
+    font-weight: 400 !important;
+  }
+
+  .prefrence a {
+    color: #217BC9;
+    font-size: 14px;
+    text-decoration: underline;
+  }
+
+  .no-data ul li {
+    list-style: none;
+    display: inline-block;
+    margin-right: 30px;
+    padding: 4px 20px;
+    border-radius: 20px;
+    font-size: 14px;
+    color: #413f3f;
+    margin-top: 5px;
+  }
+
+  .no-data .hair_range li {
+    background: none !important;
+  }
+
+  .no-data .hair_range li input {
+    background: #E6F7FF;
+    border: none;
+    border-radius: 40px;
+    width: 103px;
+    margin-left: 10px;
+    padding: 0 12px;
+  }
+
+
+
+  .skin_goals_div ul li {
+    list-style: none;
+    display: inline-block;
+    border: 0.7px solid #D6D6D6;
+    filter: drop-shadow(0px 4px 8px rgba(117, 117, 117, 0.09));
+    border-radius: 40px;
+    margin-bottom: 24px;
+    margin-right: 11px;
+    width: 208px;
+    font-size: 14px;
+    height: 35px;
+  }
+
+  .color li {
+    height: auto !important;
+  }
+
+  .color h5 {
+    border: none !important;
+    font-size: 13px !important;
+    margin-top: 1.5rem;
+
+  }
+
+  .color img {
+    width: 82px !important;
+    height: 95px !important;
+    display: block;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .color li input[type="radio"]:checked+li {
+    background: yellow;
+  }
+
+  .skin_goals ul li input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .color li {
+    width: 150px !important;
+  }
+
+  .skin_goals_div ul li input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .edit_skin_goals ul li input[type="checkbox"]:checked+.check {
+    background: #FFCBC0;
+    border-color: #D9C5C2;
+  }
+
+  .color li input[type="radio"]:checked {
+    background: #FFCBC0;
+    border-color: #D9C5C2;
+  }
+
+  .color li {
+    border: none !important;
+    border-radius: 0 !important;
+  }
+
+  .color li span {
+    display: block;
+  }
+
+  .bot_names input {
+    opacity: 1 !important;
+  }
+
+  .bot_names li {
+    border-radius: 0 !important;
+    border: 0 !important;
+  }
+
+  .bot_names input {
+    opacity: 1 !important;
+    border: 0.7px solid #D6D6D6 !important;
+    border-radius: 40px !important;
+    text-align: center;
+  }
+
+  .product_sold_box {
+    color: #01385E;
+    font-family: Helvetica Neue;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 19px;
+    text-align: center;
+    background: #FFCBC0;
+    width: 30%;
+    padding: 0.5em 0;
+
+  }
+
+
+  .skin_goals ul li .check {
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2px 5px;
+  }
+
+  .skin_goals_div ul li .check {
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2px 5px;
+  }
+
+  .fragrance ul {
+    margin-top: 30px;
+    padding: 0;
+  }
+
+  .fragrance ul li {
+    list-style: none;
+    display: inline-block;
+    border: 0.7px solid #D6D6D6;
+    filter: drop-shadow(0px 4px 8px rgba(117, 117, 117, 0.09));
+    border-radius: 40px;
+    margin-bottom: 24px;
+    margin-right: 11px;
+    width: 162px;
+    font-size: 14px;
+  }
+
+  .fragrance ul li input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .fragrance ul li input[type="radio"]:checked+.check {
+    background: #FFCBC0;
+    border-color: #D9C5C2;
+  }
+
+  .nav-link {
+    text-decoration: none;
+  }
+
+  .icon {
+    font-size: 12px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-text-stroke: 1px white;
+  }
+
+  .fragrance ul li .check {
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2px;
+  }
+
+
+  .skin_type ul {
+    margin-top: 30px;
+    padding: 0;
+    width: 50%;
+  }
+
+  .skin_type ul li {
+    list-style: none;
+    display: inline-block;
+    border: 0.7px solid #D6D6D6;
+    filter: drop-shadow(0px 4px 8px rgba(117, 117, 117, 0.09));
+    border-radius: 40px;
+    margin-bottom: 24px;
+    margin-right: 11px;
+    width: 162px;
+    font-size: 14px;
+  }
+
+  .skin_type ul li input {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    z-index: 2;
+    opacity: 0;
+  }
+
+  .skin_type ul li input[type="radio"]:checked+.check {
+    background: #FFCBC0;
+    border-color: #D9C5C2;
+  }
+
+  .skin_type ul li .check {
+    height: 100%;
+    width: 100%;
+    border-radius: 50px;
+    z-index: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2px;
+  }
+
+  .skin_goals_save {
+    width: 100%;
+    text-align: center;
+    margin-top: 5%;
+  }
+
+  .skin_goals_save button {
+    width: 254px;
+    height: 42px;
+    background: linear-gradient(3.79deg, #FFC7BD -24.81%, #FFDDCB 66.6%);
+    border: 1px solid #FFADAD;
+    box-sizing: border-box;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .pl-155 {
+    padding-left: 155px;
+  }
+
+  .products_box:nth-child(3n) {
+    margin-right: 0;
+  }
+
+  .products_box {
+    -ms-flex: 0 0 33.333333%;
+    flex: 0 0 24.333333%;
+    max-width: 24.333333%;
+    margin-right: 13%;
+  }
+
+  @media screen and (max-width: 992px) {
+    .nav-link img {
+      width: 51px;
+      height: 49px;
+    }
+
+    .pl-155 {
+      padding: 0;
+    }
+
+    .products_box {
+      flex: 0 0 45.333333%;
+      max-width: 45.333333%;
+      margin-right: 9%;
+      padding: 0 22px;
+    }
+
+    .products_box:nth-child(3n) {
+      margin-right: 9%;
+    }
+
+    .products_box:nth-child(2n) {
+      margin-right: 0;
+    }
+
+    .custom_hair_care {
+      padding: 170px 0 20px 0;
+    }
+
+  }
+
+  @media (min-width: 1300px) {
+
+    .img_thumnail {
+      width: 100%;
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    .edit_skin_goals {
+      padding: 1rem;
+    }
+
+    .nav-item span {
+      width: 77% !important;
+    }
+
+    .edit_hair_goals {
+      padding: 1rem;
+    }
+
+    .edit_hair_goals ul li {
+      width: 47% !important;
+    }
+
+    .update-hair-quiz {
+      width: 100% !important;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .color h5 {
+      font-size: 10px !important;
+    }
+
+    .color span {
+      height: 75px;
+      width: 100%
+    }
+
+    .edit_hair_goals h5 {
+      font-size: 12px;
+    }
+
+    .update-skin-quiz {
+      width: 100% !important;
+      text-align: center;
+      padding: 12px;
+    }
+
+    .custom_hair_care ul li.nav-item {
+      width: 25%;
+      text-align: center;
+    }
+
+    .products_box {
+      flex: 100%;
+      max-width: 100%;
+      margin-right: 0;
+      padding: 20px 20px 0 0;
+      border-bottom: 0.25px solid #A6A6A6;
+    }
+
+    .products_box:nth-child(3n) {
+      margin-right: 0;
+    }
+
+
+    .nav-link span {
+      font-size: 10px;
+    }
+
+    .selection_title {
+      font-size: 12px;
+    }
+
+    .quiz_selection {
+      padding: 20px 0;
+      margin-bottom: 10px;
+    }
+
+    .quiz_selection .hair {
+      padding: 0;
+    }
+
+    .new_user {
+      background: #fff;
+      padding: 0;
+      padding-bottom: 50px;
+      overflow-x: hidden;
+      min-height: calc(100vh - 100px);
+    }
+
+    .quiz_selection ul li {
+      margin-right: 5px;
+      font-size: 12px;
+      margin-top: 0;
+      padding: 0px 7px;
+    }
+
+  }
+
+
+  @media screen and (max-width: 576px) {
+
+
+    .tab-pane {
+      margin-top: 29px;
+    }
+
+    .quiz_selection {
+      margin-top: -24px;
+    }
+
+    .custom_hair_care {
+      padding: 0px 0 20px 0;
+    }
+
+
+
+
+  }
+</style>
+{%- liquid
+assign paginate_by = 40
+
+assign current_filter_size = 0
+for filter in collection.filters
+assign current_filter_size = current_filter_size | plus: filter.active_values.size
+endfor
+-%}
+
+{%- paginate collection.products by paginate_by -%}
+
+{%- for block in section.blocks -%}
+{%- case block.type -%}
+{%- when 'collection_description' -%}
+{%- if collection.description != blank and current_filter_size == 0 -%}
+<div class="rte rte--collection-desc" {{ block.shopify_attributes }}>
+  <div class="enlarge-text">
+    {{ collection.description }}
+  </div>
+</div>
+{%- endif -%}
+{%- when 'subcollections' -%}
+{%- if paginate.current_page == 1 and current_filter_size == 0 -%}
+<div {{ block.shopify_attributes }}>
+  {%- render 'subcollections' -%}
+</div>
+{%- endif -%}
+{%- when 'product_grid' -%}
+<div {{ block.shopify_attributes }}>
+  <div class="collection-filter">
+    <div class="collection-filter__inner">
+      <div class="collection-filter__item collection-filter__item--drawer">
+        <button type="button" class="collection-filter__btn text-link">
+          <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-filter" viewBox="0 0 64 64">
+            <path d="M48 42h10">.</path>
+            <path d="M48 42a5 5 0 1 1-5-5 5 5 0 0 1 5 5z" />
+            <path d="M7 42h31">.</path>
+            <path d="M16 22H6">.</path>
+            <path d="M16 22a5 5 0 1 1 5 5 5 5 0 0 1-5-5z" />
+            <path d="M57 22H26">.</path>
+          </svg>
+          {{ 'collections.filters.title_tags' | t }}
+          {%- if current_filter_size > 0 -%}
+          ({{ current_filter_size }})
+          {%- endif -%}
+        </button>
+      </div>
+
+      <div class="collection-filter__item collection-filter__item--count small--hide">
+        {{ 'collections.general.items_with_count' | t: count: collection.products_count }}
+      </div>
+
+      <div class="collection-filter__item collection-filter__item--right">
+        {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+        <div class="collection-filter__sort small--hide">
+          <label for="SortBy" class="hidden-label">{{ 'collections.sorting.title' | t }}</label>
+          <select name="SortBy" id="SortBy" data-default-sortby="{{ collection.default_sort_by }}">
+            <option value="title-ascending" {% if sort_by==collection.default_sort_by %} selected="selected" {% endif
+              %}>{{ 'collections.sorting.title' | t }}</option>
+            {%- for option in collection.sort_options -%}
+            <option value="{{ option.value }}" {% if option.value==sort_by %} selected="selected" {% endif %}>{{
+              option.name }}</option>
+            {%- endfor -%}
+          </select>
+        </div>
+
+        {%- liquid
+        assign productGridView = block.settings.grid_style
+        if cart.attributes.product_view != blank
+        assign productGridView = cart.attributes.product_view
+        endif
+        -%}
+
+        <ul class="no-bullets inline-list text-right">
+          <li><button type="button" class="grid-view-btn{% if productGridView == 'large' %} is-active{% endif %}"
+              data-view="large" title="{{ 'collections.general.large' | t }}">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-view-large"
+                viewBox="0 0 35 35">
+                <path d="M0 0h35v35H0z" />
+              </svg>
+              <span class="icon__fallback-text">{{ 'collections.general.large' | t }}</span>
+            </button></li>
+          <li><button type="button" class="grid-view-btn{% if productGridView == 'small' %} is-active{% endif %}"
+              data-view="small" title="{{ 'collections.general.small' | t }}">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-view-small"
+                viewBox="0 0 35 35">
+                <path d="M0 0h15v15H0zM20 0h15v15H20zM0 20h15v15H0zM20 20h15v15H20z" />
+              </svg>
+              <span class="icon__fallback-text">{{ 'collections.general.small' | t }}</span>
+            </button></li>
+          <li><button type="button" class="grid-view-btn{% if productGridView == 'list' %} is-active{% endif %}"
+              data-view="list" title="{{ 'collections.general.list' | t }}">
+              <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-view-list"
+                viewBox="0 0 35 35">
+                <g id="Layer_2" data-name="Layer 2">
+                  <path d="M0 0h35v8H0zM0 13h35v8H0zM0 27h35v8H0z" />
+                </g>
+              </svg>
+              <span class="icon__fallback-text">{{ 'collections.general.list' | t }}</span>
+            </button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="collection-mobile-filters medium-up--hide">
+      <div class="collection-mobile-filters__holder" id="CollectionInlineFilterWrap"></div>
+    </div>
+  </div>
+
+  {%- if collection.products == blank -%}
+  <div class="index-section">{{ 'collections.general.no_matches' | t }}</div>
+  {%- endif -%}
+
+  {% if customer %}
+  <section class="quiz_selection no-data" style="display:none;">
+    <p class="selection_title" style="color: #01385E;">Our hair care range is custom made and
+      freshly formulated for your unique hair profile</p>
+    <ul class="hair hair_range">
+      <li>
+        <label>Goals:</label>
+        <input type="text" readonly>
+      </li>
+      <li>
+        <label>Colour &amp; Fragrance:</label>
+        <input type="text" readonly>
+      </li>
+      <li>
+        <label>Name On Bottle:</label>
+        <input type="text" readonly>
+      </li>
+    </ul>
+    <div class="prefrence prefrence2">
+      <a href="/pages/quiz-3" class="hair_quiz">Take Your Hair Quiz Now</a>
+    </div>
+  </section>
+  <section class="quiz_selection data-available">
+    <p class="selection_title">Based on your last quiz taken, you selected :</p>
+    <ul class="hair hair_goals">
+      <li><a href="#">Anti-dandruff</a></li>
+      <li><a href="#">Daily Maintainence</a></li>
+      <li><a href="#">Repair Damage</a></li>
+    </ul>
+    <ul class="skin hair_pref">
+      <li><a href="#">Sprinkle Spurple (purple)</a></li>
+      <li><a href="#">Milk and Honey</a></li>
+    </ul>
+    <div class="prefrence">
+      <a href="/pages/hair-quiz?mode=retake">Retake The Quiz</a>
+    </div>
+  </section>
+  {% else %}
+  <section class="quiz_selection no-data">
+    <p class="selection_title" style="color: #01385E;">Our hair care range is custom made and
+      freshly formulated for your unique hair profile</p>
+    <ul class="hair hair_range">
+      <li>
+        <label>Goals:</label>
+        <input type="text" readonly>
+      </li>
+      <li>
+        <label>Colour &amp; Fragrance:</label>
+        <input type="text" readonly>
+      </li>
+      <li>
+        <label>Name On Bottle:</label>
+        <input type="text" readonly>
+      </li>
+    </ul>
+    <div class="prefrence prefrence2">
+      <a onclick="login()"  class="hair_quiz">Login to fetch data</a>
+      {% comment %} href="/account/login" {% endcomment %}
+    </div>
+  </section>
+  {% endif %}
+
+  <div class="new-grid product-grid collection-grid" data-view="{{ productGridView }}" data-scroll-to>
+
+    {%- liquid
+    for product in collection.products
+    render 'product-grid-item-customise', product: product
+
+    if settings.quick_shop_enable
+    render 'quick-shop-modal', product: product
+    endif
+    endfor
+    -%}
+  </div>
+
+  {%- liquid
+  if paginate.pages > 1
+  render 'pagination', paginate: paginate
+  endif
+  -%}
+</div>
+{%- endcase -%}
+{%- endfor -%}
+
+{%- endpaginate -%}
+
+<script>
+  {%if customer %}
+  let quiz_cus_id = 2;
+      {% for tag in customer.tags %}
+      console.log('{{tag}}',"&&&&")
+          if('{{tag}}'.includes('gender-male')) {
+            quiz_cus_id = 3;
+          }
+          {%endfor%}
+  let custom_Id = '{{customer.id}}'
+    $.ajax({
+      url: `https://api-quiz.bareanatomy.in/submit?quiz_id=${quiz_cus_id}&customer_id=${custom_Id}&profile_id=1`,
+      type: "GET",
+      success: function (data) {
+              if (data.data.is_quiz_completed !=1) {
+                  $('.customise_button_collection').html(`<button class="btn"  onclick="window.location.href='/pages/quiz-3'">Take The Quiz
+              </button>`);
+              $('.quick-add-btn').css('display','none');
+             
+              }
+              if (data.data.is_quiz_completed == 1) {
+              let quizStateId = data.data.quiz_state_id;
+                  renderQuizData(quizStateId);
+              }
+           else {
+          }
+
+      }
+  });
+  function renderQuizData(quizStateId) {
+      $('.hair_goals').empty();
+      $('.hair_pref').empty();
+      $.ajax({
+          //url: `https://api-test-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+          url: `https://api-quiz.bareanatomy.in/analysis?quiz_state_id=${quizStateId}`,
+          type: "GET",
+          success: function (data) {
+              if (data.data) {
+                  $('.no-skin-data').hide();
+                  $(`#quiz_selection`).show();
+                  let goals, color, fragrance;
+                  goals = data.data.quiz_data.goals.split(',');
+                  color = data.data.quiz_data.color;
+                  fragrance = data.data.quiz_data.fragrance;
+                  // $('#quiz_answers').html(<li>Anti-dandruff</li>
+                  // <li>Daily Maintanence</li>
+                  // <li>Repair Damage</li>
+                  // <li class="peach">Sprinkle Spurple (purple)</li>
+                  // <li class="peach">Milk & Honey</li>)
+                  goals.forEach((goal) => {
+                      $('.hair_goals').append(`<li>${goal}</li>`)
+
+                  });
+                  $('.hair_pref').append(`<li class="peach">${color}</li>`)
+                  $('.hair_pref').append(`<li class="peach">${fragrance}</li>`)
+
+
+              }
+
+          }
+      });
+  }
+  {% endif %}
+</script>

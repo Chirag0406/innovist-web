@@ -1,0 +1,18 @@
+<div class="page-width page-width--narrow page-content">
+  <header class="section-header">
+    {% comment %} <h1 class="section-header__title">
+      {{ page.title | escape }}
+    </h1> {% endcomment %}
+  </header>
+
+  <div class="rte rte--nomargin asdff">
+    {{ page.content }}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page",
+  "tag": "section"
+}
+{% endschema %}

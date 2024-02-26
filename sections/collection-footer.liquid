@@ -1,0 +1,69 @@
+{%- if collection.metafields.custom.title != blank and collection.metafields.custom.description != blank -%}
+  <div class="collection-bottom-desc-section">
+    <div class="page-width">
+      <div class="collection-bottom-desc">
+        {% assign count_desc = -1 %}
+        {% if collection.metafields.custom.product_text_heading_show_bottom %}
+          {%- for desc in collection.metafields.custom.description.value -%}
+            {% if forloop.index == 1 %}
+              <div class="collection-bottom-desc-part">
+                {{ desc }}
+              </div>
+            {% endif %}
+          {%- endfor -%}
+        {% endif %}
+
+        {%- for desc in collection.metafields.custom.description.value -%}
+          {% assign count_desc = count_desc | plus: 1 %}
+          <div class="collection-bottom-desc-part">
+            {%- if collection.metafields.custom.title.value[count_desc] != blank -%}
+              {{ collection.metafields.custom.title.value[count_desc] }}
+            {%- endif -%}
+            {% if collection.metafields.custom.product_text_heading_show_bottom %}
+              {% unless forloop.index == 1 %}
+                {{ desc }}
+              {% endunless %}
+            {% else %}
+              {{ desc }}
+            {% endif %}
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+  <style>
+    .collection-bottom-desc-section{width:100%;padding:40px 0 15px;}
+    .collection-bottom-desc{width:100%}
+    .collection-bottom-desc-part{width:100%;padding:10px 0;}
+    .collection-bottom-desc-part a{text-decoration:underline !important;}
+    .collection-bottom-desc-part h2{font-size:22px;margin:0 0 7px;font-weight:bold;}
+    .collection-bottom-desc-part p,.collection-bottom-desc-part h3{font-size:15px;line-height:24px;margin:0 0 12px;}
+    .collection-bottom-desc-part ul{margin:0;padding:10px 0 10px 22px;}
+    .collection-bottom-desc-part ul li{font-size:16px;line-height:24px;margin:0 0 5px;list-style:initial;}
+    .collection-bottom-desc-part ul ol{padding-left:10px;}
+    .collection-bottom-desc-part ul ol li{list-style:numeric;}
+    .collection-bottom-desc-part h3,.collection-bottom-desc-part p{display:block;}
+    .collection-bottom-desc-part ul li h3{margin:0;display:inline-block;}
+    .collection-bottom-desc-part h3{margin:0;font-size:18px;padding:10px 0 5px;font-weight:bold;}
+    .collection-bottom-desc-part h3{display:block;}
+  </style>
+{%- endif -%}
+{{ collection.metafields.custom.faq_s_schema }}
+{% schema %}
+{
+  "name": "Collection Footer",
+  "settings": [],
+  "presets": [
+    {
+      "name": "Collection Footer",
+      "category": "Collection Footer"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

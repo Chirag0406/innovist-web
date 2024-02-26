@@ -1,0 +1,740 @@
+{% schema %}
+  {
+    "name": "about-us",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+
+<!-- /templates/page.liquid -->
+<style>
+	.about-us {
+		margin: 0;
+		max-width: unset;
+		padding: unset;
+	}
+
+	.first_banner {
+		text-align: center;
+		font-family: Glegoo;
+		font-size: 38px;
+	}
+
+	.first_banner div {
+		width: 63%;
+		margin: 0 auto;
+		padding: 5% 0 8%;
+	}
+
+	.first_banner img {
+		height: auto;
+		display: block;
+		margin: 0 auto 4%;
+	}
+
+	.banner_title_1 {
+		font-weight: bold;
+		line-height: 68px;
+		font-size: 38px;
+		margin-bottom: 23px;
+	}
+
+	.banner_title_2 {
+		font-weight: normal;
+		line-height: 45px;
+		font-size: 38px;
+		margin-bottom: 0;
+	}
+
+	@media only screen and (max-width: 600px) {
+		.first_banner div {
+			padding-top: 15%;
+		}
+
+		.first_banner img {
+			margin: 0 auto 13%;
+			height: 120px;
+			width: 125px;
+		}
+
+		.banner_title_1 {
+			font-weight: bold;
+			font-size: 13px;
+			line-height: 23px;
+			margin-bottom: 13px;
+		}
+
+		.banner_title_2 {
+			font-size: 13px;
+			line-height: 18px;
+			margin-bottom: 0;
+		}
+	}
+
+	/* second section css */
+	.second_banner {
+		background: #51C3E2;
+	}
+
+	.second_banner_division {
+		padding: 9% 0%;
+		width: 80%;
+		margin: 0 auto;
+	}
+
+	.second_banner_division .row .column {
+		/* display: grid;
+		grid-template-columns: 50% 50%; */
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+
+	.second_banner_division .row .column>div {
+		flex: 0 0 50%;
+	}
+
+	.second_banner_division p {
+		font-size: 40px;
+		margin: 0;
+	}
+
+	.second_banner_division span.white_text {
+		font-size: 30px;
+		color: #fff;
+	}
+
+	.yellow_text {
+		color: #FFF157;
+	}
+
+	.second_banner_division .text {
+		border-right: 2px solid white;
+	}
+
+	@media only screen and (max-width: 600px) {
+		.second_banner_division {
+			padding: 12% 0%;
+			width: 80%;
+		}
+
+		.second_banner_division .row .column>div {
+			flex: 0 0 100%;
+		}
+
+		.second_banner_division p {
+			font-size: 24px;
+			line-height: 28px;
+		}
+
+		.second_banner_division span.white_text {
+			font-size: 13px;
+		}
+
+		.second_banner_division .image img {
+			height: 106px;
+			width: 199px;
+		}
+
+		.second_banner_division .text {
+			border-right: 0;
+			margin-bottom: 36px;
+		}
+
+	}
+
+	/* third section css */
+	.third_section_division {
+		padding: 6% 0;
+		text-align: center;
+		width: 60%;
+		margin: 0 auto;
+	}
+
+	.third_section p.title {
+		font-weight: bold;
+		font-size: 38px;
+		color: #51C3E2;
+	}
+
+	.third_section p {
+		font-size: 20px;
+		line-height: 36px;
+	}
+
+	.third_section img {
+		margin-top: 6%;
+	}
+
+	@media only screen and (max-width: 600px) {
+		.third_section_division {
+			padding: 15% 0;
+			width: 80%;
+		}
+
+		.third_section p.title {
+			font-size: 18px;
+		}
+
+		.third_section p {
+			font-size: 13px;
+			line-height: 23px;
+		}
+
+		.third_section img {
+			margin-top: 12%;
+			height: 65px;
+			width: 75px;
+		}
+	}
+
+	/* fifth section css */
+
+	.fifth_banner {
+		padding: 89px 0;
+		text-align: center;
+		width: 60%;
+		margin: 0 auto;
+	}
+
+	.fifth_banner p {
+		font-size: 32px;
+		line-height: 57px;
+		color: #A82BE2;
+		font-weight: bold;
+	}
+
+	.fifth_banner p .sub_text {
+		color: black;
+		font-size: 30px;
+		font-weight: bold;
+		line-height: 267.1%;
+		margin-bottom: 0px;
+	}
+
+
+	@media only screen and (max-width: 600px) {
+		.fifth_banner {
+			padding: 38px 0;
+			width: 80%;
+		}
+
+		.fifth_banner p {
+			font-size: 18px;
+			line-height: 32px;
+		}
+
+		.fifth_banner p .sub_text {
+			font-size: 13px;
+			line-height: 267.1%;
+		}
+	}
+
+	/* sixth_section css */
+	.sixth_section_division {
+		padding: 50px 0 85px;
+		text-align: center;
+		width: 60%;
+		margin: 0 auto;
+	}
+
+	.sixth_section {
+		background: #F28C53;
+	}
+
+	.sixth_section img {
+		margin: 0px auto 55px;
+	}
+
+	.sixth_section .title {
+		font-weight: bold;
+		font-size: 38px;
+		color: #FFE900;
+		margin-bottom: 42px;
+		font-family: Bitter;
+	}
+
+	.sixth_section p {
+		font-size: 20px;
+		line-height: 36px;
+		color: #FFFFFF;
+	}
+
+	@media only screen and (max-width: 600px) {
+		.sixth_section_division {
+			padding: 50px 0 50px;
+			width: 80%;
+		}
+
+		.sixth_section img {
+			margin: 0px auto 41px;
+			height: 86px;
+			width: 86px;
+		}
+
+		.sixth_section .title {
+			font-size: 32px;
+			line-height: 103%;
+			margin-bottom: 50px;
+		}
+
+		.sixth_section p {
+			font-size: 14px;
+			line-height: 25px;
+		}
+	}
+
+	/* seventh section css */
+	.seventh_section_division {
+		text-align: center;
+		padding: 72px 0 110px;
+	}
+
+	.seventh_section .ssd_1 {
+		margin: 0px auto 39px;
+		font-weight: bold;
+		font-size: 38px;
+		color: #A82BE2;
+	}
+
+	.seventh_section_division img.icon_1 {
+		margin: 0 auto;
+		margin-bottom: 75px;
+	}
+
+	.seventh_section_division .row_images .column_images {
+		/* display: grid; */
+		/* grid-template-columns: 16.66% 16.66% 16.66% 16.66% 16.66% 16.66%; */
+		width: 85%;
+		margin: 0 auto 0;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.seventh_section_division .row_images .column_images>div {
+		flex: 0 0 16.66%;
+	}
+
+	.seventh_section_division .row_images {
+		margin-bottom: 91px;
+	}
+
+	.column_images .image p {
+		font-weight: bold;
+		font-size: 14px;
+		line-height: 25px;
+		text-transform: uppercase;
+		margin-top: 21px;
+		color: #A82BE2;
+	}
+
+	.seventh_section_division .text_sec {
+		width: 60%;
+		margin: 0 auto;
+	}
+
+	.seventh_section_division .text_sec p {
+		font-size: 20px;
+		text-align: center;
+		line-height: 36px;
+	}
+
+	.seventh_section_division .text_sec img {
+		margin-top: 90px;
+	}
+
+	@media only screen and (max-width: 600px) {
+		.seventh_section_division {
+			padding: 51px 0 69px;
+		}
+
+		.seventh_section .ssd_1 {
+			margin: 0px auto 35px;
+			font-size: 18px;
+		}
+
+		.seventh_section_division img.icon_1 {
+			margin: 0 auto;
+			margin-bottom: 58px;
+			height: 88px;
+			width: 195px;
+		}
+
+		.seventh_section_division .text_sec {
+			width: 80%;
+		}
+
+		.seventh_section_division .text_sec p {
+			font-size: 14px;
+			line-height: 25px;
+		}
+
+		.seventh_section_division .text_sec img {
+			margin-top: 30px;
+		}
+
+		.seventh_section_division .row_images .column_images {
+			/* display: grid; */
+			/* grid-template-columns: 33.33% 33.33% 33.33%; */
+			display: flex;
+			flex-wrap: wrap;
+			width: 90%;
+			margin: 0 auto 0;
+		}
+
+		.seventh_section_division .row_images .column_images>div {
+			flex: 0 0 33.33%;
+		}
+
+		.seventh_section_division .row_images {
+			margin-bottom: 51px;
+		}
+
+		.column_images .image p {
+			font-size: 10px;
+			line-height: 21px;
+			margin-top: 10px;
+		}
+
+		.column_images .image.cl p {
+			font-size: 10px;
+			line-height: 21px;
+			margin-top: 10px;
+			margin-bottom: 35px;
+		}
+
+		.column_images .image.c2 p {
+			margin-bottom: 0;
+		}
+
+
+		.column_images .image img {
+			height: 53px;
+			width: 67px;
+		}
+	}
+
+	/* forth section css */
+	.forth_section .row_section .column_section {
+		/* display: grid; */
+		/* grid-template-columns: 50% 50%; */
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.forth_section .row_section .column_section>div {
+		flex: 0 0 50%;
+	}
+
+
+	.forth_section .row_section .column_section div {
+		text-align: center;
+	}
+
+	.forth_section .row_section .column_section .cs-1 {
+
+		background: #A82BE2;
+	}
+
+	.forth_section .row_section .column_section .cs-2 {
+
+		background: #FFE900;
+	}
+
+	.forth_section .row_section .column_section .width_sec {
+		width: 70%;
+		margin: 67px auto;
+	}
+
+	.forth_section .row_section .column_section .cs-1 .width_sec {
+		margin-top: 127px;
+	}
+
+	.forth_section .row_section .column_section .cs-2 .width_sec p {
+		font-size: 20px;
+		line-height: 36px;
+	}
+
+	.forth_section .row_section .column_section .cs-2 .width_sec p .sec_title {
+		font-size: 34px;
+		line-height: 61px;
+		font-weight: bold;
+		color: #A82BE2;
+	}
+
+	.forth_section .row_section .column_section .cs-1 .width_sec p {
+		font-weight: bold;
+		font-size: 25px;
+		line-height: 45px;
+		color: #FFFFFF;
+
+	}
+
+	.forth_section .row_section .column_section .cs-1 .width_sec p.sec_title {
+		font-family: Bitter;
+		font-size: 34px;
+		line-height: 41px;
+		width: 80%;
+		margin: 0 auto 94px;
+		color: #FFFFFF;
+	}
+
+	.forth_section .row_section .column_section .cs-1 .width_sec p.sec_title .color_text {
+		font-family: Bitter;
+		font-weight: 500;
+		font-size: 42px;
+		line-height: 50px;
+		color: #FFE900;
+	}
+
+	#triangle-right {
+		width: 0;
+		height: 0;
+		border-top: 50px solid transparent;
+		border-left: 50px solid #A82BE2;
+		border-bottom: 50px solid transparent;
+		position: relative;
+    	top: 40%;
+    	margin-bottom: -100px;
+	}
+
+	@media only screen and (max-width: 600px) {
+		.forth_section .row_section .column_section>div {
+			flex: 0 0 100%;
+		}
+
+		.forth_section .row_section .column_section .width_sec {
+			width: 80%;
+			margin: 39px auto;
+		}
+
+		.forth_section .row_section .column_section .cs-1 .width_sec {
+			margin-top: 54px;
+			margin-bottom: 54px;
+		}
+
+		.forth_section .row_section .column_section .cs-2 .width_sec p {
+			font-size: 13px;
+			line-height: 23px;
+		}
+
+		.forth_section .row_section .column_section .cs-2 .width_sec p .sec_title {
+			font-size: 24px;
+			line-height: 43px;
+		}
+
+		.forth_section .row_section .column_section .cs-1 .width_sec p {
+			font-size: 15px;
+			line-height: 27px;
+		}
+
+		.forth_section .row_section .column_section .cs-1 .width_sec p.sec_title {
+			font-size: 24px;
+			line-height: 29px;
+			width: 100%;
+			margin: 0 auto 49px;
+		}
+
+		.forth_section .row_section .column_section .cs-1 .width_sec p.sec_title .color_text {
+			font-size: 32px;
+			line-height: 38px;
+		}
+
+		#triangle-right {
+			border-left: 28px solid transparent;
+			border-right: 28px solid transparent;
+			border-top: 23px solid #A82BE2;
+			border-bottom: 0;
+			top: 0%;
+			margin: 0 auto -23px;
+		}
+	}
+</style>
+<section class="page about-us">
+	<!-- <h1 class="page__title">{{ page.title }}</h1>
+	<div class="rte">{{ page.content }}</div> -->
+	<div class="first_banner">
+		<div>
+			<img data-src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/Group_3020.svg?v=1621930496"
+				class="lazyload" />
+			<p class="banner_title_1"> Haven’t you heard?</p>
+			<p class="banner_title_2"> There's a new fun skincare brand in town!</p>
+		</div>
+	</div>
+	<div class="second_banner">
+		<div class="second_banner_division">
+			<div class="row">
+				<div class="column">
+					<div class="text" style="text-align: center">
+						<p>
+							India’s First<br>
+							<span class="yellow_text">
+								Ceramides-Based<br>
+							</span>
+							Skin Care<br>
+							<span class="white_text">
+								with So. Much. Fun.<br>
+							</span>
+						</p>
+					</div>
+					<div class="image" style="text-align: center">
+						<img data-src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/logo.svg?v=1621930496"
+							class="lazyload" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="third_section">
+		<div class="third_section_division">
+			<p class="title"> Skincare and Science</p>
+			<p>
+				We are here to give you the best of both worlds. And no, it's nothing like the boring science we hated
+				in
+				school. Based on the 3Bs of skincare (we’ll get to that in a second), we are on our way to becoming your
+				holy
+				grails!<br><br>
+				Ready to put the fun back into your skincare routine? <br>
+				<span style="font-weight: bold;">#ScienceMadeFun</span>
+			</p>
+			<img data-src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/love_scienc.svg?v=1621930496"
+				class="lazyload" />
+		</div>
+	</div>
+	<div class="forth_section">
+		<div class="row_section">
+			<div class="column_section">
+				<div class="cs-1">
+					<div class="width_sec">
+						<p class="sec_title">Let’s talk about our<br>
+							<span class="color_text">3Bs Of Skincare</span></p>
+						<p>In 2020, we started playing with the different aspects of science in skincare because we
+							believe that
+							people should understand the science behind the products they choose to use on their
+							skin.<br><br>
+							Our debut range of skincare must-haves focuses on being Bio-Compatible, Bio-Effective, and
+							is enriched
+							with Botanical Actives; the 3Bs of skincare science!</p>
+					</div>
+				</div>
+
+				<div class="cs-2">
+					<div id="triangle-right">
+					</div>
+					<div class="width_sec">
+						<p><span class="sec_title">Bio Compatible</span> <br>
+							Our products are biocompatible, meaning that they work well with the skin, are highly
+							absorbable,
+							penetrate into the deeper layers of the skin to fight common skin woes like a boss!<br><br>
+
+							<span class="sec_title">Bio Effective</span> <br>
+							Our products also boast of being super effective that work their magic to make your skin
+							better with every
+							use, without being harsh. If your skin type usually points towards the sensitive compass,
+							then we are your
+							jam!<br><br>
+
+							<span class="sec_title">Botanical Actives</span><br>
+							Our exclusive line of skincare serums are derived from skin-friendly plant-based compounds,
+							which are
+							responsible for making you age in reverse among other fantastic benefits.</p>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<div class="fifth_banner">
+		<div>
+			<p>One of the most A.M.A.Z.I.N.G Botanical actives we love working with, is <span
+					style="background-color:#FFE900;">Ceramides!</span><br>
+				<span class="sub_text">Let’s find out why!</span></p>
+		</div>
+	</div>
+	<div class="sixth_section">
+		<div class="sixth_section_division">
+			<img data-src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/ceraminde_1.svg?v=1621930496"
+				class="lazyload" />
+			<p class="title">Ceramides-Based Skincare</p>
+			<p>
+				Think of ceramides like cement- holding together the cells in your skin, thus making us look young. They
+				also
+				rebuild and restore the external barrier that retains moisture, improves the visible signs of ageing and
+				also
+				protects the skin from environmental damage.
+				<br><br>
+				Yes, ceramides do exist naturally in our body but with time, their production slows down and we need to
+				give our
+				skin the extra boost.<br><br>
+
+				There are mainly nine types of ceramides identified, derived from animals.<br>
+				TBH, the source of ceramides matters too. We believe that animals are our friends (we are cruelty free)
+				and
+				therefore, we took the phytoceramides (plant based ceramides) route.<br><br>
+
+				In short, we've done all the hard work and have put all the goodness in a bottle for your skin to soak
+				up!
+			</p>
+		</div>
+
+	</div>
+	<div class="seventh_section">
+		<div class="seventh_section_division">
+			<p class="ssd_1">We’re also proud to be</p>
+			<img data-src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/cruelty_and_derma.svg?v=1621930496"
+				class="icon_1 lazyload" />
+			<div class="row_images">
+				<div class="column_images">
+					<div class="image cl">
+						<img src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/silicon.svg?v=1621930496">
+						<p>Silicones Free</p>
+					</div>
+					<div class="image cl">
+						<img src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/paraben.svg?v=1621930497">
+						<p>Parabens Free</p>
+					</div>
+					<div class="image cl">
+						<img src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/pthalates.svg?v=1621930496">
+						<p>Pthalates Free</p>
+					</div>
+					<div class="image c2">
+						<img src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/mineral_oil.svg?v=1621930496">
+						<p>Mineral Oil Free</p>
+					</div>
+					<div class="image c2">
+						<img src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/fragrance_and_dye.svg?v=1621930496">
+						<p>Fragrance and Dye Free</p>
+					</div>
+					<div class="image c2">
+						<img src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/gluten.svg?v=1621930496">
+						<p>Gluten Free</p>
+					</div>
+				</div>
+			</div>
+			<div class="text_sec">
+				<p>
+					Our debut ceramides-based line focuses primarily on hydrating, boosting radiance, exfoliating,
+					fighting off
+					acne, and repairing the skin.<br><br>
+
+					It’s time to put a stop to all your skincare experiments as our chemists are busy formulating your
+					most
+					compatible skincare match. And we believe that great skincare days are right ahead!
+					<br><br><br>
+
+					<span style="font-weight:bold;"><span style="
+							color: #EA27C2;">So what are you waiting for?</span><br>
+						It's time to upgrade your skincare routine with Chemist At Play.</span>
+				</p>
+				<img data-src="https://cdn.shopify.com/s/files/1/0564/5444/7262/files/science.svg?v=1621930496"
+					class="lazyload" />
+			</div>
+		</div>
+	</div>
+
+</section>

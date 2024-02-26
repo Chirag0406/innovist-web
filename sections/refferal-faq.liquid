@@ -1,0 +1,61 @@
+{% assign reffaq_blocks = section.blocks | where: 'type', 'refaq' %}
+<section class="frequent_questions">
+             <h5 class="listing_title">FAQs</h5>
+          <div class="container">
+          <div class="ques_listing">
+            <div class="accordion" id="accordionExample">
+              
+                {% for block in reffaq_blocks %}
+                  {% if block.settings.ref_faqbutton and block.settings.ref_faqcon %}
+                  <div class="card">
+                    <div class="card-header" id="heading{{ forloop.index }}">
+                          <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapse{{ forloop.index }}" aria-expanded="true" aria-controls="collapse{{ forloop.index }}" value="fff">
+                             <span class="card-title">{{ block.settings.ref_faqbutton }}</span>   
+                             <i class="fa fa-angle-down" aria-hidden="true"></i>
+                          </button>
+                        </div>
+                        <div id="collapse{{ forloop.index }}" class="collapse" aria-labelledby="heading{{ forloop.index }}" data-parent="#accordionExample">
+                          <div class="card-body">
+                            {{ block.settings.ref_faqcon }}
+                          </div>
+                        </div>
+                        </div>
+                  {% endif %}
+                {% endfor %}
+                        
+              
+            </div> 
+          </div>  
+          </div>  
+        </section> 
+
+{% schema %}
+   {
+    "name": "FAQ",
+    "class": "faq-section",
+    "blocks": [
+      {
+        "type": "refaq",
+        "name": "FAQ",
+        "settings": [
+          {
+            "type": "text",
+            "id": "ref_faqbutton",
+            "label": "Button text"
+          },
+			   {
+            "type": "textarea",
+            "id": "ref_faqcon",
+            "label": "Faq Content"
+          }
+        ]
+      }
+	]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

@@ -1,0 +1,141 @@
+<style>
+  @media only screen and (max-width:768px){
+  .mobile-view-all{
+   position: static;
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding-bottom: 30px;
+  }
+    .featured-tab-product-grid .slick-slide {
+    display: -webkit-box;
+}
+  }
+</style>
+
+{%- if section.settings.divider -%}<div class="section--divider">{%- endif -%}
+
+ {%- render 'snackbar', section_id:'snackbar' -%}
+
+<div
+  id="CollectionSection-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-section-type="collection-template" class="tab-featured-collection">
+  {%- if section.settings.title != blank -%}
+    
+      <div class="section-header{% if section.settings.view_all %} section-header--with-link{% endif %}">
+        <div class="page-width">
+        <h2 class="section-header__title">
+          {{ section.settings.title }}
+        </h2>
+        </div>
+      </div>
+  {%- endif -%}
+
+   
+    <div class="page-width featured-collection-tab-container inner-{{section.id}}">
+      <div class="tab featured-collection-tab-inner">    
+        {% for block in section.blocks %}
+        <button class="tablinks {% if forloop.index == 1 %} active {% endif %}"  onclick="openCity(event, 'inner-{{section.id}}', 'featured-tab-product-grid-{{ block.id }}')">{{ block.settings.title }}</button>
+        {% endfor %} 
+      </div>                                                                                                
+  {% for block in section.blocks %}
+      {% if forloop.index == 1 %}
+      {% assign block_Id = block.id %}
+      {% endif %}
+      <div class="featured-collection-tab tabcontent {{forloop.index}}" {% if forloop.index == 1 %} style="display: block;" {% endif %} id="featured-tab-product-grid-{{ block.id }}" >
+        {%- if section.settings.view_all -%}
+         <a href="{{ section.settings.title_link }}" class="tab-featured-collection-view-all small--hide section-header__link">{{ 'collections.general.all_of_collection' | t }}</a>
+        {%- endif -%} 
+        <div class="new-grid product-grid featured-tab-product-grid" data-block-id="{{ block.id }}">
+        {%- for product in collections[block.settings.home_featured_products].products limit: block.settings.count -%}
+          <div class="featured-tab-product-grid-item">
+            {% render 'product-grid-item', product: product, collection: collection, classes: item_classes %}
+            {% if settings.quick_shop_enable %}
+            {% render 'quick-shop-modal', product: product %}
+            {% endif %}
+          </div>
+          {%- endfor -%}        
+      </div>
+
+         {%- if section.settings.view_all -%}
+         <a href="{{ section.settings.title_link }}" class="mobile-view-all tab-featured-collection-view-all section-header__link">{{ 'collections.general.all_of_collection' | t }}</a>
+        {%- endif -%} 
+      </div>
+      
+
+     {% endfor %}
+    </div>
+  
+   
+</div>
+
+{%- if section.settings.divider -%}</div>{%- endif -%}
+
+
+
+<script>
+  tabSlider('featured-tab-product-grid-{{block_Id}}');             
+</script>
+
+{% schema %}
+  {
+    "name": "Tab Featured collection",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "url",
+        "id": "title_link",
+        "label": "Heading Link"
+      },
+      {
+        "type": "checkbox",
+        "id": "view_all",
+        "label": "Show 'View all' link",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "divider",
+        "label": "Show section divider",
+        "default": false
+      }
+    ],
+	"blocks" : [
+	  {
+	  "type": "collection",
+      "name": "collection tab",
+      "settings": [
+	  {
+        "type": "collection",
+        "id": "home_featured_products",
+        "label": "Collection"
+      },
+	  {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Tab"
+      },
+      {
+        "type": "range",
+        "id": "count",
+        "label": "Products",
+        "default": 5,
+        "min": 5,
+        "max": 15,
+        "step": 5
+      }
+	]}
+	],
+    "presets": [{
+      "name": "Tab Featured collection"
+    }]
+    
+  }
+{% endschema %}

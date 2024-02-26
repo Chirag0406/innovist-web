@@ -1,0 +1,87 @@
+{% schema %}
+  {
+    "name": "gender-page",
+    "settings": []
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}
+{% comment %}New Quiz v3.0{% endcomment %}
+<link href="{{'custom_hair_quiz.css' | asset_url }}" rel="stylesheet">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<div class="wrapper shopping_cart membership_update hair-quiz skin-quiz-wrapper og-quiz" id="main">
+    <section class="width-box Hair-scalp cart_products personal_name_section">
+        <h4>Personal</h4>
+
+        <div class="row">
+            <div class="col-lg-8 col-xs-12">
+                <div class="right_content">
+                    <h5 class="preference-head4">What is your <span>gender?</span></h5>
+
+                    <div class="option-box gender"><ul><li><input type="radio" value="female" name="gender" data-selected="false">
+                        <span class="check">Female</span>
+                       </li><li><input type="radio" value="male" name="gender" data-selected="false">
+                        <span class="check">Male</span>
+                       </li><li><input type="radio" value="prefer-not-to-say" name="gender" data-selected="false">
+                        <span class="check">Prefer Not To Say</span>
+                       </li></ul></div>
+                    <!-- <button class="btn" id="name-next-btn" type="button">next</button> -->
+
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-xs-12">
+                <div class="left_content">
+                    <img src="https://cdn.shopify.com/s/files/1/0255/3302/2244/files/Group_1888_2x_ec2fcb12-9d02-4dd3-86dd-abc47a4a80e0.png?v=1613719665" alt="">
+                    <div class="box">
+                        <h5>Personalizing <label class="personalized-text"><span style="display:none;">for</span></label>...</h5>
+                        <div class="progress-bar">
+                            <span style="width: 3.22%;" id="progress-bar-width"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+
+</div>
+
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    let gift_id = Number(urlParams.get('gift_id'));
+
+    $('.gender input').change(async function() {
+        let genderValue = $(this).val()
+        localStorage.setItem('gender', genderValue);
+        {%if customer %} 
+            let updateTags = await postData('https://api-automation.bareanatomy.in/api/v1/customers/tags' , {
+                        customer_id: Number('{{customer.id}}'),
+                        tag: "gender-" + genderValue
+                    }); 
+        {% endif %}
+        if(genderValue.toLowerCase().trim() == 'male') {
+            window.location.href = '/pages/men-hair-quiz'+ `${gift_id ? '?gift_id='+gift_id : ''}`;
+        } else {
+            window.location.href = '/pages/quiz-3'+ `${gift_id ? '?gift_id='+gift_id : ''}`;
+        }
+
+    });
+    
+    function postData(ajaxurl, data) {
+        return $.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: JSON.stringify(data),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json'
+        });
+    }
+</script>

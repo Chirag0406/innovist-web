@@ -1,0 +1,134 @@
+<style>
+.sitemap-menu-wrappper ul {
+    list-style: none;
+    text-align: left;
+    margin: 0;
+}
+.sitemap-links {
+    display: flex;
+    justify-content: space-between;
+    text-align: left;
+  flex-wrap:wrap;
+      row-gap: 65px;
+}
+.sitemap-childlinks {
+    margin-top: 10px;
+    font-weight: normal;
+      text-align: left;
+}
+a.site-link-item span {
+    font-size: 14px;
+}
+.site-link-item-wrapper{
+  width:32%;
+  list-style:none;
+}
+  .sitmap-title {
+    text-align: center;
+    margin-bottom: 60px;
+    margin-top: 60px;
+}
+.site-link-item h2 {
+    font-size: 14px;
+    font-family: var(--typeBasePrimary),var(--typeBaseFallback);
+    font-weight: bold;
+  margin-bottom: 12px;
+}
+.site-childlink-item h3 {
+    font-size: 12px;
+    margin: 8px 0px;
+  font-family: var(--typeBasePrimary),var(--typeBaseFallback);
+}
+@media only screen and (max-width: 767px) {
+.site-link-item-wrapper {
+    width: 100%;
+}
+.sitemap-links {
+      row-gap: 30px;
+}
+  .sitmap-title {
+    text-align: left;
+    margin-bottom: 45px;
+    margin-top: 45px;
+}
+}
+</style>
+<div class="sitemap-menu-wrappper">
+<div class="page-width">
+<div class="sitmap-title">
+<h1>Sitemap</h1>
+</div>
+  <div class="sitemap-links" role="list">
+    {%- for link in section.settings.menu.links -%}
+      <li class="site-link-item-wrapper">
+             <a class="site-link-item"
+            href="{{ link.url }}"
+            {% if link.current %}
+              aria-current="page"
+            {% endif %}
+          >
+            <h2
+              {%- if link.current %}
+                class="header__active-menu-item"
+              {% endif %}
+            >
+              {{- link.title | escape -}}
+            </h2>
+          </a>
+      
+         <ul
+            class="sitemap-childlinks"
+                  role="list"
+                >
+                  {%- for childlink in link.links -%}
+                    <li>
+                      <a class="site-childlink-item"
+                        href="{{ childlink.url }}"
+                        {% if childlink.current %}
+                          aria-current="page"
+                        {% endif %}
+                      >
+                        <h3>{{ childlink.title | escape }}</h3>
+                      </a>
+                      {%- if childlink.links != blank -%}
+                        <ul class="sitemap-grandchild-link" role="list">
+                          {%- for grandchildlink in childlink.links -%}
+                            <li>
+                              <a class="site-grandchildlink-item" 
+                                href="{{ grandchildlink.url }}"
+                                {% if grandchildlink.current %}
+                                  aria-current="page"
+                                {% endif %}
+                              >
+                                {{ grandchildlink.title | escape }}
+                              </a>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+                    </li>
+                  {%- endfor -%}
+                </ul>
+      </li>
+    {%- endfor -%}
+  </div>
+</div>
+</div>
+
+{% schema %}
+  {
+    "name": "Sitemap",
+    "settings": [
+ {
+      "type": "link_list",
+      "id": "menu",
+      "label": "Site Map Menu"
+    }
+],
+    "presets":[
+      {
+        "name":"Sitemap"
+      }
+    ]
+  }
+{% endschema %}

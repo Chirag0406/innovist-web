@@ -1,0 +1,111 @@
+<div class="page-width builder_part">
+  <div id="loading"></div>
+
+  <div class="amount_wc" data-amount="${{amount}}"></div>
+
+  <div class="main_wrapper select_wrapper">
+    <div class="left_part">
+      <ul id="my-accordions" class="accordionjss">
+        <li class="product_select active">
+          <div
+            class="product_list"
+            data-stap="{{ forloop.index }}"
+            data-product-limit="3"
+            {% if forloop.index == 1 %}
+              style="display:block;"
+            {% endif %}
+          >
+            {% assign collection_name = section.settings.right_collection %}
+            <ul class="product-list-main">
+              {% for product in collections[collection_name].products %}
+                <li data-product="{{ product.handle }}" class="grid__items grid__item--{{section.id}}">
+                  {% include 'product-card-collection-new',
+                    max_height: max_height,
+                    product: product,
+                    show_vendor: section.settings.show_vendor
+                  %}
+                </li>
+              {% endfor %}
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="right_part">
+      {% assign collection_name = 'all' %}
+      <ul>
+        {%- paginate collections[collection_name].products by 500 -%}
+          {% for product in collections[collection_name].products %}
+            <li
+              class="hide_all {{ product.handle }}"
+              data-v-id="{{ product.selected_or_first_available_variant.id }}"
+              data-price="{{ product.price }}"
+            >
+              <img
+                src="{{ product.featured_image | img_url: '140x140' }}"
+                alt="{{ product.featured_media.preview_image.alt }}"
+              >
+              <h3>{{ product.title }}</h3>
+              <a href="javascript:void(0)" class="close-icon" data-handle="{{ product.handle }}">X</a>
+            </li>
+          {% endfor %}
+        {%- endpaginate -%}
+      </ul>
+      {% assign main_p = all_products[section.settings.product] %}
+      <div class="main_bundle_product_cart" data-id="{{ main_p.selected_or_first_available_variant.id }}"></div>
+      <a href="javascript:void(0)" class="btn checkout">Checkout</a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+ {
+   "name": "Product Builder",
+   "settings": [
+            {
+                "type":"collection",
+                "id":"right_collection",
+                "label":"Right Site Collection"
+            },
+  {
+                "type":"product",
+                "id":"product",
+                "label":"Product"
+            }
+   ],
+   "max_blocks": 3,
+   "blocks": [
+	{
+		"type": "collection",
+		"name": "Select Collection",
+		"settings": [
+                {
+                 "type": "text",
+                 "id": "title",
+                 "label": "Step Heading Text"
+               },
+			 {
+                "type":"collection",
+                "id":"collection",
+                "label":"Collection"
+               },
+			{
+                 "type": "text",
+                 "id": "limit_product",
+                 "label": "Limit Product select"
+               }
+		]
+	}
+],
+     "presets": [
+       {
+         "name": "Product Builder",
+         "category": "Product Builder"
+       }
+     ]
+ }
+{% endschema %}
+
+{% stylesheet %}
+  .builder_part{display:none;}
+{% endstylesheet %}

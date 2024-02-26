@@ -1,0 +1,79 @@
+{% if section.settings.delivery_box %}
+
+
+    <div class="mobile-only">
+        {% render 'product_delivery_time',
+                product: product
+        %}
+    </div>
+{% endif %}
+<style>
+    input.pincode,
+    input.pincode::-webkit-input-placeholder {
+        font-size: 12px !important;
+    }
+    .mobile-only{
+        display: none;
+    }
+    @media only screen and (max-width: 560px) {
+        .mobile-only{
+            display: block !important;
+        }
+        .pincode-container{
+            width: 90%;
+            margin: 1% auto;
+            padding: 1rem;
+            border:1px solid #000;
+        }
+        .display-delivery-msg{
+            text-align: left;
+            font-size: 12px;
+        }
+    }
+</style>
+
+{% schema %}
+  {
+    "name": "Delivery Box",
+    "class": "product-box",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "delivery_box",
+        "label": "Delivery Box Enable for Mobile",
+        "default": true
+      }]
+
+  }
+
+{% endschema %}
+
+<script>
+      $('.get_estimate').click(function() {
+        let value = $('.pincode').eq(0).val() ||  $('.pincode').eq(1).val();
+        $.ajax({
+            url: `https://api-login.bareanatomy.in/delivery?pin_code=${value}`,
+            headers: {
+              shop: 'bareanatomy.myshopify.com'
+            },
+            dataType: 'json',
+            contentType: 'application/json',
+            type: "GET",
+            success: function (data) {
+                if (data.status == 200 && data.data && data.data.pin_code) {
+                    $('.display-delivery-msg').text('Estd. Delivery Date - ' +
+                        new Date(Date.now() + data.data.min_days*24*60*60*1000 + 5.5 * 3600*1000).toLocaleString('default', { month: 'short', day:'2-digit' }) + ' - ' +
+                        new Date(Date.now() + data.data.max_days*24*60*60*1000 + 5.5 * 3600*1000).toLocaleString('default', { month: 'short', day:'2-digit' }))
+
+                } else  {
+                  $('.display-delivery-msg').text('Not servicable here');
+                }
+            }, error: function(err) {
+              $('.display-delivery-msg').text('Not servicable here');
+
+            }
+        });
+
+
+      })
+</script>

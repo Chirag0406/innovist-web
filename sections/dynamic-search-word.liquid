@@ -1,0 +1,88 @@
+<script>
+  $(document).ready(function(){
+    setTimeout(function(){
+      console.log('iff')
+  let staticPlaceholder = "Search - ";
+        let searcharray = [
+        {% for block in section.blocks %}
+          "{{ block.settings.title }}",
+          {% endfor %}
+        ];
+        let dynamicPlaceholder = "";
+        let searchPlaceholderIndex = 0;
+        let offset = 0;
+        let len = searcharray.length;
+        let forwards = true;
+        let skip_count = 0;
+        let skip_delay = 15;
+        let speed = 100;
+        function type() {
+          setInterval(function() {
+            if (forwards) {
+              if (offset >= searcharray[searchPlaceholderIndex].length) {
+                ++ skip_count;
+                if (skip_count == skip_delay) {
+                  forwards = false;
+                  skip_count = 0;
+                }
+              }
+            } else {
+              if (offset == 0) {
+                forwards = true;
+                searchPlaceholderIndex++;
+                offset = 0;
+                if (searchPlaceholderIndex >= len) {
+                  searchPlaceholderIndex = 0;
+                }
+              }
+            } dynamicPlaceholder = searcharray[searchPlaceholderIndex].substr(0, offset);
+            if (skip_count == 0) {
+              if (forwards) {
+                offset++;
+              } else {
+                offset--;
+              }
+            }
+            document.querySelectorAll('.st-dummy-label span').forEach(search_el => {
+              search_el.innerHTML = staticPlaceholder + dynamicPlaceholder;
+            });
+            document.querySelectorAll('.site-header__search-input').forEach(search_el => {
+              search_el.setAttribute("placeholder", staticPlaceholder + dynamicPlaceholder);
+            });
+          }, speed);
+        };
+        type();
+      }, 1000);
+  })
+</script>
+{% schema %}
+{
+  "name": "Dynamic Search Words",
+  "settings": [],
+  "blocks": [
+    {
+      "name": "Text",
+      "type": "Text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic Search Words",
+      "category": "Dynamic Search Words"
+    }
+  ]
+}
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

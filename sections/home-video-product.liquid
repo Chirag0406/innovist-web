@@ -1,0 +1,95 @@
+{% if section.settings.video_link != blank and section.settings.product != blank %}
+{% assign product = all_products[section.settings.product] %}
+<div class="home-video-product-section">
+  {% if section.settings.title != blank %}
+  <div class="section-header">
+      <div class="page-width">
+    <h2 class="section-header__title"> 
+      <p>{{ section.settings.title }}</p>
+        </h2>
+    </div>
+  </div>
+  {% endif %}
+  <div class="page-width">
+    <div class="home-video-product">
+      <div class="home-video-product-left">
+        <video width="100%" height="500" muted loop autoplay playsinline>
+  <source src="{{ section.settings.video_link }}" type="video/mp4">
+  <source src="mov_bbb.ogg" type="video/ogg">
+  Your browser does not support HTML video.
+</video>
+        <!-- <img src="{{ section.settings.video_link }}" /> -->
+      </div>
+      <div class="home-video-product-right">
+        {%- liquid
+            assign item_classes = ''
+            unless section.settings.mobile_scrollable
+              if forloop.index > section.settings.count
+                assign item_classes = 'hide'
+                assign mod = forloop.index | modulo: 2
+                if mod == 0
+                  assign item_classes = 'medium-up--hide'
+                endif
+              endif
+            endunless
+
+            render 'product-grid-item', product: product, collection: collection, classes: item_classes
+
+            if settings.quick_shop_enable
+              render 'quick-shop-modal', product: product
+            endif
+        -%}
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .home-video-product-section{width:100%;padding:30px 0;display:none;}
+  .home-video-product{width:100%;display:flex;flex-wrap:wrap;justify-content:space-between;}
+  .home-video-product-left{width:49%;}
+  .home-video-product-left video,.home-video-product-left img{width:100%;height:100%;object-fit:cover;}
+  .home-video-product-right{width:49%;}
+  .home-video-product-right .grid-item__content{padding:0;}
+  .home-video-product-section .page-width{padding:0 10px;}
+  @media(max-width:767px){
+    .home-video-product-section{display:block;}
+    .home-video-product-left video,.home-video-product-left img,[data-grid-style*=gridlines] .home-video-product-section .grid-product:after{border-radius:5px;}
+  }
+</style>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Home Video Product",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading"
+      },
+      {
+        "type": "product",
+        "id": "product",
+        "label": "Product"
+      },
+      {
+        "type": "image_picker",
+        "id": "poster_image",
+        "label": "Poster Image"
+      },
+      {
+        "type": "text",
+        "id": "video_link",
+        "label": "Video Link"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Home Video Product",
+        "category": "Home Video Product"
+      }
+    ]
+  }
+{% endschema %}

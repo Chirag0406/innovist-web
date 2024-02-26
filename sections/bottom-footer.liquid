@@ -1,0 +1,65 @@
+{%- if section.settings.enabled_bottom_footer -%}
+<div class="bottom-footer-section">
+  <div class="page-width">
+    <div class="bottom-footer">
+      {% for link in linklists[section.settings.menu].links %}
+      <div class="bottom-footer-menu">
+      <div class="h2">{{ link.title }}</div>
+        {%- if link.links != blank -%}
+          {% for sub_link in link.links %}
+      <div class="bottom-footer-list">
+        <span><a href="{{ sub_link.url }}">{{ sub_link.title }}:</a></span>
+            {%- if sub_link.links != blank -%}
+          {% for inner_link in sub_link.links %}
+        <span><a href="{{ inner_link.url }}">{{ inner_link.title }}</a></span>
+            {% endfor %}
+        {%- endif -%}
+      </div>
+            {% endfor %}
+        {%- endif -%}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+<style>
+  .bottom-footer-section{width:100%;padding: 15px 0 20px;}/*padding:40px 0 50px;*/
+  .bottom-footer{width:100%;}
+  .bottom-footer-menu{width:100%;}
+  .bottom-footer-menu .h2{font-size:15px;margin:15px 0 7px;color:#fff;}
+  .bottom-footer-list{width:100%;}
+  .bottom-footer-list span{display:inline-block;padding-right:12px;position:relative;line-height:20px;}
+  .bottom-footer-list span:after{content:'';width:1px;height:10px;position:absolute;top:0;left:-8px;background:#000;top:50%;transform:translateY(-50%);-webkit-transform:translateY(-50%);-o-transform:translateY(-50%);-moz-transform:translateY(-50%);-ms-transform:translateY(-50%);}
+  .bottom-footer-list span a{display:block;letter-spacing:0.2px;opacity:0.8;}
+  .bottom-footer-list span a:hover{opacity:1;}
+  .bottom-footer-list span:first-child{padding-right:0;}
+  .bottom-footer-list span:first-child:after,.bottom-footer-list span:nth-child(2):after{display:none;}
+</style>
+{%- endif -%}
+
+
+
+{% schema %}
+  {
+    "name": "Bottom Footer",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "enabled_bottom_footer",
+        "label": "Show Enabled Footer",
+        "default": true
+      },
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu"
+      }
+    ]
+  }
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

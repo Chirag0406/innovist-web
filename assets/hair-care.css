@@ -1,0 +1,771 @@
+
+/*! CSS Used from: https://cdn.shopify.com/s/files/1/0039/6073/3763/t/270/assets/new-theme.css?v=16287225826416427815 */
+input,button,a{-webkit-tap-highlight-color:rgba(255,255,255,0);}
+img{max-width:100%;height:auto;}
+.text-center{text-align:center;}
+#accordion{border-top:#e6e6e6 1px solid;}
+.owl-nav{width:100%;position:absolute;top:50%;margin-top:-91px;cursor:pointer;text-decoration:none;outline:0;border:0;}
+.owl-prev{display:inline-block;float:left;margin-left:20px;width:24px;height:24px;z-index:9;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2hpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDozRkJFMjI3OTA3MjA2ODExODIyQTk4NzkwMUNENzlCMyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDo2MDE3RThFQzBBMDIxMUU5OTk2NTk4NjkwOTk4ODVDRiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2MDE3RThFQjBBMDIxMUU5OTk2NTk4NjkwOTk4ODVDRiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6M0ZCRTIyNzkwNzIwNjgxMTgyMkE5ODc5MDFDRDc5QjMiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6M0ZCRTIyNzkwNzIwNjgxMTgyMkE5ODc5MDFDRDc5QjMiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz6yysEKAAABfUlEQVR42rSWPyiEYRzH7x6SblFKGW4wGExGg0xHlKLOYFBKyYYFmXi9JotikEykJKmri5I/JaPNYjNRFhPKQLw+T/2unsE99573d299+l6/3vf7uXt6nt4zURSlakl9KsEVhuEqMQfbQRDM/3WPSVAeEkuQgely95l/li8Sy86ooCagfJZYc0YXMKEioHyS2HBGN5Bn/T8TCygfI3YgLaNbGKb8w/eciVk+QuxDnYzuYIDyt0rPmhjlg8ShU34P/ZS/xvlypkJ5jjiGBhk9SPlL3KU1nvJu4kT2ub0eIUf5czUbw/cLDpxyW9pL+VO129on+NE48b4H7bZ8l8+tcM2ytakJWA67z4egtM+zcIkkq/ULrMSeVHsGSie1XSQtKgKRnBOj8CWjDrhC0qwiEEmRGIdvGXXCGZImFYFIjogpiGTUBadIMioCkewSM46kB4pIGtXeB0i2iAVn1Ad7qm80JOvEijPKqwpEYt/JgRzGzXL3pe1fi1pevwIMAE3vtN7C5YMdAAAAAElFTkSuQmCC)!important;background-repeat:no-repeat!important;}
+.owl-next{float:right;display:inline-block;margin-right:20px;width:24px;height:24px;z-index:9;background-image:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAFoSURBVHjatJa/K4VhFMc/F4OuopSSkMGglEwssmAkFoswGRQ2WfB1NgMGZRQTWeiWuoVwS8nfIf8AMfjRa3DUk7i69z73TOf5PvV8ejvnfM+bSpKEckbVXxdmtgHMAluSVooFVOS5mwPSwLKZWTkAJ0G+amZLsQHTwFlwXjezhUIBqXxFNrM0kAX6XUqAGUm7UQAOqfUv6XXpA5iSdBAF4JA64BroDiDjko6jABzSAFwBnS69AqOSslEADmkCckC7Sy/AsKTLKACHtAA3QKtLz8CQpNtC2/TXkHQPDAAPLtUAh8XMwX9RGeTv0QBm1ubFbnTpEZiIAjCzZuAcaA6KPCLprmSAt+l50EGvwJikXLFeFD5eD1wAHS69+aCdlWJ24RRnga5giiclZUp102+zOwV6fpjdUcl2bWbVQAboCx6fl7QXax/sA4PBeVHSTsyFMxrka5I2Y2+0beDpyx1U9E5Olfu35XMAD+iCCvcmIKwAAAAASUVORK5CYII=)!important;background-repeat:no-repeat!important;}
+@media only screen and (max-width: 767px){
+    img{max-width:100%;height:auto;}
+    .owl-nav{margin-top:-97px;}
+}
+/*! CSS Used from: https://cdn.shopify.com/s/files/1/0039/6073/3763/t/270/assets/demo.css?v=7714887502509001520 */
+*{margin:0;padding:0;}
+/*! CSS Used from: https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css ; media=all */
+@media all{
+    *,::after,::before{box-sizing:border-box;}
+    nav,section{display:block;}
+    h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;}
+    p{margin-top:0;margin-bottom:1rem !important;}
+    ul{margin-top:0;margin-bottom:1rem !important;}
+    ul ul{margin-bottom:0;}
+    a{color:#007bff;text-decoration:none;background-color:transparent;}
+    a:hover{color:#0056b3;text-decoration:underline;}
+    img{vertical-align:middle;border-style:none;}
+    button{border-radius:0;}
+    button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color;}
+    button,input{margin:0;font-family:inherit;font-size:inherit;line-height:inherit;}
+    button,input{overflow:visible;}
+    button{text-transform:none;}
+    [role=button]{cursor:pointer;}
+    [type=button],[type=submit],button{-webkit-appearance:button;}
+    [type=button]::-moz-focus-inner,[type=submit]::-moz-focus-inner,button::-moz-focus-inner{padding:0;border-style:none;}
+    h2,h3,h4,h5,h6{margin-bottom:.5rem;font-weight:500;line-height:1.2;}
+    h2{font-size:2rem;}
+    h3{font-size:1.75rem;}
+    h4{font-size:1.5rem;}
+    h5{font-size:1.25rem;}
+    h6{font-size:1rem;}
+    .container,.container-fluid{width:100%;padding-right:15px;padding-left:15px;margin-right:auto;margin-left:auto;}
+    @media (min-width:576px){
+        .container{max-width:540px;}
+    }
+    @media (min-width:768px){
+        .container{max-width:720px;}
+    }
+    @media (min-width:992px){
+        .container{max-width:960px;}
+    }
+    @media (min-width:1200px){
+        .container{max-width:1140px;}
+    }
+    .row{display:-ms-flexbox;display:flex;-ms-flex-wrap:wrap;flex-wrap:wrap;margin-right:-15px;margin-left:-15px;}
+    .col-md-12,.col-md-4,.col-md-5,.col-md-6,.col-md-7,.col-sm-12,.col-sm-6{position:relative;width:100%;padding-right:15px;padding-left:15px;}
+    @media (min-width:576px){
+        .col-sm-6{-ms-flex:0 0 50%;flex:0 0 50%;max-width:50%;}
+        .col-sm-12{-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%;}
+    }
+    @media (min-width:768px){
+        .col-md-4{-ms-flex:0 0 33.333333%;flex:0 0 33.333333%;max-width:33.333333%;}
+        .col-md-5{-ms-flex:0 0 41.666667%;flex:0 0 41.666667%;max-width:41.666667%;}
+        .col-md-6{-ms-flex:0 0 50%;flex:0 0 50%;max-width:50%;}
+        .col-md-7{-ms-flex:0 0 58.333333%;flex:0 0 58.333333%;max-width:58.333333%;}
+        .col-md-12{-ms-flex:0 0 100%;flex:0 0 100%;max-width:100%;}
+    }
+    .form-control{display:block;width:100%;height:calc(1.5em + .75rem + 2px);padding:.375rem .75rem;font-size:1rem;font-weight:400;line-height:1.5;color:#495057;background-color:#fff;background-clip:padding-box;border:1px solid #ced4da;border-radius:.25rem;transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;}
+    @media (prefers-reduced-motion:reduce){
+        .form-control{transition:none;}
+    }
+    .form-control::-ms-expand{background-color:transparent;border:0;}
+    .form-control:-moz-focusring{color:transparent;text-shadow:0 0 0 #495057;}
+    .form-control:focus{color:#495057;background-color:#fff;border-color:#80bdff;outline:0;box-shadow:0 0 0 .2rem rgba(0,123,255,.25);}
+    .form-control::-webkit-input-placeholder{color:#6c757d;opacity:1;}
+    .form-control::-moz-placeholder{color:#6c757d;opacity:1;}
+    .form-control:-ms-input-placeholder{color:#6c757d;opacity:1;}
+    .form-control::-ms-input-placeholder{color:#6c757d;opacity:1;}
+    .form-control::placeholder{color:#6c757d;opacity:1;}
+    .form-control:disabled,.form-control[readonly]{background-color:#e9ecef;opacity:1;}
+    .collapse:not(.show){display:none;}
+    .card{position:relative;display:-ms-flexbox;display:flex;-ms-flex-direction:column;flex-direction:column;min-width:0;word-wrap:break-word;background-color:#fff;background-clip:border-box;border:1px solid rgba(0,0,0,.125);border-radius:.25rem;}
+    .card-body{-ms-flex:1 1 auto;flex:1 1 auto;min-height:1px;padding:1.25rem;}
+    .card-title{margin-bottom:.75rem;}
+    .card-text:last-child{margin-bottom:0;}
+    .card-img-top{-ms-flex-negative:0;flex-shrink:0;width:100%;}
+    .card-img-top{border-top-left-radius:calc(.25rem - 1px);border-top-right-radius:calc(.25rem - 1px);}
+    .bg-white{background-color:#fff!important;}
+    .d-flex{display:-ms-flexbox!important;display:flex!important;}
+    .flex-column-reverse{-ms-flex-direction:column-reverse!important;flex-direction:column-reverse!important;}
+    .justify-content-center{-ms-flex-pack:center!important;justify-content:center!important;}
+    .justify-content-between{-ms-flex-pack:justify!important;justify-content:space-between!important;}
+    .align-items-center{-ms-flex-align:center!important;align-items:center!important;}
+    @media (min-width:576px){
+        .flex-sm-row{-ms-flex-direction:row!important;flex-direction:row!important;}
+    }
+    .w-100{width:100%!important;}
+    .mt-3{margin-top:1rem!important;}
+    .mt-5{margin-top:3rem!important;}
+    .mb-5{margin-bottom:3rem!important;}
+    .p-0{padding:0!important;}
+    .text-left{text-align:left!important;}
+    .text-right{text-align:right!important;}
+    .text-center{text-align:center!important;}
+    @media print{
+        *,::after,::before{text-shadow:none!important;box-shadow:none!important;}
+        a:not(.btn){text-decoration:underline;}
+        img{page-break-inside:avoid;}
+        h2,h3,p{orphans:3;widows:3;}
+        h2,h3{page-break-after:avoid;}
+        .container{min-width:992px!important;}
+    }
+}
+/*! CSS Used from: https://cdn.shopify.com/s/files/1/0039/6073/3763/t/270/assets/custom-theme.css?v=10315110635349754487 */
+.searchanize-search{color:#01385e;cursor:pointer;}
+.searchanize_form{width:100%;text-align:center;}
+.searchanize_form input{width:80%;margin:0 auto;height:100%;background:#fff6f4;border:0;border-bottom:1px solid #01385e;}
+.searchanize_form button{background:none;border:none;outline:none;}
+.searchanize_form img{height:15px;width:15px;}
+form.search{width:100%;}
+form.search input{width:100%;height:60px;}
+.searchanize-search{position:absolute;right:8%;}
+.search_nav{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:20px 50px;position:fixed;background:#fff6f4;width:100%;z-index:12;top:30px;left:0;}
+.searchanize-search{display:none!important;}
+.desktop-show{display:block;}
+.search-desktop{width:auto!important;position:absolute;right:9%;}
+.search-desktop input{height:auto!important;width:auto!important;}
+.search-desktop input{border:none;border-bottom:1px solid #01385e;background:#fff6f4;}
+.search-desktop button{background:none;border:none;outline:none;}
+@media only screen and (max-width: 560px){
+    .search_nav{height:50px!important;top:30px!important;}
+    .desktop-show{display:none;}
+}
+@media only screen and (max-width:767px){
+    .searchanize-search{display:block!important;position:relative;left:35%;}
+}
+.banner_section{background:#fadfd8;padding:30px 50px;}
+.main_bg{height:100vh;background-repeat:no-repeat;background-position:center;background-size:contain;position:relative;}
+.skin_analysis{text-align:right;}
+.skin_analysis button{padding:17px 20px;border:#d69991 2px solid;background:#fff;font-size:18px;color:#1c1111;text-transform:uppercase;font-weight:300;background:linear-gradient(to right, #ffddcb, #ffafae);font-weight:400;}
+.skin_analysis button a{color:#1c1111;}
+.personalized_skincaretitle{padding:80px 0;font-size:32px;font-weight:500;color:#000;text-align:center;font-family:'Nanum Myeongjo', serif;}
+.personalized_skincaretitle span{font-size:27px;color:#f1c9c3;display:block;}
+.subtitle{display:block;width:100%;text-align:center;font-size:18px;color:#000;padding-bottom:60px;margin:0;}
+.what_we_deliver{background:#f8f8f8;padding:80px 0;}
+.card{background:0;border:0;text-align:center;}
+.card-img-top{width:100%;text-align:center;margin-bottom:20px!important;}
+.what_we_deliver_prt2 .card{margin-bottom:20px;}
+.card-title{font-size:30px;color:#000;font-family:'Nanum Myeongjo', serif;margin:0;padding-top:15px;}
+.card-img-top img{width:100px;height:100px;overflow:hidden;}
+.what_we_deliver_prt2 .card h5.card-title2{margin-bottom:0;}
+p.card-text{margin:15px 0;font-size:22px;line-height:32px;font-weight:300;}
+.what_we_deliver .card-body .card-text{max-width:430px;max-height:60px;display:inline-block;padding:0;}
+.what_we_deliver .card{max-width:430px;margin:0 auto;}
+.what_we_deliver_prt2 .card p.card-text{margin-top:15px;}
+.card-body{padding:0;}
+.skincare_ingredients{padding:80px 0;}
+.ingredient_text{font-size:45px;font-family:'Nanum Myeongjo', serif;background:#f2cac4;height:calc(100% - 13px);padding:43px 29px;}
+.ingredient_text p{text-align:left;color:#fff;line-height:56px;padding:0;font-size:32px;font-weight:800;}
+.ingredient_images{margin-bottom:15px;width:144px;height:116px;margin:16px auto;}
+.ingredient_images img{width:100%;height:100%;object-fit:contain;}
+.ingredient_title{font-size:24px;font-weight:800;font-family:'Nanum Myeongjo', serif;padding:15px 10px;}
+.ingredient_detail p{font-size:24px;padding:0;font-weight:300;}
+.ingredient_types{display:flex;flex-wrap:wrap;justify-content:space-between;height:100%;}
+.ingredient_types .card.peach{background:#fcf1d9;width:31%;margin:0 13px 13px 0;}
+.mb-10{margin-bottom:100px;}
+.step_regime{padding:75px 0;background:#fafafa;}
+.step_regime h5{color:#000;font-size:32px;font-weight:700;font-family:'Nanum Myeongjo', serif;text-align:center;}
+.step_regime h5 span{display:block;font-size:27px;color:#f1c9c3;}
+h3.product_title{color:#b39692;font-size:27px;margin-bottom:65px;font-weight:300;}
+.img-left{height:200px;width:210px;background-position:center;position:absolute;top:-15px;}
+.img-right{height:200px;width:210px;background-position:center;position:absolute;top:-15px;right:4px;}
+.img-left.custom_product_number{height:200px;width:210px;background-position:center;position:absolute;top:-46px;}
+.img-right.custom_product_number{height:200px;width:210px;background-position:center;position:absolute;top:-46px;}
+.product_subtitle{font-size:18px;color:#a8a8a8;line-height:40px;margin-bottom:40px;}
+.product-image{padding:75px;display:inline-block;width:499px;height:499px;margin:0 auto;text-align:center;}
+.product-image img{height:100%;}
+.product_detail{display:flex;flex-direction:column;flex-wrap:wrap;justify-content:center;height:100%;}
+ul.product_advantages li{list-style:none;font-size:14px;line-height:35px;color:#0a0c04;font-weight:300;}
+.what_we_deliver_prt2{padding:76px 0;background:#fff6f4;}
+.card-title2{font-size:18px;line-height:1.1;font-family:'Nanum Myeongjo', serif;font-weight:700;}
+.news-scroll a{text-decoration:none;color:#000;font-size:18px;font-weight:300;}
+.dot{height:2px;width:6px;margin-left:24px;margin-right:24px;margin-bottom:5px!important;background-color:#000;display:inline-block;}
+.like_to_know{position:relative;}
+.about_product{width:60%;margin:150px auto;}
+.breaking-news.bg-white{margin-bottom:100px;}
+.skin_analysis{margin-bottom:30px;}
+.mobile_view_about_product{display:none;}
+.card-text span{position:relative;z-index:0;display:inline-block;font-weight:600;line-height:1;}
+.card-text span:after{position:absolute;content:"";background:#fcf1d9;width:100%;z-index:-21;top:0;bottom:0;left:2px;}
+.skin_analysis button a:hover{text-decoration:none;}
+.breaking-news.bg-white{margin:30px 0;}
+.easy-to-reach{text-align:center;padding:20px 0 40px;}
+img.easy-mob{display:none;}
+.easy-to-reach h5{text-align:center;font-size:18px;letter-spacing:.15px;color:#000;margin-bottom:25px;font-weight:300;margin:10px 0 70px;letter-spacing:1.5px;}
+.card.peach.hyaluronic{background:#f9ece4;}
+.card.peach.resorcinol{background:#f5dedb;}
+.card.peach.peptides{background:#f4ecea;}
+.card.peach.lactic-acid{background:#f0e5db;}
+.efficiency-sec{text-align:center;font-size:32px;font-weight:700;font-family:'Nanum Myeongjo', serif;color:#fff;background:#f2cac4;padding:50px 10px 50px;}
+.efficiency-sec p{margin:0;padding:0;line-height:1.1;}
+.efficiency-sec p span{color:#000;display:block;}
+.what-we-del-bg{background:#fff8ea;}
+.personalized_skincare.last_product_nutra .about_product{width:100%;margin:100px auto 100px;}
+.personalized_skincare.last_product_nutra .about_product img{width:100%;}
+.testimonials{background:#fff8f0;padding:60px 0 60px;position:relative;}
+.hair-care-testmonial{background:#e5f7ff;}
+.testimonials h6{text-align:center;font-size:18px;color:#1c1111;font-weight:300;margin-bottom:40px;}
+.testimonials h2{font-size:32px;font-family:'Nanum Myeongjo', serif;text-align:center;margin-bottom:35px;}
+.star-img{text-align:center;margin-bottom:20px;}
+.star-img img{width:auto!important;margin:0 auto;}
+.shadow-effect img{display:block;width:125px!important;height:125px;border-radius:100%;max-width:100%;margin-top:-70px;margin:-70px auto 30px;}
+#customers-testimonials .shadow-effect p{line-height:30px;margin:0 0 20px 0;font-weight:300;font-size:22px;font-family:'Nanum Myeongjo', serif;text-align:center;color:#191717;}
+.per-desg,.per-name{font-size:18px;color:#707070;font-weight:300;text-transform:capitalize;line-height:1.3;}
+.per-desg{margin-bottom:10px;}
+.per-name{text-transform:uppercase;margin-top:30px;}
+#customers-testimonials .owl-next span,#customers-testimonials .owl-prev span{font-size:0;}
+#customers-testimonials .owl-next,#customers-testimonials .owl-prev{width:18px;height:18px;background-size:cover!important;outline:0;}
+#customers-testimonials .owl-nav{width:100%;position:absolute;top:60%;margin-top:0;cursor:pointer;text-decoration:none;outline:0;border:0;transform:translateY(-50%);outline:0;}
+.logo-slider-main{padding:50px 0 50px;position:relative;}
+.logo-slider-main h6{font-size:18px;color:#1c1111;text-align:center;margin:0 0 30px;font-weight:300;letter-spacing:1.5px;}
+.logo-slider-main h2{color:#484848;font-size:32px;text-align:center;padding:0 90px;font-style:italic;font-weight:300;margin:0 0 50px;font-family:"Iowan Old Style";}
+#logo-slider .owl-next span,#logo-slider .owl-prev span{font-size:0;}
+#logo-slider .owl-next,#logo-slider .owl-prev{width:18px;height:18px;background-size:cover!important;outline:0;}
+.logo-img-container img{width:100%!important;height:100%!important;border-radius:0;margin:0!important;}
+#logo-slider .item{opacity:.2;height:100%!important;width:100%!important;-webkit-transform:scale3d(.8, .8, 1);transform:scale3d(.8, .8, 1);-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+#logo-slider .owl-item.active.center .item{opacity:1;-webkit-transform:scale3d(1, 1, 1);transform:scale3d(1, 1, 1);}
+#logo-slider .owl-nav{margin-top:-18px;z-index:-1;outline:0;outline:0;position:static;margin-top:0!important;}
+button.owl-prev{position:absolute;top:25%;left:0;}
+button.owl-next{position:absolute;top:25%;right:0;}
+.nutra-page-read a{color:#000;font-size:14px;font-weight:700;text-decoration:underline;margin-bottom:60px;display:inline-block;}
+.nutra-banner-mob{display:none;}
+.shadow-effect{background:#fff;padding:20px;border-radius:4px;text-align:center;margin-top:40px;width:90%;margin:100px auto 0;padding-top:90px;position:relative;}
+img.img-circle{position:absolute;top:0;left:50%;transform:translate(-50%, -50%);}
+#customers-testimonials .item{text-align:center;padding:50px;margin-bottom:20px;-webkit-transition:all .3s ease-in-out;-moz-transition:all .3s ease-in-out;transition:all .3s ease-in-out;}
+.owl-carousel .owl-item img{width:auto!important;margin:0 auto!important;}
+#customers-testimonials.owl-carousel .owl-dots .owl-dot.active span,#customers-testimonials.owl-carousel .owl-dots .owl-dot:hover span{background:#707070;}
+#customers-testimonials.owl-carousel .owl-dots{display:inline-block;width:100%;text-align:center;}
+#customers-testimonials.owl-carousel .owl-dots .owl-dot{display:inline-block;}
+#customers-testimonials.owl-carousel .owl-dots .owl-dot span{background:#eaeaea;display:inline-block;height:10px;margin:0 3px 5px;transition:all 250ms ease-out 0s;width:10px;border-radius:50%;}
+.skin_analysis.ingredient_here_analysis{width:100%;margin-bottom:20px;}
+.personalized_skincare.ingredient_per_skin .card-text span:after{background:#d4ecae;}
+.shadow-effect img.img-circle{width:125px!important;object-fit:cover;}
+div#logo-slider button.owl-next,div#logo-slider button.owl-prev{top:75%;}
+.banner_section.bg-yellow-b{background:#e0b77c;}
+.skin_analysis.haircare-page-btn button{border:#217bc9 2px solid;background-image:linear-gradient(to right, #aad2fe 10%, #217cca 95%);color:#000;font-size:16px;letter-spacing:1px;font-weight:300;}
+span.haircare-blue{color:#217bc9!important;}
+.haircare_block_skin .ingredient_text{background:#207bc8!important;}
+.haircare_block_skin .card.peach{background:#f4e7d9!important;}
+.haircare_block_skin .card.peach.hyaluronic{background:#d9def0!important;}
+.haircare_block_skin .card.peach.resorcinol{background:#ebebeb!important;}
+.haircare_block_skin .card.peach.peptides{background:#dae9f0!important;}
+.haircare_block_skin .card.peach.fruitenzymes{background:#f0d9e9!important;}
+.haircare_block_skin .card.peach.lactic-acid{background:#f4d9d9!important;}
+.haircare_exclusive_for_you h3.product_title{color:#207cc9;font-size:27px;}
+.exclusively_for_you.haircare_exclusive_for_you span.product_subtitle{font-size:18px;font-weight:300;line-height:40px;}
+.exclusively_for_you.haircare_exclusive_for_you ul.product_advantages li{font-size:14px;color:#0a0c04;line-height:27px;}
+.what_we_deliver_prt2.haircare_deliver_part2{background:#e5f7ff;}
+.efficiency-sec.haircare-eff{background:#207ac9;}
+.haricare_no_cont{position:relative;}
+.forst-row .product-image{text-align:left;margin-left:-16px;padding:0;}
+.sec-row .product-image{text-align:right;margin-right:-16px;padding:0;}
+.third-row .product-image{text-align:left;margin-left:-16px;padding:0;}
+.forst-row .product_detail.prod-det-1 h3.product_title{margin-top:40px;margin-bottom:40px;}
+.sec-row .product_detail.prod-det-2 h3.product_title{margin-top:40px;margin-bottom:40px;}
+.third-row .product_detail.prod-det-3 h3.product_title{margin:30px 0 50px;}
+section.personalized_skincare.ingredient_per_skin.haircare_per_skin .card-text span:after{background:#bbc8f8;}
+ul.color_dots{padding:0;margin:0;list-style:none;position:relative;margin:10px 0 10px;}
+ul.color_dots li{padding:0;margin:0;list-style:none;position:relative;margin:10px 0 10px;}
+ul.color_dots li{height:12px;width:12px;display:inline-block;border-radius:50%;margin-right:10px;}
+ul.color_dots li.yello_d{background:#fff7e8;}
+ul.color_dots li.blue_d{background:#c6bdfc;}
+ul.color_dots li.sky_d{background:#aadeff;}
+ul.color_dots li.orange_d{background:#ffc683;}
+ul.color_dots li.pinkl_d{background:#ffd1d1;}
+ul.color_dots li.green_d{background:#c0f2ce;}
+ul.color_dots li.red_d{background:#e60000;}
+.personalized_skincare.last_product_nutra p.subtitle{font-weight:300;font-size:18px;line-height:20px;}
+.personalized_skincare.ingredient_per_skin.haircare_per_skin h2.personalized_skincaretitle{font-weight:700;font-size:32px;line-height:1.2;}
+.personalized_skincare.ingredient_per_skin.haircare_per_skin h2.personalized_skincaretitle span.haircare-blue{font-size:27px;line-height:22px;}
+.exclusively_for_you.haircare_exclusive_for_you p.subtitle,.personalized_skincare.haircare_block_skin p.subtitle,.personalized_skincare.ingredient_per_skin.haircare_per_skin p.subtitle,.personalized_skincare.last_product_nutra p.subtitle,.testimonials h6,.what_we_deliver_prt2.haircare_deliver_part2.what-we-del-bg p.subtitle{letter-spacing:1.5px;}
+.main_bg.nutra-banner-web{margin-top:101px;}
+button.owl-next>span,button.owl-prev>span{display:none!important;}
+button.owl-dot{outline:0;}
+.w-80{width:80%;}
+.email-text-menu{text-transform:lowercase!important;font-weight:300!important;font-size:19px!important;font-family:HelveticaNeue!important;}
+.card-title{margin-bottom:0;}
+.card-body{padding:0;margin-top:5px;}
+@media only screen and (max-width:480px){
+    .email-text-menu{font-size:14px!important;}
+    .card{padding:0 9px;}
+    .card-body{font-size:12px;}
+}
+@media (min-width:1500px){
+    .ingredient_types .card.peach{height:210px;width:210px;margin-right:5px;}
+    .ingredient_images{height:110px;margin:10px auto 5px;}
+    .ingredient_title{font-size:22px;padding:0 10px 5px;margin-bottom:0;}
+    .ingredient_detail p{font-size:19px;padding:0 5px 5px;margin-bottom:0;}
+}
+@media (min-width:1366px){
+    .product-image{padding:5px 5px 75px;}
+    .ingredient_types .card.peach{width:31%;margin:0 13px 13px 0;width:208px;padding:15px;}
+    .ingredient_title{font-size:18px!important;padding:0 10px!important;margin-bottom:3px;}
+    .ingredient_detail p{font-size:14px!important;line-height:1.1;}
+    .ingredient_images{margin:10px auto 16px;}
+    .ingredient_text p{line-height:40px!important;font-size:30px!important;}
+}
+@media (min-width:768px){
+    .product_detail{position:relative;}
+    span.product_subtitle{margin-top:20px;margin-bottom:10px;}
+}
+@media (max-width:1920px){
+    .card-title{font-size:20px;padding-top:19px;}
+    p.card-text{font-size:14px;line-height:1.5;}
+}
+@media (max-width:1400px){
+    .skin_analysis button{padding:11px 16px;}
+    .personalized_skincaretitle span{font-size:25px;}
+    .personalized_skincaretitle{padding:60px 0;font-size:33px;}
+    .subtitle{font-size:17px;padding-bottom:50px;}
+    .what_we_deliver_prt2 p.card-text{margin-top:5px;}
+    .ingredient_title{font-size:18px;padding:10px 20px;}
+    .ingredient_detail p{font-size:19px;}
+    .step_regime h5 span{font-size:26px;}
+    .step_regime h5{font-size:33px;line-height:37px;}
+    h3.product_title{font-size:33px;}
+    .product_subtitle{font-size:20px;line-height:34px;}
+    ul.product_advantages li{font-size:16px;line-height:36px;}
+    .ingredient_text p{line-height:64px;font-size:37px;}
+    .what_we_deliver_prt2 .card h5.card-title2{font-size:18px;padding:0 6px;min-height:auto;}
+}
+@media (max-width:1365px){
+    .product_detail.prod-det-1 h3.product_title{margin-top:0;}
+}
+@media (max-width:991px){
+    #hair-care .main_bg{height:auto;margin-top:-172px;z-index:0;}
+    #hair-care .skin_analysis.haircare-page-btn.ingredient_banner_btn.text-center{bottom:13px!important;}
+    .product_detail.prod-det-1 h3.product_title{margin-top:0;}
+    .what_we_deliver .card-title{min-height:75px;}
+    .what_we_deliver .card-body .card-text{margin:10px auto 20px;}
+    .what_we_deliver_prt2 .card .card-title2{padding:0;margin-bottom:1px;font-size:19px!important;min-height:49px!important;}
+    .what_we_deliver_prt2 .card-text{line-height:18px;margin-top:0;padding-top:5px;padding-bottom:10px;}
+    .img-right{top:-75px;}
+    .img-left{top:-75px;}
+    .mobile_view_about_product{width:100%;text-align:center;}
+    .mobile_view_about_product{display:block;}
+    .about_product{display:none;}
+    .card-title2{font-size:19px;}
+    p.card-text{padding:15px 0 30px;font-size:16px;line-height:24px;color:#413f3f;}
+    .banner_section{padding-bottom:50px;}
+    .personalized_skincaretitle{font-size:31px;}
+    .skin_analysis{text-align:center;margin-top:20px;margin-bottom:67px;}
+    .ingredient_types{padding:0 15px;}
+    .ingredient_types .card.peach{width:48%;margin:0 0 16px 0;}
+    .ingredient_text p{line-height:38px;font-size:27px;padding:0 23px;}
+    .exclusively_for_you.haircare_exclusive_for_you .forst-row .haricare_no_cont h3.product_title{margin-top:12px;margin-bottom:50px;}
+    .exclusively_for_you.haircare_exclusive_for_you .sec-row .haricare_no_cont h3.product_title{margin-top:0;margin-bottom:60px;}
+    .exclusively_for_you.haircare_exclusive_for_you .third-row .haricare_no_cont h3.product_title{margin-top:4px;margin-bottom:60px;}
+}
+@media (max-width:767px){
+    #hair-care .skin_analysis.haircare-page-btn.ingredient_banner_btn.text-center{position:absolute;right:unset;bottom:20px!important;left:50%;transform:translate(-50%, 0);width:100%;}
+    .main_bg.nutra-banner-mob.haircare-w-m{height:auto!important;text-align:center;}
+    .personalized_skincare.ingredient_per_skin.haircare_per_skin h2.personalized_skincaretitle{font-size:28px;line-height:1.2;}
+    .personalized_skincare.ingredient_per_skin.haircare_per_skin h2.personalized_skincaretitle span.haircare-blue{font-size:25px;line-height:21px;}
+    .haircare_exclusive_for_you h3.product_title{font-size:36px;}
+    .exclusively_for_you.haircare_exclusive_for_you span.product_subtitle{font-size:18px;}
+    .exclusively_for_you.haircare_exclusive_for_you ul.product_advantages li{font-size:14px;}
+    section.personalized_skincare.last_product_nutra p.subtitle{font-size:20px;line-height:30px;}
+    .step_regime.step_regime h5{font-size:33px;line-height:27px;}
+    .easy-to-reach h5{text-align:center;}
+    img.easy-mob{display:block;}
+    img.easy-web{display:none;}
+    .nutra-banner-web{display:none;}
+    .banner_section.haircare_banner_section .skin_analysis{margin-bottom:10px;}
+    .nutra-banner-mob{display:block;height:364px!important;}
+    .main_bg.nutra-banner-mob.haircare-w-m{height:auto!important;}
+    .shadow-effect{padding:10px;width:100%;}
+    #customers-testimonials .shadow-effect p{font-size:20px;line-height:25px;}
+    #customers-testimonials .item,#logo-slider .item{padding:50px 30px;}
+    #customers-testimonials .owl-next,#customers-testimonials .owl-prev{width:14px;height:14px;}
+    #customers-testimonials .owl-prev,#logo-slider .owl-prev{margin-left:0;}
+    #customers-testimonials .owl-next,#logo-slider .owl-next{margin-right:0;}
+    .testimonials h2{font-size:27px;}
+    .logo-slider-main h2{font-size:20px;padding:0;}
+    .logo-slider-main h2{font-size:20px;padding:0;margin:0 0 30px;}
+    .product_detail.prod-det-1 h3.product_title{margin-top:0;}
+    #logo-slider .item{padding:5px 20px;}
+    .logo-slider-main{padding:50px 0 20px;}
+    .what_we_deliver p.subtitle{padding-top:0;padding-bottom:20px;}
+    .what_we_deliver .card-title{min-height:auto;}
+    .what_we_deliver .card-body .card-text{margin:10px auto 20px;}
+    .like_to_know.mb-10{margin-bottom:30px;}
+    .what_we_deliver_prt2 .card .card-title2{padding:0 0!important;margin-bottom:1px;font-size:14px!important;min-height:32px!important;padding:0;}
+    .exclusively_for_you p.subtitle{padding-bottom:0;font-size:18px;letter-spacing:1.5px!important;}
+    .step_regime.mb-10{margin-bottom:60px!important;}
+    .what_we_deliver_prt2{padding:60px 0 56px;margin-bottom:60px!important;}
+    .product-image{padding:0 0 115px 0;width:auto!important;}
+    .efficiency-sec{font-size:23px;padding:30px 10px 30px;}
+    .product-image img{margin-left:0;}
+    .product_detail{text-align:center!important;}
+    .img-left{top:-76px;left:33%;left:50%;transform:translateX(-50%);}
+    .img-right{top:-78px;right:72px;left:50%;transform:translateX(-50%);}
+    span.product_subtitle{line-height:40px;margin:40px 0;font-size:16px;}
+    ul.product_advantages li{font-size:14px;line-height:30px;}
+    .nutra-page-read a{margin-bottom:40px;}
+    .haricare_no_cont{margin-top:70px;}
+    .exclusively_for_you.haircare_exclusive_for_you .forst-row .haricare_no_cont h3.product_title{margin-top:12px;margin-bottom:50px;}
+    .exclusively_for_you.haircare_exclusive_for_you .sec-row .haricare_no_cont h3.product_title{margin-top:0;margin-bottom:60px;}
+    .exclusively_for_you.haircare_exclusive_for_you .third-row .haricare_no_cont h3.product_title{margin-top:4px;margin-bottom:60px;}
+    section.personalized_skincare.ingredient_per_skin p.subtitle{font-size:20px;}
+    section.personalized_skincare.ingredient_per_skin .what_we_deliver h5.card-title{font-size:24px;}
+    section.personalized_skincare.ingredient_per_skin .what_we_deliver p.card-text{font-size:18px;}
+}
+@media (max-width:576px){
+    .w-80{width:100%;}
+    .haricare_no_cont{margin-top:70px;}
+    .nutra-banner-mob{height:266px!important;}
+    ul.product_advantages li{font-size:13px;}
+    span.product_subtitle{margin:0;}
+    .ingredient_types{padding:6px 15px;}
+    .ingredient_text{margin-top:28px;padding:15px 20px;height:calc(100% - 37px);}
+    .what_we_deliver{padding:50px 0;}
+    .card-img-top img{width:100px;height:100px;}
+    .card-title{padding-top:0;font-size:20px;}
+    .subtitle{font-size:20px;}
+    .what_we_deliver_prt2 p.subtitle{padding-bottom:40px;padding-top:0;}
+    .what_we_deliver_prt2{padding:60px 0 56px;}
+    .what_we_deliver .card{margin-top:35px;}
+    p.card-text{padding:15px 0;}
+    .step_regime h5{font-size:27px!important;}
+    .step_regime h5 span{font-size:22px;font-weight:500;}
+    .step_regime{padding:50px 6px 45px;}
+    .card-img-top img{width:75px;height:75px;}
+    .card-title2{font-size:14px;}
+    p.card-text{font-size:18px;line-height:18px;}
+    .what_we_deliver_prt2 p.card-text{font-size:11px;line-height:18px;margin-top:0!important;padding-top:0;}
+    .what_we_deliver_prt2 .card{margin-bottom:0;}
+    .card-img-top{width:100%;text-align:center;margin-bottom:20px!important;}
+    .what_we_deliver_prt2 .col-sm-6{width:50%;}
+    .ingredient_title{font-size:18px;padding:0;}
+}
+@media (max-width:1920px){
+    .card-title{font-size:20px;padding-top:19px;}
+    p.card-text{font-size:14px;line-height:1.5;}
+}
+.ingredient_detail p{font-size:14px;}
+.ingredient_images{width:84px;height:84px;object-fit:cover;}
+.banner_section{padding:10px 0 0px 0;}
+@media (max-width:1400px){
+    .skin_analysis button{padding:11px 14px;}
+    .personalized_skincaretitle span{font-size:25px;}
+    .personalized_skincaretitle{padding:60px 0;font-size:33px;}
+    .subtitle{font-size:17px;padding-bottom:50px;}
+    .what_we_deliver_prt2 p.card-text{margin-top:5px;}
+    .ingredient_title{font-size:18px;padding:10px 20px;}
+    .ingredient_detail p{font-size:19px;}
+    .step_regime h5 span{font-size:26px;}
+    .step_regime h5{font-size:33px;line-height:37px;}
+    h3.product_title{font-size:33px;}
+    .product_subtitle{font-size:20px;line-height:34px;}
+    ul.product_advantages li{font-size:16px;line-height:36px;}
+    .ingredient_text p{line-height:64px;font-size:37px;}
+    .what_we_deliver_prt2 .card h5.card-title2{font-size:18px;padding:0 6px;min-height:auto;}
+}
+.main_bg{height:456px;margin-top:101px;}
+#hair-care .main_bg{height:auto;margin-top:-11px;z-index:0;}
+#hair-care .skin_analysis.haircare-page-btn.ingredient_banner_btn.text-center{position:absolute;right:30px;bottom:3px;}
+#hair-care .banner_section.bg-yellow-b{background:0;position:relative;}
+#hair-care .product-image img{height:430px;}
+#hair-care .product-image{display:flex;align-items:center;justify-content:center;margin:unset!important;width:100%;}
+.skin_analysis button{padding:10px 13px;font-size:14px;}
+.skincare_ingredients{padding:50px 0 40px;}
+@media (max-width:1365px){
+    .product_detail.prod-det-1 h3.product_title{margin-top:0;}
+    .breaking-news.bg-white{margin-bottom:30px;}
+    .breaking-news.bg-white{margin-bottom:20px;}
+    .img-left{top:-72px;}
+    .img-right{top:-78px;right:72px;}
+}
+@media (max-width:991px){
+    .product_detail.prod-det-1 h3.product_title{margin-top:0;}
+    .what_we_deliver .card-title{min-height:75px;}
+    .what_we_deliver .card-body .card-text{margin:10px auto 20px;}
+    .what_we_deliver_prt2 .card .card-title2{padding:0;margin-bottom:1px;font-size:19px!important;min-height:49px!important;}
+    .what_we_deliver_prt2 .card-text{line-height:18px;margin-top:0;padding-top:5px;padding-bottom:10px;}
+    .img-right{top:-75px;}
+    .img-left{top:-75px;}
+    .mobile_view_about_product{width:100%;text-align:center;}
+    .mobile_view_about_product{display:block;}
+    .about_product{display:none;}
+    .card-title2{font-size:19px;}
+    p.card-text{padding:15px 0 30px;font-size:16px;line-height:24px;color:#413f3f;}
+    .banner_section{padding-bottom:50px;}
+    .personalized_skincaretitle{font-size:31px;}
+    .skin_analysis{text-align:center;margin-top:20px;margin-bottom:67px;}
+    .ingredient_types{padding:0 15px;}
+    .ingredient_types .card.peach{width:48%;margin:0 0 16px 0;}
+    .ingredient_text p{line-height:38px;font-size:27px;padding:0 23px;}
+    .exclusively_for_you.haircare_exclusive_for_you .forst-row .haricare_no_cont h3.product_title{margin-top:12px;margin-bottom:50px;}
+    .exclusively_for_you.haircare_exclusive_for_you .sec-row .haricare_no_cont h3.product_title{margin-top:0;margin-bottom:60px;}
+    .exclusively_for_you.haircare_exclusive_for_you .third-row .haricare_no_cont h3.product_title{margin-top:4px;margin-bottom:60px;}
+}
+@media (max-width:767px){
+    .main_bg.nutra-banner-mob.haircare-w-m{height:auto!important;text-align:center;}
+    .personalized_skincare.ingredient_per_skin.haircare_per_skin h2.personalized_skincaretitle{font-size:28px;line-height:1.2;}
+    .personalized_skincare.ingredient_per_skin.haircare_per_skin h2.personalized_skincaretitle span.haircare-blue{font-size:25px;line-height:21px;}
+    .haircare_exclusive_for_you h3.product_title{font-size:36px;}
+    .exclusively_for_you.haircare_exclusive_for_you span.product_subtitle{font-size:18px;}
+    .exclusively_for_you.haircare_exclusive_for_you ul.product_advantages li{font-size:14px;}
+    section.personalized_skincare.last_product_nutra p.subtitle{font-size:20px;line-height:30px;}
+    .step_regime.step_regime h5{font-size:33px;line-height:27px;}
+    .easy-to-reach h5{text-align:center;}
+    img.easy-mob{display:block;}
+    img.easy-web{display:none;}
+    .nutra-banner-web{display:none;}
+    .banner_section.haircare_banner_section .skin_analysis{margin-bottom:10px;}
+    .nutra-banner-mob{display:block;height:364px!important;}
+    .main_bg.nutra-banner-mob.haircare-w-m{height:auto!important;}
+    .shadow-effect{padding:10px;width:100%;}
+    #customers-testimonials .shadow-effect p{font-size:20px;line-height:25px;}
+    #customers-testimonials .item,#logo-slider .item{padding:50px 30px;}
+    #customers-testimonials .owl-next,#customers-testimonials .owl-prev{width:14px;height:14px;}
+    #customers-testimonials .owl-prev,#logo-slider .owl-prev{margin-left:0;}
+    #customers-testimonials .owl-next,#logo-slider .owl-next{margin-right:0;}
+    .testimonials h2{font-size:27px;}
+    .logo-slider-main h2{font-size:20px;padding:0;}
+    .logo-slider-main h2{font-size:20px;padding:0;margin:0 0 30px;}
+    .product_detail.prod-det-1 h3.product_title{margin-top:0;}
+    #logo-slider .item{padding:5px 20px;}
+    .logo-slider-main{padding:50px 0 20px;}
+    .what_we_deliver p.subtitle{padding-top:0;padding-bottom:20px;}
+    .what_we_deliver .card-title{min-height:auto;}
+    .what_we_deliver .card-body .card-text{margin:10px auto 20px;}
+    .like_to_know.mb-10{margin-bottom:30px;}
+    .what_we_deliver_prt2 .card .card-title2{padding:0 0!important;margin-bottom:1px;font-size:14px!important;min-height:32px!important;padding:0;}
+    .exclusively_for_you p.subtitle{padding-bottom:0;font-size:18px;letter-spacing:1.5px!important;}
+    .step_regime.mb-10{margin-bottom:60px!important;}
+    .what_we_deliver_prt2{padding:60px 0 56px;margin-bottom:60px!important;}
+    .product-image{padding:0 0 115px 0;}
+    .efficiency-sec{font-size:23px;padding:30px 10px 30px;}
+    .product-image img{margin-left:0;}
+    .product_detail{text-align:center!important;}
+    .img-left{top:-76px;left:33%;left:50%;transform:translateX(-50%);}
+    .img-right{top:-78px;right:72px;left:50%;transform:translateX(-50%);}
+    span.product_subtitle{line-height:40px;margin:40px 0;font-size:16px;}
+    ul.product_advantages li{font-size:14px;line-height:30px;}
+    .nutra-page-read a{margin-bottom:40px;}
+    .haricare_no_cont{margin-top:70px;}
+    .exclusively_for_you.haircare_exclusive_for_you .forst-row .haricare_no_cont h3.product_title{margin-top:12px;margin-bottom:50px;}
+    .exclusively_for_you.haircare_exclusive_for_you .sec-row .haricare_no_cont h3.product_title{margin-top:0;margin-bottom:60px;}
+    .exclusively_for_you.haircare_exclusive_for_you .third-row .haricare_no_cont h3.product_title{margin-top:4px;margin-bottom:60px;}
+    section.personalized_skincare.ingredient_per_skin p.subtitle{font-size:20px;}
+    section.personalized_skincare.ingredient_per_skin .what_we_deliver h5.card-title{font-size:24px;}
+    section.personalized_skincare.ingredient_per_skin .what_we_deliver p.card-text{font-size:18px;}
+}
+@media (max-width:576px){
+    .skin_analysis{margin-bottom:0;}
+    .haricare_no_cont{margin-top:70px;}
+    .nutra-banner-mob{height:266px!important;}
+    ul.product_advantages li{font-size:13px;}
+    span.product_subtitle{margin:0;}
+    .ingredient_types{padding:6px 15px;}
+    .ingredient_text{margin-top:28px;padding:15px 20px;height:calc(100% - 37px);}
+    .what_we_deliver{padding:50px 0;}
+    .card-img-top img{width:100px;height:100px;}
+    .card-title{padding-top:0;font-size:20px;}
+    .subtitle{font-size:20px;}
+    .what_we_deliver_prt2 p.subtitle{padding-bottom:40px;padding-top:0;}
+    .what_we_deliver_prt2{padding:60px 0 56px;}
+    .what_we_deliver .card{margin-top:35px;}
+    p.card-text{padding:15px 0;}
+    .step_regime h5{font-size:27px!important;}
+    .step_regime h5 span{font-size:22px;font-weight:500;}
+    .step_regime{padding:50px 6px 45px;}
+    .card-img-top img{width:75px;height:75px;}
+    .card-title2{font-size:14px;}
+    p.card-text{font-size:18px;line-height:18px;}
+    .what_we_deliver_prt2 p.card-text{font-size:11px;line-height:18px;margin-top:0!important;padding-top:0;}
+    .what_we_deliver_prt2 .card{margin-bottom:0;}
+    .card-img-top{width:100%;text-align:center;margin-bottom:20px!important;}
+    .what_we_deliver_prt2 .col-sm-6{width:50%;}
+    .ingredient_title{font-size:18px;padding:0;}
+    .ingredient_detail p{font-size:14px;}
+    .ingredient_images{width:84px;height:53px;}
+    .banner_section{padding:10px 0 0px 0;}
+    .main_bg{margin-top:76px;height:456px;}
+    .skin_analysis button{padding:10px 13px;font-size:14px;}
+    .skincare_ingredients{padding:50px 0 40px;}
+    .breaking-news.bg-white{margin-bottom:30px;}
+    .breaking-news.bg-white{margin-bottom:20px;}
+    .img-left{top:-72px;}
+    .img-right{top:-78px;right:72px;}
+    .img-left.custom_product_number,.img-right.custom_product_number{top:-72px;}
+}
+@media (max-width:420px){
+    .shadow-effect{padding-top:90px;}
+    .nutra-banner-mob{height:566px!important;}
+    .exclusively_for_you.haircare_exclusive_for_you .forst-row .haricare_no_cont h3.product_title{margin-top:12px;margin-bottom:50px;}
+    .exclusively_for_you.haircare_exclusive_for_you .sec-row .haricare_no_cont h3.product_title{margin-top:0;margin-bottom:60px;}
+    .exclusively_for_you.haircare_exclusive_for_you .third-row .haricare_no_cont h3.product_title{margin-top:4px;margin-bottom:60px;}
+}
+@media only screen and (max-width:480px){
+    .card{padding:0 9px;}
+    .card-body{font-size:12px;}
+}
+.head{width:100%;display:block;margin:0 0 35px;}
+.head h2{font-size:43px;position:relative;margin:0 0 18px;color:#413f3f;font-family:'Playfair Display', serif;font-weight:700;}
+.review-slider-section{display:none;}
+button:focus,input:focus{box-shadow:none;outline:0;}
+#start-shopping{margin-bottom:1em;}
+@media only screen and (max-width:991px){
+    .head h2{font-size:18px;}
+}
+@media only screen and (max-width:767px){
+    .skin_analysis{margin-bottom:0;}
+}
+@media only screen and (max-width:576px){
+    .head h2{font-size:16px;}
+}
+.card-title{margin-bottom:0;}
+.card-body{padding:0;margin-top:5px;}
+@media only screen and (max-width:480px){
+    .card{padding:0 9px;}
+    .card-body{font-size:12px;}
+}
+.head{width:100%;display:block;margin:0 0 35px;}
+.head h2{font-size:40px;position:relative;margin:0 0 18px;color:#413f3f;font-family:'Playfair Display', serif;}
+button:focus,input:focus{box-shadow:none!important;outline:0!important;}
+.shopping_cart_icon{position:relative;}
+.menu_cart_icon{cursor:pointer;}
+.cart_menu{width:26px;height:23px;cursor:pointer;}
+.cart_menu img{width:100%;}
+.cart_items{position:absolute;width:18px;height:18px;background:#ffcbc0;border-radius:20px;color:#01385e;left:-3px;top:0;text-align:center;line-height:18px;font-size:12px;}
+.loader_wrapper{display:none;height:100vh;position:absolute;width:100%;}
+.spinning-loader{width:50px;height:50px;border-radius:50%;border:3px solid rgba(1, 56, 94, .2);border-left-color:#01385e;background:0;animation:rotate-s-loader 1s linear infinite;margin:50% auto;}
+.product_detail_cart{display:flex;justify-content:center;margin-bottom:80px;}
+.product_image{background:#f8f8f8;width:211px;height:193px;border-radius:10px;position:relative;}
+.product_image img{position:absolute;top:-37px;right:50%;display:flex;width:100%;justify-content:center;transform:translate(50%, 0);}
+.product_detail_box{position:relative;width:516px;padding-left:45px;}
+.items_number{display:flex;width:101px;border:0.75px solid #01385E;background:#fff;border-radius:1px;overflow:hidden;height:36px;justify-content:space-between;}
+.items_number .form-control{background:#ffcbc0;border:#ffcbc0 1px solid!important;border-radius:0;color:#01385e;font-size:22px;font-weight:700;height:36px;width:35px;padding:0;text-align:center;-moz-appearance:textfield;}
+.items_number button{width:32px;background:#fff;border:0;font-size:16px;display:flex;align-items:center;justify-content:center;}
+.product_detail_box h5{font-size:28px;color:#01385e;font-family:'Playfair Display', serif;font-weight:700;margin-bottom:2px;}
+.product_detail_box h5 span{font-size:29px;font-family:HelveticaNeue;font-weight:500;}
+.product_detail_box h4{margin-bottom:-4px;}
+.product_detail_box p{color:#1c1111;font-size:16px;font-weight:500;font-family:HelveticaNeue;margin:0;}
+.cart_container .head h2{color:#01385e!important;display:inline-block;margin-bottom:0px;font-family:HelveticaNeue;font-weight:bold;font-size:24px!important;line-height:29px;letter-spacing:0.02em;}
+.cart_container .product_detail_box{width:73%;}
+.cart_container .product_detail_box h4{font-size:18px;margin-bottom:5px;margin-top:0;}
+.product_detail_box p{font-size:14px;}
+.cart_container .product_detail_box h5 span{font-size:31px;}
+.cart_container .product_detail_box h4 del{font-size:23px;color:#01385e;margin-left:auto;order:2;}
+.cart_container .items_number{position:absolute;bottom:0;}
+.cart_container .make_payment_cart{margin:10px 0;padding:32px 0;border-top:#d3d4d4 2px solid;position:relative;}
+.cart_container .make_payment_cart h4{margin-bottom:29px;color:#01385e;position:relative;}
+.cart_container .make_payment_cart a{text-align:center;font-size:25px;color:#01385e;}
+.cart_container .make_payment_cart a:hover{text-decoration:underline;}
+.cart_logo{position:absolute;left:0;right:0;text-align:center;margin:auto;z-index:-1;margin-bottom:5px;}
+.cart_container .make_payment_cart h4.subtotal{display:none;}
+@media only screen and (max-width:991px){
+    .head h2{font-size:18px;}
+    .product_detail_box{padding-left:18px;}
+}
+@media only screen and (max-width:767px){
+    .product_image img{width:75px;height:77px;top:-18px;object-fit:contain;}
+    .product_image{width:75px;height:75px;}
+    .product_detail_box h5{font-size:17px;}
+    .items_number{width:89px;height:29px;}
+    .items_number .form-control{height:29px;padding:0 6px;}
+    .product_detail_box h5 span{font-size:17px;}
+    .product_detail_box h4 del{font-size:15px;}
+    .product_detail_box p{font-size:12px;}
+    .product_detail{margin-bottom:45px;}
+}
+@media only screen and (max-width:560px){
+    .product_detail_cart{margin-bottom:35px;padding:1rem 0;}
+    .cart_container .make_payment_cart{padding:15px 0;left:0;right:0;margin:10px 15px;}
+    .contact-us-link{display:none;}
+}
+@media only screen and (max-width:576px){
+    .cart_logo{width:185px;height:17px;}
+    .cart_logo img{width:100%;display:flex;align-items:center;}
+    #product_wrapper{height:calc(100vh - 445px);overflow:auto;}
+    .cart_menu{width:17px;height:15px;display:flex;}
+    .shopping_cart_icon{width:26px;height:19px;}
+    .shopping_cart_icon img{width:100%;height:100%;object-fit:contain;}
+    .cart_items{width:12px;height:12px;left:-3px;top:2px;line-height:13px;font-size:8px;}
+    .cart_logo{margin:0 auto;}
+    .product_detail_box h5{font-size:13px;}
+    .items_number{height:16px;width:46px;}
+    .items_number .form-control{width:16px;font-size:12px;padding:0;height:auto;}
+    .items_number button{width:100%;padding:0;font-size:10px;}
+    .product_detail_box h5 span{font-size:15px!important;}
+    .product_detail_box h4 del{font-size:11px!important;}
+    .product_detail_box p{font-size:8px;padding:.5em 0;}
+    .product_detail{margin-bottom:35px;}
+    .product_detail_box{width:247px;padding-left:7px;}
+    .cart_container .make_payment_cart h4{font-size:13px;margin-bottom:15px;}
+    .cart_container .make_payment_cart h4 span{font-size:14px;}
+    .cart_container .make_payment_cart a{font-size:12px;padding:13px 0;}
+}
+@media only screen and (max-width:560px){
+}
+.container.cart_container{padding-left:35px;padding-right:50px;width:100%!important;}
+.container.cart_container .product_image{height:120px;width:120px;}
+.cart_container .items_number{width:71px;height:22px;}
+.container.cart_container .product_detail_cart .product_image img{top:0;right:0;transform:unset;height:100%;}
+.container.cart_container .product_detail_box h5{font-family:HelveticaNeue;font-style:normal;font-weight:500;font-size:16px;line-height:144.99%;color:#01385E;margin-bottom:10px;margin-top:0;}
+.container.cart_container .product_detail_box h5 span{font-size:16px;}
+.container.cart_container .product_detail_box h5 span.text-left{word-wrap:break-word;}
+.cart_container .product_detail_box h4 del{text-align:right;text-decoration-line:line-through;font-family:HelveticaNeue;font-size:16px;color:#777B7E;}
+.cart_container .product_detail_box p{font-family:HelveticaNeue;font-style:normal;font-weight:normal;font-size:12px;line-height:144.99%;color:#777B7E;margin-bottom:10px;}
+.cart_container .items_number button,.cart_container .items_number .form-control{height:21px;}
+.cart_container .items_number button{width:20px;font-size:10px;}
+.cart_container .items_number .form-control{width:30px;font-size:14px;background:#fff;border-color:#fff!important;}
+.container.cart_container .product_detail_cart{margin-bottom:0;padding-bottom:20px;padding-top:10px;border-bottom:1px solid #D0D0D0;}
+.cart_container .make_payment_cart{margin:0;padding:15px 0 30px;border-top:1px solid rgba(149, 149, 149, 0.3);}
+.cart_container .make_payment_cart h4.subtotal{font-family:HelveticaNeue;font-style:normal;font-weight:bold;font-size:18px;line-height:144.99%;text-align:right;color:#01385E;margin-bottom:0;}
+.cart_container .make_payment_cart h4.subtotal span{font-weight:normal;}
+.logout-menu-button{display:block;}
+.cart_container .make_payment_cart h4.cart_text{font-family:HelveticaNeue;font-style:normal;font-weight:300;font-size:12px;line-height:144.99%;color:#777B7E;width:80%!important;}
+.cart_container .make_payment_cart a{font-size:16px;}
+.cart_container .make_payment_cart h4.cart_text_1{font-family:HelveticaNeue;font-style:normal;font-weight:normal;font-size:14px;line-height:17px;text-align:center;margin-bottom:0;color:#A7A7A7;}
+.cart_container .product_detail_box .product_name{width:80%;}
+.cart_container .product_detail_box .product_box_1{display:flex;}
+.cart_container #desktop_shopping_cart{height:calc(100vh - 280px);overflow:auto;}
+.cart_container .product_detail_box .product_price_box{width:20%;}
+@media only screen and (max-width: 576px){
+    .container.cart_container{padding-left:15px;padding-right:15px;}
+    .cart_container .head h2{font-size:16px!important;line-height:20px;}
+    .container.cart_container .product_detail_cart{padding-bottom:15px;padding-top:15px;border-bottom:0.75px solid #D5D5D5;}
+    .container.cart_container .product_image{height:70px;width:70px;}
+    .cart_container .items_number{width:42px;height:15px;}
+    .container.cart_container .product_detail_box h5{font-size:12px;line-height:130%;margin-bottom:5px;}
+    .container.cart_container .product_detail_box h5 span{font-size:10px!important;line-height:144.99%;}
+    .cart_container .product_detail_box h4 del,.cart_container .product_detail_box p{font-size:10px!important;padding:0;}
+    .cart_container .items_number button,.cart_container .items_number .form-control{height:14px;}
+    .cart_container .items_number button{width:10px;font-size:6px;}
+    .cart_container .items_number .form-control{width:20px;font-size:10px;}
+    .cart_container .make_payment_cart{margin:0;padding:15px 0 30px;}
+    .cart_container .make_payment_cart h4.subtotal{font-size:12px;line-height:130%;}
+    .cart_container .make_payment_cart h4.subtotal span{font-size:12px;}
+    .cart_container .make_payment_cart h4.cart_text{font-size:10px;margin-bottom:30px;}
+    .cart_container #product_wrapper{height:calc(100vh - 300px);}
+    .cart_container .make_payment_cart a{padding:10px 0;}
+    .cart_container .make_payment_cart a{font-size:10px;}
+    .cart_container .make_payment_cart h4.cart_text_1{display:grid;margin:auto;}
+    .cart_container .items_number{position:relative;}
+    .logout-menu-button{display:none;}
+    .cart_container #desktop_shopping_cart{height:unset;overflow:unset;}
+}
+/*! CSS Used from: https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css */
+.owl-carousel,.owl-carousel .owl-item{-webkit-tap-highlight-color:transparent;position:relative;}
+.owl-carousel{display:none;width:100%;z-index:1;}
+.owl-carousel .owl-stage{position:relative;-ms-touch-action:pan-Y;touch-action:manipulation;-moz-backface-visibility:hidden;}
+.owl-carousel .owl-stage:after{content:".";display:block;clear:both;visibility:hidden;line-height:0;height:0;}
+.owl-carousel .owl-stage-outer{position:relative;overflow:hidden;-webkit-transform:translate3d(0,0,0);}
+.owl-carousel .owl-item{-webkit-backface-visibility:hidden;-moz-backface-visibility:hidden;-ms-backface-visibility:hidden;-webkit-transform:translate3d(0,0,0);-moz-transform:translate3d(0,0,0);-ms-transform:translate3d(0,0,0);}
+.owl-carousel .owl-item{min-height:1px;float:left;-webkit-backface-visibility:hidden;-webkit-touch-callout:none;}
+.owl-carousel .owl-item img{display:block;width:100%;}
+.owl-carousel.owl-loaded{display:block;}
+.owl-carousel .owl-dot,.owl-carousel .owl-nav .owl-next,.owl-carousel .owl-nav .owl-prev{cursor:pointer;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+.owl-carousel .owl-nav button.owl-next,.owl-carousel .owl-nav button.owl-prev,.owl-carousel button.owl-dot{background:0 0;color:inherit;border:none;padding:0!important;font:inherit;}
+.owl-carousel.owl-drag .owl-item{-ms-touch-action:pan-y;touch-action:pan-y;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;}
+/*! CSS Used from: https://cdn.shopify.com/s/files/1/0039/6073/3763/t/270/assets/footer.css?v=16314523209662126183 */
+.col-md-7{padding-left:0;padding-right:0;}
+.row{margin-right:0;margin-left:0;}
+/*! CSS Used keyframes */
+.site-nav__link:hover {text-decoration : none !important;}
+.black-div {color: white !important;}
+/* .site-nav__dropdown-list a, .site-nav--is-megamenu a{color:#000 !important;} */
+/* .slide-nav__link, .cart__item-title a{color:#000 !important;} */

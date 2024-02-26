@@ -1,0 +1,563 @@
+<link rel="stylesheet" href="{{ 'login.css' | asset_url }}">
+<style>
+    .user-wallet {
+        width: 90%;
+        border: 1px solid #E5E5E5;
+        margin: 1em auto;
+        padding: 10px;
+        background: #E5E5E5;
+        box-shadow: rgb(100 100 111 / 20%) 0px 7px 29px 0px;
+        border-radius: 5px;
+        color: #000;
+        margin-bottom: 1em;
+        }
+    
+        .user-wallet section {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 95%;
+        margin-bottom: 0.5rem;
+        }
+    
+        .user-wallet-balance {
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 300;
+        font-size: 14px;
+        line-height: 16px;
+        margin-bottom:0;
+        }
+    
+        .user-wallet-rs {
+        font-family: 'Helvetica';
+        font-style: normal;
+        font-weight: 700;
+        font-size: 30px;
+        line-height: 34px;
+        color: #000000;
+        margin-bottom:0;
+        }
+    
+        .user-wallet-rs span {
+        font-family: 'Helvetica';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+        }
+    
+        .user-wallet-icon {
+        width:4em;
+        }
+    
+        .user-wallet-left-icon {
+        width:2rem;
+         margin-right:0.1rem;
+         cursor:pointer;
+        }
+    
+</style>
+
+
+{% render 'new-menulist' %} 
+
+
+<div class="slide-nav__wrapper" data-level="1" style='display:none;'>
+
+  {% if section.settings.drawer-menu-image %}
+    <a href="{{ section.settings.drawer-menu-link }}">
+      <img
+        srcset="{%- if section.settings.drawer-menu-image.width >= 375 -%}{{ section.settings.drawer-menu-image | image_url: width: 375 }} 375w,{%- endif -%}
+        {%- if section.settings.drawer-menu-image.width >= 550 -%}{{ section.settings.drawer-menu-image | image_url: width: 550 }} 550w,{%- endif -%}
+        {%- if section.settings.drawer-menu-image.width >= 750 -%}{{ section.settings.drawer-menu-image | image_url: width: 750 }} 750w,{%- endif -%}
+        {%- if section.settings.drawer-menu-image.width >= 1100 -%}{{ section.settings.drawer-menu-image | image_url: width: 1100 }} 1100w,{%- endif -%}
+        {%- if section.settings.drawer-menu-image.width >= 1500 -%}{{ section.settings.drawer-menu-image | image_url: width: 1500 }} 1500w,{%- endif -%}
+        {%- if section.settings.drawer-menu-image.width >= 1780 -%}{{ section.settings.drawer-menu-image | image_url: width: 1780 }} 1780w,{%- endif -%}
+        {%- if section.settings.drawer-menu-image.width >= 2000 -%}{{ section.settings.drawer-menu-image | image_url: width: 2000 }} 2000w,{%- endif -%}
+        {%- if section.settings.drawer-menu-image.width >= 3000 -%}{{ section.settings.drawer-menu-image | image_url: width: 3000 }} 3000w,{%- endif -%}
+        {%- if section.settings.drawer-menu-image.width >= 3840 -%}{{ section.settings.drawer-menu-image | image_url: width: 3840 }} 3840w,{%- endif -%}
+        {{ section.settings.drawer-menu-image | image_url }} {{ section.settings.drawer-menu-image.width }}w"
+        sizes="{% if section.settings.stack_images_on_mobile %}(min-width: 750px) 50vw, 100vw{% else %}100vw{% endif %}"
+        src="{{ section.settings.drawer-menu-image | image_url: width: 1500 }}"
+        loading="lazy" class="img-fluid"
+        alt="{{ section.settings.drawer-menu-image.alt | escape }}"
+        width="{{ section.settings.drawer-menu-image.width }}"
+        height="{{ section.settings.drawer-menu-image.width | divided_by: section.settings.drawer-menu-image.aspect_ratio }}"
+      >
+    </a>
+  {% endif %}
+    
+
+    <ul class="slide-nav">
+        {%- for link in main_menu.links -%}
+            {%- liquid
+                assign link_index = forloop.index
+                assign child_list_handle = link.title | handleize | append: link_index
+
+                assign is_collection = false
+                assign have_image = false
+                if link.url contains '/collections/'
+                    assign lang_code_string = request.locale.iso_code | prepend: '/' | downcase
+                    assign subcollection_handle = link.url | remove: '/collections/' | remove: lang_code_string
+                    assign subcollection_drop = collections[subcollection_handle]
+                    assign have_image = subcollection_drop.products.first.featured_media.preview_image
+                    assign is_collection = true
+                endif
+            -%}
+
+            <li class="slide-nav__item">
+                {%- if link.levels > 0 -%}
+                    <button type="button"
+                            onClick="sendEventToGA('Homepage','','Mobile_Menu_{{ link.title }}')"
+                            class="slide-nav__button js-toggle-submenu accordion {% if forloop.first == true %}active{% endif %}"
+                            {% if link.active or link.child_active %}data-active="true"{% endif %}>
+            <span class="slide-nav__link">
+              <span><b>{{ link.title }}</b></span>
+              <svg aria-hidden="true" {% if forloop.first == true%}
+                  style="display: none;"
+              {% endif %} focusable="false" role="presentation" class="icon icon-chevron-" viewBox="0 0 284.49 498.98"><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98z"/></svg>
+                <svg {% if forloop.first == true%}
+                    style="display: block;"
+                {% endif %} xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+</svg>
+              <span class="icon__fallback-text">{{ 'general.drawers.expand_submenu' | t }}</span>
+            </span>
+                    </button>
+
+                    <ul
+                            class="slide-nav__dropdown panel"
+                            {% if child_list_handle == 'shop-now1'%}
+                                style="display: block;"
+                            {% endif %}
+                            data-parent="{{ child_list_handle }}"
+                            data-level="2">
+
+                        {% comment %}
+                          If a collection, automatically add 'view all' link
+                        {% endcomment %}
+                        {%- if is_collection -%}
+                            <li class="slide-nav__item">
+                                <a href="{{ link.url }}" class="slide-nav__link">
+                                    <span>{{ 'collections.general.all_of_collection' | t }}</span>
+                                </a>
+                            </li>
+                        {%- endif -%}
+
+                        {%- for childlink in link.links -%}
+                            {%- liquid
+                                assign grand_child_list_handle = childlink.title | handleize
+                                assign grand_child_link_id = grand_child_list_handle | append: link_index
+                            -%}
+
+                            <li class="slide-nav__item">
+                                {%- if childlink.levels > 0 -%}
+                                    <button type="button"
+                                            class="slide-nav__button js-toggle-submenu accordion"
+                                            onClick="sendEventToGA('Homepage','','Mobile_Menu_{{ childlink.title }}')"
+                                            {% if link.active or link.child_active %}data-active="true"{% endif %}>
+                    <span class="slide-nav__link slide-nav__sublist-link">
+                      <span>{{ childlink.title }}</span>
+                      <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-right" viewBox="0 0 284.49 498.98"><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98z"/></svg>
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+  <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+</svg>
+                      <span class="icon__fallback-text">{{ 'general.drawers.expand_submenu' | t }}</span>
+                    </span>
+                                    </button>
+                                    <ul class="slide-nav__dropdown panel"
+                                        data-level="3">
+                                        {% comment %}
+                                          If a collection, automatically add 'view all' link
+                                        {% endcomment %}
+                                        {%- if childlink.url contains '/collections/' -%}
+                                            <li class="slide-nav__item">
+                                                <a href="{{ childlink.url }}" class="slide-nav__link">
+                                                    <span>{{ 'collections.general.all_of_collection' | t }}</span>
+                                                    <svg aria-hidden="true" focusable="false" role="presentation" class="icon icon-chevron-right" viewBox="0 0 284.49 498.98"><path d="M35 498.98a35 35 0 0 1-24.75-59.75l189.74-189.74L10.25 59.75a35.002 35.002 0 0 1 49.5-49.5l214.49 214.49a35 35 0 0 1 0 49.5L59.75 488.73A34.89 34.89 0 0 1 35 498.98z"/></svg>
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+                                                        <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
+                                                    </svg>
+                                                </a>
+                                            </li>
+                                        {%- endif -%}
+
+                                        {%- for grandchildlink in childlink.links -%}
+                                            <li class="slide-nav__item">
+                                                <a href="{{ grandchildlink.url }}" class="slide-nav__link">
+                                                    <span>{{ grandchildlink.title | escape }}</span>
+                                                </a>
+                                            </li>
+                                        {%- endfor -%}
+                                    </ul>
+                                {%- else -%}
+                                    <a href="{{ childlink.url }}" class="slide-nav__link">
+                                        <span>{{ childlink.title | escape }}</span>
+                                    </a>
+                                {%- endif -%}
+                            </li>
+                        {%- endfor -%}
+                    </ul>
+                {%- else -%}
+                    <a href="{{ link.url }}" class="slide-nav__link">
+                        {%- if have_image -%}
+                            {{ collection_image }}
+                        {%- endif -%}
+
+                        <span>{{ link.title | escape }}</span>
+                    </a>
+                {%- endif -%}
+            </li>
+        {%- endfor -%}
+    </ul>
+    <div class="contact">
+        <div class="h6">Contact Us</div>
+        <ul>
+            <li>
+                <a class="email-text-menu" href="tel:+919711170970"><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Call.svg?v=1624265558"></a>
+                <a href="https://wa.me/919711170970?text={{ canonical_url }}"><span style="cursor:pointer;margin: 0 12px;"><img src="https://cdn.shopify.com/s/files/1/0039/6073/3763/files/Whatsapp_ceb22be0-b5a1-4782-8ba9-61d9dbab3af3.svg?v=1624265558"></span>
+                <span style="cursor: pointer;margin-left:0 !important;">+91 9711170970</span></a></li>
+            <li>
+                <a class="email-text-menu" href="mailto:hello@bareanatomy.com"><i class="fa fa-envelope" style="color: white;margin-right: 5px;font: normal normal normal 14px/2 FontAwesome;font-size: 20px;"></i>
+                <span style="cursor: pointer;margin-left:0 !important ;">chat@innovist.com</span></a>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="login-text">
+
+        <svg class="icon-avatar" width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="12" cy="7" r="4" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M4 21V17C4 15.8954 4.89543 15 6 15H18C19.1046 15 20 15.8954 20 17V21" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="login-signup">
+                {% if customer %}
+					<a href="/account"> Hi, {{ customer.first_name }} </a>
+                {% else %}
+                     <!-- <a  id="mobile-Btn" >Login/Signup</a> -->
+                    <a href="/account/login" >Login/Signup</a>
+                {% endif %}
+            </span></div>
+
+            {% if customer%}
+                <section class='user-wallet'>
+               <section>
+               <p class='user-wallet-balance'>Wallet Balance</p>
+                   <img class='user-wallet-icon' src="{{ 'Medium.png' | asset_url }}" />
+               </section>
+               <section>
+               <p class='user-wallet-rs'>₹ 0<span>INR</span></p>
+                   <img class='user-wallet-left-icon' src="{{ 'right-arrow.png' | asset_url }}" />
+               </section>
+           </section>
+           {% endif %}
+</div>
+{% comment %} script {% endcomment %}
+<script>
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            let slideItemRightChevron = this.querySelector('.icon');
+            let slideItemDownChevron = this.querySelector('.bi');
+
+
+
+
+            /* Toggle between adding and removing the "active" class,
+            to highlight the button that controls the panel */
+            this.classList.toggle("active");
+
+            /* Toggle between hiding and showing the active panel */
+            var panel = this.nextElementSibling;
+            if (panel.style.display === "block") {
+                panel.style.display = "none";
+                slideItemDownChevron.style.display = "none";
+                slideItemRightChevron.style.display = "block";
+            } else {
+                panel.style.display = "block";
+                slideItemDownChevron.style.display = "block";
+                slideItemRightChevron.style.display = "none";
+            }
+        });
+    }
+
+    
+    let customerid = {{customer.id}}
+    fetch(`https://wallet.d2c.tools/api/v1/credits/transactions?version=1&customerId=${customerid}`,{
+    method:'get',
+    headers:{
+        
+        "shopname": {{shop.permanent_domain | json }}
+    }
+    })
+    .then(function(res){return res.json()})
+    .then(function(result){
+        console.log(result)
+        document.getElementsByClassName("user-wallet-rs")[0].innerHTML = `₹ ${result.data.wallet.total_credits} <span>INR</span>`;
+    })
+    .catch(function(err){console.log(err)})
+    
+
+
+
+</script>
+
+
+<script>
+
+
+    let arrowBtn=document.querySelector('.user-wallet-left-icon')
+
+
+    if(arrowBtn)
+    {
+        arrowBtn.addEventListener('click', function openPage(e)
+        {
+            e.preventDefault()
+            window.location.href='https://innovist.com/pages/store-credits'
+        })
+    }
+
+
+
+
+let mobile_modal = document.getElementById("mobile-myModal");
+{% comment %} let Btn = document.getElementById("mobile-Btn"); {% endcomment %}
+
+let mobile_span=document.getElementsByClassName('mobile-close')[0]
+
+
+let tabModal = document.getElementById("myModal");
+let tabBtn = document.getElementById("mobile-Btn");
+let tabSpan = document.getElementsByClassName("close")[0];
+
+
+     
+    tabBtn.onclick = function ()
+    {
+        let width=window.screen.availWidth;
+        
+        if(width>601)
+        {
+            mobile_modal.style.display = "none";
+            tabModal.style.display = "block";
+   
+        }
+        else if(width<600)
+            {
+                tabModal.style.display = "none";
+                mobile_modal.style.display = "block";
+                
+            }
+        
+    }
+    
+    tabSpan.onclick = function ()
+    {
+        tabModal.style.display = "none";
+        mobile_modal.style.display = "none";
+    }
+    
+    window.onclick = function (event)
+    {
+        if (event.target == tabModal)
+        {
+            document.querySelector('#CustomerFirstName').value=''
+            document.querySelector('#CustomerLastName').value=''
+            document.querySelector('#CustomerEmailAddress').value=''
+            document.querySelector('#CustomerPhoneNumber').value=''
+            document.querySelector('#CustomerPassword').value=''
+            document.querySelector('.popup-screen-1-hidden').value=''
+            document.querySelector('#digit-1').value=''
+            document.querySelector('#digit-2').value=''
+            document.querySelector('#digit-3').value=''
+            document.querySelector('#digit-4').value=''
+            document.querySelector('#digit-1').style.borderColor='white'
+            document.querySelector('#digit-2').style.borderColor='white'
+            document.querySelector('#digit-3').style.borderColor='white'
+            document.querySelector('#digit-4').style.borderColor='white' 
+
+            document.querySelector('#signin_CustomerEmailNumber').value=''
+            document.querySelector('#signin_CustomerPassword').value=''
+
+                 
+            const registerOtp=document.querySelector('.register-email-screen')
+            registerOtp.style.display='none'
+
+            document.querySelector('#register-digit-1').value=''
+            document.querySelector('#register-digit-2').value=''
+            document.querySelector('#register-digit-3').value=''
+            document.querySelector('#register-digit-4').value=''
+          
+            const val_register_tab=document.querySelector('.email-phn-register');
+            val_register_tab.innerHTML='Enter the OTP'
+            val_register_tab.style.color='black'
+          
+            document.querySelector('#register-digit-1').style.borderColor='white'
+            document.querySelector('#register-digit-2').style.borderColor='white'
+            document.querySelector('#register-digit-3').style.borderColor='white'
+            document.querySelector('#register-digit-4').style.borderColor='white' 
+
+                  
+            let tab_loading=document.querySelector('.loading');
+            tab_loading.style.display='none'
+
+            let tab_register_loading=document.querySelector('.register-loading');
+            tab_register_loading.style.display='none'
+
+            let tab_otp_loading=document.querySelector('.otp-loading')
+            tab_otp_loading.style.display='none'
+
+            let tab_resend_loading=document.querySelector('.resend-otp-loading');
+            tab_resend_loading.style.display='none'
+
+        
+            let tab_signin_loading=document.querySelector('.signin-loading');
+            tab_signin_loading.style.display='none' 
+           
+            let msg=document.querySelector('.sign-in-password-popup-err');
+            msg.style.display='none'
+            msg.innerHTML=''
+
+            
+            const val_err=document.querySelector('.email-phn');
+            val_err.style.color='black'
+
+            tabModal.style.display = "none";
+            
+            let val=document.querySelector('.signin-screen-1')
+            val.style.display = "block";
+
+            let webloading=document.querySelector('.google-web-loading');
+            webloading.style.display='none'
+
+            let err_msg=document.querySelector('#screen1-err-msg')
+            err_msg.innerHTML='';
+            err_msg.style.display='none'
+
+
+            document.querySelector('#CustomerEmailNumber').value=''
+    
+            let screen1=document.querySelector('.register-page')
+            screen1.style.display='none';
+    
+            let screen2=document.querySelector('.signin-email-screen')
+            screen2.style.display='none';
+    
+            let signin_page=document.querySelector('.signin-page');
+            signin_page.style.display='none'
+    
+    
+        }
+        if (event.target == mobile_modal)
+        {
+        
+            mobile_modal.style.display = "none";    
+
+            let mobileloading=document.querySelector('.google-mobile-loading')
+            mobileloading.style.display='none'
+            
+            document.querySelector('.mobile-email-phn-field').value=''
+            document.querySelector('#mobile-digit-1').value='';
+            document.querySelector('#mobile-digit-2').value='';
+            document.querySelector('#mobile-digit-3').value='';
+            document.querySelector('#mobile-digit-4').value='';
+            document.querySelector('#mobile_signin_CustomerEmailNumber').value=''
+            document.querySelector('#mobile_signin_CustomerPassword').value=''
+            document.querySelector('.mobile-sign-in-password-popup-err').style.display='none'
+            document.querySelector('.mobile-err-otp-page').style.display='none';
+            document.querySelector('#mobile-CustomerFirstName').value=''
+            document.querySelector('#mobile-CustomerLastName').value=''
+            document.querySelector('#mobile-CustomerEmailAddress').value=''
+            document.querySelector('#mobile-CustomerPhoneNumber').value=''
+            document.querySelector('#mobile-CustomerPassword').value=''
+            document.querySelector('.mobile-screen-1-hidden').value=''
+            document.querySelector('#mobile-digit-1').style.borderColor='white'
+            document.querySelector('#mobile-digit-2').style.borderColor='white'
+            document.querySelector('#mobile-digit-3').style.borderColor='white'
+            document.querySelector('#mobile-digit-4').style.borderColor='white'
+
+            document.querySelector('#mobile_signin_CustomerEmailNumber').value='';
+            document.querySelector('#mobile_signin_CustomerPassword').value=''
+
+            let hideButton=document.querySelector('.mobile-login-content-img')
+            hideButton.style.display='block'
+            let screen1_loading=document.querySelector('.mobile-loading-screen-1')
+            screen1_loading.style.display='none'
+
+            let mobile_register_loading=document.querySelector('.mobile-register-loading');
+            mobile_register_loading.style.display='none'
+
+            let mobile_otp_loading=document.querySelector('.mobile-loading-screen-2')
+            mobile_otp_loading.style.display='none'
+
+            let mobile_resendOtp_loading=document.querySelector('.mobile-resend-otp-loading');
+            mobile_resendOtp_loading.style.display='none'
+
+            let imgButton=document.querySelector('.mobile-login-pwd-content-img')
+            imgButton.style.display='block'
+            let loading=document.querySelector('.mobile-signin-loading');
+            loading.style.display='none' 
+
+            const val_error=document.querySelector('.mobile-err-otp-page');
+            val_error.innerHTML=''
+            val_error.style.display='none'
+
+            const err_msg1=document.querySelector('.mobile-sign-in-password-popup-err')
+            err_msg1.innerHTML=''
+            err_msg1.style.display='none'
+
+        
+
+            let err=document.querySelector('.mobile-register-err-msg')
+
+            err.style.display='none'
+            err.innerHTML='';
+
+            let screen1=document.querySelector('.mobile-screen-1')
+            screen1.style.display='block';
+
+            let msg=document.querySelector('#mobile-screen1-err-msg')
+            msg.innerHTML=''
+            msg.style.display='none'
+
+            let screen2=document.querySelector('.mobile-screen-2')
+            screen2.style.display='none'
+
+            let registerPage=document.querySelector('.mobile-register-page');
+          //  registerPage.style.display='none'
+
+            let screen4=document.querySelector('.mobile-signin-page')
+            screen4.style.display='none';
+
+
+            document.querySelector('#mobile-register-digit-1').style.borderColor='white'
+            document.querySelector('#mobile-register-digit-2').style.borderColor='white'
+            document.querySelector('#mobile-register-digit-3').style.borderColor='white'
+            document.querySelector('#mobile-register-digit-4').style.borderColor='white'
+
+            document.querySelector('#mobile-register-digit-1').value=''
+            document.querySelector('#mobile-register-digit-2').value=''
+            document.querySelector('#mobile-register-digit-3').value=''
+            document.querySelector('#mobile-register-digit-4').value=''
+
+            let screen2_reg=document.querySelector('.mobile-register-screen-2')
+            screen2_reg.style.display='none';
+
+            let mob_reg_otp_loading=document.querySelector('.mobile-otp-register-loading-screen-2')
+            mob_reg_otp_loading.style.display='none'
+
+            const mob_reg_err=document.querySelector('.mobile-register-err-otp-page');
+            mob_reg_err.style.display='none';
+
+          console.log('jjbjkn');
+
+        }
+    }
+
+    
+</script>

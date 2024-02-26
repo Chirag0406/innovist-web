@@ -1,0 +1,55 @@
+<style>
+  div#stMobileSearchBox {
+    display: none;
+}
+.st-search-desktop svg.st-searchicon {
+    fill: #282c3f !important;
+    width: 25px;
+}
+.st-search-bar {
+    width: 100%;
+    position: relative;
+}
+.st-search-bar input {
+       height: 35px !important;
+    background-color: transparent;
+       border: 1px solid var(--colorNavSearchBorder)!important;
+    margin-bottom: 0px;
+    width: 100%;
+    font-size: 12px !important;
+    padding: 8px 80px 8px 10px;
+    color: #fff;
+}
+  .st-search-bar svg.st-searchicon {
+    position: absolute;
+   right: 15px;
+    top: 3px;
+    /* transform: translateY(52%); */
+    fill: #fff;
+    width: 27px;
+}
+  .st-search-bar input::placeholder {
+    color: #fff;
+    opacity: 1;
+}
+.st-search-bar svg.input-close-btn {
+    position: absolute;
+    right: 50px;
+    width: 25px;
+    fill: #fff;
+    top: 5px;
+      cursor: pointer;
+}
+
+</style>
+ <div class="st-search-bar st-hidden-sm" id="stDesktopSearchBox">
+   <form onsubmit="return false;" method="get" role="search" class="site-header__search-form" data-dark="true">
+  <input type="hidden" name="type" value="product,article">
+  <input type="hidden" name="options[prefix]" value="last">
+  <input type="text" name="st" value="" placeholder="Search..." class="site-header__search-input" aria-label="Search..." autocomplete="off">
+<svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="30" height="30" viewBox="0 0 30 30" style=" fill:#undefined;" class="st-searchicon"><path d="M 13 3 C 7.4889971 3 3 7.4889971 3 13 C 3 18.511003 7.4889971 23 13 23 C 15.396508 23 17.597385 22.148986 19.322266 20.736328 L 25.292969 26.707031 A 1.0001 1.0001 0 1 0 26.707031 25.292969 L 20.736328 19.322266 C 22.148986 17.597385 23 15.396508 23 13 C 23 7.4889971 18.511003 3 13 3 z M 13 5 C 17.430123 5 21 8.5698774 21 13 C 21 17.430123 17.430123 21 13 21 C 8.5698774 21 5 17.430123 5 13 C 5 8.5698774 8.5698774 5 13 5 z"></path></svg>
+                 <svg clip-rule="evenodd" fill-rule="evenodd" stroke-linejoin="round" stroke-miterlimit="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="input-close-btn" style="display: none;"><path d="m12 10.93 5.719-5.72c.146-.146.339-.219.531-.219.404 0 .75.324.75.749 0 .193-.073.385-.219.532l-5.72 5.719 5.719 5.719c.147.147.22.339.22.531 0 .427-.349.75-.75.75-.192 0-.385-.073-.531-.219l-5.719-5.719-5.719 5.719c-.146.146-.339.219-.531.219-.401 0-.75-.323-.75-.75 0-.192.073-.384.22-.531l5.719-5.719-5.72-5.719c-.146-.147-.219-.339-.219-.532 0-.425.346-.749.75-.749.192 0 .385.073.531.219z"></path></svg>
+                
+     {%render 'st-trending-searches' %}
+</form>          
+                            </div>
